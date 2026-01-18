@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get commits since last tag
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          if [ -n "$PREV_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"- %s" $PREV_TAG..HEAD)
+          else
+            COMMITS=$(git log --pretty=format:"- %s")
+          fi
+          
+          # Write to file for multiline output
+          echo "$COMMITS" > changelog.txt
+          echo "Generated changelog with $(echo "$COMMITS" | wc -l) commits"
+      
+      - name: Create release archive
+        run: |
+          VERSION=${{ steps.version.outputs.VERSION }}
+          
+          # Create tarball (exclude git files)
+          tar -czvf antikit-${VERSION}.tar.gz \
+            --exclude='.git*' \
+            --exclude='*.tar.gz' \
+            --exclude='*.zip' \
+            workflows/ agents/ skills/ schemas/ templates/ \
+            install.sh install.ps1 \
+            README.md README.vi.md README.zh.md README.ja.md \
+            LICENSE.md CHANGELOG.md VERSION
+          
+          # Create zip
+          zip -r antikit-${VERSION}.zip \
+            workflows/ agents/ skills/ schemas/ templates/ \
+            install.sh install.ps1 \
+            README.md README.vi.md README.zh.md README.ja.md \
+            LICENSE.md CHANGELOG.md VERSION \
+            -x "*.git*"
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: AntiKit v${{ steps.version.outputs.VERSION }}
+          body_path: changelog.txt
+          draft: false
+          prerelease: false
+          files: |
+            antikit-${{ steps.version.outputs.VERSION }}.tar.gz
+            antikit-${{ steps.version.outputs.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Summary
+        run: |
+          echo "## Release Created! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** v${{ steps.version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Assets:**" >> $GITHUB_STEP_SUMMARY
+          echo "- antikit-${{ steps.version.outputs.VERSION }}.tar.gz" >> $GITHUB_STEP_SUMMARY
+          echo "- antikit-${{ steps.version.outputs.VERSION }}.zip" >> $GITHUB_STEP_SUMMARY
