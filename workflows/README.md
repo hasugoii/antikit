@@ -7,9 +7,9 @@ This directory contains all AntiKit workflow documentation organized by language
 | Folder | Language | Status |
 |--------|----------|--------|
 | [en/](./en/) | 🇺🇸 English | ✅ Complete |
-| [vi/](./vi/) | 🇻🇳 Tiếng Việt | 🔄 In progress |
-| [zh/](./zh/) | 🇨🇳 中文 | 🔄 In progress |
-| [ja/](./ja/) | 🇯🇵 日本語 | 🔄 In progress |
+| [vi/](./vi/) | 🇻🇳 Tiếng Việt | ✅ Complete |
+| [zh/](./zh/) | 🇨🇳 中文 | ✅ Complete |
+| [ja/](./ja/) | 🇯🇵 日本語 | ✅ Complete |
 
 ## 📋 Workflow List (20 total)
 
