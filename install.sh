@@ -1,0 +1,420 @@
+#!/bin/bash
+# AntiKit Installer for macOS/Linux
+# Direct download approach - inspired by AWF
+# https://github.com/hasugoii/antikit
+
+REPO_BASE="https://raw.githubusercontent.com/hasugoii/antikit/main"
+
+# Workflows (will use selected language)
+WORKFLOWS=(
+    "ak-update.md" "audit.md" "brainstorm.md" "cloudflare-tunnel.md"
+    "code.md" "config.md" "customize.md" "debug.md" "deploy.md"
+    "init.md" "next.md" "plan.md" "recap.md" "refactor.md"
+    "rollback.md" "run.md" "save_brain.md" "test.md" "uninstall.md" "visualize.md"
+)
+
+# Agents
+AGENTS=(
+    "architect.md" "backend.md" "database.md" "debugger.md" "devops.md"
+    "doc-writer.md" "explorer.md" "frontend.md" "game.md" "mobile.md"
+    "orchestrator.md" "pentester.md" "performance.md" "security.md" "seo.md" "tester.md"
+)
+
+# Schemas
+SCHEMAS=(
+    "brain.schema.json" "preferences.schema.json" "session.schema.json"
+)
+
+# Templates
+TEMPLATES=(
+    "brain.example.json" "preferences.example.json" "session.example.json"
+)
+
+# Skills (directories with SKILL.md inside)
+SKILLS=(
+    "api-patterns" "app-builder" "architecture" "bash-linux" "behavioral-modes"
+    "brainstorming" "clean-code" "code-review-checklist" "database-design"
+    "deployment-procedures" "docker-expert" "documentation-templates" "frontend-design"
+    "game-development" "geo-fundamentals" "i18n-localization" "lint-and-validate"
+    "mcp-builder" "mobile-design" "nestjs-expert" "nextjs-expert" "nodejs-best-practices"
+    "parallel-agents" "performance-profiling" "plan-writing" "powershell-windows"
+    "prisma-expert" "python-patterns" "react-patterns" "red-team-tactics"
+    "seo-fundamentals" "server-management" "systematic-debugging" "tailwind-patterns"
+    "tdd-workflow" "testing-patterns" "typescript-expert" "ui-ux-pro-max"
+    "vulnerability-scanner" "webapp-testing"
+)
+
+# Paths
+ANTIGRAVITY_DIR="$HOME/.gemini/antigravity"
+GLOBAL_WORKFLOWS="$ANTIGRAVITY_DIR/global_workflows"
+AGENTS_DIR="$ANTIGRAVITY_DIR/agents"
+SCHEMAS_DIR="$ANTIGRAVITY_DIR/schemas"
+TEMPLATES_DIR="$ANTIGRAVITY_DIR/templates"
+SKILLS_DIR="$ANTIGRAVITY_DIR/skills"
+GEMINI_MD="$HOME/.gemini/GEMINI.md"
+VERSION_FILE="$HOME/.gemini/antikit_version"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+# Get version from repo
+CURRENT_VERSION=$(curl -s "$REPO_BASE/VERSION" 2>/dev/null || echo "1.0.0")
+
+echo ""
+echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${MAGENTA}║       🚀 AntiKit - Enhancement Kit for Antigravity       ║${NC}"
+echo -e "${MAGENTA}║                        v${CURRENT_VERSION}                           ║${NC}"
+echo -e "${MAGENTA}╚══════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Check if updating
+if [ -f "$VERSION_FILE" ]; then
+    OLD_VERSION=$(cat "$VERSION_FILE")
+    echo -e "${YELLOW}📦 Current version: $OLD_VERSION${NC}"
+    echo -e "${GREEN}📦 New version: $CURRENT_VERSION${NC}"
+    echo ""
+fi
+
+# Language selection
+echo -e "${CYAN}🌐 Select language for workflows:${NC}"
+echo "   1. English (en)"
+echo "   2. Japanese (ja)"
+echo "   3. Vietnamese (vi)"
+echo "   4. Chinese (zh)"
+echo ""
+read -p "Enter choice (1-4, default: 1): " lang_choice
+
+case $lang_choice in
+    2) LANG="ja" ;;
+    3) LANG="vi" ;;
+    4) LANG="zh" ;;
+    *) LANG="en" ;;
+esac
+echo -e "${GREEN}✅ Selected language: $LANG${NC}"
+echo ""
+
+success=0
+failed=0
+
+# 1. Create directories
+mkdir -p "$ANTIGRAVITY_DIR" "$GLOBAL_WORKFLOWS" "$AGENTS_DIR" "$SCHEMAS_DIR" "$TEMPLATES_DIR" "$SKILLS_DIR"
+echo -e "${GREEN}📂 Directories ready: $ANTIGRAVITY_DIR${NC}"
+
+# 2. Download Workflows
+echo ""
+echo -e "${CYAN}⏳ Downloading workflows ($LANG)...${NC}"
+for wf in "${WORKFLOWS[@]}"; do
+    if curl -f -s -o "$GLOBAL_WORKFLOWS/$wf" "$REPO_BASE/workflows/$LANG/$wf"; then
+        echo -e "   ${GREEN}✅ $wf${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $wf${NC}"
+        ((failed++))
+    fi
+done
+
+# 3. Download Agents
+echo ""
+echo -e "${CYAN}⏳ Downloading agents...${NC}"
+for agent in "${AGENTS[@]}"; do
+    if curl -f -s -o "$AGENTS_DIR/$agent" "$REPO_BASE/agents/$agent"; then
+        echo -e "   ${GREEN}✅ $agent${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $agent${NC}"
+        ((failed++))
+    fi
+done
+
+# 4. Download Schemas
+echo ""
+echo -e "${CYAN}⏳ Downloading schemas...${NC}"
+for schema in "${SCHEMAS[@]}"; do
+    if curl -f -s -o "$SCHEMAS_DIR/$schema" "$REPO_BASE/schemas/$schema"; then
+        echo -e "   ${GREEN}✅ $schema${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $schema${NC}"
+        ((failed++))
+    fi
+done
+
+# 5. Download Templates
+echo ""
+echo -e "${CYAN}⏳ Downloading templates...${NC}"
+for template in "${TEMPLATES[@]}"; do
+    if curl -f -s -o "$TEMPLATES_DIR/$template" "$REPO_BASE/templates/$template"; then
+        echo -e "   ${GREEN}✅ $template${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $template${NC}"
+        ((failed++))
+    fi
+done
+
+# 6. Download Skills
+echo ""
+echo -e "${CYAN}⏳ Downloading skills...${NC}"
+for skill in "${SKILLS[@]}"; do
+    mkdir -p "$SKILLS_DIR/$skill"
+    if curl -f -s -o "$SKILLS_DIR/$skill/SKILL.md" "$REPO_BASE/skills/$skill/SKILL.md"; then
+        echo -e "   ${GREEN}✅ $skill${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $skill${NC}"
+        ((failed++))
+    fi
+done
+
+# 7. Save version and language
+mkdir -p "$HOME/.gemini"
+echo "$CURRENT_VERSION" > "$VERSION_FILE"
+LANG_FILE="$HOME/.gemini/antikit_language"
+echo "$LANG" > "$LANG_FILE"
+echo ""
+echo -e "${GREEN}✅ Version saved: $CURRENT_VERSION${NC}"
+echo -e "${GREEN}✅ Language saved: $LANG${NC}"
+
+# 8. Update Global Rules (GEMINI.md) - Language specific
+case $LANG in
+    "vi")
+        ANTIKIT_INSTRUCTIONS='
+# AntiKit - Enhancement Kit for Antigravity
+
+## CRITICAL: Nhận Diện Lệnh
+Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương ứng và thực hiện theo hướng dẫn.
+
+## Command Mapping:
+| Lệnh | Workflow File | Mô Tả |
+|------|--------------|-------|
+| `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 Bàn ý tưởng, nghiên cứu thị trường |
+| `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | Thiết kế tính năng |
+| `/code` | ~/.gemini/antigravity/global_workflows/code.md | Viết code an toàn |
+| `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | Tạo UI/UX |
+| `/debug` | ~/.gemini/antigravity/global_workflows/debug.md | Debug sâu |
+| `/test` | ~/.gemini/antigravity/global_workflows/test.md | Kiểm thử |
+| `/run` | ~/.gemini/antigravity/global_workflows/run.md | Chạy ứng dụng |
+| `/deploy` | ~/.gemini/antigravity/global_workflows/deploy.md | Deploy production |
+| `/init` | ~/.gemini/antigravity/global_workflows/init.md | Khởi tạo dự án |
+| `/recap` | ~/.gemini/antigravity/global_workflows/recap.md | Khôi phục context |
+| `/next` | ~/.gemini/antigravity/global_workflows/next.md | Gợi ý bước tiếp theo |
+| `/customize` | ~/.gemini/antigravity/global_workflows/customize.md | ⚙️ Tùy chỉnh AI |
+| `/save-brain` | ~/.gemini/antigravity/global_workflows/save_brain.md | Lưu kiến thức |
+| `/audit` | ~/.gemini/antigravity/global_workflows/audit.md | Kiểm tra bảo mật |
+| `/refactor` | ~/.gemini/antigravity/global_workflows/refactor.md | Tái cấu trúc code |
+| `/rollback` | ~/.gemini/antigravity/global_workflows/rollback.md | Rollback deployment |
+| `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | Quản lý tunnel |
+| `/config` | ~/.gemini/antigravity/global_workflows/config.md | Cấu hình settings |
+| `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | Cập nhật AntiKit |
+| `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ Gỡ cài đặt AntiKit |
+
+## Vị Trí Tài Nguyên:
+- Agents: ~/.gemini/antigravity/agents/
+- Skills: ~/.gemini/antigravity/skills/
+- Schemas: ~/.gemini/antigravity/schemas/
+- Templates: ~/.gemini/antigravity/templates/
+
+## Hướng Dẫn:
+1. Khi user gõ một trong các lệnh trên, ĐỌC file WORKFLOW tương ứng
+2. Thực hiện TỪNG PHASE trong workflow
+3. KHÔNG bỏ qua bước nào
+4. Kết thúc bằng menu BƯỚC TIẾP THEO như trong workflow
+
+## Kiểm Tra Update:
+- Version AntiKit lưu tại: ~/.gemini/antikit_version
+- Để kiểm tra và cập nhật AntiKit, user gõ: /ak-update
+'
+        ;;
+    "ja")
+        ANTIKIT_INSTRUCTIONS='
+# AntiKit - Enhancement Kit for Antigravity
+
+## CRITICAL: コマンド認識
+ユーザーが `/` で始まるコマンドを入力した場合、対応するワークフローファイルを読み、指示に従ってください。
+
+## Command Mapping:
+| コマンド | ワークフローファイル | 説明 |
+|----------|---------------------|------|
+| `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 アイデア出し、市場調査 |
+| `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | 機能設計 |
+| `/code` | ~/.gemini/antigravity/global_workflows/code.md | 安全なコード作成 |
+| `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | UI/UX作成 |
+| `/debug` | ~/.gemini/antigravity/global_workflows/debug.md | 詳細デバッグ |
+| `/test` | ~/.gemini/antigravity/global_workflows/test.md | テスト |
+| `/run` | ~/.gemini/antigravity/global_workflows/run.md | アプリ実行 |
+| `/deploy` | ~/.gemini/antigravity/global_workflows/deploy.md | 本番デプロイ |
+| `/init` | ~/.gemini/antigravity/global_workflows/init.md | プロジェクト初期化 |
+| `/recap` | ~/.gemini/antigravity/global_workflows/recap.md | コンテキスト復元 |
+| `/next` | ~/.gemini/antigravity/global_workflows/next.md | 次のステップ提案 |
+| `/customize` | ~/.gemini/antigravity/global_workflows/customize.md | ⚙️ AIカスタマイズ |
+| `/save-brain` | ~/.gemini/antigravity/global_workflows/save_brain.md | 知識保存 |
+| `/audit` | ~/.gemini/antigravity/global_workflows/audit.md | セキュリティ監査 |
+| `/refactor` | ~/.gemini/antigravity/global_workflows/refactor.md | コードリファクタリング |
+| `/rollback` | ~/.gemini/antigravity/global_workflows/rollback.md | ロールバック |
+| `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | トンネル管理 |
+| `/config` | ~/.gemini/antigravity/global_workflows/config.md | 設定 |
+| `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | AntiKit更新 |
+| `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ AntiKitをアンインストール |
+
+## リソースの場所:
+- Agents: ~/.gemini/antigravity/agents/
+- Skills: ~/.gemini/antigravity/skills/
+- Schemas: ~/.gemini/antigravity/schemas/
+- Templates: ~/.gemini/antigravity/templates/
+
+## 手順:
+1. ユーザーが上記のコマンドを入力したら、対応するWORKFLOWファイルを読む
+2. ワークフローの各フェーズを実行
+3. どのステップもスキップしない
+4. ワークフローの次のステップメニューで終了
+
+## アップデート確認:
+- AntiKitバージョン保存先: ~/.gemini/antikit_version
+- AntiKitの確認・更新: /ak-update
+'
+        ;;
+    "zh")
+        ANTIKIT_INSTRUCTIONS='
+# AntiKit - Enhancement Kit for Antigravity
+
+## CRITICAL: 命令识别
+当用户输入以 `/` 开头的命令时，读取相应的工作流文件并按照说明执行。
+
+## Command Mapping:
+| 命令 | 工作流文件 | 描述 |
+|------|-----------|------|
+| `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 头脑风暴、市场研究 |
+| `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | 功能设计 |
+| `/code` | ~/.gemini/antigravity/global_workflows/code.md | 安全编写代码 |
+| `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | 创建UI/UX |
+| `/debug` | ~/.gemini/antigravity/global_workflows/debug.md | 深度调试 |
+| `/test` | ~/.gemini/antigravity/global_workflows/test.md | 测试 |
+| `/run` | ~/.gemini/antigravity/global_workflows/run.md | 运行应用 |
+| `/deploy` | ~/.gemini/antigravity/global_workflows/deploy.md | 部署生产 |
+| `/init` | ~/.gemini/antigravity/global_workflows/init.md | 初始化项目 |
+| `/recap` | ~/.gemini/antigravity/global_workflows/recap.md | 恢复上下文 |
+| `/next` | ~/.gemini/antigravity/global_workflows/next.md | 下一步建议 |
+| `/customize` | ~/.gemini/antigravity/global_workflows/customize.md | ⚙️ 自定义AI |
+| `/save-brain` | ~/.gemini/antigravity/global_workflows/save_brain.md | 保存知识 |
+| `/audit` | ~/.gemini/antigravity/global_workflows/audit.md | 安全审计 |
+| `/refactor` | ~/.gemini/antigravity/global_workflows/refactor.md | 重构代码 |
+| `/rollback` | ~/.gemini/antigravity/global_workflows/rollback.md | 回滚部署 |
+| `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | 管理隧道 |
+| `/config` | ~/.gemini/antigravity/global_workflows/config.md | 配置设置 |
+| `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | 更新AntiKit |
+| `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ 卸载 AntiKit |
+
+## 资源位置:
+- Agents: ~/.gemini/antigravity/agents/
+- Skills: ~/.gemini/antigravity/skills/
+- Schemas: ~/.gemini/antigravity/schemas/
+- Templates: ~/.gemini/antigravity/templates/
+
+## 说明:
+1. 当用户输入上述命令之一时，读取相应的WORKFLOW文件
+2. 执行工作流中的每个阶段
+3. 不要跳过任何步骤
+4. 以工作流中的下一步菜单结束
+
+## 更新检查:
+- AntiKit版本保存在: ~/.gemini/antikit_version
+- 检查和更新AntiKit: /ak-update
+'
+        ;;
+    *)
+        ANTIKIT_INSTRUCTIONS='
+# AntiKit - Enhancement Kit for Antigravity
+
+## CRITICAL: Command Recognition
+When user types commands starting with `/`, read the corresponding workflow file and follow instructions.
+
+## Command Mapping:
+| Command | Workflow File | Description |
+|---------|--------------|-------------|
+| `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 Brainstorm ideas, market research |
+| `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | Design features |
+| `/code` | ~/.gemini/antigravity/global_workflows/code.md | Write code safely |
+| `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | Create UI/UX |
+| `/debug` | ~/.gemini/antigravity/global_workflows/debug.md | Deep debugging |
+| `/test` | ~/.gemini/antigravity/global_workflows/test.md | Testing |
+| `/run` | ~/.gemini/antigravity/global_workflows/run.md | Run application |
+| `/deploy` | ~/.gemini/antigravity/global_workflows/deploy.md | Deploy production |
+| `/init` | ~/.gemini/antigravity/global_workflows/init.md | Initialize project |
+| `/recap` | ~/.gemini/antigravity/global_workflows/recap.md | Restore context |
+| `/next` | ~/.gemini/antigravity/global_workflows/next.md | Next steps suggestion |
+| `/customize` | ~/.gemini/antigravity/global_workflows/customize.md | ⚙️ Customize AI |
+| `/save-brain` | ~/.gemini/antigravity/global_workflows/save_brain.md | Save knowledge |
+| `/audit` | ~/.gemini/antigravity/global_workflows/audit.md | Security audit |
+| `/refactor` | ~/.gemini/antigravity/global_workflows/refactor.md | Refactor code |
+| `/rollback` | ~/.gemini/antigravity/global_workflows/rollback.md | Rollback deployment |
+| `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | Manage tunnel |
+| `/config` | ~/.gemini/antigravity/global_workflows/config.md | Configure settings |
+| `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | Update AntiKit |
+| `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ Uninstall AntiKit |
+
+## Resource Locations:
+- Agents: ~/.gemini/antigravity/agents/
+- Skills: ~/.gemini/antigravity/skills/
+- Schemas: ~/.gemini/antigravity/schemas/
+- Templates: ~/.gemini/antigravity/templates/
+
+## Instructions:
+1. When user types one of the commands above, READ the corresponding WORKFLOW FILE
+2. Execute EACH PHASE in the workflow
+3. DO NOT skip any step
+4. End with NEXT STEPS menu as in workflow
+
+## Update Check:
+- AntiKit version saved at: ~/.gemini/antikit_version
+- To check and update AntiKit, user types: /ak-update
+'
+        ;;
+esac
+
+if [ ! -f "$GEMINI_MD" ]; then
+    echo "$ANTIKIT_INSTRUCTIONS" > "$GEMINI_MD"
+    echo -e "${GREEN}✅ Created Global Rules (GEMINI.md)${NC}"
+else
+    # Remove old AntiKit or AWF section and replace with new
+    if grep -q "AntiKit - Enhancement Kit for Antigravity" "$GEMINI_MD" 2>/dev/null; then
+        # Remove old AntiKit section
+        sed -i.bak '/# AntiKit - Enhancement Kit for Antigravity/,$d' "$GEMINI_MD"
+        rm -f "$GEMINI_MD.bak"
+    elif grep -q "AWF - Antigravity Workflow Framework" "$GEMINI_MD" 2>/dev/null; then
+        # Remove old AWF section
+        sed -i.bak '/# AWF - Antigravity Workflow Framework/,$d' "$GEMINI_MD"
+        rm -f "$GEMINI_MD.bak"
+    fi
+    echo "$ANTIKIT_INSTRUCTIONS" >> "$GEMINI_MD"
+    echo -e "${GREEN}✅ Updated Global Rules (GEMINI.md)${NC}"
+fi
+
+# Summary
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "${YELLOW}🎉 COMPLETE! Installed $success files ($failed failed)${NC}"
+echo -e "${CYAN}📦 Version: $CURRENT_VERSION${NC}"
+echo ""
+echo "📂 Workflows:  $GLOBAL_WORKFLOWS"
+echo "📂 Agents:     $AGENTS_DIR"
+echo "📂 Skills:     $SKILLS_DIR"
+echo "📂 Schemas:    $SCHEMAS_DIR"
+echo "📂 Templates:  $TEMPLATES_DIR"
+echo ""
+echo ""
+echo -e "${YELLOW}⚠️  IMPORTANT: Please RESTART Antigravity to apply changes!${NC}"
+echo ""
+echo -e "${CYAN}👉 You can use AntiKit in ANY project immediately!${NC}"
+echo "👉 Try typing '/recap' to test."
+echo "👉 Check for updates: '/ak-update'"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+read -p "Press Enter to exit..."
+
+exit 0
