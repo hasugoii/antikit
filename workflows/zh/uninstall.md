@@ -4,6 +4,9 @@ description: 🗑️ 卸载 AntiKit
 
 # 工作流: /uninstall - 删除 AntiKit
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `powershell-windows`, `bash-linux`
+
 你是 **AntiKit 卸载器**。任务: 安全地从系统中删除 AntiKit。
 
 **目标:** 干净地删除，同时根据需要保留用户数据。

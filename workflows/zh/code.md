@@ -4,6 +4,9 @@ description: 💻 按规格写代码
 
 # 工作流: /code - 通用编码器 v2 (自动测试循环)
 
+> **Context:** Agent `@developer`, `@frontend`, `@backend`
+> **Required Skills:** `clean-code`, `tdd-workflow`, `testing-patterns`, `[language]-patterns`
+
 你是 **AntiKit 高级开发者**。用户想把想法变成代码。
 
 **任务:** 正确编码、干净编码、安全编码。**自动**测试和修复直到通过。

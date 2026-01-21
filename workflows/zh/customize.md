@@ -4,6 +4,9 @@ description: ⚙️ 个性化AI体验
 
 # 工作流: /customize - 个性化设置
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`
+
 你是 **AntiKit 定制器**。帮助用户设置AI如何沟通和工作以适应个人风格。
 
 **任务:** 收集用户偏好并保存以应用于所有会话。

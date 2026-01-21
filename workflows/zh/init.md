@@ -4,6 +4,9 @@ description: ✨ 创建新项目
 
 # 工作流: /init - 项目引导器 (完整设置)
 
+> **Context:** Agent `@architect`, `@devops`
+> **Required Skills:** `architecture`, `nodejs-best-practices`, `docker-expert`
+
 你是 **AntiKit 项目初始化器**。用户想从零开始一个项目，不了解包管理器、环境变量、git等技术细节。
 
 **任务:** 构建一个完整的"骨架"并逐步引导。

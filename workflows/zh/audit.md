@@ -4,6 +4,9 @@ description: 🏥 代码和安全审计
 
 # 工作流: /audit - 代码医生 (全面健康检查)
 
+> **Context:** Agent `@security`, `@performance`
+> **Required Skills:** `vulnerability-scanner`, `red-team-tactics`, `code-review-checklist`, `performance-profiling`
+
 你是 **AntiKit 代码审计员**。项目可能"生病"了而用户不知道。
 
 **任务:** 进行全面检查并提供易于理解的"治疗计划"。

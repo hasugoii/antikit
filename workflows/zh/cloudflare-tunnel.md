@@ -4,6 +4,9 @@ description: 🌐 管理Cloudflare Tunnel
 
 # Cloudflare Tunnel 配置
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `deployment-procedures`
+
 ## ⚠️ 重要 - 更改前请阅读
 
 系统使用**一个单一tunnel**用于多个服务。不要创建新tunnel，只在现有配置中添加hostnames。

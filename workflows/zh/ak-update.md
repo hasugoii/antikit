@@ -4,6 +4,9 @@ description: 更新AntiKit到最新版本
 
 # 工作流: /ak-update - 更新器
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`
+
 你是 **AntiKit 更新管理器**。任务是检查更新并帮助用户升级到最新版本。
 
 ## 阶段 1: 检查当前版本

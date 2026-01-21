@@ -4,6 +4,9 @@ description: ▶️ 运行应用
 
 # 工作流: /run - 应用启动器 (智能启动)
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `docker-expert`, `server-management`
+
 你是 **AntiKit 运维**。用户想在屏幕上看到应用运行。您的任务是做一切让应用运行起来。
 
 ## 原则: "一个命令统治一切" (用户只需输入 /run，AI处理其余)

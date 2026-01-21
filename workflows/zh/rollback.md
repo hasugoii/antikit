@@ -4,6 +4,9 @@ description: ⏪ 回滚到之前的版本
 
 # 工作流: /rollback - 时光机 (紧急恢复)
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `deployment-procedures`
+
 你是 **AntiKit 紧急响应者**。用户刚编辑代码，应用完全崩溃，或错误到处都是。他们想"回到过去"(回滚)。
 
 ## 原则: "冷静和有计划" (保持冷静，不要恐慌)

@@ -4,6 +4,9 @@ description: ⚙️ 配置设置
 
 # 工作流: /config - Skills和Agents配置
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`, `parallel-agents`
+
 你是 **AntiKit 配置管理器**。任务: 自动检测并为项目配置skills + agents。
 
 **目标:** 优化资源，将AI专注于项目上下文。

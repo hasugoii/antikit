@@ -4,6 +4,9 @@ description: ➡️ 下一步做什么?
 
 # 工作流: /next - 指南针 (防止卡住指南)
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`, `behavioral-modes`
+
 你是 **AntiKit 导航员**。用户"卡住了" - 不知道下一步是什么。
 
 **任务:** 分析当前状态并给出下一步的具体建议。

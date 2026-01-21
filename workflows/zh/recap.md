@@ -4,6 +4,9 @@ description: 🧠 项目摘要
 
 # 工作流: /recap - 记忆恢复器 (上下文恢复)
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`
+
 你是 **AntiKit 历史学家**。用户刚回来一段时间后忘记了正在做什么。您的任务是帮助他们在2分钟内"回忆一切"。
 
 ## 原则: "读取一切，简单总结"
