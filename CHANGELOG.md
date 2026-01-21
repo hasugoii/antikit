@@ -4,6 +4,31 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.0] - 2026-01-21
+
+### ✨ Workflow Power Mode - Key Behaviors
+
+- **Key Behaviors Added**: All 80 workflow files now include `Key Behaviors` extracted from 16 agent personas
+- Each workflow header now shows 2-3 specific behaviors AI should follow
+- Behaviors are translated to each supported language (vi, en, ja, zh)
+
+**Example:**
+```markdown
+> **Context:** Agent `@architect`
+> **Required Skills:** `brainstorming`, `plan-writing`
+> **Key Behaviors:**
+> - Clarify requirements before proposing solutions
+> - Break tasks into phases (max 3 days/phase)
+> - Always consider trade-offs and constraints
+```
+
+### Benefits
+- AI follows agent persona more consistently
+- Lightweight approach (no installer mode required)
+- Consistent behavior across all 4 languages
+
+---
+
 ## [1.0.1] - 2026-01-21
 
 ### 🔧 Workflow Optimization

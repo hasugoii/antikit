@@ -6,6 +6,10 @@ description: 🌐 管理Cloudflare Tunnel
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `server-management`, `deployment-procedures`
+> **Key Behaviors:**
+> - 使用现有tunnel，不要创建新的
+> - 添加hostname后验证DNS路由
+> - 配置更改后重启tunnel
 
 ## ⚠️ 重要 - 更改前请阅读
 

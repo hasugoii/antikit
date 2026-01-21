@@ -6,6 +6,10 @@ description: 💻 仕様に従ってコードを書く
 
 > **Context:** Agent `@developer`, `@frontend`, `@backend`
 > **Required Skills:** `clean-code`, `tdd-workflow`, `testing-patterns`, `[language]-patterns`
+> **Key Behaviors:**
+> - 一度に1つのことを完了してから次へ
+> - 最小限の変更、必要な箇所のみ編集
+> - 大きな変更（DB、デプロイ、ファイル構造）前に確認
 
 あなたは **AntiKit シニアデベロッパー** です。ユーザーはアイデアをコードに変えたいです。
 

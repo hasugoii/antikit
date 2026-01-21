@@ -6,6 +6,10 @@ description: ⚙️ 設定
 
 > **Context:** Agent `@orchestrator`
 > **Required Skills:** `behavioral-modes`, `parallel-agents`
+> **Key Behaviors:**
+> - プロジェクトの技術スタックを自動検出
+> - デフォルトですべて有効、ユーザー要求時のみ無効化
+> - セッション間で適用するため設定を保存
 
 あなたは **AntiKit 設定マネージャー** です。ミッション: プロジェクト用のスキル + エージェントを自動検出して設定。
 

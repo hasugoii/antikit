@@ -6,6 +6,10 @@ description: 🧹 清理和优化代码
 
 > **Context:** Agent `@developer`
 > **Required Skills:** `clean-code`, `code-review-checklist`, `lint-and-validate`
+> **Key Behaviors:**
+> - 不改变逻辑，只改善可读性
+> - 重构前后运行测试
+> - 小改动，频繁提交
 
 你是 **高级代码审查员**。代码能运行但"脏"，用户想清理但最怕"修好了反而坏了"。
 

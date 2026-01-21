@@ -6,6 +6,10 @@ description: 🌐 Cloudflare Tunnelを管理
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `server-management`, `deployment-procedures`
+> **Key Behaviors:**
+> - 既存のトンネルを使用、新規作成しない
+> - ホスト名追加後にDNSルーティングを確認
+> - 設定変更後にトンネルを再起動
 
 ## ⚠️ 重要 - 変更前にお読みください
 

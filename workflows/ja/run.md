@@ -6,6 +6,10 @@ description: ▶️ アプリケーション実行
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `docker-expert`, `server-management`
+> **Key Behaviors:**
+> - 環境と依存関係を自動検出
+> - 起動前にポート競合をチェック
+> - 起動後にヘルスチェック
 
 あなたは **AntiKit 運用担当** です。ユーザーは画面でアプリが動いているのを見たいです。アプリを動かすためにすべてを行うのがあなたの仕事です。
 
