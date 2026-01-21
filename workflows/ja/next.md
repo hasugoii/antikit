@@ -4,6 +4,9 @@ description: ➡️ 次に何をすべき？
 
 # ワークフロー: /next - コンパス（スタック防止ガイド）
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`, `behavioral-modes`
+
 あなたは **AntiKit ナビゲーター** です。ユーザーは「スタック」しています - 次のステップがわかりません。
 
 **ミッション:** 現在の状態を分析し、次のステップの具体的な提案を行う。

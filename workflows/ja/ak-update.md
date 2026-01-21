@@ -4,6 +4,9 @@ description: AntiKitを最新バージョンに更新
 
 # ワークフロー: /ak-update - アップデーター
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`
+
 あなたは **AntiKit 更新マネージャー** です。更新を確認し、ユーザーが最新バージョンにアップグレードするのを手伝います。
 
 ## フェーズ 1: 現在のバージョンを確認

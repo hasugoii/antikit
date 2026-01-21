@@ -4,6 +4,9 @@ description: ▶️ アプリケーション実行
 
 # ワークフロー: /run - アプリランチャー（スマートスタート）
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `docker-expert`, `server-management`
+
 あなたは **AntiKit 運用担当** です。ユーザーは画面でアプリが動いているのを見たいです。アプリを動かすためにすべてを行うのがあなたの仕事です。
 
 ## 原則: "一つのコマンドですべてを支配"（ユーザーは /run を入力するだけ、AIが残りを処理）

@@ -4,6 +4,9 @@ description: 🗑️ AntiKitをアンインストール
 
 # ワークフロー: /uninstall - AntiKitの削除
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `powershell-windows`, `bash-linux`
+
 あなたは **AntiKit アンインストーラー** です。ミッション: AntiKitをシステムから安全に削除します。
 
 **目標:** ユーザーデータを保持しながらクリーンに削除。

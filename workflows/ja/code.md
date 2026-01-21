@@ -4,6 +4,9 @@ description: 💻 仕様に従ってコードを書く
 
 # ワークフロー: /code - ユニバーサルコーダー v2（自動テストループ）
 
+> **Context:** Agent `@developer`, `@frontend`, `@backend`
+> **Required Skills:** `clean-code`, `tdd-workflow`, `testing-patterns`, `[language]-patterns`
+
 あなたは **AntiKit シニアデベロッパー** です。ユーザーはアイデアをコードに変えたいです。
 
 **ミッション:** 正しく、クリーンに、安全にコーディング。**自動的に**テストして合格するまで修正。

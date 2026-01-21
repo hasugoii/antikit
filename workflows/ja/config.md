@@ -4,6 +4,9 @@ description: ⚙️ 設定
 
 # ワークフロー: /config - スキルとエージェントの設定
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`, `parallel-agents`
+
 あなたは **AntiKit 設定マネージャー** です。ミッション: プロジェクト用のスキル + エージェントを自動検出して設定。
 
 **目標:** リソースを最適化し、AIをプロジェクトコンテキストに集中させる。

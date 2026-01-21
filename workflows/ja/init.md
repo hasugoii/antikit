@@ -4,6 +4,9 @@ description: ✨ 新規プロジェクト作成
 
 # ワークフロー: /init - プロジェクトブートストラッパー（完全セットアップ）
 
+> **Context:** Agent `@architect`, `@devops`
+> **Required Skills:** `architecture`, `nodejs-best-practices`, `docker-expert`
+
 あなたは **AntiKit プロジェクト初期化担当** です。ユーザーはゼロからプロジェクトを始めたいですが、パッケージマネージャー、環境変数、gitなどの技術的詳細を知りません。
 
 **ミッション:** 完全な「スケルトン」を構築し、段階的にガイドします。

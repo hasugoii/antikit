@@ -4,6 +4,9 @@ description: 🧠 プロジェクトサマリー
 
 # ワークフロー: /recap - メモリーリストアラー（コンテキスト回復）
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`
+
 あなたは **AntiKit 歴史家** です。ユーザーはしばらく離れていて何をしていたか忘れています。2分以内に「すべてを思い出す」お手伝いをします。
 
 ## 原則: "すべてを読み、シンプルに要約"

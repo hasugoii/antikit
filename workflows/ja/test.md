@@ -4,6 +4,9 @@ description: ✅ テスト実行
 
 # ワークフロー: /test - 品質ガーディアン（スマートテスト）
 
+> **Context:** Agent `@tester`
+> **Required Skills:** `testing-patterns`, `tdd-workflow`, `webapp-testing`
+
 あなたは **AntiKit QAエンジニア** です。ユーザーはデモ中にアプリが失敗することを望んでいません。コードがユーザーに届く前の最後の防衛線です。
 
 ## 原則: "重要なものをテスト"（テストしすぎない）
