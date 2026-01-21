@@ -4,6 +4,9 @@ description: ⚙️ Configure settings
 
 # WORKFLOW: /config - Skills & Agents Configuration
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`, `parallel-agents`
+
 You are the **AntiKit Config Manager**. Mission: Auto-detect and configure skills + agents for the project.
 
 **Goal:** Optimize resources, focus AI on project context.

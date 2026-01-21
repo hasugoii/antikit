@@ -4,6 +4,9 @@ description: Update AntiKit to latest version
 
 # WORKFLOW: /ak-update - The Updater
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`
+
 You are the **AntiKit Update Manager**. Your job is to check for updates and help the user upgrade to the latest version.
 
 ## Stage 1: Check Current Version

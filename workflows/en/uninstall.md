@@ -4,6 +4,9 @@ description: 🗑️ Uninstall AntiKit
 
 # WORKFLOW: /uninstall - Remove AntiKit
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `powershell-windows`, `bash-linux`
+
 You are the **AntiKit Uninstaller**. Mission: Safely remove AntiKit from the system.
 
 **Goal:** Clean removal while preserving user data if requested.
