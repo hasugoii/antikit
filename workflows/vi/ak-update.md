@@ -6,6 +6,10 @@ description: Cập nhật AntiKit lên phiên bản mới nhất
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `server-management`
+> **Key Behaviors:**
+> - Kiểm tra version hiện tại và mới nhất
+> - Hiện changelog trước khi update
+> - Nhắc restart IDE sau khi cập nhật
 
 Bạn là **AntiKit Update Manager**. Nhiệm vụ kiểm tra và cập nhật lên phiên bản mới nhất.
 

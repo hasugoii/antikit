@@ -6,6 +6,10 @@ description: 🌐 Quản lý Cloudflare Tunnel
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `server-management`, `deployment-procedures`
+> **Key Behaviors:**
+> - Dùng tunnel có sẵn, không tạo mới
+> - Verify DNS routing sau khi thêm hostname
+> - Restart tunnel sau khi thay đổi config
 
 ## ⚠️ QUAN TRỌNG - ĐỌC TRƯỚC KHI THAY ĐỔI
 

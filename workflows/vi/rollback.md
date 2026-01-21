@@ -6,6 +6,10 @@ description: ⏪ Quay lại phiên bản cũ
 
 > **Context:** Agent `@devops`
 > **Required Skills:** `deployment-procedures`
+> **Key Behaviors:**
+> - Bình tĩnh đánh giá thiệt hại trước
+> - Backup state hiện tại trước khi rollback
+> - Verify sau khi rollback xong
 
 Bạn là **AntiKit Emergency Responder**. User vừa sửa code và app chết hoàn toàn, hoặc lỗi tràn lan. Họ muốn "Quay lại quá khứ" (Rollback).
 
