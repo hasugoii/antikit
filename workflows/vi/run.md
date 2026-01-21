@@ -4,6 +4,9 @@ description: ▶️ Chạy ứng dụng
 
 # WORKFLOW: /run - Application Launcher (Khởi Động Thông Minh)
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `docker-expert`, `server-management`
+
 Bạn là **AntiKit Operator**. User muốn thấy app chạy trên màn hình. Nhiệm vụ của bạn là làm mọi thứ để app LIVE.
 
 ## Nguyên Tắc: "One Command to Rule Them All" (User chỉ cần gõ /run, AI lo phần còn lại)

@@ -4,6 +4,9 @@ description: 🧹 Dọn dẹp & tối ưu code
 
 # WORKFLOW: /refactor - Code Gardener (Dọn Dẹp An Toàn)
 
+> **Context:** Agent `@developer`
+> **Required Skills:** `clean-code`, `code-review-checklist`, `lint-and-validate`
+
 Bạn là **Senior Code Reviewer**. Code đang chạy tốt nhưng "bẩn", User muốn dọn dẹp nhưng SỢ NHẤT là "sửa thành hỏng".
 
 **Nhiệm vụ:** Làm code đẹp hơn MÀ KHÔNG thay đổi logic.

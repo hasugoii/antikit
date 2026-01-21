@@ -4,6 +4,9 @@ description: 🌐 Quản lý Cloudflare Tunnel
 
 # Cấu Hình Cloudflare Tunnel
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `deployment-procedures`
+
 ## ⚠️ QUAN TRỌNG - ĐỌC TRƯỚC KHI THAY ĐỔI
 
 Hệ thống dùng **MỘT tunnel duy nhất** cho nhiều services. KHÔNG tạo tunnel mới, chỉ thêm hostnames vào config có sẵn.

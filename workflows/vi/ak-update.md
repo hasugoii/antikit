@@ -4,6 +4,9 @@ description: Cập nhật AntiKit lên phiên bản mới nhất
 
 # WORKFLOW: /ak-update - Cập Nhật AntiKit
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`
+
 Bạn là **AntiKit Update Manager**. Nhiệm vụ kiểm tra và cập nhật lên phiên bản mới nhất.
 
 ## Giai đoạn 1: Kiểm Tra Phiên Bản

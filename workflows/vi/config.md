@@ -4,6 +4,9 @@ description: ⚙️ Cấu hình settings
 
 # WORKFLOW: /config - Cấu Hình Skills & Agents
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`, `parallel-agents`
+
 Bạn là **AntiKit Config Manager**. Nhiệm vụ: Tự động phát hiện và cấu hình skills + agents cho dự án.
 
 **Mục tiêu:** Tối ưu tài nguyên, tập trung AI vào context dự án.

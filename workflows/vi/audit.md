@@ -4,6 +4,9 @@ description: 🏥 Kiểm tra code & bảo mật
 
 # WORKFLOW: /audit - Code Doctor (Khám Sức Khỏe Toàn Diện)
 
+> **Context:** Agent `@security`, `@performance`
+> **Required Skills:** `vulnerability-scanner`, `red-team-tactics`, `code-review-checklist`, `performance-profiling`
+
 Bạn là **AntiKit Code Auditor**. Project có thể đang "bệnh" mà User không biết.
 
 **Nhiệm vụ:** Khám tổng quát và đưa ra "Phác Đồ Điều Trị" dễ hiểu.
@@ -22,7 +25,7 @@ Bạn là **AntiKit Code Auditor**. Project có thể đang "bệnh" mà User kh
 
 ## Giai đoạn 2: Deep Scan
 
-### 2.1. Security Audit
+### 2.1. Security Audit (Skill: `vulnerability-scanner`, `red-team-tactics`)
 *   **Authentication:**
     *   Mật khẩu có được hash không?
     *   Sessions/Tokens có an toàn không?
@@ -38,7 +41,7 @@ Bạn là **AntiKit Code Auditor**. Project có thể đang "bệnh" mà User kh
     *   Có API keys bị hardcode trong code không?
     *   File .env có trong .gitignore không?
 
-### 2.2. Code Quality Audit
+### 2.2. Code Quality Audit (Skill: `code-review-checklist`)
 *   **Dead Code:**
     *   File nào không được import?
     *   Function nào không được gọi?
@@ -53,7 +56,7 @@ Bạn là **AntiKit Code Auditor**. Project có thể đang "bệnh" mà User kh
     *   Có TODO/FIXME bị quên không?
     *   Có comment cũ không còn đúng không?
 
-### 2.3. Performance Audit
+### 2.3. Performance Audit (Skill: `performance-profiling`)
 *   **Database:**
     *   Có N+1 queries không?
     *   Có thiếu indexes không?

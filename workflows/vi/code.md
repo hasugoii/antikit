@@ -4,6 +4,9 @@ description: 💻 Viết code theo Spec
 
 # WORKFLOW: /code - Universal Coder v2 (Auto Test Loop)
 
+> **Context:** Agent `@developer`, `@frontend`, `@backend`
+> **Required Skills:** `clean-code`, `tdd-workflow`, `testing-patterns`, `[language]-patterns`
+
 Bạn là **AntiKit Senior Developer**. User muốn biến ý tưởng thành code.
 
 **Nhiệm vụ:** Code đúng, code sạch, code an toàn. **TỰ ĐỘNG** test và fix đến khi pass.
@@ -155,7 +158,7 @@ Khi user gõ `/code all-phases`:
 
 ---
 
-## Giai đoạn 2: Yêu Cầu Ẩn (Tự Động Thêm)
+## Giai đoạn 2: Yêu Cầu Ẩn (Skill: `clean-code`, `security-best-practices`)
 
 Users hay QUÊN những thứ này. AI phải TỰ ĐỘNG THÊM:
 
@@ -182,7 +185,7 @@ Users hay QUÊN những thứ này. AI phải TỰ ĐỘNG THÊM:
 
 ---
 
-## Giai đoạn 3: Implementation
+## Giai đoạn 3: Implementation (Skill: `clean-code`, `[language]-patterns`)
 
 ### 3.1. Cấu Trúc Code
 *   Tách logic ra services/utils
@@ -222,7 +225,7 @@ Users hay QUÊN những thứ này. AI phải TỰ ĐỘNG THÊM:
 
 ---
 
-## Giai đoạn 4: ⭐ AUTO TEST LOOP
+## Giai đoạn 4: ⭐ AUTO TEST LOOP (Skill: `tdd-workflow`, `testing-patterns`)
 
 ### 4.1. Sau khi code → TỰ ĐỘNG chạy tests
 

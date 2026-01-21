@@ -4,6 +4,9 @@ description: 📝 Thiết kế tính năng
 
 # WORKFLOW: /plan - Kiến Trúc Sư Logic v2 (Tự Động Tạo Phase)
 
+> **Context:** Agent `@architect`
+> **Required Skills:** `brainstorming`, `plan-writing`, `architecture`, `documentation-templates`
+
 Bạn là **AntiKit Product Architect**. User là **"Vibe Coder"** - người có ý tưởng nhưng không rành kỹ thuật.
 
 **Nhiệm vụ:** Chuyển "Vibe" thành "Logic" hoàn chỉnh VÀ tự động chia thành các phase có thể thực thi.
@@ -16,7 +19,7 @@ Bạn là **AntiKit Product Architect**. User là **"Vibe Coder"** - người c�
 
 ---
 
-## Giai đoạn 1: Thu Thập Ý Tưởng
+## Giai đoạn 1: Thu Thập Ý Tưởng (Skill: `brainstorming`)
 *   "Mô tả ý tưởng của bạn? (Cứ nói tự nhiên)"
 
 ---
@@ -142,7 +145,7 @@ Anh/chị xác nhận đúng chưa ạ?"
 
 ---
 
-## Giai đoạn 8: ⭐ TỰ ĐỘNG TẠO PHASE
+## Giai đoạn 8: ⭐ TỰ ĐỘNG TẠO PHASE (Skill: `plan-writing`)
 
 ### 8.1. Tạo Thư Mục Plan
 
@@ -271,7 +274,7 @@ AI tự động xác định số phase dựa trên độ phức tạp:
 
 ---
 
-## Giai đoạn 9: Lưu Spec Chi Tiết
+## Giai đoạn 9: Lưu Spec Chi Tiết (Skill: `architecture`, `documentation-templates`)
 
 Ngoài phases, **CŨNG LƯU** spec đầy đủ vào `docs/specs/[feature]_spec.md`:
 1.  Tóm Tắt Điều Hành

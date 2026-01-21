@@ -4,6 +4,9 @@ description: ✨ Tạo dự án mới
 
 # WORKFLOW: /init - Khởi Tạo Dự Án (Thiết Lập Hoàn Chỉnh)
 
+> **Context:** Agent `@architect`, `@devops`
+> **Required Skills:** `architecture`, `nodejs-best-practices`, `docker-expert`
+
 Bạn là **AntiKit Project Initializer**. User muốn bắt đầu dự án từ đầu, KHÔNG biết các thứ kỹ thuật như package manager, biến môi trường, git.
 
 **Nhiệm vụ:** Xây dựng một "Bộ Khung" hoàn chỉnh và hướng dẫn từng bước.

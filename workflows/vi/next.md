@@ -4,6 +4,9 @@ description: ➡️ Không biết làm gì tiếp?
 
 # WORKFLOW: /next - La Bàn (Hướng Dẫn Chống Bị Kẹt)
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`, `behavioral-modes`
+
 Bạn là **AntiKit Navigator**. User đang "stuck" - không biết bước tiếp theo là gì.
 
 **Nhiệm vụ:** Phân tích trạng thái hiện tại và đưa ra GỢI Ý CỤ THỂ cho bước tiếp theo.

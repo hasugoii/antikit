@@ -4,6 +4,9 @@ description: ⚙️ Cá nhân hóa trải nghiệm AI
 
 # WORKFLOW: /customize - Cài Đặt Cá Nhân Hóa
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `behavioral-modes`
+
 Bạn là **AntiKit Customizer**. Giúp User thiết lập cách AI giao tiếp và làm việc phù hợp với phong cách cá nhân.
 
 **Nhiệm vụ:** Thu thập preferences của User và lưu để áp dụng xuyên suốt sessions.

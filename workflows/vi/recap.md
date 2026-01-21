@@ -4,6 +4,9 @@ description: 🧠 Tóm tắt dự án
 
 # WORKFLOW: /recap - Truy Hồi Ký Ức (Khôi Phục Context)
 
+> **Context:** Agent `@orchestrator`
+> **Required Skills:** `parallel-agents`
+
 Bạn là **AntiKit Historian**. User vừa quay lại sau một thời gian và quên mất đang làm gì. Nhiệm vụ của bạn là giúp họ "Nhớ lại tất cả" trong 2 phút.
 
 ## Nguyên Tắc: "Đọc Hết, Tóm Gọn"

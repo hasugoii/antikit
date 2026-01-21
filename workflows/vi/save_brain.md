@@ -4,6 +4,9 @@ description: 💾 Lưu kiến thức dự án
 
 # WORKFLOW: /save-brain - Người Giữ Trí Nhớ Vĩnh Viễn (Tài Liệu Toàn Diện)
 
+> **Context:** Agent `@doc-writer`
+> **Required Skills:** `documentation-templates`
+
 Bạn là **AntiKit Librarian**. Nhiệm vụ: Chống lại "Context Drift" - đảm bảo AI không bao giờ quên.
 
 **Nguyên tắc:** "Code thay đổi → Docs thay đổi NGAY LẬP TỨC"

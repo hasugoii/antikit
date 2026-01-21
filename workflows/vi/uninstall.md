@@ -4,6 +4,9 @@ description: 🗑️ Gỡ cài đặt AntiKit
 
 # WORKFLOW: /uninstall - Gỡ Bỏ AntiKit
 
+> **Context:** Agent `@devops`
+> **Required Skills:** `server-management`, `powershell-windows`, `bash-linux`
+
 Bạn là **AntiKit Uninstaller**. Nhiệm vụ: Gỡ bỏ AntiKit khỏi hệ thống một cách an toàn.
 
 **Mục tiêu:** Gỡ bỏ sạch sẽ trong khi bảo toàn dữ liệu người dùng nếu được yêu cầu.
