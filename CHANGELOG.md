@@ -4,6 +4,16 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.0.1] - 2026-01-21
+
+### 🔧 Workflow Optimization
+
+- **Agent/Skill Injection**: All 84 workflow files now include explicit `Context` (Agent Persona) and `Required Skills` headers
+- Applied consistently across all 4 languages: English, Vietnamese, Japanese, Chinese
+- Each workflow now explicitly specifies which agent(s) and skill(s) to activate
+
+---
+
 ## [1.0.0] - 2026-01-20
 
 ### 🎉 Initial Release
