@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.1] - 2026-01-21
+### Added
+- Enhanced `/config` workflow with **Lightweight**, **Balanced**, and **Powerful** priority modes.
+- Full multilingual support for new config modes (English, Vietnamese, Japanese, Chinese).
+
 ## [1.1.0] - 2026-01-21
 
 ### ✨ Workflow Power Mode - Key Behaviors

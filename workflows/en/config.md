@@ -241,49 +241,62 @@ Scan files/folders:
 
 ---
 
-## Phase 2: User Options
+## Phase 2: Mode Selection
 
 ### 2.1. Selection Menu
 
 ```
-"⚙️ **What do you want to do?**
+"⚙️ **Which configuration mode do you want?**
 
-1️⃣ **Keep as is** - Enable all (Recommended)
-   → No restrictions, AI auto-selects fitting skill
+1️⃣ **Lightweight** (Fast & Light)
+   → Enable only core Agents (@architect, @coder)
+   → Disable deep analysis features
+   → Best for: Slow machines, speed, small projects
 
-2️⃣ **Optimize** - Only use recommended skills
-   → Disable unrelated skills
-   → Reduce context, AI focuses more
+2️⃣ **Balanced** (Recommended)
+   → Auto-detect tech stack and enable fitting skills
+   → Balance between intelligence and performance
 
-3️⃣ **Custom** - Choose each skill/agent
-   → Full control
+3️⃣ **Powerful** (Max Power)
+   → ENABLE ALL agents and skills
+   → Deep analysis: Security, Performance, SEO...
+   → Best for: Audits, releases, complex projects
 
-4️⃣ **Skip** - No config needed
+4️⃣ **Custom**
+   → Manually choose each skill
 "
 ```
 
-### 2.2. If User chooses Optimize (Option 2)
+### 2.2. Mode Details
 
+#### 🍃 Lightweight Mode (`/config mode lightweight`)
+*   **Goal:** Fastest response, save tokens.
+*   **Enabled:** `@architect`, `@frontend`, `@backend`
+*   **Disabled:** `@security`, `@performance`, `@seo`, `@tester`, `@mobile`, `@game`...
+*   **Skills:** Keep only basic framework skills (React, Node...).
+
+#### ⚖️ Balanced Mode (`/config optimize`)
+*   **Goal:** Balanced. Right tool for the right job.
+*   **Logic:** Run Auto-Detection (Phase 1) and only enable stack-relevant items.
+
+#### 🚀 Powerful Mode (`/config mode powerful`)
+*   **Goal:** Leave no stone unturned.
+*   **Enabled:** ALL Agents + ALL Skills.
+*   **Behavior:**
+    *   After coding → Auto-call Security & Performance checks.
+    *   During plan → Call SEO & Architecture checks.
+
+---
+
+## Phase 3: Create Preferences File
+...
+```json
+{
+  "mode": "lightweight | balanced | powerful | custom",
+  ...
+}
 ```
-"🎯 **OPTIMIZED CONFIG:**
 
-✅ **Enabled (14 skills + 8 agents):**
-   [Recommended list]
-
-❌ **Disabled (26 skills + 8 agents):**
-   game-development, mobile-design, python-patterns...
-   @mobile, @game, @seo, @pentester...
-
-📊 **Benefits:**
-   • ~35% less context size
-   • AI responds faster
-   • Less confusion
-
-⚠️ **Note:**
-   If later you need a disabled skill, AI will AUTO-SUGGEST enabling it!
-
-Save this config?"
-```
 
 ---
 
@@ -326,13 +339,13 @@ Save this config?"
 
 | Command | Description |
 |---------|-------------|
-| `/config` | Auto-detect and show recommendations |
+| `/config` | Auto-detect and show mode menu |
 | `/config show` | View current preferences |
-| `/config reset` | Return to default (enable all) |
+| `/config mode lightweight` | Switch to Lightweight mode (fast) |
+| `/config mode balanced` | Switch to Balanced mode (optimize) |
+| `/config mode powerful` | Switch to Powerful mode (full power) |
 | `/config add [name]` | Add skill/agent to recommended |
 | `/config remove [name]` | Disable skill/agent |
-| `/config optimize` | Switch to optimized mode |
-| `/config enable-all` | Enable all |
 | `/config language [code]` | Change language |
 
 ---

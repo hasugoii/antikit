@@ -227,53 +227,66 @@ Scan files/folders:
 
 ---
 
-## Giai đoạn 2: Tùy Chọn User
+## Giai đoạn 2: Tùy Chọn Chế Độ (Modes)
 
 ### 2.1. Menu Lựa Chọn
 
 ```
-"⚙️ **Anh/chị muốn làm gì?**
+"⚙️ **Anh/chị muốn cấu hình theo chế độ nào?**
 
-1️⃣ **Giữ nguyên** - Bật tất cả (Khuyến nghị)
-   → Không giới hạn, AI tự động chọn skill phù hợp
+1️⃣ **Lightweight** (Nhẹ & Nhanh)
+   → Chỉ bật các Agent cốt lõi (@architect, @coder)
+   → Tắt các tính năng phân tích sâu
+   → Phù hợp: Máy yếu, cần tốc độ, dự án nhỏ
 
-2️⃣ **Tối ưu** - Chỉ dùng skills khuyên dùng
-   → Tắt các skills không liên quan
-   → Giảm context, AI tập trung hơn
+2️⃣ **Balanced** (Cân Bằng - Khuyến Nghị)
+   → Tự động detect tech stack và bật skill phù hợp
+   → Cân bằng giữa thông minh và hiệu năng
 
-3️⃣ **Tùy chỉnh** - Chọn từng skill/agent
-   → Kiểm soát hoàn toàn
+3️⃣ **Powerful** (Mạnh Mẽ Nhất)
+   → BẬT TẤT CẢ agents và skills
+   → Phân tích sâu: Security, Performance, SEO...
+   → Phù hợp: Audit, release, dự án phức tạp
 
-4️⃣ **Bỏ qua** - Không cần config
+4️⃣ **Custom** (Tùy Chỉnh)
+   → Chọn thủ công từng skill
 "
 ```
 
-### 2.2. Nếu User chọn Optimize (Option 2)
+### 2.2. Chi Tiết Các Mode
 
-```
-"🎯 **CẤU HÌNH TỐI ƯU:**
+#### 🍃 Lightweight Mode (`/config mode lightweight`)
+*   **Mục tiêu:** Tốc độ phản hồi nhanh nhất, tiết kiệm token.
+*   **Enabled:** `@architect`, `@frontend`, `@backend`
+*   **Disabled:** `@security`, `@performance`, `@seo`, `@tester`, `@mobile`, `@game`...
+*   **Skills:** Chỉ giữ lại các skill frameworks cơ bản (React, Node...).
 
-✅ **Enabled (14 skills + 8 agents):**
-   [Danh sách recommended]
+#### ⚖️ Balanced Mode (`/config optimize`)
+*   **Mục tiêu:** Cân bằng. Dùng đúng skill cho đúng job.
+*   **Logic:** Chạy Auto-Detection (Giai đoạn 1) và chỉ bật những gì liên quan đến tech stack.
 
-❌ **Disabled (26 skills + 8 agents):**
-   game-development, mobile-design, python-patterns...
-   @mobile, @game, @seo, @pentester...
-
-📊 **Lợi ích:**
-   • Giảm ~35% context size
-   • AI phản hồi nhanh hơn
-   • Ít bị lẫn lộn
-
-⚠️ **Ghi chú:**
-   Nếu sau này cần skill đã tắt, AI sẽ TỰ ĐỘNG GỢI Ý bật lại!
-
-Lưu cấu hình này?"
-```
+#### 🚀 Powerful Mode (`/config mode powerful`)
+*   **Mục tiêu:** Không bỏ sót bất kỳ góc nhìn nào.
+*   **Enabled:** ALL Agents + ALL Skills.
+*   **Behavior:**
+    *   Mỗi khi code xong → Tự động gọi Security & Performance check.
+    *   Khi plan → Gọi SEO & Architecture check.
 
 ---
 
 ## Giai đoạn 3: Tạo File Preferences
+...
+```json
+{
+  "mode": "lightweight | balanced | powerful | custom",
+  ...
+}
+```
+
+
+---
+
+
 
 ### 3.1. Mặc Định (Enable All)
 
@@ -312,13 +325,13 @@ Lưu cấu hình này?"
 
 | Lệnh | Mô tả |
 |------|-------|
-| `/config` | Auto-detect và hiển thị recommendations |
+| `/config` | Auto-detect và hiển thị menu modes |
 | `/config show` | Xem preferences hiện tại |
-| `/config reset` | Trở về mặc định (enable all) |
+| `/config mode lightweight` | Chuyển sang chế độ Nhẹ (nhanh) |
+| `/config mode balanced` | Chuyển sang chế độ Cân bằng (optimize) |
+| `/config mode powerful` | Chuyển sang chế độ Mạnh mẽ (full power) |
 | `/config add [name]` | Thêm skill/agent vào recommended |
 | `/config remove [name]` | Tắt skill/agent |
-| `/config optimize` | Chuyển sang mode tối ưu |
-| `/config enable-all` | Bật tất cả |
 | `/config language [code]` | Đổi ngôn ngữ |
 
 ---

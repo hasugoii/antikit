@@ -87,16 +87,50 @@ description: ⚙️ 配置设置
 
 ---
 
-## 阶段 2: 用户选项
+## 阶段 2: 模式选择
+
+### 2.1. 选择菜单
 
 ```
-"⚙️ **您想做什么?**
+"⚙️ **您想要哪种配置模式?**
 
-1️⃣ **保持原样** - 启用所有 (推荐)
-2️⃣ **优化** - 只使用推荐的skills
-3️⃣ **自定义** - 选择每个skill/agent
-4️⃣ **跳过** - 不需要配置"
+1️⃣ **Lightweight** (轻量 & 快速)
+   → 仅启用核心 Agent (@architect, @coder)
+   → 禁用深度分析功能
+   → 适合: 慢速机器, 追求速度, 小型项目
+
+2️⃣ **Balanced** (平衡 - 推荐)
+   → 自动检测技术栈并启用适配的 skill
+   → 智能与性能的平衡
+
+3️⃣ **Powerful** (最强模式)
+   → 启用所有 agents 和 skills
+   → 深度分析: Security, Performance, SEO...
+   → 适合: 审计, 发布, 复杂项目
+
+4️⃣ **Custom** (自定义)
+   → 手动选择每个 skill
+"
 ```
+
+### 2.2. 模式详情
+
+#### 🍃 Lightweight Mode (`/config mode lightweight`)
+*   **目标:** 最快响应, 节省 token。
+*   **启用:** `@architect`, `@frontend`, `@backend`
+*   **禁用:** `@security`, `@performance`, `@seo`, `@tester`, `@mobile`, `@game`...
+*   **Skills:** 仅保留基本框架 skill (React, Node...)。
+
+#### ⚖️ Balanced Mode (`/config optimize`)
+*   **目标:** 平衡。在正确的地方使用正确的工具。
+*   **逻辑:** 运行自动检测 (阶段1) 并仅启用与技术栈相关的项目。
+
+#### 🚀 Powerful Mode (`/config mode powerful`)
+*   **目标:** 全面覆盖。
+*   **启用:** 所有 Agents + 所有 Skills。
+*   **行为:**
+    *   编码后 → 自动调用 Security & Performance 检查。
+    *   计划时 → 调用 SEO & Architecture 检查。
 
 ---
 
@@ -104,10 +138,12 @@ description: ⚙️ 配置设置
 
 | 命令 | 描述 |
 |------|------|
-| `/config` | 自动检测并显示推荐 |
+| `/config` | 自动检测并显示模式菜单 |
 | `/config show` | 查看当前偏好 |
-| `/config reset` | 返回默认 (启用所有) |
-| `/config optimize` | 切换到优化模式 |
+| `/config mode lightweight` | 切换到轻量模式 (快速) |
+| `/config mode balanced` | 切换到平衡模式 (优化) |
+| `/config mode powerful` | 切换到最强模式 (全开) |
+| `/config optimize` | 切换到平衡模式 |
 | `/config language [code]` | 更改语言 (见阶段4) |
 
 ---

@@ -23,8 +23,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/workflows-20-green" alt="Workflows">
+  <img src="https://img.shields.io/badge/version-1.1.1-blue" alt="Version">
+  <img src="https://img.shields.io/badge/workflows-20+-green" alt="Workflows">
   <img src="https://img.shields.io/badge/agents-16-purple" alt="Agents">
   <img src="https://img.shields.io/badge/skills-40-orange" alt="Skills">
   <img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen" alt="License">
