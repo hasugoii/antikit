@@ -1,213 +1,102 @@
-<p align="center">
-  <img src="assets/logo.png" alt="AntiKit - Bộ Vibe Coding cho Google Antigravity" width="120" height="120">
-</p>
+<div align="center">
 
-<h1 align="center">AntiKit</h1>
+# AntiKit 🚀
 
-<p align="center">
-  <strong>Bộ Vibe Coding cho Google Antigravity</strong><br>
-  <em>Biến AI hỗn loạn thành code production-ready</em>
-</p>
+**Bạn đồng hành "Vibe Coding" cho Antigravity AI.**
+*Code bằng cảm giác. Để AI lo logic.* 🧘‍♂️✨
 
-<p align="center">
-  <a href="#câu-chuyện">Câu chuyện</a> •
-  <a href="#bắt-đầu-nhanh">Bắt đầu</a> •
-  <a href="#các-lệnh">Lệnh</a> •
-  <a href="#bao-gồm-những-gì">Bao gồm</a>
-</p>
+[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
 
-<p align="center">
-  <a href="README.md">🇺🇸 English</a> •
-  <a href="README.zh.md">🇨🇳 中文</a> •
-  <a href="README.ja.md">🇯🇵 日本語</a>
-</p>
+[English](README.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [中文](README.zh.md)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/workflows-20-green" alt="Workflows">
-  <img src="https://img.shields.io/badge/agents-16-purple" alt="Agents">
-  <img src="https://img.shields.io/badge/skills-40-orange" alt="Skills">
-  <img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen" alt="License">
-</p>
+</div>
 
 ---
 
-## 🌟 Câu Chuyện
+## 🤔 Tại sao lại cần AntiKit?
 
-*Bạn khám phá ra **Google Antigravity** — IDE agent-first cách mạng.*
+Bạn đang sở hữu **Google Antigravity**, con AI code đỉnh nhất hiện nay. Nhưng đôi khi dùng nó thấy...
+- 😥 **Quá Kỹ Thuật:** "Contexts", "Schemas", "Prompts"... nghe nhức đầu!
+- 🇺🇸 **Toàn Tiếng Anh:** Bạn hỏi tiếng Việt, nó trả lời tiếng Anh (hoặc nửa nạc nửa mỡ).
+- 😨 **Quá Rủi Ro:** Nhỡ nó xóa nhầm file `C:\Windows` thì toang?
+- 😵 **Quá Loạn:** Đang nói chuyện với ai? Ông dev hay ông tester?
 
-*Bạn hào hứng. AI thực sự viết code cho bạn! Vibe coding đỉnh cao!*
-
-*Rồi thực tế ập đến...*
-
-> 🧠 Sau 30 tin nhắn, AI quên sạch database schema và bắt đầu ảo giác các bảng
-
-> 💥 Code "chạy được" nhưng crash ngay khi lên production
-
-> 🔄 Sửa 1 bug, 3 bug mới xuất hiện. Vòng lặp debug vô tận.
-
-> ❓ Bạn nhìn màn hình không biết phải làm gì tiếp
-
-*Quen chưa?*
+**AntiKit** sinh ra để fix hết đống đó. Nó biến cỗ máy thô sơ của Antigravity thành một chiếc **Siêu Xe Hạng Sang** mà ai cũng lái được.
 
 ---
 
-## ⚡ Giải Pháp
+## ✨ 4 Trụ Cột của "Vibe Coding"
 
-**AntiKit là mảnh ghép còn thiếu.**
+### 1. 🌏 Native Fluency (Nói tiếng của BẠN)
+Quên "Engrish" đi. AntiKit buộc AI phải **SUY NGHĨ và TRẢ LỜI** bằng tiếng Việt 100% (hoặc Nhật/Trung tùy bạn chọn).
+> *Không còn: "Here is your code" -> Giờ là: "Của bạn đây, sếp ơi!"*
 
-Một framework gồm **20 workflows**, **16 AI agents**, và **40 skills chuyên sâu** biến Antigravity từ công cụ mạnh mẽ thành hệ điều hành phát triển hoàn chỉnh.
+### 2. 🛡️ Zero-Fear Safety (Sandbox An Toàn)
+Code thoải mái, không lo hỏng máy. Em đã cài một lớp **Khiên Chắn**:
+- 🚫 **Chặn lệnh hủy diệt:** Cấm tiệt `rm -rf`, `format`.
+- 🔒 **Khóa phạm vi:** AI chỉ được phép nghịch trong folder dự án.
+- 🧱 **Bảo vệ hệ thống:** File Windows/System là bất khả xâm phạm.
 
-| Không có AntiKit | Có AntiKit |
-|------------------|------------|
-| "AI quên schema lần nữa rồi" | `/recap` khôi phục toàn bộ context |
-| Bug ngẫu nhiên sau mỗi lần fix | `/code` bao gồm test tự động |
-| "Giờ làm gì tiếp đây?" | `/next` gợi ý đường đi tốt nhất |
-| Code review? Là gì? | `/audit` kiểm tra bảo mật & chất lượng |
-| Sợ thay đổi bất cứ thứ gì | `/rollback` về bất kỳ version nào |
-| Mất context giữa các session | `/save-brain` lưu trữ kiến thức |
+### 3. 🆔 Clarity Badges (Biết rõ ai đang làm)
+AntiKit đeo bảng tên cho từng con AI. Bạn luôn biết mình đang làm việc với ai.
+> `> 🆔 Agent: @architect (Kiến trúc sư) | 🛠️ Skills: Quy hoạch, Thiết kế`
+
+### 4. 🧠 Supervisor Brain (Tự Phản Biện)
+Em cấy một "Lương tâm" vào cho AI. Trước khi nó đưa code cho bạn, nó sẽ tự hỏi:
+> *"Khoan, code này ngon chưa? Senior Dev có chửi không?"*
+Nó tự sửa lỗi của chính mình **trước khi** bạn kịp nhìn thấy.
 
 ---
 
-## 🚀 Bắt Đầu Nhanh
+## 🚀 Cài Đặt 1 Chạm
 
-**⏱️ Cài đặt trong 30 giây:**
+Không cần biết code cao siêu. Mở terminal lên và paste câu **Thần Chú** này vào:
 
-### macOS / Linux
+### 🪟 Windows (PowerShell)
+```powershell
+iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+```
 
+### 🍎 macOS / 🐧 Linux
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
 ```
 
-### Windows (PowerShell)
-
-```powershell
-irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 | iex
-```
-
-**Sau khi cài, restart Antigravity và thử:**
-
-```
-/recap
-```
+*(Trong lúc cài, cứ chọn ngôn ngữ bạn thích: **Vietnamese** nhé!)*
 
 ---
 
-## 📋 Các Lệnh
+## 🎮 "Vibe" Như Thế Nào?
 
-AntiKit tổ chức việc phát triển AI của bạn thành hành trình rõ ràng:
+Cài xong rồi, chỉ cần gõ mấy lệnh `/slash` này vào chat để gọi chuyên gia:
 
-### 🎯 Giai đoạn 1: Lên Kế Hoạch
-> *Nghĩ trước khi code*
-
-| Lệnh | Chức năng |
-|------|-----------|
-| `/init` | Thiết lập cấu trúc project, Git, môi trường |
-| `/recap` | Khôi phục context sau khi nghỉ — AI nhớ mọi thứ |
-| `/brainstorm` | Khám phá ý tưởng với AI trước khi commit |
-| `/plan` | Thiết kế database, API, tạo specs chi tiết |
-| `/next` | Bí? Nhận gợi ý thông minh |
-
-### 🔨 Giai đoạn 2: Xây Dựng
-> *Viết code production-ready từ ngày đầu*
-
-| Lệnh | Chức năng |
-|------|-----------|
-| `/visualize` | Thiết kế UI đẹp với AI |
-| `/code` | Viết code với kiểm tra bảo mật tích hợp |
-| `/run` | Chạy ứng dụng |
-
-### ⚙️ Giai đoạn 3: Vận Hành
-> *Duy trì chất lượng, fix lỗi nhanh*
-
-| Lệnh | Chức năng |
-|------|-----------|
-| `/debug` | Tìm nguyên nhân gốc, không chỉ vá triệu chứng |
-| `/test` | Chạy test toàn diện |
-| `/refactor` | Dọn dẹp code lộn xộn tự động |
-| `/rollback` | An toàn quay về version trước |
-| `/deploy` | Đẩy lên production tự tin |
-
-### 🛡️ Giai đoạn 4: Quản Lý
-> *Giữ project khỏe mạnh*
-
-| Lệnh | Chức năng |
-|------|-----------|
-| `/save-brain` | Lưu kiến thức project — AI không bao giờ quên |
-| `/config` | Cấu hình skills, agents, ngôn ngữ |
-| `/audit` | Review bảo mật và chất lượng code |
-| `/ak-update` | Cập nhật AntiKit lên version mới nhất |
-| `/uninstall` | Gỡ cài đặt sạch sẽ nếu cần |
+| Lệnh | Triệu hồi... | Dùng khi cảm thấy... |
+| :--- | :--- | :--- |
+| `/brainstorm` | 💡 **Thánh Ý Tưởng** | "Có ý tưởng mà chưa biết bắt đầu sao..." |
+| `/plan` | 📝 **Kiến Trúc Sư** | "Cần một kế hoạch bài bản trước khi code." |
+| `/visualize` | 🎨 **Họa Sĩ** | "Muốn giao diện đẹp lung linh." |
+| `/code` | 💻 **Senior Dev** | "Code hộ cái, lười quá rồi." |
+| `/deploy` | 🚀 **DevOps** | "Cho cái web này lên mạng đi!" |
+| `/audit` | 🏥 **Bác Sĩ** | "Khám xem code có bệnh tật gì không?" |
+| `/recap` | 🧠 **Thư Ký** | "Nãy giờ làm gì rồi nhỉ, nhắc lại coi." |
 
 ---
 
-## 🤖 Bao Gồm Những Gì
+## 📦 Trong Hộp Có Gì?
 
-### 20 Workflows
-Vòng đời phát triển hoàn chỉnh từ ý tưởng đến production. Mỗi workflow hướng dẫn từng bước.
-
-### 16 AI Agents
-Chuyên gia sẵn sàng hỗ trợ:
-
-`@frontend` • `@backend` • `@database` • `@security` • `@devops` • `@tester` • `@debugger` • `@performance` • `@architect` • `@doc` • `@orchestrator` • `@pentester` • `@mobile` • `@game` • `@seo` • `@explorer`
-
-### 40 Skills
-Module kiến thức chuyên sâu tự động load theo context:
-
-**Frontend:** React, Next.js, TailwindCSS, UI/UX patterns
-**Backend:** Node.js, NestJS, API patterns, Python
-**Database:** Prisma, PostgreSQL, thiết kế schema
-**DevOps:** Docker, deployment, CI/CD
-**Và nhiều hơn...**
+-   **16 Agent Chuyên Biệt:** Frontend, Backend, Security, SEO, Mobile...
+-   **80+ Workflows:** Quy trình chuẩn chỉnh gói gọn trong 1 lệnh.
+-   **Global Memory (GEMINI.md):** "Bộ não" quản lý luật an toàn và ngôn ngữ.
 
 ---
 
-## 💡 Workflow Hàng Ngày
+<div align="center">
 
-| Khi nào | Làm gì |
-|---------|--------|
-| 🌅 Bắt đầu session | `/recap` để khôi phục context |
-| 🔨 Đang code | `/code` để implement an toàn |
-| 🐛 Tìm thấy bug | `/debug` để tìm nguyên nhân gốc |
-| ✅ Xong tính năng | `/save-brain` + Git commit |
-| 🌙 Kết thúc session | `/save-brain` để lưu kiến thức |
-| 😕 Bí? | `/next` để nhận gợi ý |
+**Built with ❤️ for the Vibe Coding Community.**
 
----
+[![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
 
-## 🌐 Hỗ Trợ Đa Ngôn Ngữ
-
-AntiKit nói ngôn ngữ của bạn:
-
-- 🇺🇸 English
-- 🇻🇳 Tiếng Việt
-- 🇯🇵 日本語
-- 🇨🇳 中文
-
-Đổi ngôn ngữ bất cứ lúc nào: `/config language vi`
-
----
-
-## 📜 License
-
-AntiKit là **mã nguồn mở** theo [Apache 2.0 License](LICENSE.md).
-
-- ✅ Miễn phí cho cá nhân
-- ✅ Miễn phí cho thương mại
-- ✅ Tự do sửa đổi và phân phối
-
----
-
-<p align="center">
-  <strong>Ngừng chiến đấu với AI. Bắt đầu vibe coding với Antigravity + AntiKit.</strong><br><br>
-  <a href="https://github.com/hasugoii/antikit">⭐ Star trên GitHub</a> •
-  <a href="https://github.com/hasugoii/antikit/issues">🐛 Báo lỗi</a> •
-  <a href="https://github.com/hasugoii/antikit/discussions">💬 Thảo luận</a>
-</p>
-
----
-
-<p align="center">
-  <sub>Made with ❤️ cho cộng đồng Antigravity</sub><br>
-  <sub><b>Keywords:</b> vibe coding, antigravity, gemini cli, ai coding assistant, agentic development</sub>
-</p>
+</div>

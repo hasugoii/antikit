@@ -1,8 +1,18 @@
-# AntiKit 🚀
-> **The "Vibe Coding" Companion for Antigravity.**
-> Code by feeling. Let AI handle the logic. 🧘‍♂️✨
+<div align="center">
 
-![AntiKit Banner](https://img.shields.io/badge/Vibe_Coding-Enabled-8A2BE2?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-1.1.6-green?style=for-the-badge)
+# AntiKit 🚀
+
+**The "Vibe Coding" Companion for Antigravity.**
+*Code by feeling. Let AI handle the logic.* 🧘‍♂️✨
+
+[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
+
+[English](README.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [中文](README.zh.md)
+
+</div>
 
 ---
 
@@ -83,6 +93,10 @@ Once installed, just type these slash commands in your chat to summon experts:
 
 ---
 
-## 🤝 Join the Vibe
-Open an issue or star the repo if this makes your life easier!
-**Happy Vibe Coding!** 🎧💻
+<div align="center">
+
+**Built with ❤️ for the Vibe Coding Community.**
+
+[![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
+
+</div>

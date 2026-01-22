@@ -1,187 +1,102 @@
-<p align="center">
-  <img src="assets/logo.png" alt="AntiKit - Google Antigravity的Vibe Coding框架" width="120" height="120">
-</p>
+<div align="center">
 
-<h1 align="center">AntiKit</h1>
+# AntiKit 🚀
 
-<p align="center">
-  <strong>Google Antigravity的Vibe Coding框架</strong><br>
-  <em>将AI混乱转化为生产级代码</em>
-</p>
+**Antigravity AI 的 "Vibe Coding" 伴侣。**
+*凭感觉写代码。逻辑交给 AI。* 🧘‍♂️✨
 
-<p align="center">
-  <a href="#故事">故事</a> •
-  <a href="#快速开始">快速开始</a> •
-  <a href="#命令">命令</a> •
-  <a href="#包含内容">包含内容</a>
-</p>
+[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
 
-<p align="center">
-  <a href="README.md">🇺🇸 English</a> •
-  <a href="README.vi.md">🇻🇳 Tiếng Việt</a> •
-  <a href="README.ja.md">🇯🇵 日本語</a>
-</p>
+[English](README.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [中文](README.zh.md)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/workflows-20-green" alt="Workflows">
-  <img src="https://img.shields.io/badge/agents-16-purple" alt="Agents">
-  <img src="https://img.shields.io/badge/skills-40-orange" alt="Skills">
-  <img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen" alt="License">
-</p>
+</div>
 
 ---
 
-## 🌟 故事
+## 🤔 为什么选择 AntiKit?
 
-*你发现了**Google Antigravity** — 革命性的代理优先IDE。*
+你拥有 **Google Antigravity**，目前最强大的 AI 编程代理。但有时感觉...
+- 😥 **太技术化:** "Contexts", "Schemas", "Prompts"... 头都大了！
+- 🇺🇸 **全是英语:** 你问中文，它回英文（或者奇怪的翻译腔）。
+- 😨 **太危险:** 万一它删了我的 `C:\Windows` 文件夹怎么办？
+- 😵 **太混乱:** 谁在说话？程序员？测试员？
 
-*你很兴奋。AI真的能为你写代码！终极Vibe Coding！*
-
-*然后现实来了...*
-
-> 🧠 30条消息后，AI忘记了你的数据库模式，开始幻想表
-
-> 💥 代码"能跑"但在生产环境立即崩溃
-
-> 🔄 修一个bug，出现三个新bug。无尽的调试循环。
-
-> ❓ 盯着屏幕不知道下一步该做什么
-
-*听起来熟悉吗？*
+**AntiKit** 解决了这一切。它将 Antigravity 的原始引擎变成了一辆谁都能开的 **豪华跑车**。
 
 ---
 
-## ⚡ 解决方案
+## ✨ "Vibe Coding" 的四大支柱
 
-**AntiKit是缺失的那块拼图。**
+### 1. 🌏 母语流利 (说你的语言)
+不再有 "Chinglish"。AntiKit 强制 AI 100% 使用这中文 **思考和回答**。
+> *不再是: "Here is your code" -> 现在是: "代码好了，老板！"*
 
-由**20个工作流**、**16个AI代理**和**40个专业技能**组成的框架，将Antigravity从强大的工具转变为完整的开发操作系统。
+### 2. 🛡️ 零恐惧安全 (沙盒模式)
+安心写代码。我们安装了 **数字力场**:
+- 🚫 **阻止破坏性命令:** 禁止 `rm -rf` 或 `format`。
+- 🔒 **项目锁定:** AI 不能触碰项目文件夹以外的任何东西。
+- 🧱 **系统保护:** 你的操作系统文件是不可触碰的。
 
-| 没有AntiKit | 有AntiKit |
-|-------------|-----------|
-| "AI又忘了我的模式" | `/recap`恢复完整上下文 |
-| 每次修复后出现随机bug | `/code`包含自动测试 |
-| "接下来该做什么？" | `/next`建议最佳路径 |
-| 代码审查？那是什么？ | `/audit`检查安全性和质量 |
-| 害怕改动任何东西 | `/rollback`回到任意版本 |
-| 会话之间丢失上下文 | `/save-brain`持久化知识 |
+### 3. 🆔 清晰徽章 (了解你的团队)
+AntiKit 给每个 AI 代理都挂了名牌。你永远知道谁在为你工作。
+> `> 🆔 Agent: @architect (架构师) | 🛠️ Skills: 规划, 设计`
+
+### 4. 🧠 监督大脑 (自动修正)
+我们给 AI 植入了一个 "良心"。在它给你代码之前，它会偷偷问自己:
+> *"等等，这代码够好吗？高级开发人员会批准吗？"*
+它会在你看到之前 **自动修复** 自己的错误。
 
 ---
 
-## 🚀 快速开始
+## 🚀 一键安装
 
-**⏱️ 30秒安装：**
+你不需要是技术大神。只需打开终端并粘贴此 **魔法咒语**:
 
-### macOS / Linux
+### 🪟 Windows (PowerShell)
+```powershell
+iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+```
 
+### 🍎 macOS / 🐧 Linux
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
 ```
 
-### Windows (PowerShell)
-
-```powershell
-irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 | iex
-```
-
-**安装后，重启Antigravity并尝试：**
-
-```
-/recap
-```
+*(安装过程中，只需选择你的语言: **Chinese (中文)**)*
 
 ---
 
-## 📋 命令
+## 🎮 如何 "Vibe"?
 
-AntiKit将你的AI驱动开发组织成清晰的旅程：
+安装后，只需在聊天中输入这些 `/slash` 命令即可召唤专家:
 
-### 🎯 阶段1：规划
-> *编码前先思考*
-
-| 命令 | 功能 |
-|------|------|
-| `/init` | 设置项目结构、Git、环境 |
-| `/recap` | 休息后恢复上下文 — AI记住一切 |
-| `/brainstorm` | 提交前与AI探索想法 |
-| `/plan` | 设计数据库、API，创建详细规范 |
-| `/next` | 卡住了？获取智能建议 |
-
-### 🔨 阶段2：构建
-> *从第一天就写生产级代码*
-
-| 命令 | 功能 |
-|------|------|
-| `/visualize` | 用AI设计漂亮的UI布局 |
-| `/code` | 带内置安全检查地写代码 |
-| `/run` | 启动你的应用 |
-
-### ⚙️ 阶段3：运维
-> *保持质量，快速修复问题*
-
-| 命令 | 功能 |
-|------|------|
-| `/debug` | 找到根本原因，不只是打补丁 |
-| `/test` | 运行全面测试 |
-| `/refactor` | 自动清理混乱代码 |
-| `/rollback` | 安全回退到之前版本 |
-| `/deploy` | 自信地推送到生产环境 |
-
-### 🛡️ 阶段4：管理
-> *保持项目健康*
-
-| 命令 | 功能 |
-|------|------|
-| `/save-brain` | 保存项目知识 — AI永不遗忘 |
-| `/config` | 配置技能、代理、语言设置 |
-| `/audit` | 安全审查和代码质量检查 |
-| `/ak-update` | 更新AntiKit到最新版本 |
-| `/uninstall` | 需要时干净卸载 |
+| 命令 | 召唤... | 当你感觉... |
+| :--- | :--- | :--- |
+| `/brainstorm` | 💡 **创意大师** | "我有想法，但不知道从哪里开始..." |
+| `/plan` | 📝 **架构师** | "编码前我需要一个可靠的计划。" |
+| `/visualize` | 🎨 **设计师** | "我想要它看起来很漂亮。" |
+| `/code` | 💻 **高级开发** | "直接帮我写代码，我懒得动。" |
+| `/deploy` | 🚀 **DevOps** | "把这东西发布到网上！" |
+| `/audit` | 🏥 **医生** | "我的代码健康吗？安全吗？" |
+| `/recap` | 🧠 **秘书** | "提醒我一下，我们刚才做到哪了？" |
 
 ---
 
-## 🤖 包含内容
+## 📦 盒子里有什么?
 
-### 20个工作流
-从想法到生产的完整开发生命周期。每个工作流逐步指导。
-
-### 16个AI代理
-随时准备帮助的专家：
-
-`@frontend` • `@backend` • `@database` • `@security` • `@devops` • `@tester` • `@debugger` • `@performance` • `@architect` • `@doc` • `@orchestrator` • `@pentester` • `@mobile` • `@game` • `@seo` • `@explorer`
-
-### 40个技能
-根据上下文自动加载的深度知识模块：
-
-**前端：** React, Next.js, TailwindCSS, UI/UX模式
-**后端：** Node.js, NestJS, API模式, Python
-**数据库：** Prisma, PostgreSQL, 模式设计
-**DevOps：** Docker, 部署, CI/CD
-**更多...**
+-   **16 个专业代理:** 前端, 后端, 安全, SEO, 移动端...
+-   **80+ 工作流:** 最佳实践浓缩为简单的命令。
+-   **全局记忆 (GEMINI.md):** 强制执行安全和语言的 "大脑"。
 
 ---
 
-## 📜 许可证
+<div align="center">
 
-AntiKit是[Apache 2.0许可证](LICENSE.md)下的**开源**项目。
+**Built with ❤️ for the Vibe Coding Community.**
 
-- ✅ 个人使用免费
-- ✅ 商业使用免费
-- ✅ 自由修改和分发
+[![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
 
----
-
-<p align="center">
-  <strong>停止与AI战斗。用Antigravity + AntiKit开始Vibe Coding。</strong><br><br>
-  <a href="https://github.com/hasugoii/antikit">⭐ 在GitHub上Star</a> •
-  <a href="https://github.com/hasugoii/antikit/issues">🐛 报告Bug</a> •
-  <a href="https://github.com/hasugoii/antikit/discussions">💬 讨论</a>
-</p>
-
----
-
-<p align="center">
-  <sub>为Antigravity社区用❤️制作</sub><br>
-  <sub><b>Keywords:</b> vibe coding, antigravity, gemini cli, ai coding assistant, agentic development</sub>
-</p>
+</div>

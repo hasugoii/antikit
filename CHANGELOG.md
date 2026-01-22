@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.8] - 2026-01-22
+### Added
+- **Global README Support**: Added professional READMEs in Vietnamese (`README.vi.md`), Japanese (`README.ja.md`), and Chinese (`README.zh.md`).
+- **Professional Badges**: Added Version, License, and **Buy Me A Coffee** badges to the README header.
+
 ## [1.1.7] - 2026-01-22
 ### Changed
 - **Marketing Overhaul**: Completely rewrote `README.md` and `antikit-web` to focus on "Vibe Coding".
