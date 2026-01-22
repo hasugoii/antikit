@@ -4,6 +4,13 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.5] - 2026-01-22
+### Added
+- **Safety Boundaries**: Implemented strictly enforced safety rules in `install.ps1`, `install.sh`, and `GEMINI.md`.
+    - **Scope Restriction**: Agents are restricted to the current project directory.
+    - **System Protection**: Agents are prohibited from modifying system files (e.g., `C:\Windows`, `/etc`).
+    - **Destructive Actions**: Agents must ask for explicit approval before running destructive commands.
+
 ## [1.1.4] - 2026-01-22
 ### Added
 - **Identity Badge**: Agents now explicitly display their identity and active skills at the start of responses (e.g., `> 🆔 **Agent:** @architect | 🛠️ **Skills:** brainstorming`).

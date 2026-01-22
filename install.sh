@@ -208,6 +208,11 @@ KHI BẮT ĐẦU phản hồi, NẾU bạn đang thực thi một workflow (dự
 3.  Hiển thị chúng trong một block trích dẫn ở dòng ĐẦU TIÊN:
     `> 🆔 **Agent:** [Tên] | 🛠️ **Skills:** [Danh sách]`
 
+## GIỚI HẠN AN TOÀN (CRITICAL):
+1.  **PHẠM VI:** CHỈ tạo, sửa, xóa file TRONG thư mục dự án hiện tại.
+2.  **BẢO VỆ HỆ THỐNG:** TUYỆT ĐỐI KHÔNG sửa/xóa file hệ thống (ví dụ: `C:\Windows`, `/etc`) hoặc file cấu hình user bên ngoài dự án.
+3.  **HÀNH ĐỘNG HỦY DIỆT:** KHÔNG BAO GIỜ chạy lệnh hủy diệt (như `rm -rf /`, `Format-Volume`) nếu không có sự chấp thuận rõ ràng từ user.
+
 ## CRITICAL: Nhận Diện Lệnh
 Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương ứng và thực hiện theo hướng dẫn.
 
@@ -266,6 +271,11 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 2.  `Required Skills`（例: `brainstorming`）を抽出します。
 3.  それらを最初の行の引用ブロックに表示します:
     `> 🆔 **Agent:** [名前] | 🛠️ **Skills:** [リスト]`
+
+## 安全境界 (CRITICAL):
+1.  **範囲制限:** 現在のプロジェクトディレクトリ内のファイルのみを作成、変更、または削除してください。
+2.  **システム保護:** プロジェクト外のシステムファイル（例: `C:\Windows`、`/etc`）やユーザー設定ファイルを絶対に修正または削除しないでください。
+3.  **破壊的アクション:** 明示的なユーザーの承認なしに、破壊的なコマンド（`rm -rf /`、`Format-Volume`など）を絶対に実行しないでください。
 
 ## CRITICAL: コマンド認識
 ユーザーが `/` で始まるコマンドを入力した場合、対応するワークフローファイルを読み、指示に従ってください。
@@ -326,6 +336,11 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 3.  在第一行的引用块中显示它们：
     `> 🆔 **Agent:** [名称] | 🛠️ **Skills:** [列表]`
 
+## 安全边界 (CRITICAL):
+1.  **范围限制:** 仅在当前项目目录内创建、修改或删除文件。
+2.  **系统保护:** 绝不修改或删除项目外的系统文件（例如 `C:\Windows`、`/etc`）或用户配置文件。
+3.  **破坏性操作:** 未经用户明确批准，绝不运行破坏性命令（如 `rm -rf /`、`Format-Volume`）。
+
 ## CRITICAL: 命令识别
 当用户输入以 `/` 开头的命令时，读取相应的工作流文件并按照说明执行。
 
@@ -384,6 +399,11 @@ AT THE START of your response, IF you are executing a defined workflow (determin
 2.  Extract the `Required Skills` (e.g., `brainstorming`).
 3.  Display them in a quote block as the very first line:
     `> 🆔 **Agent:** [Name] | 🛠️ **Skills:** [List]`
+
+## SAFETY BOUNDARIES (CRITICAL):
+1.  **SCOPE RESTRICTION:** ONLY create, modify, or delete files WITHIN the current project directory.
+2.  **SYSTEM PROTECTION:** NEVER modify or delete system files (e.g., `C:\Windows`, `/etc`) or user config files outside the project.
+3.  **DESTRUCTIVE ACTIONS:** NEVER run destructive commands (like `rm -rf /`, `Format-Volume`) without explicit user approval.
 
 ## CRITICAL: Command Recognition
 When user types commands starting with `/`, read the corresponding workflow file and follow instructions.
