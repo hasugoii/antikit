@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.7] - 2026-01-22
+### Changed
+- **Marketing Overhaul**: Completely rewrote `README.md` and `antikit-web` to focus on "Vibe Coding".
+- **Documentation**: Highlighted 4 key pillars: Native Fluency, Zero-Fear Safety, Identity Badges, and Supervisor Brain.
+
 ## [1.1.6] - 2026-01-22
 ### Added
 - **Supervisor Mode (Self-Reflection)**: Implemented "Internal Reflection" rules. Agents now self-critique critical actions against `@supervisor`/`@security` standards before execution, improving quality without the cost of a full multi-agent loop.
