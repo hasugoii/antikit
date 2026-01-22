@@ -1,5 +1,9 @@
-# AntiKit Installer for Windows (PowerShell)
 # Tự động detect Antigravity và cài đặt Enhancement Kit
+
+param(
+    [switch]$Unattended = $false,
+    [string]$Language = ""
+)
 
 $RepoBase = "https://raw.githubusercontent.com/hasugoii/antikit/main"
 
@@ -76,21 +80,38 @@ if (Test-Path $VersionFile) {
 }
 
 # Language selection
-Write-Host "🌐 Select language for workflows:" -ForegroundColor Cyan
-Write-Host "   1. English (en)" -ForegroundColor White
-Write-Host "   2. Japanese (ja)" -ForegroundColor White
-Write-Host "   3. Vietnamese (vi)" -ForegroundColor White
-Write-Host "   4. Chinese (zh)" -ForegroundColor White
-Write-Host ""
+$LangFile = "$env:USERPROFILE\.gemini\antikit_language"
+$lang = "en" # Default
 
-$langChoice = Read-Host "Enter choice (1-4, default: 1)"
-switch ($langChoice) {
-    "2" { $lang = "ja" }
-    "3" { $lang = "vi" }
-    "4" { $lang = "zh" }
-    default { $lang = "en" }
+# 1. Try to load from config if exists
+if (Test-Path $LangFile) {
+    $lang = Get-Content $LangFile -ErrorAction SilentlyContinue
+    if ([string]::IsNullOrWhiteSpace($lang)) { $lang = "en" }
+    Write-Host "✅ Auto-detected language: $lang" -ForegroundColor Green
 }
-Write-Host "✅ Selected language: $lang" -ForegroundColor Green
+# 2. Override with param if provided
+if (-not [string]::IsNullOrWhiteSpace($Language)) {
+    $lang = $Language
+    Write-Host "✅ Using language from parameter: $lang" -ForegroundColor Green
+}
+# 3. Prompt user ONLY if not Unattended and no config found and no param
+if (-not $Unattended -and (-not (Test-Path $LangFile)) -and [string]::IsNullOrWhiteSpace($Language)) {
+    Write-Host "🌐 Select language for workflows:" -ForegroundColor Cyan
+    Write-Host "   1. English (en)" -ForegroundColor White
+    Write-Host "   2. Japanese (ja)" -ForegroundColor White
+    Write-Host "   3. Vietnamese (vi)" -ForegroundColor White
+    Write-Host "   4. Chinese (zh)" -ForegroundColor White
+    Write-Host ""
+
+    $langChoice = Read-Host "Enter choice (1-4, default: 1)"
+    switch ($langChoice) {
+        "2" { $lang = "ja" }
+        "3" { $lang = "vi" }
+        "4" { $lang = "zh" }
+        default { $lang = "en" }
+    }
+    Write-Host "✅ Selected language: $lang" -ForegroundColor Green
+}
 Write-Host ""
 
 $success = 0
@@ -408,21 +429,38 @@ else {
     $content = Get-Content $GeminiMd -Raw -ErrorAction SilentlyContinue
     if ($null -eq $content) { $content = "" }
 
-    # Remove old AntiKit or AWF section and replace with new
-    $antiKitMarker = "# AntiKit - Enhancement Kit for Antigravity"
-    $awfMarker = "# AWF - Antigravity Workflow Framework"
+    # Define markers for robust updates
+    $StartMarker = "<!-- ANTIKIT_START -->"
+    $EndMarker = "<!-- ANTIKIT_END -->"
     
-    $markerIndex = $content.IndexOf($antiKitMarker)
-    if ($markerIndex -lt 0) {
-        $markerIndex = $content.IndexOf($awfMarker)
+    $NewContent = "$StartMarker`n$AntiKitInstructions`n$EndMarker"
+
+    if ($content.Contains($StartMarker) -and $content.Contains($EndMarker)) {
+        # Scenario A: Markers exist - Replace block
+        $pattern = "(?s)$StartMarker.*?$EndMarker"
+        $content = $content -replace $pattern, $NewContent
+        Set-Content -Path $GeminiMd -Value $content -Encoding UTF8
+        Write-Host "✅ Updated Global Rules (GEMINI.md) - Block Replaced" -ForegroundColor Green
     }
-    
-    if ($markerIndex -ge 0) {
-        $content = $content.Substring(0, $markerIndex)
+    else {
+        # Scenario B: Legacy Header or Fresh Install
+        # Remove old AntiKit or AWF section if found (Legacy Migration)
+        $antiKitMarker = "# AntiKit - Enhancement Kit for Antigravity"
+        $awfMarker = "# AWF - Antigravity Workflow Framework"
+        
+        $markerIndex = $content.IndexOf($antiKitMarker)
+        if ($markerIndex -lt 0) {
+            $markerIndex = $content.IndexOf($awfMarker)
+        }
+        
+        if ($markerIndex -ge 0) {
+            $content = $content.Substring(0, $markerIndex)
+        }
+        
+        $content = $content.TrimEnd() + "`n`n" + $NewContent
+        Set-Content -Path $GeminiMd -Value $content -Encoding UTF8
+        Write-Host "✅ Updated Global Rules (GEMINI.md) - Migrated/Appended" -ForegroundColor Green
     }
-    $content = $content.TrimEnd() + "`n" + $AntiKitInstructions
-    Set-Content -Path $GeminiMd -Value $content -Encoding UTF8
-    Write-Host "✅ Updated Global Rules (GEMINI.md)" -ForegroundColor Green
 }
 
 # Summary
@@ -446,8 +484,10 @@ Write-Host "👉 Check for updates: '/ak-update'" -ForegroundColor White
 Write-Host ""
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
 Write-Host ""
-Write-Host "Press any key to exit..." -ForegroundColor DarkGray
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+if (-not $Unattended) {
+    Write-Host "Press any key to exit..." -ForegroundColor DarkGray
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+}
 
 # Exit cleanly
 exit 0

@@ -4,6 +4,12 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.2] - 2026-01-22
+### Fixed
+- Fixed `ak-update` hanging on Windows by adding `-Unattended` mode to `install.ps1`.
+- Fixed `GEMINI.md` duplication issue on re-install by implementing robust `<!-- ANTIKIT_START -->` marker replacement logic.
+- Improved installer language detection to automatically use previously selected language.
+
 ## [1.1.1] - 2026-01-21
 ### Added
 - Enhanced `/config` workflow with **Lightweight**, **Balanced**, and **Powerful** priority modes.

@@ -81,21 +81,31 @@ if [ -f "$VERSION_FILE" ]; then
 fi
 
 # Language selection
-echo -e "${CYAN}🌐 Select language for workflows:${NC}"
-echo "   1. English (en)"
-echo "   2. Japanese (ja)"
-echo "   3. Vietnamese (vi)"
-echo "   4. Chinese (zh)"
-echo ""
-read -p "Enter choice (1-4, default: 1): " lang_choice
+LANG_FILE="$HOME/.gemini/antikit_language"
+LANG="en" # Default
 
-case $lang_choice in
-    2) LANG="ja" ;;
-    3) LANG="vi" ;;
-    4) LANG="zh" ;;
-    *) LANG="en" ;;
-esac
-echo -e "${GREEN}✅ Selected language: $LANG${NC}"
+# 1. Try to load from config if exists
+if [ -f "$LANG_FILE" ]; then
+    LANG=$(cat "$LANG_FILE")
+    echo -e "${GREEN}✅ Auto-detected language: $LANG${NC}"
+else
+    # 2. Prompt user ONLY if no config found
+    echo -e "${CYAN}🌐 Select language for workflows:${NC}"
+    echo "   1. English (en)"
+    echo "   2. Japanese (ja)"
+    echo "   3. Vietnamese (vi)"
+    echo "   4. Chinese (zh)"
+    echo ""
+    read -p "Enter choice (1-4, default: 1): " lang_choice
+
+    case $lang_choice in
+        2) LANG="ja" ;;
+        3) LANG="vi" ;;
+        4) LANG="zh" ;;
+        *) LANG="en" ;;
+    esac
+    echo -e "${GREEN}✅ Selected language: $LANG${NC}"
+fi
 echo ""
 
 success=0
@@ -377,21 +387,57 @@ When user types commands starting with `/`, read the corresponding workflow file
 esac
 
 if [ ! -f "$GEMINI_MD" ]; then
-    echo "$ANTIKIT_INSTRUCTIONS" > "$GEMINI_MD"
+    echo "<!-- ANTIKIT_START -->" > "$GEMINI_MD"
+    echo "$ANTIKIT_INSTRUCTIONS" >> "$GEMINI_MD"
+    echo "<!-- ANTIKIT_END -->" >> "$GEMINI_MD"
     echo -e "${GREEN}✅ Created Global Rules (GEMINI.md)${NC}"
 else
-    # Remove old AntiKit or AWF section and replace with new
-    if grep -q "AntiKit - Enhancement Kit for Antigravity" "$GEMINI_MD" 2>/dev/null; then
-        # Remove old AntiKit section
-        sed -i.bak '/# AntiKit - Enhancement Kit for Antigravity/,$d' "$GEMINI_MD"
-        rm -f "$GEMINI_MD.bak"
-    elif grep -q "AWF - Antigravity Workflow Framework" "$GEMINI_MD" 2>/dev/null; then
-        # Remove old AWF section
-        sed -i.bak '/# AWF - Antigravity Workflow Framework/,$d' "$GEMINI_MD"
-        rm -f "$GEMINI_MD.bak"
+    # Robust update using Markers
+    START_MARKER="<!-- ANTIKIT_START -->"
+    END_MARKER="<!-- ANTIKIT_END -->"
+    
+    if grep -q "$START_MARKER" "$GEMINI_MD" && grep -q "$END_MARKER" "$GEMINI_MD"; then
+        # Scenario A: Markers exist - Block Replace using awk to preserve content before/after
+        # Create temp file
+        TMP_FILE="${GEMINI_MD}.tmp"
+        
+        # AWK script to replace block
+        awk -v start="$START_MARKER" -v end="$END_MARKER" -v new_content="$ANTIKIT_INSTRUCTIONS" '
+        $0 ~ start {
+            print start
+            print new_content
+            print end
+            skip = 1
+            next
+        }
+        $0 ~ end {
+            skip = 0
+            next
+        }
+        !skip { print }
+        ' "$GEMINI_MD" > "$TMP_FILE"
+        
+        mv "$TMP_FILE" "$GEMINI_MD"
+        echo -e "${GREEN}✅ Updated Global Rules (GEMINI.md) - Block Replaced${NC}"
+        
+    else
+        # Scenario B: Legacy Header or Fresh Install
+        # Remove old AntiKit or AWF section and replace with new (Legacy Migration)
+        if grep -q "AntiKit - Enhancement Kit for Antigravity" "$GEMINI_MD" 2>/dev/null; then
+            sed -i.bak '/# AntiKit - Enhancement Kit for Antigravity/,$d' "$GEMINI_MD"
+            rm -f "$GEMINI_MD.bak"
+        elif grep -q "AWF - Antigravity Workflow Framework" "$GEMINI_MD" 2>/dev/null; then
+            sed -i.bak '/# AWF - Antigravity Workflow Framework/,$d' "$GEMINI_MD"
+            rm -f "$GEMINI_MD.bak"
+        fi
+        
+        # Append new content with markers
+        echo "" >> "$GEMINI_MD"
+        echo "$START_MARKER" >> "$GEMINI_MD"
+        echo "$ANTIKIT_INSTRUCTIONS" >> "$GEMINI_MD"
+        echo "$END_MARKER" >> "$GEMINI_MD"
+        echo -e "${GREEN}✅ Updated Global Rules (GEMINI.md) - Migrated/Appended${NC}"
     fi
-    echo "$ANTIKIT_INSTRUCTIONS" >> "$GEMINI_MD"
-    echo -e "${GREEN}✅ Updated Global Rules (GEMINI.md)${NC}"
 fi
 
 # Summary
@@ -415,6 +461,8 @@ echo "👉 Check for updates: '/ak-update'"
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-read -p "Press Enter to exit..."
+if [ ! -f "$LANG_FILE" ]; then
+    read -p "Press Enter to exit..."
+fi
 
 exit 0

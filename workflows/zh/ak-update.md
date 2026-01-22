@@ -59,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ### Windows (PowerShell):
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) }"
+iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) } -Unattended"
 ```
 
 ## 阶段 5: 验证更新

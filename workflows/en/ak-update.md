@@ -66,7 +66,7 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ### For Windows (PowerShell):
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) }"
+iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) } -Unattended"
 ```
 
 ## Stage 5: Verify Update
