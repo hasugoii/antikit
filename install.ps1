@@ -228,6 +228,11 @@ $AntiKitInstructions = switch ($lang) {
 
 # AntiKit - Enhancement Kit for Antigravity
 
+## NGÔN NGỮ BẮT BUỘC (CRITICAL):
+1.  **SUY NGHĨ (THOUGHTS):** Bạn PHẢI viết toàn bộ quy trình suy nghĩ (thought process) bằng **TIẾNG VIỆT**.
+2.  **TRAO ĐỔI:** Luôn trả lời user bằng **TIẾNG VIỆT**, trừ khi user yêu cầu cụ thể ngôn ngữ khác.
+3.  **KHÔNG** dùng tiếng Anh cho phân tích nội bộ.
+
 ## CRITICAL: Nhận Diện Lệnh
 Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương ứng và thực hiện theo hướng dẫn.
 
@@ -276,6 +281,10 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
         @"
 
 # AntiKit - Enhancement Kit for Antigravity
+
+## 必須言語 (CRITICAL):
+1.  **思考プロセス:** すべての思考プロセスを必ず**日本語**で記述してください。
+2.  **対話:** ユーザーには常に**日本語**で応答してください。
 
 ## CRITICAL: コマンド認識
 ユーザーが `/` で始まるコマンドを入力した場合、対応するワークフローファイルを読み、指示に従ってください。
@@ -326,6 +335,10 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 
 # AntiKit - Enhancement Kit for Antigravity
 
+## 强制语言 (CRITICAL):
+1.  **思维过程:** 您必须使用**中文**编写所有思维过程。
+2.  **交互:** 始终使用**中文**回答用户。
+
 ## CRITICAL: 命令识别
 当用户输入以 `/` 开头的命令时，读取相应的工作流文件并按照说明执行。
 
@@ -374,6 +387,10 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
         @"
 
 # AntiKit - Enhancement Kit for Antigravity
+
+## MANDATORY LANGUAGE (CRITICAL):
+1.  **THOUGHTS:** You MUST write your entire thought process in **ENGLISH**.
+2.  **INTERACTION:** Always respond to the user in **ENGLISH**.
 
 ## CRITICAL: Command Recognition
 When user types commands starting with `/`, read the corresponding workflow file and follow instructions.

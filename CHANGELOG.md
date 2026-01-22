@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.3] - 2026-01-22
+### Changed
+- Enforced **Strict Language Support** in `install.ps1`, `install.sh` and `GEMINI.md`.
+- Agents now **MUST** use the selected language for both internal "Thoughts" and user interactions.
+
 ## [1.1.2] - 2026-01-22
 ### Fixed
 - Fixed `ak-update` hanging on Windows by adding `-Unattended` mode to `install.ps1`.
