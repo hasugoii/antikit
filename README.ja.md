@@ -5,7 +5,7 @@
 **Antigravity AIのための「Vibe Coding」コンパニオン。**
 *直感でコーディング。ロジックはAIにお任せ。* 🧘‍♂️✨
 
-[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.8-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ## 🎮 どうやって "Vibe" する？
 
-インストールしたら、チャットでこれらの `/slash` コマンドを入力して専門家を召喚しましょう:
+インストールしたら、チャットでこれらの `/slash` 命令を入力して専門家を召喚しましょう:
 
 | コマンド | 召喚... | こんな気分の時に... |
 | :--- | :--- | :--- |
@@ -85,10 +85,24 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ---
 
+## 🛠️ プロフェッショナルのためにも ⚡
+
+AntiKitは初心者向けだと思っていますか？ **考え直してください。** これはシニア開発者のための強化外骨格です：
+
+1.  **⚡ 爆速の効率化:** 面倒なセットアップ、設定、ボイラープレートを1秒で自動化します。
+2.  **🧠 40以上の専門スキル:** エージェントには以下の深い知識がプリロードされています：
+    *   **技術:** Next.js, React, Node.js, Python, Docker, Cloudflare.
+    *   **方法論:** TDD, Clean Code, DDD, セキュリティパターン.
+    *   **専門分野:** SEO, UX/UI, パフォーマンス分析.
+3.  **👮 規律の強制:** 嫌われ役になることなく、チーム全体で **Linting、Testing、Safety** のルールを強制できます。
+4.  **🧘 ディープ・フロー:** AIがバックグラウンドで（危険な）作業を安全に処理している間、あなたはゾーンに入り続けることができます。
+
+---
+
 ## 📦 箱の中身は？
 
 -   **16の専門エージェント:** フロントエンド、バックエンド、セキュリティ、SEO、モバイルなど
--   **80+ ワークフロー:** ベストプラクティスをシンプルなコマンドに凝縮
+-   **20 ワークフロー:** 4言語に対応した最適化されたプロセス。
 -   **グローバルメモリ (GEMINI.md):** 安全と言語を強制する「頭脳」
 
 ---

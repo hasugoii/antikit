@@ -5,7 +5,7 @@
 **The "Vibe Coding" Companion for Antigravity.**
 *Code by feeling. Let AI handle the logic.* 🧘‍♂️✨
 
-[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.8-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
@@ -85,10 +85,24 @@ Once installed, just type these slash commands in your chat to summon experts:
 
 ---
 
+## 🛠️ Also for the PROS ⚡
+
+Think AntiKit is just for beginners? **Think again.** It's an exoskeleton for Senior Devs:
+
+1.  **⚡ Blazing Efficiency:** Automate the boring stuff (setup, config, boilerplate) in 1 second.
+2.  **🧠 40+ Expert Skills:** Our agents come pre-loaded with deep knowledge in:
+    *   **Tech:** Next.js, React, Node.js, Python, Docker, Cloudflare.
+    *   **Methodology:** TDD, Clean Code, DDD, Security Patterns.
+    *   **Specialty:** SEO, UX/UI, Performance Profiling.
+3.  **👮 Enforcement:** Use AntiKit to enforce **Linting, Testing, and Safety** rules across your team without being the "bad cop".
+4.  **🧘 Deep Flow:** Stay in the zone while the Agent handles the grunt work safely in the background.
+
+---
+
 ## 📦 What's Inside?
 
 -   **16 Specialized Agents:** Frontend, Backend, Security, SEO, Mobile...
--   **80+ Workflows:** Best practices baked into simple commands.
+-   **20 Workflows:** Optimized processes available in 4 languages.
 -   **Global Memory (GEMINI.md):** The "Brain" that enforces safety and language.
 
 ---

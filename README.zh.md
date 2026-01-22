@@ -5,7 +5,7 @@
 **Antigravity AI 的 "Vibe Coding" 伴侣。**
 *凭感觉写代码。逻辑交给 AI。* 🧘‍♂️✨
 
-[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.8-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
@@ -85,10 +85,24 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ---
 
+## 🛠️ 也适合技术专家 (PRO) ⚡
+
+以为 AntiKit 只是给新手用的？ **再想一想。** 它是高级开发人员的外骨骼：
+
+1.  **⚡ 极速效率:** 在 1 秒内自动化那些无聊的事情（设置、配置、样板代码）。
+2.  **🧠 40+ 专家技能:** 我们的代理预装了深厚的知识：
+    *   **技术:** Next.js, React, Node.js, Python, Docker, Cloudflare.
+    *   **方法论:** TDD, Clean Code, DDD, 安全模式.
+    *   **专长:** SEO, UX/UI, 性能分析.
+3.  **👮 强制执行:** 使用 AntiKit 在整个团队中强制执行 **Linting、测试和安全** 规则，而无需充当“坏警察”。
+4.  **🧘 深度心流:** 让 AI 在后台安全地处理脏活累活，让你保持专注。
+
+---
+
 ## 📦 盒子里有什么?
 
 -   **16 个专业代理:** 前端, 后端, 安全, SEO, 移动端...
--   **80+ 工作流:** 最佳实践浓缩为简单的命令。
+-   **20 工作流:** 4 种语言优化的流程。
 -   **全局记忆 (GEMINI.md):** 强制执行安全和语言的 "大脑"。
 
 ---

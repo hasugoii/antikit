@@ -4,6 +4,12 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.9] - 2026-01-22
+### Changed
+- **Content Accuracy**: Updated READMEs to correctly state "**20+ Core Workflows**" (instead of misleading 80+ file count).
+- **Pro Appeal**: Added "**For the Pros**" section highlighting efficiency, standardized enforcement, and deep flow state.
+- **Skill Library**: Clearly listed 40+ specialized skills (Tech, Process, Niche) to demonstrate Agent capability.
+
 ## [1.1.8] - 2026-01-22
 ### Added
 - **Global README Support**: Added professional READMEs in Vietnamese (`README.vi.md`), Japanese (`README.ja.md`), and Chinese (`README.zh.md`).

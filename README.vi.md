@@ -5,7 +5,7 @@
 **Bạn đồng hành "Vibe Coding" cho Antigravity AI.**
 *Code bằng cảm giác. Để AI lo logic.* 🧘‍♂️✨
 
-[![Version](https://img.shields.io/badge/Version-1.1.7-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.8-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
@@ -85,10 +85,24 @@ Cài xong rồi, chỉ cần gõ mấy lệnh `/slash` này vào chat để gọ
 
 ---
 
+## 🛠️ Dành Cả Cho Dân PRO ⚡
+
+Nghĩ AntiKit chỉ dành cho người mới? **Nhầm to.** Đây là bộ giáp exoskeleton cho Senior Dev:
+
+1.  **⚡ Tốc độ tối đa:** Tự động hóa những thứ nhàm chán (setup, config, boilerplate) trong 1 giây.
+2.  **🧠 40+ Skill Chuyên Sâu:** Agent được nạp sẵn kiến thức sâu rộng về:
+    *   **Tech:** Next.js, React, Node.js, Python, Docker, Cloudflare.
+    *   **Quy trình:** TDD, Clean Code, DDD, Security Patterns.
+    *   **Ngách:** SEO, UX/UI, Tối ưu hiệu năng.
+3.  **👮 Kỷ luật thép:** Dùng AntiKit để ép chuẩn **Linting, Testing, và Safety** cho cả team mà không cần đóng vai ác.
+4.  **🧘 Deep Flow:** Giữ sự tập trung cao độ, để AI xử lý việc tay chân (nhưng nguy hiểm) ở background.
+
+---
+
 ## 📦 Trong Hộp Có Gì?
 
 -   **16 Agent Chuyên Biệt:** Frontend, Backend, Security, SEO, Mobile...
--   **80+ Workflows:** Quy trình chuẩn chỉnh gói gọn trong 1 lệnh.
+-   **20 Workflow:** Quy trình chuẩn chỉnh (nhân 4 ngôn ngữ) gói gọn trong 1 lệnh.
 -   **Global Memory (GEMINI.md):** "Bộ não" quản lý luật an toàn và ngôn ngữ.
 
 ---
