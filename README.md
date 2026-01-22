@@ -30,9 +30,9 @@ You have **Google Antigravity**, the most powerful AI coding agent. But sometime
 
 ## ✨ The 4 Pillars of "Vibe Coding"
 
-### 1. 🌏 Native Fluency (Speak YOUR Language)
-Stop struggling with "Engrish". AntiKit forces the AI to **THINK and SPEAK** in your native language (Vietnamese, Japanese, Chinese) 100% of the time.
-> *No more: "Here is your code" -> It's now: "Của bạn đây, sếp ơi!"*
+### 1. 🌏 Strict Language Enforcement (No Language Drift)
+Antigravity loves to default to English. AntiKit forces it to **stick to your preferred language** (Vietnamese, Japanese, Chinese, etc.) 100% of the time.
+> *No more random switching mid-conversation.*
 
 ### 2. 🛡️ Zero-Fear Safety (Sandbox Mode)
 Code with total peace of mind. We installed a **Digital Force Field**:

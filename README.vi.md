@@ -20,7 +20,7 @@
 
 Bạn đang sở hữu **Google Antigravity**, con AI code đỉnh nhất hiện nay. Nhưng đôi khi dùng nó thấy...
 - 😥 **Quá Kỹ Thuật:** "Contexts", "Schemas", "Prompts"... nghe nhức đầu!
-- 🇺🇸 **Toàn Tiếng Anh:** Bạn hỏi tiếng Việt, nó trả lời tiếng Anh (hoặc nửa nạc nửa mỡ).
+- ⚠️ **Toàn Tiếng Anh:** Bạn hỏi tiếng Việt, nó trả lời tiếng Anh (hoặc nửa nạc nửa mỡ).
 - 😨 **Quá Rủi Ro:** Nhỡ nó xóa nhầm file `C:\Windows` thì toang?
 - 😵 **Quá Loạn:** Đang nói chuyện với ai? Ông dev hay ông tester?
 

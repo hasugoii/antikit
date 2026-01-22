@@ -4,6 +4,14 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.12] - 2026-01-22
+### Fixed
+- **Windows Emoji Support**: Replaced 🇺🇸 (US Flag) with ⚠️ (Warning) in Vietnamese, Japanese, and Chinese READMEs to fix rendering issues on Windows.
+
+## [1.1.11] - 2026-01-22
+### Fixed
+- **English Logic**: Rephrased "Native Fluency" section in English README to focus on "Strict Language Enforcement" (removed illogical "struggling with Engrish" complaint).
+
 ## [1.1.10] - 2026-01-22
 ### Fixed
 - **Content Logic**: Fixed logical inconsistency in English README (replaced "Too English" complaint with "Too Random/Risky").
