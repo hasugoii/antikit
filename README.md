@@ -42,7 +42,7 @@ Code with total peace of mind. We installed a **Digital Force Field**:
 
 ### 3. 🆔 Clarity Badges (Know Your Team)
 AntiKit gives every AI agent a name tag. You always know who is working for you.
-> `> 🆔 Agent: @architect (Kiến trúc sư) | 🛠️ Skills: Quy hoạch, Thiết kế`
+> `> 🆔 Agent: @architect (Architect) | 🛠️ Skills: Planning, Design`
 
 ### 4. 🧠 Supervisor Brain (Auto-Correction)
 We implanted a "Conscience" into the AI. Before it gives you code, it secretly asks itself:
