@@ -107,6 +107,12 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 ---
 
+## 🤝 致谢 (Credits)
+
+本项目参考了 [TUAN130294](https://github.com/TUAN130294) 的 [AWF (Antigravity Workflow Framework)](https://github.com/TUAN130294/awf)。
+
+---
+
 <div align="center">
 
 **Built with ❤️ for the Vibe Coding Community.**

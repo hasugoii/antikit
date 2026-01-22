@@ -107,6 +107,12 @@ Nghĩ AntiKit chỉ dành cho người mới? **Nhầm to.** Đây là bộ giá
 
 ---
 
+## 🤝 Lời Cảm Ơn (Credits)
+
+Dự án này được tham khảo từ [AWF (Antigravity Workflow Framework)](https://github.com/TUAN130294/awf) của [TUAN130294](https://github.com/TUAN130294).
+
+---
+
 <div align="center">
 
 **Built with ❤️ for the Vibe Coding Community.**

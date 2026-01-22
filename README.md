@@ -107,6 +107,12 @@ Think AntiKit is just for beginners? **Think again.** It's an exoskeleton for Se
 
 ---
 
+## 🤝 Credits
+
+This project was inspired by and references the [AWF (Antigravity Workflow Framework)](https://github.com/TUAN130294/awf) by [TUAN130294](https://github.com/TUAN130294).
+
+---
+
 <div align="center">
 
 **Built with ❤️ for the Vibe Coding Community.**

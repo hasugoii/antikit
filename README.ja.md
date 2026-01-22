@@ -107,6 +107,12 @@ AntiKitは初心者向けだと思っていますか？ **考え直してくだ�
 
 ---
 
+## 🤝 クレジット (Credits)
+
+このプロジェクトは、[TUAN130294](https://github.com/TUAN130294) による [AWF (Antigravity Workflow Framework)](https://github.com/TUAN130294/awf) を参考にしています。
+
+---
+
 <div align="center">
 
 **Built with ❤️ for the Vibe Coding Community.**
