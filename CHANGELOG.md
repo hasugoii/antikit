@@ -4,6 +4,10 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.6] - 2026-01-22
+### Added
+- **Supervisor Mode (Self-Reflection)**: Implemented "Internal Reflection" rules. Agents now self-critique critical actions against `@supervisor`/`@security` standards before execution, improving quality without the cost of a full multi-agent loop.
+
 ## [1.1.5] - 2026-01-22
 ### Added
 - **Safety Boundaries**: Implemented strictly enforced safety rules in `install.ps1`, `install.sh`, and `GEMINI.md`.

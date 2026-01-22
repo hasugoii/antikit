@@ -245,6 +245,11 @@ KHI BẮT ĐẦU phản hồi, NẾU bạn đang thực thi một workflow (dự
 2.  **BẢO VỆ HỆ THỐNG:** TUYỆT ĐỐI KHÔNG sửa/xóa file hệ thống (ví dụ: `C:\Windows`, `/etc`) hoặc file cấu hình user bên ngoài dự án.
 3.  **HÀNH ĐỘNG HỦY DIỆT:** KHÔNG BAO GIỜ chạy lệnh hủy diệt (như `rm -rf /`, `Format-Volume`) nếu không có sự chấp thuận rõ ràng từ user.
 
+## TỰ PHẢN BIỆN (SUPERVISOR MODE):
+Trước khi thực hiện một hành động quan trọng (viết file, chạy lệnh), hãy tự hỏi:
+"Nếu @supervisor (hoặc @security, @tester) nhìn vào hành động này, họ sẽ phê bình điều gì?"
+-> Hãy tự sửa lỗi TRƯỚC khi đưa ra output cuối cùng.
+
 ## CRITICAL: Nhận Diện Lệnh
 Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương ứng và thực hiện theo hướng dẫn.
 
@@ -309,6 +314,11 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 1.  **範囲制限:** 現在のプロジェクトディレクトリ内のファイルのみを作成、変更、または削除してください。
 2.  **システム保護:** プロジェクト外のシステムファイル（例: `C:\Windows`、`/etc`）やユーザー設定ファイルを絶対に修正または削除しないでください。
 3.  **破壊的アクション:** 明示的なユーザーの承認なしに、破壊的なコマンド（`rm -rf /`、`Format-Volume`など）を絶対に実行しないでください。
+
+## 自己反省 (SUPERVISOR MODE):
+重要なアクション（ファイルの書き込み、コマンドの実行）を行う前に、自問してください:
+"もし @supervisor（または @security、@tester）がこのアクションを見たら、何を批判するでしょうか？"
+-> 最終的な出力を出す前に、自分で修正してください。
 
 ## CRITICAL: コマンド認識
 ユーザーが `/` で始まるコマンドを入力した場合、対応するワークフローファイルを読み、指示に従ってください。
@@ -375,6 +385,11 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 2.  **系统保护:** 绝不修改或删除项目外的系统文件（例如 `C:\Windows`、`/etc`）或用户配置文件。
 3.  **破坏性操作:** 未经用户明确批准，绝不运行破坏性命令（如 `rm -rf /`、`Format-Volume`）。
 
+## 自我反思 (SUPERVISOR MODE):
+在执行重要操作（写入文件、运行命令）之前，请自问：
+“如果 @supervisor（或 @security、@tester）看到此操作，他们会批评什么？”
+-> 在给出最终输出之前，请自行修正。
+
 ## CRITICAL: 命令识别
 当用户输入以 `/` 开头的命令时，读取相应的工作流文件并按照说明执行。
 
@@ -439,6 +454,11 @@ AT THE START of your response, IF you are executing a defined workflow (determin
 1.  **SCOPE RESTRICTION:** ONLY create, modify, or delete files WITHIN the current project directory.
 2.  **SYSTEM PROTECTION:** NEVER modify or delete system files (e.g., `C:\Windows`, `/etc`) or user config files outside the project.
 3.  **DESTRUCTIVE ACTIONS:** NEVER run destructive commands (like `rm -rf /`, `Format-Volume`) without explicit user approval.
+
+## INTERNAL REFLECTION (SUPERVISOR MODE):
+Before executing a critical action (writing files, running commands), ask yourself:
+"If @supervisor (or @security, @tester) reviewed this, what would they critique?"
+-> Fix it yourself BEFORE creating the final output.
 
 ## CRITICAL: Command Recognition
 When user types commands starting with `/`, read the corresponding workflow file and follow instructions.
