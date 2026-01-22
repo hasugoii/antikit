@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.4] - 2026-01-22
+### Added
+- **Identity Badge**: Agents now explicitly display their identity and active skills at the start of responses (e.g., `> 🆔 **Agent:** @architect | 🛠️ **Skills:** brainstorming`).
+- Enforced Identity Visibility in `install.ps1`, `install.sh`, and `GEMINI.md`.
+
 ## [1.1.3] - 2026-01-22
 ### Changed
 - Enforced **Strict Language Support** in `install.ps1`, `install.sh` and `GEMINI.md`.

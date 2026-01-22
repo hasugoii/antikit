@@ -201,6 +201,13 @@ case $LANG in
 2.  **TRAO ĐỔI:** Luôn trả lời user bằng **TIẾNG VIỆT**, trừ khi user yêu cầu cụ thể ngôn ngữ khác.
 3.  **KHÔNG** dùng tiếng Anh cho phân tích nội bộ.
 
+## HIỂN THỊ DANH TÍNH (MANDATORY):
+KHI BẮT ĐẦU phản hồi, NẾU bạn đang thực thi một workflow (dựa trên header `> **Context:**` trong file được đọc):
+1.  Trích xuất tên `Context` (ví dụ: `@architect`).
+2.  Trích xuất `Required Skills` (ví dụ: `brainstorming`).
+3.  Hiển thị chúng trong một block trích dẫn ở dòng ĐẦU TIÊN:
+    `> 🆔 **Agent:** [Tên] | 🛠️ **Skills:** [Danh sách]`
+
 ## CRITICAL: Nhận Diện Lệnh
 Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương ứng và thực hiện theo hướng dẫn.
 
@@ -252,6 +259,13 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 ## 必須言語 (CRITICAL):
 1.  **思考プロセス:** すべての思考プロセスを必ず**日本語**で記述してください。
 2.  **対話:** ユーザーには常に**日本語**で応答してください。
+
+## IDENTITY VISIBILITY (MANDATORY):
+応答の開始時に、ワークフローを実行している場合（読み込まれたファイルの `> **Context:**` ヘッダーに基づく）:
+1.  `Context` 名（例: `@architect`）を抽出します。
+2.  `Required Skills`（例: `brainstorming`）を抽出します。
+3.  それらを最初の行の引用ブロックに表示します:
+    `> 🆔 **Agent:** [名前] | 🛠️ **Skills:** [リスト]`
 
 ## CRITICAL: コマンド認識
 ユーザーが `/` で始まるコマンドを入力した場合、対応するワークフローファイルを読み、指示に従ってください。
@@ -305,6 +319,13 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 1.  **思维过程:** 您必须使用**中文**编写所有思维过程。
 2.  **交互:** 始终使用**中文**回答用户。
 
+## 身份可见性 (MANDATORY):
+在回复开始时，如果您正在执行工作流（基于读取文件中的 `> **Context:**` 标头）：
+1.  提取 `Context` 名称（例如：`@architect`）。
+2.  提取 `Required Skills`（例如：`brainstorming`）。
+3.  在第一行的引用块中显示它们：
+    `> 🆔 **Agent:** [名称] | 🛠️ **Skills:** [列表]`
+
 ## CRITICAL: 命令识别
 当用户输入以 `/` 开头的命令时，读取相应的工作流文件并按照说明执行。
 
@@ -356,6 +377,13 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 ## MANDATORY LANGUAGE (CRITICAL):
 1.  **THOUGHTS:** You MUST write your entire thought process in **ENGLISH**.
 2.  **INTERACTION:** Always respond to the user in **ENGLISH**.
+
+## IDENTITY VISIBILITY (MANDATORY):
+AT THE START of your response, IF you are executing a defined workflow (determined by the `> **Context:**` header in the loaded file):
+1.  Extract the `Context` name (e.g., `@architect`).
+2.  Extract the `Required Skills` (e.g., `brainstorming`).
+3.  Display them in a quote block as the very first line:
+    `> 🆔 **Agent:** [Name] | 🛠️ **Skills:** [List]`
 
 ## CRITICAL: Command Recognition
 When user types commands starting with `/`, read the corresponding workflow file and follow instructions.
