@@ -4,6 +4,11 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.10] - 2026-01-22
+### Fixed
+- **Content Logic**: Fixed logical inconsistency in English README (replaced "Too English" complaint with "Too Random/Risky").
+- **Link Targets**: Updated all project/PR links to point to the official site `https://antikit.pages.dev`.
+
 ## [1.1.9] - 2026-01-22
 ### Changed
 - **Content Accuracy**: Updated READMEs to correctly state "**20+ Core Workflows**" (instead of misleading 80+ file count).

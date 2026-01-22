@@ -5,9 +5,9 @@
 **Antigravity AI 的 "Vibe Coding" 伴侣。**
 *凭感觉写代码。逻辑交给 AI。* 🧘‍♂️✨
 
-[![Version](https://img.shields.io/badge/Version-1.1.8-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.9-green?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![Website](https://img.shields.io/badge/Website-antikit.pages.dev-purple?style=for-the-badge)](https://antikit.pages.dev)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/hasugoii)
 
 [English](README.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [中文](README.zh.md)
