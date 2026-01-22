@@ -3,6 +3,8 @@
 # Brain/Session files (local context)
 .brain/
 .brain/session.json
+docs/report/
+docs/reports/
 
 # Environment files
 .env
