@@ -4,6 +4,18 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.1.13] - 2026-01-27
+### Fixed
+- **UTF-8 Encoding on Windows**: Fixed GEMINI.md displaying corrupted Vietnamese/Chinese/Japanese characters on Windows.
+- **Template-based Installation**: Replaced embedded UTF-8 content in install scripts with template downloads from repository.
+- **Consistent Encoding**: Install scripts now use `.NET WriteAllText` with explicit UTF-8 encoding for reliable cross-platform support.
+
+### Added
+- **GEMINI.md Templates**: Added `gemini_en.md`, `gemini_vi.md`, `gemini_zh.md`, `gemini_ja.md` template files in `/templates/` folder.
+
+### Changed
+- **Simplified Install Scripts**: Reduced install.ps1 and install.sh size by ~50% by removing embedded language content.
+
 ## [1.1.12] - 2026-01-22
 ### Fixed
 - **Windows Emoji Support**: Replaced 🇺🇸 (US Flag) with ⚠️ (Warning) in Vietnamese, Japanese, and Chinese READMEs to fix rendering issues on Windows.
