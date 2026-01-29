@@ -1,4 +1,4 @@
-# Tự động detect Antigravity và cài đặt Enhancement Kit
+﻿# Tự động detect Antigravity và cài đặt Enhancement Kit
 
 param(
     [switch]$Unattended = $false,
@@ -66,7 +66,7 @@ catch {
 
 Write-Host ""
 Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-Write-Host "║       🚀 AntiKit - Enhancement Kit for Antigravity       ║" -ForegroundColor Magenta
+Write-Host "║        AntiKit - Enhancement Kit for Antigravity       ║" -ForegroundColor Magenta
 Write-Host "║                        v$CurrentVersion                           ║" -ForegroundColor Magenta
 Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
@@ -74,8 +74,8 @@ Write-Host ""
 # Check if updating
 if (Test-Path $VersionFile) {
     $OldVersion = Get-Content $VersionFile
-    Write-Host "📦 Current version: $OldVersion" -ForegroundColor Yellow
-    Write-Host "📦 New version: $CurrentVersion" -ForegroundColor Green
+    Write-Host "[PKG] Current version: $OldVersion" -ForegroundColor Yellow
+    Write-Host "[PKG] New version: $CurrentVersion" -ForegroundColor Green
     Write-Host ""
 }
 
@@ -87,16 +87,16 @@ $lang = "en" # Default
 if (Test-Path $LangFile) {
     $lang = Get-Content $LangFile -ErrorAction SilentlyContinue
     if ([string]::IsNullOrWhiteSpace($lang)) { $lang = "en" }
-    Write-Host "✅ Auto-detected language: $lang" -ForegroundColor Green
+    Write-Host "[OK] Auto-detected language: $lang" -ForegroundColor Green
 }
 # 2. Override with param if provided
 if (-not [string]::IsNullOrWhiteSpace($Language)) {
     $lang = $Language
-    Write-Host "✅ Using language from parameter: $lang" -ForegroundColor Green
+    Write-Host "[OK] Using language from parameter: $lang" -ForegroundColor Green
 }
 # 3. Prompt user ONLY if not Unattended and no config found and no param
 if (-not $Unattended -and (-not (Test-Path $LangFile)) -and [string]::IsNullOrWhiteSpace($Language)) {
-    Write-Host "🌐 Select language for workflows:" -ForegroundColor Cyan
+    Write-Host "[LANG] Select language for workflows:" -ForegroundColor Cyan
     Write-Host "   1. English (en)" -ForegroundColor White
     Write-Host "   2. Japanese (ja)" -ForegroundColor White
     Write-Host "   3. Vietnamese (vi)" -ForegroundColor White
@@ -110,7 +110,7 @@ if (-not $Unattended -and (-not (Test-Path $LangFile)) -and [string]::IsNullOrWh
         "4" { $lang = "zh" }
         default { $lang = "en" }
     }
-    Write-Host "✅ Selected language: $lang" -ForegroundColor Green
+    Write-Host "[OK] Selected language: $lang" -ForegroundColor Green
 }
 Write-Host ""
 
@@ -124,75 +124,75 @@ foreach ($dir in $dirs) {
         New-Item -ItemType Directory -Force -Path $dir | Out-Null
     }
 }
-Write-Host "📂 Directories ready: $AntigravityDir" -ForegroundColor Green
+Write-Host "[DIR] Directories ready: $AntigravityDir" -ForegroundColor Green
 
 # 2. Download Workflows
 Write-Host ""
-Write-Host "⏳ Downloading workflows ($lang)..." -ForegroundColor Cyan
+Write-Host "[...] Downloading workflows ($lang)..." -ForegroundColor Cyan
 foreach ($wf in $WorkflowsEn) {
     try {
         $url = "$RepoBase/workflows/$lang/$wf"
         Invoke-WebRequest -Uri $url -OutFile "$GlobalWorkflows\$wf" -UseBasicParsing -ErrorAction Stop
-        Write-Host "   ✅ $wf" -ForegroundColor Green
+        Write-Host "   [OK] $wf" -ForegroundColor Green
         $success++
     }
     catch {
-        Write-Host "   ❌ $wf" -ForegroundColor Red
+        Write-Host "   [X] $wf" -ForegroundColor Red
         $failed++
     }
 }
 
 # 3. Download Agents
 Write-Host ""
-Write-Host "⏳ Downloading agents..." -ForegroundColor Cyan
+Write-Host "[...] Downloading agents..." -ForegroundColor Cyan
 foreach ($agent in $Agents) {
     try {
         $url = "$RepoBase/agents/$agent"
         Invoke-WebRequest -Uri $url -OutFile "$AgentsDir\$agent" -UseBasicParsing -ErrorAction Stop
-        Write-Host "   ✅ $agent" -ForegroundColor Green
+        Write-Host "   [OK] $agent" -ForegroundColor Green
         $success++
     }
     catch {
-        Write-Host "   ❌ $agent" -ForegroundColor Red
+        Write-Host "   [X] $agent" -ForegroundColor Red
         $failed++
     }
 }
 
 # 4. Download Schemas
 Write-Host ""
-Write-Host "⏳ Downloading schemas..." -ForegroundColor Cyan
+Write-Host "[...] Downloading schemas..." -ForegroundColor Cyan
 foreach ($schema in $Schemas) {
     try {
         $url = "$RepoBase/schemas/$schema"
         Invoke-WebRequest -Uri $url -OutFile "$SchemasDir\$schema" -UseBasicParsing -ErrorAction Stop
-        Write-Host "   ✅ $schema" -ForegroundColor Green
+        Write-Host "   [OK] $schema" -ForegroundColor Green
         $success++
     }
     catch {
-        Write-Host "   ❌ $schema" -ForegroundColor Red
+        Write-Host "   [X] $schema" -ForegroundColor Red
         $failed++
     }
 }
 
 # 5. Download Templates
 Write-Host ""
-Write-Host "⏳ Downloading templates..." -ForegroundColor Cyan
+Write-Host "[...] Downloading templates..." -ForegroundColor Cyan
 foreach ($template in $Templates) {
     try {
         $url = "$RepoBase/templates/$template"
         Invoke-WebRequest -Uri $url -OutFile "$TemplatesDir\$template" -UseBasicParsing -ErrorAction Stop
-        Write-Host "   ✅ $template" -ForegroundColor Green
+        Write-Host "   [OK] $template" -ForegroundColor Green
         $success++
     }
     catch {
-        Write-Host "   ❌ $template" -ForegroundColor Red
+        Write-Host "   [X] $template" -ForegroundColor Red
         $failed++
     }
 }
 
 # 6. Download Skills
 Write-Host ""
-Write-Host "⏳ Downloading skills..." -ForegroundColor Cyan
+Write-Host "[...] Downloading skills..." -ForegroundColor Cyan
 foreach ($skill in $Skills) {
     try {
         $skillDir = "$SkillsDir\$skill"
@@ -201,11 +201,11 @@ foreach ($skill in $Skills) {
         }
         $url = "$RepoBase/skills/$skill/SKILL.md"
         Invoke-WebRequest -Uri $url -OutFile "$skillDir\SKILL.md" -UseBasicParsing -ErrorAction Stop
-        Write-Host "   ✅ $skill" -ForegroundColor Green
+        Write-Host "   [OK] $skill" -ForegroundColor Green
         $success++
     }
     catch {
-        Write-Host "   ❌ $skill" -ForegroundColor Red
+        Write-Host "   [X] $skill" -ForegroundColor Red
         $failed++
     }
 }
@@ -214,12 +214,12 @@ foreach ($skill in $Skills) {
 if (-not (Test-Path "$env:USERPROFILE\.gemini")) {
     New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.gemini" | Out-Null
 }
-Set-Content -Path $VersionFile -Value $CurrentVersion -Encoding UTF8
+[System.IO.File]::WriteAllText($VersionFile, $CurrentVersion, [System.Text.Encoding]::UTF8)
 $LangFile = "$env:USERPROFILE\.gemini\antikit_language"
-Set-Content -Path $LangFile -Value $lang -Encoding UTF8
+[System.IO.File]::WriteAllText($LangFile, $lang, [System.Text.Encoding]::UTF8)
 Write-Host ""
-Write-Host "✅ Version saved: $CurrentVersion" -ForegroundColor Green
-Write-Host "✅ Language saved: $lang" -ForegroundColor Green
+Write-Host "[OK] Version saved: $CurrentVersion" -ForegroundColor Green
+Write-Host "[OK] Language saved: $lang" -ForegroundColor Green
 
 # 8. Update Global Rules (GEMINI.md) - Language specific
 $AntiKitInstructions = switch ($lang) {
@@ -506,26 +506,25 @@ When user types commands starting with `/`, read the corresponding workflow file
     }
 }
 
+# Define markers for robust updates
+$StartMarker = "<!-- ANTIKIT_START -->"
+$EndMarker = "<!-- ANTIKIT_END -->"
+$FullContent = "$StartMarker`n$AntiKitInstructions`n$EndMarker"
+
 if (-not (Test-Path $GeminiMd)) {
-    Set-Content -Path $GeminiMd -Value $AntiKitInstructions -Encoding UTF8
-    Write-Host "✅ Created Global Rules (GEMINI.md)" -ForegroundColor Green
+    [System.IO.File]::WriteAllText($GeminiMd, $FullContent, [System.Text.Encoding]::UTF8)
+    Write-Host "[OK] Created Global Rules (GEMINI.md)" -ForegroundColor Green
 }
 else {
     $content = Get-Content $GeminiMd -Raw -ErrorAction SilentlyContinue
     if ($null -eq $content) { $content = "" }
 
-    # Define markers for robust updates
-    $StartMarker = "<!-- ANTIKIT_START -->"
-    $EndMarker = "<!-- ANTIKIT_END -->"
-    
-    $NewContent = "$StartMarker`n$AntiKitInstructions`n$EndMarker"
-
     if ($content.Contains($StartMarker) -and $content.Contains($EndMarker)) {
         # Scenario A: Markers exist - Replace block
         $pattern = "(?s)$StartMarker.*?$EndMarker"
-        $content = $content -replace $pattern, $NewContent
-        Set-Content -Path $GeminiMd -Value $content -Encoding UTF8
-        Write-Host "✅ Updated Global Rules (GEMINI.md) - Block Replaced" -ForegroundColor Green
+        $content = $content -replace $pattern, $FullContent
+        [System.IO.File]::WriteAllText($GeminiMd, $content, [System.Text.Encoding]::UTF8)
+        Write-Host "[OK] Updated Global Rules (GEMINI.md) - Block Replaced" -ForegroundColor Green
     }
     else {
         # Scenario B: Legacy Header or Fresh Install
@@ -542,32 +541,32 @@ else {
             $content = $content.Substring(0, $markerIndex)
         }
         
-        $content = $content.TrimEnd() + "`n`n" + $NewContent
-        Set-Content -Path $GeminiMd -Value $content -Encoding UTF8
-        Write-Host "✅ Updated Global Rules (GEMINI.md) - Migrated/Appended" -ForegroundColor Green
+        $content = $content.TrimEnd() + "`n`n" + $FullContent
+        [System.IO.File]::WriteAllText($GeminiMd, $content, [System.Text.Encoding]::UTF8)
+        Write-Host "[OK] Updated Global Rules (GEMINI.md) - Migrated/Appended" -ForegroundColor Green
     }
 }
 
 # Summary
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
-Write-Host "🎉 COMPLETE! Installed $success files ($failed failed)" -ForegroundColor Yellow
-Write-Host "📦 Version: $CurrentVersion" -ForegroundColor Cyan
+Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
+Write-Host "[SUCCESS] COMPLETE! Installed $success files ($failed failed)" -ForegroundColor Yellow
+Write-Host "[PKG] Version: $CurrentVersion" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "📂 Workflows:  $GlobalWorkflows" -ForegroundColor DarkGray
-Write-Host "📂 Agents:     $AgentsDir" -ForegroundColor DarkGray
-Write-Host "📂 Skills:     $SkillsDir" -ForegroundColor DarkGray
-Write-Host "📂 Schemas:    $SchemasDir" -ForegroundColor DarkGray
-Write-Host "📂 Templates:  $TemplatesDir" -ForegroundColor DarkGray
+Write-Host "[DIR] Workflows:  $GlobalWorkflows" -ForegroundColor DarkGray
+Write-Host "[DIR] Agents:     $AgentsDir" -ForegroundColor DarkGray
+Write-Host "[DIR] Skills:     $SkillsDir" -ForegroundColor DarkGray
+Write-Host "[DIR] Schemas:    $SchemasDir" -ForegroundColor DarkGray
+Write-Host "[DIR] Templates:  $TemplatesDir" -ForegroundColor DarkGray
 Write-Host ""
 Write-Host ""
-Write-Host "⚠️  IMPORTANT: Please RESTART Antigravity to apply changes!" -ForegroundColor Yellow
+Write-Host "[!]  IMPORTANT: Please RESTART Antigravity to apply changes!" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "👉 You can use AntiKit in ANY project immediately!" -ForegroundColor Cyan
-Write-Host "👉 Try typing '/recap' to test." -ForegroundColor White
-Write-Host "👉 Check for updates: '/ak-update'" -ForegroundColor White
+Write-Host "[>] You can use AntiKit in ANY project immediately!" -ForegroundColor Cyan
+Write-Host "[>] Try typing '/recap' to test." -ForegroundColor White
+Write-Host "[>] Check for updates: '/ak-update'" -ForegroundColor White
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host ""
 if (-not $Unattended) {
     Write-Host "Press any key to exit..." -ForegroundColor DarkGray
