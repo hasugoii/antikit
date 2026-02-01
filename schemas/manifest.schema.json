@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AntiKit Package Manifest",
+    "description": "Manifest file for AntiKit library packages",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "type",
+        "version",
+        "original_language",
+        "author"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique identifier (type-name)",
+            "pattern": "^(workflow|skill|agent|rule)-[a-z0-9-]+$"
+        },
+        "name": {
+            "type": "string",
+            "description": "Human-readable name"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "workflow",
+                "skill",
+                "agent",
+                "rule"
+            ]
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "original_language": {
+            "type": "string",
+            "enum": [
+                "vi",
+                "en",
+                "ja",
+                "zh"
+            ]
+        },
+        "author": {
+            "type": "string"
+        },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "created": {
+            "type": "string",
+            "format": "date"
+        },
+        "updated": {
+            "type": "string",
+            "format": "date"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "dependencies": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "translations": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "vi",
+                    "en",
+                    "ja",
+                    "zh"
+                ]
+            }
+        },
+        "stats": {
+            "type": "object",
+            "properties": {
+                "downloads": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "rating": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 5
+                }
+            }
+        }
+    }
+}

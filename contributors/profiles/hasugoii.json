@@ -1,0 +1,21 @@
+{
+    "username": "hasugoii",
+    "display_name": "Hasugoii",
+    "joined": "2026-02-01",
+    "country": "VN",
+    "points": 500,
+    "level": "Gold",
+    "badges": [
+        "Founder",
+        "Creator",
+        "Translator"
+    ],
+    "contributions": [],
+    "stats": {
+        "workflows_created": 21,
+        "skills_created": 40,
+        "agents_created": 16,
+        "translations": 84,
+        "total_downloads": 0
+    }
+}

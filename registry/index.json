@@ -1,0 +1,22 @@
+{
+    "version": "1.0.0",
+    "updated": "2026-02-01",
+    "packages": {},
+    "categories": {
+        "workflows": [],
+        "skills": [],
+        "agents": [],
+        "rules": []
+    },
+    "languages": [
+        "vi",
+        "en",
+        "ja",
+        "zh"
+    ],
+    "stats": {
+        "total_packages": 0,
+        "total_downloads": 0,
+        "total_contributors": 1
+    }
+}

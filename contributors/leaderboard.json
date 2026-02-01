@@ -1,0 +1,39 @@
+{
+    "updated": "2026-02-01",
+    "top_contributors": [
+        {
+            "rank": 1,
+            "username": "hasugoii",
+            "country": "VN",
+            "points": 500,
+            "level": "Gold",
+            "contributions": 161
+        }
+    ],
+    "levels": {
+        "Bronze": {
+            "min_points": 100,
+            "perks": [
+                "Name in README"
+            ]
+        },
+        "Silver": {
+            "min_points": 500,
+            "perks": [
+                "Early access"
+            ]
+        },
+        "Gold": {
+            "min_points": 1000,
+            "perks": [
+                "Vote on roadmap"
+            ]
+        },
+        "Diamond": {
+            "min_points": 5000,
+            "perks": [
+                "Core contributor status"
+            ]
+        }
+    }
+}
