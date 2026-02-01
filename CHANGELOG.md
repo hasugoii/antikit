@@ -4,6 +4,25 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.3.1] - 2026-02-01
+
+### 🐛 Hotfix: Installer Missing Community Workflows
+
+### Fixed
+- **Installer Scripts**: Added missing Community workflows to download lists
+  - `install.ps1`: Added `browse.md`, `contribute.md`, `history.md` to `$WorkflowsEn` array
+  - `install.sh`: Added same 3 files to `WORKFLOWS` array
+- **GEMINI.md Templates**: Added missing command mappings for all 4 languages
+  - `/ak-browse` - Browse Community Library
+  - `/ak-contribute` - Contribute to Library
+  - `/ak-history` - Update History
+
+### Root Cause
+- Workflows were added to `workflows/{lang}/` directories but not added to installer download lists
+- Command mappings were documented in CHANGELOG 1.3.0 but not added to GEMINI.md templates
+
+---
+
 ## [1.3.0] - 2026-02-01
 
 ### 🤝 Community Contribution System

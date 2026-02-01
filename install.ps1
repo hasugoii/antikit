@@ -9,9 +9,9 @@ $RepoBase = "https://raw.githubusercontent.com/hasugoii/antikit/main"
 
 # Workflows - organized by language
 $WorkflowsEn = @(
-    "ak-update.md", "audit.md", "brainstorm.md", "cloudflare-tunnel.md",
-    "code.md", "config.md", "customize.md", "debug.md", "deploy.md",
-    "init.md", "next.md", "plan.md", "recap.md", "refactor.md",
+    "ak-update.md", "audit.md", "brainstorm.md", "browse.md", "cloudflare-tunnel.md",
+    "code.md", "config.md", "contribute.md", "customize.md", "debug.md", "deploy.md",
+    "history.md", "init.md", "next.md", "plan.md", "recap.md", "refactor.md",
     "rollback.md", "run.md", "save_brain.md", "test.md", "uninstall.md", "visualize.md"
 )
 
@@ -275,6 +275,9 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 | `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | Quản lý tunnel |
 | `/config` | ~/.gemini/antigravity/global_workflows/config.md | Cấu hình settings |
 | `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | Cập nhật AntiKit |
+| `/ak-browse` | ~/.gemini/antigravity/global_workflows/browse.md | 🔍 Duyệt Community Library |
+| `/ak-contribute` | ~/.gemini/antigravity/global_workflows/contribute.md | 🤝 Đóng góp vào Library |
+| `/ak-history` | ~/.gemini/antigravity/global_workflows/history.md | 📜 Lịch sử cập nhật |
 | `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ Gỡ cài đặt AntiKit |
 
 ## Vị Trí Tài Nguyên:
@@ -345,6 +348,9 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 | `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | トンネル管理 |
 | `/config` | ~/.gemini/antigravity/global_workflows/config.md | 設定 |
 | `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | AntiKit更新 |
+| `/ak-browse` | ~/.gemini/antigravity/global_workflows/browse.md | 🔍 ライブラリを閲覧 |
+| `/ak-contribute` | ~/.gemini/antigravity/global_workflows/contribute.md | 🤝 ライブラリに貢献 |
+| `/ak-history` | ~/.gemini/antigravity/global_workflows/history.md | 📜 更新履歴 |
 | `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ AntiKitをアンインストール |
 
 ## リソースの場所:
@@ -415,6 +421,9 @@ Khi user gõ các lệnh bắt đầu bằng `/`, đọc file workflow tương �
 | `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | 管理隧道 |
 | `/config` | ~/.gemini/antigravity/global_workflows/config.md | 配置设置 |
 | `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | 更新AntiKit |
+| `/ak-browse` | ~/.gemini/antigravity/global_workflows/browse.md | 🔍 浏览社区库 |
+| `/ak-contribute` | ~/.gemini/antigravity/global_workflows/contribute.md | 🤝 贡献到库 |
+| `/ak-history` | ~/.gemini/antigravity/global_workflows/history.md | 📜 更新历史 |
 | `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ 卸载 AntiKit |
 
 ## 资源位置:
@@ -485,6 +494,9 @@ When user types commands starting with `/`, read the corresponding workflow file
 | `/cloudflare-tunnel` | ~/.gemini/antigravity/global_workflows/cloudflare-tunnel.md | Manage tunnel |
 | `/config` | ~/.gemini/antigravity/global_workflows/config.md | Configure settings |
 | `/ak-update` | ~/.gemini/antigravity/global_workflows/ak-update.md | Update AntiKit |
+| `/ak-browse` | ~/.gemini/antigravity/global_workflows/browse.md | 🔍 Browse Community Library |
+| `/ak-contribute` | ~/.gemini/antigravity/global_workflows/contribute.md | 🤝 Contribute to Library |
+| `/ak-history` | ~/.gemini/antigravity/global_workflows/history.md | 📜 Update History |
 | `/uninstall` | ~/.gemini/antigravity/global_workflows/uninstall.md | 🗑️ Uninstall AntiKit |
 
 ## Resource Locations:
