@@ -207,6 +207,8 @@ Mỗi file phase có cấu trúc này:
 # Phase XX: [Tên]
 Trạng thái: ⬜ Chờ | 🟡 Đang Làm | ✅ Hoàn Thành
 Phụ thuộc: [Phase trước nếu có]
+Ước tính: [X hours/days]
+Ưu tiên: P0-Critical | P1-High | P2-Medium | P3-Low
 
 ## Mục Tiêu
 [Mục tiêu của phase này]
@@ -221,9 +223,18 @@ Phụ thuộc: [Phase trước nếu có]
 - [ ] Bảo mật: [...]
 
 ## Các Bước Thực Hiện
-1. [ ] Bước 1 - [Mô tả]
-2. [ ] Bước 2 - [Mô tả]
-3. [ ] Bước 3 - [Mô tả]
+| # | Task | Phụ thuộc | Ước tính | Trạng thái |
+|---|------|-----------|----------|------------|
+| 1 | [Mô tả task 1] | - | 30m | ⬜ |
+| 2 | [Mô tả task 2] | Task 1 | 1h | ⬜ |
+| 3 | [Mô tả task 3] | Task 1, 2 | 2h | ⬜ |
+
+## Dependencies Map (Sơ đồ phụ thuộc)
+```
+Task 1 (Setup) ─┬─► Task 2 (Core Logic)
+                │
+                └─► Task 3 (Helpers) ─► Task 4 (Integration)
+```
 
 ## Files Cần Tạo/Sửa
 - `path/to/file1.ts` - [Mục đích]
@@ -232,6 +243,12 @@ Phụ thuộc: [Phase trước nếu có]
 ## Tiêu Chí Test
 - [ ] Test case 1
 - [ ] Test case 2
+
+## Rủi Ro & Blockers
+| Rủi ro | Xác suất | Ảnh hưởng | Giải pháp |
+|--------|----------|-----------|-----------|
+| [Rủi ro 1] | Cao | Nghiêm trọng | [Cách xử lý] |
+| [Rủi ro 2] | Thấp | Nhẹ | [Cách xử lý] |
 
 ## Ghi Chú
 [Ghi chú đặc biệt cho phase này]

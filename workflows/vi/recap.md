@@ -129,16 +129,71 @@ Tạo tóm tắt từ scan:
     *   B) Làm tính năng mới → Gợi ý `/plan`.
     *   C) Kiểm tra tổng thể trước → Gợi ý `/audit`.
 
+---
+
+## Giai đoạn 4: 📅 Daily Standup Format (⭐ NEW)
+
+### 4.1. Standup Summary
+Khi User bắt đầu ngày mới, hiển thị theo format standup:
+
+```
+📅 DAILY STANDUP - [Date]
+
+✅ DONE (Hôm qua đã làm):
+- [Task 1] ✓
+- [Task 2] ✓
+- [Bug fix: issue description] ✓
+
+🔄 DOING (Hôm nay sẽ làm):
+- [Current task] (50% done)
+- [Next task from pending list]
+
+🚫 BLOCKED (Đang bị chặn):
+- [Blocker 1]: [Lý do] ⚠️ CẦN HỖ TRỢ
+- [Blocker 2]: [Waiting for external dependency]
+
+📊 PROGRESS:
+- Phase X: 70% complete
+- Overall: 45% of plan done
+```
+
+### 4.2. Blockers Highlight
+**QUAN TRỌNG:** Luôn highlight blockers đầu tiên!
+
+```
+🚨 BLOCKERS CẦN GIẢI QUYẾT:
+
+| # | Blocker | Loại | Đã chờ | Hành động |
+|---|---------|------|--------|-----------|
+| 1 | API chưa có response format | External | 2 ngày | Liên hệ backend team |
+| 2 | Test payment thất bại | Technical | 1 ngày | Cần /debug |
+| 3 | Chờ approval design | Process | 3 ngày | Follow up |
+
+💡 Gợi ý: Giải quyết blocker #2 trước vì đây là tech issue có thể tự fix.
+```
+
+### 4.3. Tự Động Phát Hiện Blockers
+AI tự động phát hiện potential blockers từ:
+- `session.json` → errors_encountered (bugs chưa fix)
+- `session.json` → pending_tasks với status "blocked"
+- Recent commits với message chứa "WIP", "TODO", "FIXME"
+- Tests đang skip hoặc fail
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Tiếp tục việc dang dở? /code hoặc /debug
 2️⃣ Làm tính năng mới? /plan
 3️⃣ Kiểm tra tổng thể? /audit
+4️⃣ Có blocker? Giải quyết blocker trước!
+5️⃣ Cuối ngày? /save-brain để lưu progress
 ```
 
 ## 💡 MẸO:
 *   Nên dùng `/recap` mỗi sáng trước khi bắt đầu làm việc.
 *   Sau khi `/recap`, nhớ `/save-brain` cuối ngày để mai recap dễ hơn.
+*   Focus giải quyết blockers trước khi làm tasks mới!
 
 ---
 
