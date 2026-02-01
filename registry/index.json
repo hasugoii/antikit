@@ -1,13 +1,114 @@
 {
-    "version": "1.0.0",
+    "$schema": "https://antikit.pages.dev/schemas/registry.schema.json",
+    "version": "2.0.0",
     "updated": "2026-02-01",
-    "packages": {},
+    "tiers": {
+        "critical": {
+            "description": "Security patches, malware fixes - auto-install",
+            "behavior": "auto-install",
+            "packages": []
+        },
+        "recommended": {
+            "description": "Core improvements - prompt with default Yes",
+            "behavior": "prompt-yes",
+            "packages": [
+                "workflow/debug",
+                "workflow/code",
+                "workflow/plan",
+                "workflow/test",
+                "workflow/audit"
+            ]
+        },
+        "optional": {
+            "description": "Community packages - user choice",
+            "behavior": "prompt-no",
+            "packages": []
+        }
+    },
     "categories": {
-        "workflows": [],
-        "skills": [],
-        "agents": [],
+        "workflows": {
+            "core": [
+                "ak-update",
+                "audit",
+                "brainstorm",
+                "browse",
+                "cloudflare-tunnel",
+                "code",
+                "config",
+                "contribute",
+                "customize",
+                "debug",
+                "deploy",
+                "history",
+                "init",
+                "next",
+                "plan",
+                "recap",
+                "refactor",
+                "rollback",
+                "run",
+                "save_brain",
+                "test",
+                "uninstall",
+                "visualize"
+            ],
+            "community": []
+        },
+        "skills": {
+            "frontend": [
+                "react-patterns",
+                "nextjs-expert",
+                "tailwind-patterns",
+                "frontend-design",
+                "ui-ux-pro-max"
+            ],
+            "backend": [
+                "api-patterns",
+                "nodejs-best-practices",
+                "nestjs-expert",
+                "python-patterns"
+            ],
+            "database": [
+                "prisma-expert",
+                "database-design"
+            ],
+            "security": [
+                "vulnerability-scanner",
+                "red-team-tactics"
+            ],
+            "devops": [
+                "docker-expert",
+                "deployment-procedures",
+                "server-management"
+            ],
+            "testing": [
+                "testing-patterns",
+                "tdd-workflow",
+                "webapp-testing"
+            ],
+            "other": []
+        },
+        "agents": [
+            "architect",
+            "backend",
+            "database",
+            "debugger",
+            "devops",
+            "doc-writer",
+            "explorer",
+            "frontend",
+            "game",
+            "mobile",
+            "orchestrator",
+            "pentester",
+            "performance",
+            "security",
+            "seo",
+            "tester"
+        ],
         "rules": []
     },
+    "packages": {},
     "languages": [
         "vi",
         "en",

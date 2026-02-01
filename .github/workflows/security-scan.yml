@@ -1,0 +1,89 @@
+name: Security Scan
+
+on:
+  pull_request:
+    paths:
+      - 'workflows/**'
+      - 'skills/**'
+      - 'agents/**'
+      - 'library/**'
+
+jobs:
+  security-scan:
+    name: Scan for Malicious Patterns
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            workflows/**/*.md
+            skills/**/*.md
+            skills/**/SKILL.md
+            agents/**/*.md
+            library/**/*.md
+      
+      - name: Run security scan
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          chmod +x ./scripts/security-scan.sh
+          
+          echo "🔍 Scanning changed files for security issues..."
+          echo ""
+          
+          blocked=0
+          warnings=0
+          passed=0
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Scanning: $file"
+            
+            # Run scan and capture exit code
+            set +e
+            ./scripts/security-scan.sh "$file"
+            result=$?
+            set -e
+            
+            case $result in
+              0) ((passed++)) ;;
+              1) ((warnings++)) ;;
+              2) ((blocked++)) ;;
+            esac
+          done
+          
+          echo ""
+          echo "📊 SCAN SUMMARY"
+          echo "==============="
+          echo "✅ Passed: $passed"
+          echo "⚠️ Warnings: $warnings"
+          echo "❌ Blocked: $blocked"
+          
+          if [ $blocked -gt 0 ]; then
+            echo ""
+            echo "❌ SECURITY CHECK FAILED"
+            echo "Found $blocked file(s) with blocked patterns."
+            echo "Please remove dangerous code before merging."
+            exit 1
+          elif [ $warnings -gt 0 ]; then
+            echo ""
+            echo "⚠️ MANUAL REVIEW REQUIRED"
+            echo "Found $warnings file(s) with warnings."
+            echo "A maintainer must review before merging."
+            # Don't fail on warnings, just flag for review
+            exit 0
+          else
+            echo ""
+            echo "✅ ALL SECURITY CHECKS PASSED"
+            exit 0
+          fi
+      
+      - name: Skip scan
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo "No scannable files changed. Skipping security scan."

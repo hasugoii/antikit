@@ -4,6 +4,64 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.4.0] - 2026-02-01
+
+### 📦 Selective Update System
+
+A major release introducing selective package installation and comprehensive security system.
+
+### Added
+
+#### Selective Package Installation
+- **`/ak-install`** - Install individual packages on demand
+  - Install single: `/ak-install skill/react-patterns`
+  - Install by category: `/ak-install --category=security`
+  - Automatic dependency resolution
+- New workflows for all 4 languages (vi, en, ja, zh)
+
+#### Security Scanning System
+- **`schemas/security-patterns.json`** - Comprehensive pattern definitions
+  - Blocked patterns: curl pipe, rm -rf, base64 decode, credential theft
+  - Warning patterns: network requests, file operations
+  - Whitelist for approved domains
+- **`scripts/security-scan.ps1`** - PowerShell scanner (8/8 tests pass)
+- **`scripts/security-scan.sh`** - Bash scanner for macOS/Linux
+- **`.github/workflows/security-scan.yml`** - CI/CD integration
+
+#### Trust System & Moderation
+- **Contributor Trust Levels**:
+  - 🆕 New: Manual review required
+  - ⭐ Verified (5+ approvals): Auto-approve if scan passes
+  - 👑 Maintainer: Instant publish + moderation rights
+- **`/ak-moderate`** - Admin moderation dashboard
+- **`/ak-report`** - Community reporting system
+- **Auto-quarantine**: 3 reports → package disabled
+
+#### Update Tiers
+- **CRITICAL**: Security patches (auto-install)
+- **RECOMMENDED**: Core improvements (prompt Y)
+- **OPTIONAL**: Community packages (user choice)
+
+#### Registry Schema v2.0.0
+- Package categories and tags
+- Tier classification
+- Dependency tracking
+- Download statistics
+
+### Files Added
+- `schemas/package.schema.json` - Package validation
+- `schemas/security-patterns.json` - Security patterns
+- `scripts/security-scan.ps1` - Windows scanner
+- `scripts/security-scan.sh` - Unix scanner
+- `.github/workflows/security-scan.yml` - CI check
+- `contributors/trust-levels.json` - Trust system
+- `registry/audit-log.json` - Transparency log
+- `workflows/*/install.md` (4 languages)
+- `workflows/*/moderate.md` (4 languages)
+- `workflows/*/report.md` (4 languages)
+
+---
+
 ## [1.3.1] - 2026-02-01
 
 ### 🐛 Hotfix: Installer Missing Community Workflows

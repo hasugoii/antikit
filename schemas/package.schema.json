@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://antikit.pages.dev/schemas/package.schema.json",
+    "title": "AntiKit Package Schema",
+    "description": "Schema for validating AntiKit packages metadata",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "type",
+        "version",
+        "tier"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "pattern": "^(workflow|skill|agent|rule)/[a-z0-9-]+$",
+            "description": "Unique package identifier in format type/name"
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "Human-readable package name"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "workflow",
+                "skill",
+                "agent",
+                "rule"
+            ],
+            "description": "Package type"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "description": "Semantic version"
+        },
+        "tier": {
+            "type": "string",
+            "enum": [
+                "critical",
+                "recommended",
+                "optional"
+            ],
+            "description": "Update tier determining installation behavior"
+        },
+        "description": {
+            "type": "string",
+            "maxLength": 500
+        },
+        "author": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 10
+        },
+        "dependencies": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^(workflow|skill|agent|rule)/[a-z0-9-]+$"
+            },
+            "description": "List of required packages"
+        },
+        "languages": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "en",
+                    "vi",
+                    "ja",
+                    "zh"
+                ]
+            },
+            "description": "Available translations"
+        },
+        "created": {
+            "type": "string",
+            "format": "date"
+        },
+        "updated": {
+            "type": "string",
+            "format": "date"
+        },
+        "downloads": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "securityScan": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "passed",
+                        "warning",
+                        "blocked",
+                        "pending"
+                    ]
+                },
+                "lastScan": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

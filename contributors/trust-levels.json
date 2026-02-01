@@ -1,0 +1,69 @@
+{
+    "$schema": "https://antikit.pages.dev/schemas/trust-levels.schema.json",
+    "version": "1.0.0",
+    "updated": "2026-02-01",
+    "levels": {
+        "new": {
+            "description": "New contributor - all submissions require manual review",
+            "requirements": {
+                "approved": 0,
+                "rejected": null
+            },
+            "permissions": {
+                "autoApprove": false,
+                "moderator": false
+            }
+        },
+        "verified": {
+            "description": "Verified contributor - auto-approve if security scan passes",
+            "requirements": {
+                "approved": 5,
+                "maxRecentRejected": 0
+            },
+            "permissions": {
+                "autoApprove": true,
+                "moderator": false
+            }
+        },
+        "maintainer": {
+            "description": "Core maintainer - instant publish, can approve/reject others",
+            "requirements": {
+                "manualAssignment": true
+            },
+            "permissions": {
+                "autoApprove": true,
+                "moderator": true,
+                "banUsers": true
+            }
+        }
+    },
+    "contributors": {
+        "hasugoii": {
+            "level": "maintainer",
+            "stats": {
+                "approved": 50,
+                "rejected": 0,
+                "reports_received": 0,
+                "reports_submitted": 0
+            },
+            "dates": {
+                "joined": "2026-01-20",
+                "last_contribution": "2026-02-01",
+                "last_login": "2026-02-01"
+            },
+            "badges": [
+                "founder",
+                "top-contributor"
+            ],
+            "pending_reviews": 0
+        }
+    },
+    "blocked": {},
+    "settings": {
+        "threshold_verified": 5,
+        "threshold_quarantine": 3,
+        "points_per_approval": 10,
+        "points_per_rejection": -5,
+        "recent_window_days": 30
+    }
+}

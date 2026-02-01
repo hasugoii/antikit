@@ -1,0 +1,136 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "version": "1.0.0",
+    "description": "Security patterns for scanning AntiKit contributions",
+    "blocked": {
+        "external_execution": {
+            "description": "Downloading and executing external code",
+            "severity": "critical",
+            "patterns": [
+                "curl\\s+[^|]*\\|\\s*(bash|sh|zsh)",
+                "wget\\s+[^|]*\\|\\s*(bash|sh|zsh)",
+                "curl\\s+-s[^|]*\\|\\s*(bash|sh)",
+                "Invoke-WebRequest[^|]*\\|\\s*Invoke-Expression",
+                "iwr[^|]*\\|\\s*iex",
+                "IEX\\s*\\(\\s*\\(New-Object",
+                "eval\\s*\\([^)]*\\$",
+                "exec\\s*\\([^)]*\\$",
+                "subprocess\\.run\\([^)]*shell\\s*=\\s*True"
+            ]
+        },
+        "filesystem_danger": {
+            "description": "Destructive filesystem operations",
+            "severity": "critical",
+            "patterns": [
+                "rm\\s+-rf\\s+[/~]",
+                "rm\\s+-rf\\s+\\$HOME",
+                "rm\\s+-rf\\s+\\$\\{HOME\\}",
+                "del\\s+/s\\s+/q\\s+C:",
+                "Remove-Item.*-Recurse.*-Force.*(\\$HOME|\\$env:|C:\\\\)",
+                "Format-Volume",
+                "Clear-Disk",
+                "diskpart.*clean"
+            ]
+        },
+        "data_exfiltration": {
+            "description": "Sending data to external servers",
+            "severity": "critical",
+            "patterns": [
+                "curl.*-X\\s*POST.*-d.*\\$\\(",
+                "curl.*--data.*\\$\\(",
+                "Invoke-WebRequest.*-Method\\s*Post.*-Body",
+                "[Convert]::ToBase64String.*Invoke-WebRequest"
+            ]
+        },
+        "encoding_bypass": {
+            "description": "Obfuscated or encoded commands",
+            "severity": "critical",
+            "patterns": [
+                "base64\\s+-d\\s*\\|\\s*(bash|sh)",
+                "base64\\s+--decode\\s*\\|\\s*(bash|sh)",
+                "\\[Convert\\]::FromBase64String.*Invoke",
+                "\\[System\\.Text\\.Encoding\\].*FromBase64String"
+            ]
+        },
+        "system_access": {
+            "description": "Accessing sensitive system files",
+            "severity": "high",
+            "patterns": [
+                "/etc/passwd",
+                "/etc/shadow",
+                "/etc/sudoers",
+                "C:\\\\Windows\\\\System32",
+                "\\$env:APPDATA(?!.*antikit)",
+                "\\$HOME/\\.ssh",
+                "~/.ssh/id_rsa"
+            ]
+        },
+        "credential_theft": {
+            "description": "Accessing credentials or secrets",
+            "severity": "critical",
+            "patterns": [
+                "cat.*\\.env",
+                "type.*\\.env",
+                "Get-Content.*\\.env",
+                "\\$env:.*API_KEY",
+                "\\$env:.*SECRET",
+                "\\$env:.*PASSWORD",
+                "keychain",
+                "credential-manager"
+            ]
+        }
+    },
+    "warning": {
+        "network_requests": {
+            "description": "Network requests (may be legitimate)",
+            "severity": "medium",
+            "patterns": [
+                "curl\\s+(?!.*\\|)",
+                "wget\\s+(?!.*\\|)",
+                "Invoke-WebRequest(?!.*\\|)",
+                "fetch\\s*\\(",
+                "axios\\.",
+                "http\\.request"
+            ]
+        },
+        "file_operations": {
+            "description": "File write operations",
+            "severity": "low",
+            "patterns": [
+                "fs\\.writeFile",
+                "fs\\.writeFileSync",
+                "Set-Content",
+                "Out-File",
+                "Add-Content",
+                ">\\s+[^>]"
+            ]
+        },
+        "subprocess": {
+            "description": "Process execution",
+            "severity": "medium",
+            "patterns": [
+                "child_process",
+                "subprocess(?!\\.run.*shell.*True)",
+                "os\\.system",
+                "Start-Process",
+                "Invoke-Command"
+            ]
+        }
+    },
+    "whitelist": {
+        "domains": [
+            "raw.githubusercontent.com/hasugoii/antikit",
+            "github.com/hasugoii/antikit",
+            "antikit.pages.dev"
+        ],
+        "paths": [
+            "\\$HOME/.gemini",
+            "~/.gemini",
+            "\\$env:USERPROFILE\\.gemini"
+        ],
+        "contexts": [
+            "# Safe: user-approved",
+            "# Whitelisted"
+        ]
+    }
+}

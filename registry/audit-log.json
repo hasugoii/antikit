@@ -1,0 +1,22 @@
+{
+    "$schema": "https://antikit.pages.dev/schemas/audit-log.schema.json",
+    "version": "1.0.0",
+    "description": "Public audit log for transparency - all moderation actions recorded here",
+    "entries": [
+        {
+            "id": "001",
+            "timestamp": "2026-02-01T12:00:00Z",
+            "action": "system_init",
+            "actor": "system",
+            "details": {
+                "message": "Audit log initialized for AntiKit v1.4.0"
+            }
+        }
+    ],
+    "stats": {
+        "total_approvals": 0,
+        "total_rejections": 0,
+        "total_quarantines": 0,
+        "total_bans": 0
+    }
+}
