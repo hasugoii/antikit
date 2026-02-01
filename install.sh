@@ -6,10 +6,11 @@
 REPO_BASE="https://raw.githubusercontent.com/hasugoii/antikit/main"
 
 # Workflows (will use selected language)
+# Note: moderate.md is admin-only, not included in standard install
 WORKFLOWS=(
     "ak-update.md" "audit.md" "brainstorm.md" "browse.md" "cloudflare-tunnel.md"
     "code.md" "config.md" "contribute.md" "customize.md" "debug.md" "deploy.md"
-    "history.md" "init.md" "install.md" "moderate.md" "next.md" "plan.md" "recap.md"
+    "history.md" "init.md" "install.md" "next.md" "plan.md" "recap.md"
     "refactor.md" "report.md" "rollback.md" "run.md" "save_brain.md" "scan.md"
     "test.md" "uninstall.md" "visualize.md"
 )
