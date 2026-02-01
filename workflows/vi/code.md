@@ -334,7 +334,61 @@ Báo user: "📍 Đã lưu tiến độ. Nếu context reset, gõ /recap để n
 
 ---
 
-## Giai đoạn 6: Bàn Giao
+## Giai đoạn 6: 🔍 Pre-Commit Checklist & Breaking Change Detection
+
+### 6.1. Pre-Commit Self-Review Checklist
+
+**TRƯỚC KHI** báo hoàn thành task, AI TỰ KIỂM TRA:
+
+```
+✅ PRE-COMMIT CHECKLIST:
+□ Code có đúng yêu cầu của user không?
+□ Có thêm gì NGOÀI yêu cầu không? (Nếu có → hỏi user)
+□ Validation input đầy đủ?
+□ Error handling có đầy đủ try-catch?
+□ Có hardcode sensitive data không? (API keys, passwords)
+□ Có để console.log debug không? (Xóa trước commit)
+□ Comments có cần thiết cho logic phức tạp?
+□ Tên biến/function có rõ ràng không?
+```
+
+### 6.2. Breaking Change Detection
+
+**KIỂM TRA** xem thay đổi có phá vỡ code khác không:
+
+```
+⚠️ BREAKING CHANGE DETECTION:
+
+Nếu thay đổi bao gồm:
+□ Đổi tên function/class/variable đang được import elsewhere
+□ Thay đổi signature của function (params, return type)
+□ Xóa hoặc rename database columns/tables
+□ Thay đổi API response format
+□ Xóa props của component đang được sử dụng
+
+→ CẢNH BÁO USER:
+"⚠️ Thay đổi này có thể ảnh hưởng đến các files khác:
+- [File A] đang import function này
+- [File B] đang dùng API này
+
+Anh/chị muốn em kiểm tra và cập nhật các files liên quan không?"
+```
+
+### 6.3. Test Reminder cho Logic Quan Trọng
+
+```
+Nếu code vừa viết bao gồm:
+- Business logic quan trọng (tính toán tiền, validate rules)
+- Security-related code (auth, permissions)
+- Data transformation logic
+
+→ NHẮC USER:
+"📝 Logic này khá quan trọng. Có cần em viết tests cho nó không?"
+```
+
+---
+
+## Giai đoạn 7: Bàn Giao
 
 1.  Báo cáo: "Xong code [Tên Task]."
 2.  Liệt kê: "Files đã thay đổi: [Danh sách]"
@@ -352,6 +406,9 @@ Báo user: "📍 Đã lưu tiến độ. Nếu context reset, gõ /recap để n
 
 ### Sau khi hoàn thành phase:
 *   "Phase xong rồi! `/save-brain` để lưu trước khi nghỉ."
+
+### Khi phát hiện pattern hay:
+*   "💡 Em nhận thấy pattern [X] này hay. Anh/chị muốn lưu vào GLOBAL không?"
 
 ---
 

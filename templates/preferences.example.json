@@ -1,8 +1,10 @@
 {
-  "updated_at": "2026-01-17T18:30:00Z",
+  "updated_at": "2026-02-01T10:30:00Z",
+  "schema_version": "1.2.0",
   "communication": {
     "tone": "friendly",
-    "persona": "assistant"
+    "persona": "assistant",
+    "language": "auto"
   },
   "technical": {
     "detail_level": "simple",
@@ -13,9 +15,82 @@
     "pace": "careful",
     "feedback": "gentle"
   },
+  "proactive_behavior": {
+    "suggest_global_rules": true,
+    "description": "When discovering useful patterns/rules, proactively suggest saving to global",
+    "triggers": [
+      "Discovered new best practice applied successfully",
+      "Solved complex bug with new approach",
+      "Established effective workflow",
+      "Found good convention/naming",
+      "Discovered important security pattern",
+      "Learned new integration/API knowledge"
+    ],
+    "prompt_template": "💡 I noticed this [rule/pattern] is quite useful. Would you like me to save it to GLOBAL for all projects?"
+  },
+  "git_workflow": {
+    "enabled": true,
+    "strategy": "main-develop",
+    "default_branch": "develop",
+    "production_branch": "main",
+    "rules": {
+      "always_work_on_develop": true,
+      "require_confirmation_before_merge": true,
+      "require_diff_review_before_merge": true,
+      "check_for_deleted_code": true,
+      "never_force_push": true
+    },
+    "merge_checklist": [
+      "Run git diff main develop --stat",
+      "Review changed files in detail",
+      "Confirm no important code was accidentally deleted",
+      "Test app on develop before merge",
+      "Add version number when merging"
+    ],
+    "when_to_merge": "Only merge to main when user requests build/deploy"
+  },
+  "bug_management": {
+    "auto_log_bugs": true,
+    "use_5_whys": true,
+    "severity_levels": [
+      "CRITICAL",
+      "MAJOR",
+      "MINOR",
+      "TRIVIAL"
+    ],
+    "require_root_cause": true,
+    "track_regression": true
+  },
+  "task_management": {
+    "priority_system": [
+      "P0-Critical",
+      "P1-High",
+      "P2-Medium",
+      "P3-Low"
+    ],
+    "track_dependencies": true,
+    "estimate_time": true,
+    "daily_standup_format": true
+  },
+  "code_quality": {
+    "pre_commit_checklist": true,
+    "self_review_before_done": true,
+    "breaking_change_warning": true,
+    "test_reminder_for_critical_logic": true,
+    "doc_sync_on_code_change": true
+  },
+  "learning": {
+    "log_lessons_learned": true,
+    "maintain_pattern_library": true,
+    "warn_anti_patterns": true
+  },
   "custom_rules": [
-    "Always use TypeScript instead of JavaScript",
-    "Include unit tests when writing code",
-    "Prefer performance over clean code"
+    "CRITICAL: Always work on 'develop' branch, NEVER commit directly to 'main'",
+    "When user requests build: ASK CONFIRMATION before merging develop to main",
+    "Before merge: SHOW git diff for review, especially check for deleted code",
+    "NEVER auto-merge without user consent",
+    "After merge and build: Return to develop branch to continue work",
+    "PROACTIVE: When discovering useful rule/pattern → SUGGEST saving to GLOBAL",
+    "PROACTIVE: Before saving to global → ASK user for confirmation"
   ]
 }

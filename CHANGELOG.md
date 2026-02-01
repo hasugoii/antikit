@@ -4,6 +4,50 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.2.0] - 2026-02-01
+
+### ✨ Enhanced Workflows & Global Rules
+
+This release introduces significant improvements to bug management, code quality, and proactive knowledge sharing.
+
+### Added
+
+#### Global Rules System
+- **Proactive Behavior**: AI now proactively suggests saving useful patterns/rules to global memory
+- **Git Workflow**: Main/Develop branching strategy with merge confirmation and diff review
+- **Bug Management**: Severity classification (CRITICAL, MAJOR, MINOR, TRIVIAL)
+- **Task Management**: Priority system (P0-P3) with dependency tracking
+- **Code Quality**: Pre-commit checklist, breaking change detection, test reminders
+- **Learning System**: Lesson learned logging, pattern library, anti-pattern warnings
+
+#### Workflow Improvements
+
+**`/debug` Enhanced:**
+- 5 Whys Root Cause Analysis template
+- Bug severity classification
+- Pattern matching with previously fixed bugs
+- Enhanced bug logging with timestamp, severity, root cause, and lesson learned
+- Suggestion to save common bug patterns to global
+
+**`/code` Enhanced:**
+- Pre-Commit Self-Review Checklist (validation, security, error handling)
+- Breaking Change Detection with warnings for impacted files
+- Test reminder for critical business logic
+- Pattern discovery suggestion for global saving
+
+**`/preferences` Template:**
+- Full global rules template with git workflow, bug management, task management
+- Proactive behavior configuration
+- Code quality settings
+
+### Benefits
+- Better bug tracking and prevention across projects
+- Improved code quality with self-review before commit
+- Knowledge retention through global pattern library
+- Safer deployments with merge confirmation workflow
+
+---
+
 ## [1.1.12] - 2026-01-22
 ### Fixed
 - **Windows Emoji Support**: Replaced 🇺🇸 (US Flag) with ⚠️ (Warning) in Vietnamese, Japanese, and Chinese READMEs to fix rendering issues on Windows.

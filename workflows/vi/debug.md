@@ -71,7 +71,36 @@ Sau khi có thông tin từ User, AI điều tra độc lập:
 *   Liệt kê 2-3 nguyên nhân có thể.
 *   Ưu tiên kiểm tra nguyên nhân phổ biến nhất trước.
 
-### 2.4. Debug Logging (Nếu cần)
+### 2.4. Phân Tích 5 Whys (Root Cause Analysis)
+Khi gặp bug phức tạp, sử dụng kỹ thuật **5 Whys** để tìm nguyên nhân gốc:
+
+```
+🔍 Ví dụ 5 Whys:
+❓ Tại sao app crash? → Vì data trả về null
+❓ Tại sao data null? → Vì API không trả dữ liệu
+❓ Tại sao API không trả? → Vì user chưa có record trong DB
+❓ Tại sao chưa có record? → Vì signup flow skip bước init
+❓ Tại sao skip? → Vì validation không bắt trường hợp này
+✅ ROOT CAUSE: Thiếu validation trong signup flow
+```
+
+### 2.5. Phân Loại Mức Độ Bug
+Phân loại để ưu tiên fix:
+
+| Mức độ | Mô tả | Hành động |
+|--------|-------|-----------|
+| 🔴 CRITICAL | App crash, mất dữ liệu, security | Fix NGAY LẬP TỨC |
+| 🟠 MAJOR | Tính năng chính không hoạt động | Fix trong ngày |
+| 🟡 MINOR | Tính năng phụ bị lỗi, UI sai | Fix trong sprint |
+| ⚪ TRIVIAL | Lỗi nhỏ, typo, cosmetic | Khi có thời gian |
+
+### 2.6. Kiểm Tra Pattern Bugs Cũ
+*   Trước khi tìm giải pháp mới, KIỂM TRA:
+    *   `session.json` → errors_encountered (bugs đã fix trong session này)
+    *   `knowledge/` → patterns đã học được
+*   "Em thấy bug này GIỐNG với bug [X] đã fix trước đó. Thử áp dụng cách fix cũ..."
+
+### 2.7. Debug Logging (Nếu cần)
 *   "Em sẽ thêm một số điểm theo dõi (logs) vào code để bắt lỗi."
 *   Chèn `console.log` vào các điểm nghi ngờ.
 *   "Anh/chị thử lại hành động gây lỗi nhé."
@@ -154,13 +183,29 @@ Sau khi fix, AI tự động lưu vào session.json:
 {
   "errors_encountered": [
     {
+      "timestamp": "2026-02-01T10:30:00Z",
       "error": "Cannot read property 'map' of undefined",
+      "severity": "MAJOR",
+      "root_cause": "API trả về null thay vì empty array",
       "solution": "Thêm check array trước map",
-      "resolved": true,
-      "file": "src/components/ProductList.tsx"
+      "files_changed": ["src/components/ProductList.tsx"],
+      "lesson_learned": "Luôn validate API response trước khi map",
+      "resolved": true
     }
   ]
 }
+```
+
+### Đề Xuất Lưu Vào Global
+```
+Nếu bug này có thể tái diễn ở dự án khác:
+"💡 Em nhận thấy pattern lỗi này hay gặp. Anh/chị có muốn em lưu vào GLOBAL không?"
+
+Các loại bug nên đề xuất lưu global:
+- Pattern lỗi phổ biến (null check, async/await)
+- Security issues
+- Performance gotchas
+- Framework-specific pitfalls
 ```
 
 ---
@@ -171,4 +216,6 @@ Sau khi fix, AI tự động lưu vào session.json:
 2️⃣ Vẫn còn lỗi? Tiếp tục /debug
 3️⃣ Fix xong nhưng hỏng thêm? /rollback
 4️⃣ Ổn rồi? /save-brain để lưu
+5️⃣ Bug hay gặp? Đề xuất lưu GLOBAL để nhớ mãi
 ```
+
