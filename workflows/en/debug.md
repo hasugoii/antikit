@@ -71,7 +71,36 @@ After getting info from User, AI investigates independently:
 *   List 2-3 possible causes.
 *   Prioritize checking most common cause first.
 
-### 2.4. Debug Logging (If needed)
+### 2.4. 5 Whys Analysis (Root Cause Analysis)
+When facing complex bugs, use the **5 Whys** technique to find root cause:
+
+```
+🔍 5 Whys Example:
+❓ Why did app crash? → Because data returned null
+❓ Why was data null? → Because API didn't return data
+❓ Why didn't API return? → Because user has no record in DB
+❓ Why no record? → Because signup flow skipped init step
+❓ Why was it skipped? → Because validation didn't catch this case
+✅ ROOT CAUSE: Missing validation in signup flow
+```
+
+### 2.5. Bug Severity Classification
+Classify to prioritize fixes:
+
+| Severity | Description | Action |
+|----------|-------------|--------|
+| 🔴 CRITICAL | App crash, data loss, security | Fix IMMEDIATELY |
+| 🟠 MAJOR | Core feature not working | Fix today |
+| 🟡 MINOR | Secondary feature broken, UI issue | Fix in sprint |
+| ⚪ TRIVIAL | Small issue, typo, cosmetic | When time permits |
+
+### 2.6. Check Previous Bug Patterns
+*   Before finding new solution, CHECK:
+    *   `session.json` → errors_encountered (bugs fixed in this session)
+    *   `knowledge/` → learned patterns
+*   "I see this bug is SIMILAR to bug [X] fixed before. Let me try the same approach..."
+
+### 2.7. Debug Logging (If needed)
 *   "I'll add some monitoring points (logs) to the code to catch the error."
 *   Insert `console.log` at suspect points.
 *   "Please try the action that causes the error again."
@@ -154,13 +183,29 @@ After fixing, AI automatically saves to session.json:
 {
   "errors_encountered": [
     {
+      "timestamp": "2026-02-01T10:30:00Z",
       "error": "Cannot read property 'map' of undefined",
+      "severity": "MAJOR",
+      "root_cause": "API returned null instead of empty array",
       "solution": "Add array check before map",
-      "resolved": true,
-      "file": "src/components/ProductList.tsx"
+      "files_changed": ["src/components/ProductList.tsx"],
+      "lesson_learned": "Always validate API response before mapping",
+      "resolved": true
     }
   ]
 }
+```
+
+### Suggest Saving to Global
+```
+If this bug pattern could recur in other projects:
+"💡 I noticed this error pattern is quite common. Would you like me to save it to GLOBAL?"
+
+Bug types worth suggesting for global:
+- Common patterns (null check, async/await)
+- Security issues
+- Performance gotchas
+- Framework-specific pitfalls
 ```
 
 ---
@@ -171,4 +216,6 @@ After fixing, AI automatically saves to session.json:
 2️⃣ Still have errors? Continue /debug
 3️⃣ Fixed but broke more? /rollback
 4️⃣ All good? /save-brain to save
+5️⃣ Common bug? Suggest saving to GLOBAL for future reference
 ```
+

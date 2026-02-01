@@ -334,7 +334,61 @@ Tell user: "📍 Progress saved. If context resets, type /recap to remember!"
 
 ---
 
-## Phase 6: Handover
+## Phase 6: 🔍 Pre-Commit Checklist & Breaking Change Detection
+
+### 6.1. Pre-Commit Self-Review Checklist
+
+**BEFORE** reporting task complete, AI SELF-CHECKS:
+
+```
+✅ PRE-COMMIT CHECKLIST:
+□ Does code match user's request?
+□ Did I add anything BEYOND the request? (If yes → ask user)
+□ Is input validation complete?
+□ Is error handling with try-catch complete?
+□ Any hardcoded sensitive data? (API keys, passwords)
+□ Any debug console.log left? (Remove before commit)
+□ Are comments needed for complex logic?
+□ Are variable/function names clear?
+```
+
+### 6.2. Breaking Change Detection
+
+**CHECK** if change could break other code:
+
+```
+⚠️ BREAKING CHANGE DETECTION:
+
+If change includes:
+□ Renaming function/class/variable that's imported elsewhere
+□ Changing function signature (params, return type)
+□ Deleting or renaming database columns/tables
+□ Changing API response format
+□ Removing props from component being used
+
+→ WARN USER:
+"⚠️ This change may affect other files:
+- [File A] imports this function
+- [File B] uses this API
+
+Would you like me to check and update related files?"
+```
+
+### 6.3. Test Reminder for Critical Logic
+
+```
+If just-written code includes:
+- Important business logic (money calculations, validation rules)
+- Security-related code (auth, permissions)
+- Data transformation logic
+
+→ REMIND USER:
+"📝 This logic is quite important. Should I write tests for it?"
+```
+
+---
+
+## Phase 7: Handover
 
 1.  Report: "Finished coding [Task Name]."
 2.  List: "Files changed: [List]"
@@ -352,6 +406,9 @@ Tell user: "📍 Progress saved. If context resets, type /recap to remember!"
 
 ### After completing phase:
 *   "Phase done! `/save-brain` to save before taking a break."
+
+### When discovering useful pattern:
+*   "💡 I noticed this [X] pattern is useful. Would you like to save it to GLOBAL?"
 
 ---
 
