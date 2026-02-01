@@ -4,6 +4,56 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.2.1] - 2026-02-01
+
+### 🌐 Full Multilingual Workflow Support
+
+This release completes multilingual support for all enhanced workflows across Vietnamese, English, Japanese, and Chinese.
+
+### Added
+
+#### Complete Language Parity
+All 5 enhanced workflows now have identical features across all 4 languages:
+
+**`/debug` (vi, en, ja, zh):**
+- 5 Whys Root Cause Analysis template
+- Bug Severity Classification (CRITICAL, MAJOR, MINOR, TRIVIAL)
+- Pattern Matching with previously fixed bugs
+- Enhanced bug logging with timestamp, severity, root cause, lesson learned
+- Suggestion to save common patterns to global
+
+**`/code` (vi, en, ja, zh):**
+- Pre-Commit Self-Review Checklist
+- Breaking Change Detection with impacted file warnings
+- Test Reminder for critical business logic
+- Pattern discovery suggestion for global saving
+
+**`/plan` (vi, en, ja, zh):**
+- Task Dependencies with visual Dependency Map
+- Time Estimation per task and phase
+- Priority System (P0-Critical to P3-Low)
+- Risks & Blockers tracking table
+- Smart Phase Detection based on complexity
+
+**`/test` (vi, en, ja, zh):**
+- Priority Testing (P0-P3 levels)
+- Critical Path First execution strategy
+- Risk-Based Testing prioritization
+- Enhanced Coverage Report by category
+- Coverage saving to session.json
+
+**`/recap` (vi, en, ja, zh):**
+- Daily Standup Format (Done/Doing/Blocked)
+- Blockers Highlight with action table
+- Auto-Detect Blockers from session.json, git commits, and tests
+
+### Benefits
+- Users can use AntiKit in their preferred language with full feature parity
+- Consistent experience across all supported languages
+- Better adoption for international teams
+
+---
+
 ## [1.2.0] - 2026-02-01
 
 ### ✨ Enhanced Workflows & Global Rules
