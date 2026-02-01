@@ -1,94 +1,115 @@
 ---
-description: Update AntiKit to latest version
+description: Update AntiKit with package selection
 ---
 
-# WORKFLOW: /ak-update - The Updater
+# WORKFLOW: /ak-update - AntiKit Update (Enhanced)
 
 > **Context:** Agent `@devops`
-> **Required Skills:** `server-management`
+> **Required Skills:** `server-management`, `git-workflow`
 > **Key Behaviors:**
-> - Check current and latest version
-> - Show changelog before updating
-> - Remind to restart IDE after update
+> - Display list of available packages
+> - Allow selective update
+> - Save local update history
 
-You are the **AntiKit Update Manager**. Your job is to check for updates and help the user upgrade to the latest version.
+You are the **AntiKit Update Manager**. Mission: Check and update AntiKit with package selection capability.
 
-## Stage 1: Check Current Version
+---
 
-1. Read the installed version:
-   ```bash
-   cat ~/.gemini/awf_version 2>/dev/null || echo "Unknown"
-   ```
+## Phase 1: Fetch Registry
 
-2. Check latest version from GitHub:
-   ```bash
-   curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION
-   ```
+### 1.1. Check core version
 
-3. Compare versions and report:
-
-```
-📦 **AntiKit VERSION CHECK**
-
-Current version: [installed version]
-Latest version:  [github version]
-
-Status: [UP TO DATE / UPDATE AVAILABLE]
-```
-
-## Stage 2: Show Changelog (if update available)
-
-If there's a new version, fetch and display the changelog:
 ```bash
-curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/CHANGELOG.md | head -50
+# Local version
+cat ~/.gemini/antikit_version 2>/dev/null || echo "unknown"
+
+# Remote version
+curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION
 ```
 
-Show what's new in a friendly format.
+### 1.2. Fetch library registry
 
-## Stage 3: Update Options
-
-Present options to the user:
-
-```
-🔄 **UPDATE OPTIONS**
-
-1️⃣ Update now (recommended)
-2️⃣ Skip this update
-3️⃣ View full changelog
-```
-
-## Stage 4: Perform Update (if user chooses option 1)
-
-### For Mac/Linux:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | sh
+curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.json
 ```
 
-### For Windows (PowerShell):
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) } -Unattended"
+---
+
+## Phase 2: Compare with Local
+
+Read `~/.gemini/antikit_installed.json` and compare with registry.
+
+---
+
+## Phase 3: Display Available Updates
+
+```
+📦 ANTIKIT UPDATE CENTER
+
+🔷 CORE: v{local} → v{remote} {status}
+
+┌─────────────────────────────────────────────────────┐
+│ 📂 WORKFLOWS ({count} updates)                      │
+├─────────────────────────────────────────────────────┤
+│ [ ] 1. /debug         1.0.0 → 1.2.0  ⭐ Hot update  │
+│ [ ] 2. /code          1.1.0 → 1.2.1  🆕 New version │
+│ [✓] 3. /plan          1.2.0          ✅ Up to date  │
+└─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────┐
+│ 🛠️ SKILLS ({count} available)                       │
+├─────────────────────────────────────────────────────┤
+│ [ ] 4. react-patterns  v2.0  ⭐ Popular             │
+│ [ ] 5. nextjs-expert   v1.5  🆕 New                 │
+└─────────────────────────────────────────────────────┘
+
+📊 Your language: 🇬🇧 English
 ```
 
-## Stage 5: Verify Update
+---
 
-After update completes:
-1. Check new version is installed
-2. Confirm success to user
+## Phase 4: Selection
 
 ```
-✅ **UPDATE COMPLETE**
+🔽 SELECT TO UPDATE:
 
-AntiKit has been updated to version [new version].
+Enter numbers (comma separated) or:
+• all       - Update all
+• workflows - Only workflows
+• skills    - Only skills
+• cancel    - Cancel
 
-What's new:
-- [Key changes from changelog]
+Example: 1,2,4,5 or all
 
-👉 Restart your IDE to apply changes.
+> _
 ```
 
-## NEXT STEPS:
+---
+
+## Phase 5: Execute Update
+
+Download selected packages, copy to local, update antikit_installed.json.
+
+---
+
+## Phase 6: Confirmation
+
 ```
-1️⃣ Test a workflow? Try /recap
-2️⃣ View all commands? /help
-3️⃣ Start new project? /init
+✅ UPDATE COMPLETE!
+
+📦 Updated:
+├── workflow/debug 1.0.0 → 1.2.0
+├── skill/react-patterns (new)
+
+👉 Restart IDE to apply changes.
+```
+
+---
+
+## Phase 7: Next Steps
+
+```
+1️⃣ Browse more packages? /ak-browse
+2️⃣ View update history? /ak-history
+3️⃣ Contribute package? /ak-contribute
 ```

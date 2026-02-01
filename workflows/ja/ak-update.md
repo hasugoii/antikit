@@ -1,76 +1,70 @@
 ---
-description: AntiKitを最新バージョンに更新
+description: パッケージ選択でAntiKitを更新
 ---
 
-# ワークフロー: /ak-update - アップデーター
+# ワークフロー: /ak-update - AntiKit更新 (Enhanced)
 
 > **Context:** Agent `@devops`
-> **Required Skills:** `server-management`
-> **Key Behaviors:**
-> - 現在と最新バージョンを確認
-> - 更新前に変更履歴を表示
-> - 更新後にIDEの再起動をリマインド
+> **Required Skills:** `server-management`, `git-workflow`
 
-あなたは **AntiKit 更新マネージャー** です。更新を確認し、ユーザーが最新バージョンにアップグレードするのを手伝います。
+AntiKit更新マネージャー。パッケージ選択機能付きで更新をチェックして実行します。
 
-## フェーズ 1: 現在のバージョンを確認
+---
 
-1. インストールされているバージョンを読む:
-   ```bash
-   cat ~/.gemini/awf_version 2>/dev/null || echo "不明"
-   ```
+## フェーズ 1: レジストリを取得
 
-2. GitHubから最新バージョンを確認:
-   ```bash
-   curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION
-   ```
+バージョンチェックとレジストリのフェッチ。
 
-3. バージョンを比較して報告:
+---
+
+## フェーズ 2: ローカルと比較
+
+`~/.gemini/antikit_installed.json` を読み込み比較。
+
+---
+
+## フェーズ 3: 利用可能な更新を表示
 
 ```
-📦 **AntiKit バージョン確認**
+📦 ANTIKIT アップデートセンター
 
-現在のバージョン: [インストール済みバージョン]
-最新バージョン: [GitHubバージョン]
+┌─────────────────────────────────────────────────────┐
+│ 📂 ワークフロー ({count} 更新)                       │
+├─────────────────────────────────────────────────────┤
+│ [ ] 1. /debug         1.0.0 → 1.2.0  ⭐ ホット      │
+│ [ ] 2. /code          1.1.0 → 1.2.1  🆕 新バージョン │
+└─────────────────────────────────────────────────────┘
 
-状態: [最新です / 更新あり]
+📊 あなたの言語: 🇯🇵 日本語
 ```
 
-## フェーズ 2: 更新オプション
+---
+
+## フェーズ 4: 選択
 
 ```
-🔄 **更新オプション**
+🔽 更新するものを選択:
 
-1️⃣ 今すぐ更新（推奨）
-2️⃣ この更新をスキップ
-3️⃣ 完全な更新履歴を見る
+番号を入力 (カンマ区切り) または:
+• all - すべて更新
+• workflows - ワークフローのみ
+• cancel - キャンセル
+
+> _
 ```
 
-## フェーズ 3: 更新を実行（ユーザーが1を選択した場合）
+---
 
-### Mac/Linux:
-```bash
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | sh
-```
+## フェーズ 5-6: 実行と確認
 
-### Windows (PowerShell):
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1) } -Unattended"
-```
+選択したパッケージをダウンロードしてインストール。
 
-## フェーズ 4: 更新を確認
+---
+
+## フェーズ 7: 次のステップ
 
 ```
-✅ **更新完了**
-
-AntiKitがバージョン [新バージョン] に更新されました。
-
-👉 IDEを再起動して変更を適用してください。
-```
-
-## 次のステップ:
-```
-1️⃣ ワークフローをテスト? /recap を試す
-2️⃣ すべてのコマンドを見る? /help
-3️⃣ 新しいプロジェクト開始? /init
+1️⃣ もっとパッケージを見る? /ak-browse
+2️⃣ 更新履歴を見る? /ak-history
+3️⃣ パッケージを貢献? /ak-contribute
 ```
