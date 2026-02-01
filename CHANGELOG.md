@@ -4,6 +4,63 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.3.0] - 2026-02-01
+
+### 🤝 Community Contribution System
+
+This major release introduces a complete community contribution ecosystem for AntiKit.
+
+### Added
+
+#### Infrastructure
+- **Community Library** (`library/`) - New directory structure for community packages
+- **Registry System** (`registry/index.json`) - Package index with metadata
+- **Contributor Profiles** (`contributors/`) - User profiles, points, and leaderboard
+- **Manifest Schema** (`schemas/manifest.schema.json`) - Package validation
+
+#### New Workflows
+- **`/ak-contribute`** - Submit local customizations to the community library
+  - Auto-validate content format
+  - Auto-translate to all 4 languages (vi, en, ja, zh)
+  - Auto-commit and push to git
+  - Earn contributor points
+
+- **`/ak-update` (Enhanced)** - Selective package updates
+  - Browse available updates with UI
+  - Choose individual packages to install
+  - Track update history
+  - Language-aware (auto-translate to user's language)
+
+- **`/ak-browse`** - Browse community library
+  - Filter by type, tag, language, popularity
+  - View package details
+  - One-click install
+
+- **`/ak-history`** - View update history
+  - Timeline of updates and installs
+  - Rollback capability
+  - Contribution tracking
+
+#### Cross-Language Features
+- Users can contribute in ANY language
+- AI auto-translates to all 4 supported languages
+- Users see content in their preferred language
+- Universal content layer separates logic from text
+
+#### Contributor Recognition
+- Points system (100 pts for workflow, 50 for skill, 30 for translation)
+- Level system (Bronze → Silver → Gold → Diamond)
+- Leaderboard with top contributors
+- Badges for achievements
+
+### Benefits
+- Community-driven growth
+- Cross-language collaboration
+- Selective updates (no more download-all)
+- Full transparency with Git-based storage
+
+---
+
 ## [1.2.1] - 2026-02-01
 
 ### 🌐 Full Multilingual Workflow Support
