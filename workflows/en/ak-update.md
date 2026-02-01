@@ -41,7 +41,26 @@ Read `~/.gemini/antikit_installed.json` and compare with registry.
 
 ---
 
-## Phase 3: Display Available Updates
+## Phase 3: Security Scan
+
+Before displaying updates, scan all packages for security issues:
+
+```
+🔍 SCANNING PACKAGES FOR SECURITY...
+
+[1/4] workflow/debug... ✅ PASSED
+[2/4] workflow/code... ✅ PASSED  
+[3/4] skill/react-patterns... ⚠️ 1 WARNING
+[4/4] skill/nextjs-expert... ✅ PASSED
+```
+
+**If BLOCKED**: Package cannot be installed, skip automatically.
+**If WARNING**: Show warning, ask user to confirm.
+**If all PASSED**: Proceed to display updates.
+
+---
+
+## Phase 4: Display Available Updates
 
 ```
 📦 ANTIKIT UPDATE CENTER
@@ -68,7 +87,7 @@ Read `~/.gemini/antikit_installed.json` and compare with registry.
 
 ---
 
-## Phase 4: Selection
+## Phase 5: Selection
 
 ```
 🔽 SELECT TO UPDATE:
@@ -86,13 +105,13 @@ Example: 1,2,4,5 or all
 
 ---
 
-## Phase 5: Execute Update
+## Phase 6: Execute Update
 
 Download selected packages, copy to local, update antikit_installed.json.
 
 ---
 
-## Phase 6: Confirmation
+## Phase 7: Confirmation
 
 ```
 ✅ UPDATE COMPLETE!
@@ -106,7 +125,7 @@ Download selected packages, copy to local, update antikit_installed.json.
 
 ---
 
-## Phase 7: Next Steps
+## Phase 8: Next Steps
 
 ```
 1️⃣ Browse more packages? /ak-browse

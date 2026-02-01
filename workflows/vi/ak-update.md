@@ -61,10 +61,76 @@ cat ~/.gemini/antikit_installed.json
 
 ---
 
-## Giai đoạn 3: Hiển Thị Updates Available
+## Giai đoạn 3: Security Scan (Quét Bảo Mật)
+
+### 3.1. Fetch Security Patterns
+
+```bash
+# Lấy patterns mới nhất từ registry
+curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/schemas/security-patterns.json
+```
+
+### 3.2. Quét Packages Trước Khi Cài
+
+Với mỗi package sẽ update, thực hiện security scan:
+
+```
+🔍 QUÉT BẢO MẬT PACKAGES...
+
+[1/4] workflow/debug... ✅ PASSED
+[2/4] workflow/code... ✅ PASSED  
+[3/4] skill/react-patterns... ⚠️ 1 WARNING
+[4/4] skill/nextjs-expert... ✅ PASSED
+```
+
+### 3.3. Xử lý kết quả scan
+
+**Nếu có BLOCKED:**
+```
+❌ PHÁT HIỆN VẤN ĐỀ BẢO MẬT!
+
+Package: skill/malicious-tool
+Status: 🚫 BLOCKED
+
+Tìm thấy patterns nguy hiểm:
+├── Line 15: curl ... | bash  (external_execution)
+└── Line 27: rm -rf /  (filesystem_danger)
+
+⚠️ Package này KHÔNG thể cài đặt.
+Đã báo cáo tự động cho maintainers.
+
+Bỏ qua package này và tiếp tục? [Y/n]
+```
+
+**Nếu có WARNING:**
+```
+⚠️ CẢNH BÁO BẢO MẬT
+
+Package: skill/react-patterns
+Status: ⚠️ WARNING
+
+Tìm thấy patterns cần review:
+└── Line 42: fetch('https://api.example.com')  (network_request)
+
+📝 Package này có thể cài đặt nhưng cần kiểm tra.
+Tiếp tục cài đặt? [Y/n/details]
+```
+
+**Nếu tất cả PASSED:**
+```
+✅ QUÉT BẢO MẬT HOÀN TẤT
+
+4/4 packages passed security scan.
+Tất cả packages an toàn để cài đặt.
+```
+
+---
+
+## Giai đoạn 4: Hiển Thị Updates Available
 
 ```
 📦 ANTIKIT UPDATE CENTER
+
 
 🔷 CORE: v{local} → v{remote} {status}
 
@@ -97,7 +163,7 @@ cat ~/.gemini/antikit_installed.json
 
 ---
 
-## Giai đoạn 4: Chọn Lựa
+## Giai đoạn 5: Chọn Lựa
 
 ```
 🔽 CHỌN ĐỂ CẬP NHẬT:
@@ -117,9 +183,9 @@ Ví dụ: 1,2,4,5 hoặc all
 
 ---
 
-## Giai đoạn 5: Thực Hiện Update
+## Giai đoạn 6: Thực Hiện Update
 
-### 5.1. Download Selected
+### 6.1. Download Selected
 
 ```
 ⬇️ ĐANG TẢI...
@@ -132,14 +198,14 @@ Ví dụ: 1,2,4,5 hoặc all
 Đã tải: 4 packages
 ```
 
-### 5.2. Update Local Files
+### 6.2. Update Local Files
 
 ```bash
 # Copy từ git repo sang local
 cp -r antikit/library/workflows/debug/translations/vi.md ~/.gemini/antigravity/global_workflows/debug.md
 ```
 
-### 5.3. Update antikit_installed.json
+### 6.3. Update antikit_installed.json
 
 ```json
 {
@@ -160,7 +226,7 @@ cp -r antikit/library/workflows/debug/translations/vi.md ~/.gemini/antigravity/g
 
 ---
 
-## Giai đoạn 6: Xác Nhận
+## Giai đoạn 7: Xác Nhận
 
 ```
 ✅ CẬP NHẬT HOÀN TẤT!
