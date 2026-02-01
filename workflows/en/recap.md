@@ -129,16 +129,71 @@ Create summary from scan:
     *   B) Start new feature → Suggest `/plan`.
     *   C) Check overall status first → Suggest `/audit`.
 
+---
+
+## Phase 4: 📅 Daily Standup Format (⭐ NEW)
+
+### 4.1. Standup Summary
+When User starts a new day, display in standup format:
+
+```
+📅 DAILY STANDUP - [Date]
+
+✅ DONE (Yesterday completed):
+- [Task 1] ✓
+- [Task 2] ✓
+- [Bug fix: issue description] ✓
+
+🔄 DOING (Today will work on):
+- [Current task] (50% done)
+- [Next task from pending list]
+
+🚫 BLOCKED (Currently blocked):
+- [Blocker 1]: [Reason] ⚠️ NEEDS HELP
+- [Blocker 2]: [Waiting for external dependency]
+
+📊 PROGRESS:
+- Phase X: 70% complete
+- Overall: 45% of plan done
+```
+
+### 4.2. Blockers Highlight
+**IMPORTANT:** Always highlight blockers first!
+
+```
+🚨 BLOCKERS TO RESOLVE:
+
+| # | Blocker | Type | Waiting | Action |
+|---|---------|------|---------|--------|
+| 1 | API missing response format | External | 2 days | Contact backend team |
+| 2 | Payment test failing | Technical | 1 day | Need /debug |
+| 3 | Waiting for design approval | Process | 3 days | Follow up |
+
+💡 Suggestion: Resolve blocker #2 first since it's a tech issue you can self-fix.
+```
+
+### 4.3. Auto-Detect Blockers
+AI automatically detects potential blockers from:
+- `session.json` → errors_encountered (unfixed bugs)
+- `session.json` → pending_tasks with status "blocked"
+- Recent commits with messages containing "WIP", "TODO", "FIXME"
+- Tests being skipped or failing
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Continue unfinished work? /code or /debug
 2️⃣ Start new feature? /plan
 3️⃣ Check overall status? /audit
+4️⃣ Have blockers? Resolve blockers first!
+5️⃣ End of day? /save-brain to save progress
 ```
 
 ## 💡 TIPS:
 *   Use `/recap` every morning before starting work.
 *   After `/recap`, remember `/save-brain` at end of day for easier recap tomorrow.
+*   Focus on resolving blockers before starting new tasks!
 
 ---
 

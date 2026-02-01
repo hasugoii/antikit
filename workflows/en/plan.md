@@ -207,6 +207,8 @@ Each phase file has this structure:
 # Phase XX: [Name]
 Status: ⬜ Pending | 🟡 In Progress | ✅ Complete
 Dependencies: [Previous phase if any]
+Estimate: [X hours/days]
+Priority: P0-Critical | P1-High | P2-Medium | P3-Low
 
 ## Objective
 [Goal of this phase]
@@ -221,9 +223,18 @@ Dependencies: [Previous phase if any]
 - [ ] Security: [...]
 
 ## Implementation Steps
-1. [ ] Step 1 - [Description]
-2. [ ] Step 2 - [Description]
-3. [ ] Step 3 - [Description]
+| # | Task | Dependencies | Estimate | Status |
+|---|------|--------------|----------|--------|
+| 1 | [Task 1 description] | - | 30m | ⬜ |
+| 2 | [Task 2 description] | Task 1 | 1h | ⬜ |
+| 3 | [Task 3 description] | Task 1, 2 | 2h | ⬜ |
+
+## Dependencies Map
+```
+Task 1 (Setup) ─┬─► Task 2 (Core Logic)
+                │
+                └─► Task 3 (Helpers) ─► Task 4 (Integration)
+```
 
 ## Files to Create/Modify
 - `path/to/file1.ts` - [Purpose]
@@ -232,6 +243,12 @@ Dependencies: [Previous phase if any]
 ## Test Criteria
 - [ ] Test case 1
 - [ ] Test case 2
+
+## Risks & Blockers
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| [Risk 1] | High | Severe | [How to handle] |
+| [Risk 2] | Low | Minor | [How to handle] |
 
 ## Notes
 [Special notes for this phase]
