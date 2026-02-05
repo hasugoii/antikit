@@ -4,6 +4,51 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.5.0] - 2026-02-05
+
+### 🔄 Living Documentation System
+
+This release introduces automatic schema synchronization to ensure AI agents always have accurate database documentation.
+
+### Added
+
+#### New Workflow
+- **`/sync-schema`** - Synchronize database documentation with actual schema
+  - Reads migrations and updates `docs/database/schema.md`
+  - Updates `src/lib/db/schema.ts` with TypeScript types
+  - Syncs `.brain/brain.json` database_schema section
+  - Validates CRITICAL_COLUMNS before any changes
+
+#### Auto-Sync Integration
+Automatic `/sync-schema` triggers added to existing workflows:
+
+- **`/save-brain`** - Auto-sync at end of session and when DB changes
+- **`/code`** - Auto-sync after creating new migrations or changing DB schema
+- **`/plan`** - Auto-sync after completing phase-02 (database phase)
+- **`/deploy`** - Pre-flight check includes schema sync verification
+
+#### Critical Columns Protection
+- New `CRITICAL_COLUMNS` pattern to prevent accidental deletion of business-critical columns
+- AI must check critical columns before removing any database column
+- Documents business purpose for each critical column
+
+### Benefits
+- AI no longer makes incorrect changes due to outdated documentation
+- Database schema changes are automatically reflected in docs
+- Business rules for columns are preserved and accessible
+- Reduces "blind fixes" where AI removes important columns
+
+### Files Added
+- `workflows/sync-schema.md` - New schema sync workflow
+
+### Files Modified
+- `workflows/save_brain.md` - Added auto sync-schema trigger
+- `workflows/code.md` - Added migration change detection
+- `workflows/plan.md` - Added database phase completion trigger
+- `workflows/deploy.md` - Added pre-deploy schema verification
+
+---
+
 ## [1.4.0] - 2026-02-01
 
 ### 📦 Selective Update System
