@@ -196,6 +196,28 @@ AntiKit:
 
 ---
 
+## 🧠 Trí Nhớ Vĩnh Viễn (AI Không Bao Giờ Quên Nữa)
+
+> *"Hôm qua giải thích cả kiến trúc... hôm nay nó làm như chưa từng nói chuyện."*
+
+Quen không? **AntiKit giải quyết luôn.**
+
+| Vấn đề | Giải pháp AntiKit |
+|:-------|:------------------|
+| 🤦 AI quên sạch session trước | `/save-brain` lưu kiến thức vào `.brain/brain.json` — **vĩnh viễn** |
+| 🤷 AI ảo giác, bịa code không tồn tại | `/recap` quét codebase thực tế, không dùng trí nhớ |
+| 😤 Phải giải thích lại mỗi ngày | `.brain/session.json` theo dõi bạn đang làm gì |
+| 🔄 Mất context sau đoạn chat dài | Kiến thức có cấu trúc, sống qua các session |
+
+```
+Cuối ngày:  /save-brain  → lưu kiến trúc, API, DB, quyết định
+Sáng hôm sau: /recap      → "Em nhớ hết. Anh/chị đang làm X."
+```
+
+**Không phải giải thích lại. Không ảo giác. AI nhớ mãi.** 🧠
+
+---
+
 ## 🌍 4 Ngôn Ngữ, Cùng Sức Mạnh
 
 | Ngôn ngữ | Workflows |
@@ -242,8 +264,14 @@ Community skills từ [coreyhaines31/marketingskills](https://github.com/coreyha
 
 **Đừng code mù. Hãy build business.** 🚀
 
-```
+**macOS / Linux:**
+```bash
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang vi
+```
+
+**Windows (PowerShell):**
+```powershell
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language vi
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)

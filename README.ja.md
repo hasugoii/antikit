@@ -183,6 +183,28 @@ AntiKit:
 
 ---
 
+## 🧠 永久記憶（AIはもう忘れない）
+
+> *「昨日アーキテクチャを全部説明したのに...今日はまるで話してないかのように振る舞う。」*
+
+あるある？**AntiKitが解決します。**
+
+| 問題 | AntiKitの解決策 |
+|:-----|:----------------|
+| 🤦 AIが次のセッションで全部忘れる | `/save-brain` がプロジェクト知識を `.brain/brain.json` に保存 — **永久に** |
+| 🤷 AIが存在しないコードを幻覚する | `/recap` が実際のコードベースをスキャン、記憶に頼らない |
+| 😤 毎日同じことを説明し直す | `.brain/session.json` が作業内容を追跡 |
+| 🔄 長い会話でコンテキストが消える | 構造化された知識がセッションを超えて生き残る |
+
+```
+一日の終わり: /save-brain  → アーキテクチャ、API、DBスキーマ、判断を保存
+翌朝:        /recap       → 「全部覚えています。Xに取り組んでいましたね。」
+```
+
+**もう説明し直す必要なし。幻覚もなし。AIは永遠に覚えています。** 🧠
+
+---
+
 ## 📦 パッケージ内容
 
 | コンポーネント | 数量 | ハイライト |
@@ -218,8 +240,14 @@ AntiKit:
 
 **盲目にコードを書くのをやめる。ビジネスを構築しよう。** 🚀
 
-```
+**macOS / Linux:**
+```bash
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang ja
+```
+
+**Windows (PowerShell):**
+```powershell
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language ja
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)

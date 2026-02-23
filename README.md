@@ -200,6 +200,28 @@ AntiKit:
 
 ---
 
+## 🧠 Permanent Memory (AI Never Forgets Again)
+
+> *"I explained the whole architecture yesterday... and today it acts like we never talked."*
+
+Sound familiar? **AntiKit solves this.**
+
+| Problem | AntiKit Solution |
+|:--------|:----------------|
+| 🤦 AI forgets everything next session | `/save-brain` saves project knowledge to `.brain/brain.json` — **permanent** |
+| 🤷 AI hallucinates code that doesn't exist | `/recap` scans your actual codebase, not memory |
+| 😤 Re-explaining the same thing every day | `.brain/session.json` tracks what you're working on |
+| 🔄 Context lost after long conversations | Structured knowledge survives across sessions |
+
+```
+End of day:  /save-brain  → saves architecture, APIs, DB schema, decisions
+Next morning: /recap       → "I remember everything. You were working on X."
+```
+
+**No more re-explaining. No more hallucinations. Your AI remembers forever.** 🧠
+
+---
+
 ## 🌍 4 Languages, Same Power
 
 AntiKit speaks your language natively:
@@ -248,8 +270,14 @@ Community skills from [coreyhaines31/marketingskills](https://github.com/coreyha
 
 **Stop coding blindly. Start building businesses.** 🚀
 
-```
+**macOS / Linux:**
+```bash
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
