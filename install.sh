@@ -13,15 +13,15 @@ WORKFLOWS=(
     "uninstall.mdt" "visualize.mdt"
 )
 
-# Agents
+# Agents (21 total)
 AGENTS=(
     "backend-specialist.mdt" "code-archaeologist.mdt" "database-architect.mdt"
     "debugger.mdt" "devops-engineer.mdt" "documentation-writer.mdt"
     "explorer-agent.mdt" "frontend-specialist.mdt" "game-developer.mdt"
-    "mobile-developer.mdt" "orchestrator.mdt" "penetration-tester.mdt"
-    "performance-optimizer.mdt" "product-manager.mdt" "product-owner.mdt"
-    "project-planner.mdt" "qa-automation-engineer.mdt" "security-auditor.mdt"
-    "seo-specialist.mdt" "test-engineer.mdt"
+    "growth-hacker.mdt" "mobile-developer.mdt" "orchestrator.mdt"
+    "penetration-tester.mdt" "performance-optimizer.mdt" "product-manager.mdt"
+    "product-owner.mdt" "project-planner.mdt" "qa-automation-engineer.mdt"
+    "security-auditor.mdt" "seo-specialist.mdt" "test-engineer.mdt"
 )
 
 # Schemas
@@ -34,18 +34,38 @@ TEMPLATES=(
     "brain.example.json" "preferences.example.json" "session.example.json"
 )
 
-# Skills (directories with SKILL.md inside)
+# Skills (83 total — directories with SKILL.mdt inside)
 SKILLS=(
-    "api-patterns" "app-builder" "architecture" "bash-linux" "behavioral-modes"
-    "brainstorming" "clean-code" "code-review-checklist" "database-design"
-    "deployment-procedures" "docker-expert" "documentation-templates" "evidence-discipline" "frontend-design"
-    "game-development" "geo-fundamentals" "growth-marketing" "i18n-localization" "lint-and-validate"
-    "mcp-builder" "mobile-design" "nestjs-expert" "nextjs-expert" "nodejs-best-practices"
-    "parallel-agents" "performance-profiling" "plan-writing" "powershell-windows" "proactive-intelligence"
-    "prisma-expert" "python-patterns" "react-patterns" "red-team-tactics"
-    "seo-fundamentals" "server-management" "systematic-debugging" "tailwind-patterns"
-    "tdd-workflow" "testing-patterns" "typescript-expert" "ui-ux-pro-max"
-    "vulnerability-scanner" "webapp-testing"
+    "ab-test-setup" "ad-creative" "ai-seo" "analytics-tracking"
+    "api-patterns" "app-builder" "app-store-optimization" "architecture"
+    "bash-linux" "behavioral-modes" "brainstorming"
+    "churn-prevention" "clean-code" "code-review-checklist" "cold-email"
+    "competitor-alternatives" "content-hash-cache-pattern" "content-strategy"
+    "continuous-learning-v2" "copy-editing" "copywriting" "cost-aware-llm-pipeline"
+    "database-design" "deployment-procedures" "docker-expert" "docker-patterns"
+    "documentation-templates" "e2e-testing" "email-sequence" "evidence-discipline"
+    "form-cro" "free-tool-strategy" "frontend-design"
+    "game-development" "geo-fundamentals" "growth-marketing"
+    "i18n-localization" "intelligent-routing"
+    "launch-strategy" "lint-and-validate"
+    "marketing-ideas" "marketing-psychology" "mcp-builder" "mobile-design"
+    "nestjs-expert" "nextjs-expert" "nextjs-react-expert" "nodejs-best-practices"
+    "onboarding-cro"
+    "page-cro" "paid-ads" "parallel-agents" "paywall-upgrade-cro"
+    "performance-profiling" "plan-writing" "popup-cro" "powershell-windows"
+    "pricing-strategy" "prisma-expert" "proactive-intelligence"
+    "product-marketing-context" "programmatic-seo" "python-patterns"
+    "react-patterns" "red-team-tactics" "referral-program" "rust-pro"
+    "schema-markup" "seo-audit" "seo-fundamentals" "server-management"
+    "signup-flow-cro" "social-content" "strategic-compact" "systematic-debugging"
+    "tailwind-patterns" "tdd-workflow" "testing-patterns" "typescript-expert"
+    "ui-ux-pro-max" "vulnerability-scanner" "web-design-guidelines" "webapp-testing"
+)
+
+# Scripts (7 total)
+SCRIPTS=(
+    "auto_preview.py" "checklist.py" "generate-index.sh"
+    "security-scan.ps1" "security-scan.sh" "session_manager.py" "verify_all.py"
 )
 
 # Paths
@@ -226,6 +246,22 @@ for skill in "${SKILLS[@]}"; do
         ((success++))
     else
         echo -e "   ${RED}❌ $skill${NC}"
+        ((failed++))
+    fi
+done
+
+# 6.5 Download Scripts
+SCRIPTS_DIR="$ANTIGRAVITY_DIR/scripts"
+mkdir -p "$SCRIPTS_DIR"
+echo ""
+echo -e "${CYAN}⏳ Downloading scripts...${NC}"
+for script in "${SCRIPTS[@]}"; do
+    if curl -f -s -o "$SCRIPTS_DIR/$script" "$REPO_BASE/scripts/$script"; then
+        chmod +x "$SCRIPTS_DIR/$script"
+        echo -e "   ${GREEN}✅ $script${NC}"
+        ((success++))
+    else
+        echo -e "   ${RED}❌ $script${NC}"
         ((failed++))
     fi
 done
