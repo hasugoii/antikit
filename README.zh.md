@@ -5,7 +5,7 @@
 ### 把Antigravity变成**赚钱机器。**
 *从"我有个想法" → 开发完成、营销完成、开始赚钱 — 一套工具搞定。*
 
-[![Version](https://img.shields.io/badge/v1.13.4-91_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/v1.13.5-91_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![Docs](https://img.shields.io/badge/文档-antikit.pages.dev-FF6D00?style=for-the-badge)](https://antikit.pages.dev/docs)

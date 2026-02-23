@@ -4,6 +4,16 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.13.5] - 2026-02-24
+
+### 🔧 /ak-update Language-Aware Installer Re-run
+
+### Fixed
+- **Phase 9 language detection** — Auto-reads `~/.gemini/antikit_lang` and passes correct `--lang` flag when re-running installer
+- Non-English users no longer lose their language settings during GEMINI.md refresh
+
+---
+
 ## [1.13.4] - 2026-02-24
 
 ### 🔄 /ak-update Now Refreshes GEMINI.md
