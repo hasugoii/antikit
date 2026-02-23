@@ -5,7 +5,7 @@
 ### Biến Antigravity thành **cỗ máy in tiền.**
 *Từ "anh có ý tưởng" → code xong, marketing xong, và kiếm tiền — trong một bộ công cụ.*
 
-[![Version](https://img.shields.io/badge/v1.13.0-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/v1.13.1-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![Docs](https://img.shields.io/badge/Docs-antikit.pages.dev-FF6D00?style=for-the-badge)](https://antikit.pages.dev/docs)

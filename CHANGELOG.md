@@ -4,6 +4,28 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.13.1] - 2026-02-23
+
+### 🔧 Orphan Workflow Fix + Full save_brain Translation
+
+### Fixed — Missing Workflows
+- **`save_brain.mdt`** was orphan at `workflows/` root — never distributed to users
+  - Created EN translation (289 lines, hand-translated from VI source)
+  - Created JA translation (287 lines, fully hand-translated)
+  - Created ZH translation (287 lines, fully hand-translated)
+  - Copied VI source to `workflows/vi/`
+  - Added to `install.sh` + `install.ps1` WORKFLOWS arrays
+- **`sync-schema.mdt`** — same orphan issue, same fix (4 language versions)
+- Installer WORKFLOWS count: 18 → 20
+
+### Fixed — Install Commands
+- README.vi.md → `bash -s -- --lang vi` / `-Language vi`
+- README.ja.md → `bash -s -- --lang ja` / `-Language ja`
+- README.zh.md → `bash -s -- --lang zh` / `-Language zh`
+- Users copy-pasting from localized README now auto-select matching language
+
+---
+
 ## [1.13.0] - 2026-02-23
 
 ### 🌐 Full 4-Language Workflow Parity — 72 Files Synchronized
