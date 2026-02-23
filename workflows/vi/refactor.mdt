@@ -67,6 +67,50 @@ F) 💪 Tất cả"
 
 ---
 
+## Giai đoạn 1.5: 🔍 Phân Tích Ảnh Hưởng (BẮT BUỘC)
+
+> **Quy tắc:** Trước khi refactor BẤT KỲ code nào, quét xem ai phụ thuộc vào nó.
+
+### 1.5.1. Quét Phụ Thuộc
+
+```
+Với mỗi file/function sắp refactor:
+1. grep -rn "tênHàm" src/  → Ai gọi hàm này?
+2. grep -rn "import.*from.*file" src/  → Ai import file này?
+3. Kiểm tra test files: có test cho phần này không?
+
+Báo cáo:
+"📊 Hàm này được dùng ở 5 files. Refactor sẽ ảnh hưởng:
+- src/pages/Orders.tsx (gọi processOrder)
+- src/api/checkout.ts (import từ orderService)
+- tests/order.test.ts (test processOrder)
+
+Em sẽ cập nhật TẤT CẢ phần phụ thuộc sau khi refactor."
+```
+
+### 1.5.2. Xác Nhận Dead Code
+
+```
+Trước khi xóa code "không dùng":
+⚠️ PHẢI xác nhận bằng grep TRƯỚC:
+→ grep -rn "tênHàm" . (toàn bộ project, không chỉ src/)
+→ Kiểm tra dynamic imports (import bằng string)
+→ Kiểm tra config files (webpack, vite, v.v.)
+
+Nếu CÒN reference → KHÔNG PHẢI dead code. KHÔNG XÓA.
+```
+
+### 1.5.3. Đánh Giá Rủi Ro
+
+| Phạm vi | Rủi ro | Hành động cần thiết |
+|---------|--------|---------------------|
+| Đổi tên biến local | 🟢 Thấp | Cứ đổi |
+| Đổi tên hàm exported | 🟡 Trung bình | Cập nhật tất cả nơi import |
+| Thay đổi signature hàm | 🔴 Cao | Cập nhật tất cả nơi gọi + tests |
+| Xóa file | 🔴 Cao | Xác nhận 0 references + hỏi user |
+
+---
+
 ## Giai đoạn 2: Phát Hiện Code Smell
 
 ### 2.1. Vấn Đề Cấu Trúc

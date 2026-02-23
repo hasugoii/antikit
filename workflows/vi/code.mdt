@@ -233,6 +233,59 @@ Users hay QUÊN những thứ này. AI phải TỰ ĐỘNG THÊM:
 
 ---
 
+## Giai đoạn 2.5: 🔍 Phân Tích Ảnh Hưởng (BẮT BUỘC trước khi sửa code)
+
+> **Quy tắc:** KHÔNG BAO GIỜ sửa hoặc xóa code mà không kiểm tra ai đang phụ thuộc vào nó.
+
+### 2.5.1. Trước Khi Sửa Bất Kỳ File Nào
+
+```
+Với MỖI file sắp sửa:
+1. Quét imports/references:
+   → grep -rn "tên_hàm" src/
+   → grep -rn "import.*from.*filename" src/
+2. Liệt kê phạm vi ảnh hưởng:
+   → "Hàm này được dùng ở 3 file: [A, B, C]"
+3. Kiểm tra test coverage:
+   → "Có test cho phần này: CÓ/KHÔNG"
+```
+
+### 2.5.2. Trước Khi Xóa Code
+
+```
+⚠️ KIỂM TRA BẮT BUỘC trước khi xóa:
+1. Code này thật sự không dùng?
+   → grep -rn "tênHàm" . (tìm TOÀN BỘ project)
+2. Có import động không? (import bằng string, reflection)
+3. Tests có gọi không?
+4. Config files có dùng không?
+
+Nếu CÒN reference → KHÔNG XÓA. Hỏi user trước:
+"⚠️ Code này vẫn được dùng ở [files]. Vẫn xóa?"
+```
+
+### 2.5.3. Báo Cáo Ảnh Hưởng (Hiển thị cho User)
+
+```
+📊 PHÂN TÍCH ẢNH HƯỞNG:
+┌─────────────────────────────────────┐
+│ Files cần sửa:     3               │
+│ Functions ảnh hưởng: 5              │
+│ Files import chúng: 8              │
+│ Test coverage: 2/5 có test          │
+│ Mức rủi ro: 🟡 TRUNG BÌNH         │
+└─────────────────────────────────────┘
+
+Files ảnh hưởng:
+- src/services/order.ts (sửa trực tiếp)
+- src/components/OrderList.tsx (import orderService)
+- src/api/orders.ts (import orderService)
+
+Tiếp tục không?
+```
+
+---
+
 ## Giai đoạn 3: Implementation (Skill: `clean-code`, `[language]-patterns`)
 
 ### 3.1. Cấu Trúc Code

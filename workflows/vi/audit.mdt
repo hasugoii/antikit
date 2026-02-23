@@ -199,12 +199,35 @@ Khi User chọn **Option 5 (Fix All)**, AI sẽ:
 *   ⚠️ **Cần Review:** Lộ API key (chuyển vào .env), SQL injection (cần review logic)
 *   ❌ **Chỉ fix thủ công:** Thay đổi kiến trúc, lỗi business logic
 
-### 6.2. Thực thi Fix:
+### 6.2. 🔍 Phân Tích Ảnh Hưởng (Trước Khi Auto-Fix)
+
+> **Quy tắc:** Ngay cả auto-fix cũng có thể phá hỏng. Xác nhận trước.
+
+```
+Với MỖI lỗi sắp auto-fix:
+1. Quét references: Ai đang dùng code này?
+2. Kiểm tra test coverage: Test có bắt được nếu fix phá gì không?
+3. Đánh giá rủi ro:
+   - Xóa import không dùng → 🟢 An toàn
+   - Xóa hàm "dead" → 🟡 Phải xác nhận bằng grep trước!
+   - Chuyển API key vào .env → 🟡 Kiểm tra tất cả references
+   - Thay đổi logic validation → 🔴 Cần user xác nhận
+
+Báo cáo trước khi fix:
+"📊 Kế hoạch auto-fix:
+✅ 6 fix an toàn (imports, formatting, console.log)
+⚠️ 2 cần xác nhận (dead code → đang quét references...)
+❌ 1 bỏ qua (thay đổi architecture)
+
+Tiếp tục với các fix an toàn?"
+```
+
+### 6.3. Thực thi Fix:
 *   Fix các lỗi auto-fixable từng cái một.
 *   Với lỗi "Cần Review": Hỏi User xác nhận trước khi fix.
 *   Bỏ qua lỗi "Chỉ fix thủ công" và ghi chú lại.
 
-### 6.3. Báo cáo:
+### 6.4. Báo cáo:
 ```
 ✅ Đã auto-fix: 8 lỗi
 ⚠️ Cần review thêm: 2 lỗi (liệt kê bên dưới)

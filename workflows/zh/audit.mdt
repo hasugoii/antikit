@@ -1,5 +1,5 @@
 ---
-description: 🏥 Code & security audit
+description: 🏥 代码和安全审计
 ---
 
 # WORKFLOW: /audit - The Code Doctor (Comprehensive Health Check)
@@ -199,12 +199,35 @@ When User chooses **Option 5 (Fix All)**, AI will:
 *   ⚠️ **Need Review:** API key exposure (move to .env), SQL injection (need to review logic)
 *   ❌ **Manual Only:** Architecture changes, business logic bugs
 
-### 6.2. Execute Fix:
+### 6.2. 🔍 Impact Analysis (Before Auto-Fix)
+
+> **Rule:** Even auto-fixes can break things. Verify first.
+
+```
+For EACH error about to be auto-fixed:
+1. Scan references: Who uses this code?
+2. Check test coverage: Will tests catch if fix breaks something?
+3. Assess risk:
+   - Removing unused import → 🟢 Safe
+   - Removing "dead" function → 🟡 Verify with grep first!
+   - Moving API key to .env → 🟡 Check all references
+   - Changing validation logic → 🔴 Need user confirmation
+
+Report before fixing:
+"📊 Auto-fix plan:
+✅ 6 safe fixes (imports, formatting, console.log)
+⚠️ 2 need verification (dead code → scanning references...)
+❌ 1 skip (architecture change)
+
+Proceed with safe fixes?"
+```
+
+### 6.3. Execute Fix:
 *   Fix auto-fixable errors one by one.
 *   For "Need Review" errors: Ask User to confirm before fixing.
 *   Skip "Manual Only" errors and note them.
 
-### 6.3. Report:
+### 6.4. Report:
 ```
 ✅ Auto-fixed: 8 errors
 ⚠️ Need more review: 2 errors (listed below)

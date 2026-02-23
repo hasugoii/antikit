@@ -1,5 +1,5 @@
 ---
-description: 🐞 Fix bugs & Debug
+description: 🐞 修复Bug和调试
 ---
 
 # WORKFLOW: /debug - The Sherlock Holmes (User-Friendly Debugging)
@@ -120,6 +120,42 @@ When error is found, explain to User in PLAIN LANGUAGE:
 
 *   **Technical:** "ECONNREFUSED"
 *   **Plain:** "The app can't connect to the database. The database might not be running."
+
+---
+
+## Phase 3.5: 🔍 Impact Analysis (Before Fixing)
+
+> **Rule:** Before fixing a bug, check what else depends on the buggy code.
+
+### 3.5.1. Side Effect Check
+
+```
+Bug found in function X:
+1. Who else calls function X?
+   → grep -rn "functionX" src/
+2. Will fixing X change behavior for callers?
+   → If function X returns different data after fix
+   → ALL callers might be affected
+
+Report to user:
+"🔍 The fix will change how [function X] works.
+These files also use it:
+- src/pages/Dashboard.tsx
+- src/api/reports.ts
+
+I'll verify they still work after the fix."
+```
+
+### 3.5.2. Regression Prevention
+
+```
+After identifying fix:
+1. List ALL files the fix touches
+2. For each file → check if tests exist
+3. If no tests → warn user:
+   "⚠️ No tests for [file]. Fix might break something undetected.
+    Want me to write a quick test first?"
+```
 
 ---
 

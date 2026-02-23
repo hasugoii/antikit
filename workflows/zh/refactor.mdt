@@ -1,5 +1,5 @@
 ---
-description: 🧹 清理与优化代码
+description: 🧹 整理和优化代码
 ---
 
 # WORKFLOW: /refactor - The Code Gardener (Safe Cleanup)
@@ -64,6 +64,50 @@ F) 💪 All of the above"
 ### 1.3. Backup Suggestion
 *   "Before refactoring, do you want me to create a backup branch?"
 *   If YES → `git checkout -b backup/before-refactor`
+
+---
+
+## Phase 1.5: 🔍 Impact Analysis (MANDATORY)
+
+> **Rule:** Before refactoring ANY code, scan who depends on it.
+
+### 1.5.1. Dependency Scan
+
+```
+For each file/function to be refactored:
+1. grep -rn "functionName" src/  → Who calls this?
+2. grep -rn "import.*from.*file" src/  → Who imports this?
+3. Check test files: does this have tests?
+
+Report:
+"📊 This function is used in 5 files. Refactoring it will affect:
+- src/pages/Orders.tsx (calls processOrder)
+- src/api/checkout.ts (imports from orderService)
+- tests/order.test.ts (tests processOrder)
+
+I'll update ALL dependents after refactoring."
+```
+
+### 1.5.2. Dead Code Verification
+
+```
+Before deleting "unused" code:
+⚠️ MUST verify with grep FIRST:
+→ grep -rn "functionName" . (entire project, not just src/)
+→ Check dynamic imports (string-based)
+→ Check config files (webpack, vite, etc.)
+
+If ANY reference found → NOT dead code. Do NOT delete.
+```
+
+### 1.5.3. Risk Assessment
+
+| Scope | Risk | Required Action |
+|-------|------|-----------------|
+| Rename local variable | 🟢 Low | Just rename |
+| Rename exported function | 🟡 Medium | Update all importers |
+| Change function signature | 🔴 High | Update all callers + tests |
+| Delete file | 🔴 High | Verify zero references + ask user |
 
 ---
 

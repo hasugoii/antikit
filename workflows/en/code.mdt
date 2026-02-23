@@ -233,6 +233,59 @@ Users often FORGET these. AI must AUTO-ADD:
 
 ---
 
+## Phase 2.5: 🔍 Impact Analysis (MANDATORY before editing)
+
+> **Rule:** NEVER edit or delete code without checking who depends on it.
+
+### 2.5.1. Before Modifying Any File
+
+```
+For EACH file about to be edited:
+1. Scan imports/references:
+   → grep -rn "function_name" src/
+   → grep -rn "import.*from.*filename" src/
+2. List affected scope:
+   → "This function is used in 3 files: [A, B, C]"
+3. Check test coverage:
+   → "Tests exist for this: YES/NO"
+```
+
+### 2.5.2. Before Deleting Any Code
+
+```
+⚠️ MANDATORY CHECK before deleting:
+1. Is this code truly unused?
+   → grep -rn "functionName" . (search ENTIRE project)
+2. Is it referenced dynamically? (string-based imports, reflection)
+3. Is it called from tests?
+4. Is it used in config files?
+
+If ANY reference found → DO NOT DELETE. Ask user first:
+"⚠️ This code is still referenced in [files]. Delete anyway?"
+```
+
+### 2.5.3. Impact Report (Show to User)
+
+```
+📊 IMPACT ANALYSIS:
+┌─────────────────────────────────────┐
+│ Files to modify:  3                 │
+│ Functions affected: 5               │
+│ Files that import them: 8           │
+│ Test coverage: 2/5 have tests       │
+│ Risk level: 🟡 MEDIUM              │
+└─────────────────────────────────────┘
+
+Affected files:
+- src/services/order.ts (direct edit)
+- src/components/OrderList.tsx (imports orderService)
+- src/api/orders.ts (imports orderService)
+
+Shall I proceed?
+```
+
+---
+
 ## Phase 3: Implementation
 
 ### 3.1. Code Structure

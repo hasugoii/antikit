@@ -123,6 +123,42 @@ Khi tìm được lỗi, giải thích cho User bằng NGÔN NGỮ ĐƠN GIẢN:
 
 ---
 
+## Giai đoạn 3.5: 🔍 Phân Tích Ảnh Hưởng (Trước Khi Sửa)
+
+> **Quy tắc:** Trước khi fix bug, kiểm tra code lỗi còn ảnh hưởng gì khác.
+
+### 3.5.1. Kiểm Tra Tác Dụng Phụ
+
+```
+Tìm thấy bug ở hàm X:
+1. Ai khác gọi hàm X?
+   → grep -rn "hàmX" src/
+2. Fix hàm X có thay đổi behavior cho caller không?
+   → Nếu hàm X trả về data khác sau fix
+   → TẤT CẢ callers có thể bị ảnh hưởng
+
+Báo cho user:
+"🔍 Việc sửa sẽ thay đổi cách [hàm X] hoạt động.
+Các files cũng dùng nó:
+- src/pages/Dashboard.tsx
+- src/api/reports.ts
+
+Em sẽ kiểm tra chúng vẫn hoạt động sau khi fix."
+```
+
+### 3.5.2. Phòng Ngừa Regression
+
+```
+Sau khi xác định fix:
+1. Liệt kê TẤT CẢ files fix ảnh hưởng
+2. Với mỗi file → kiểm tra có test không
+3. Nếu không có test → cảnh báo user:
+   "⚠️ Không có test cho [file]. Fix có thể phá gì đó mà không biết.
+    Muốn em viết test nhanh trước không?"
+```
+
+---
+
 ## Giai đoạn 4: Sửa Lỗi
 
 ### 4.1. Thực hiện sửa
