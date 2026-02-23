@@ -128,7 +128,4 @@ Download selected packages, copy to local, update antikit_installed.json.
 ## Phase 8: Next Steps
 
 ```
-1️⃣ Browse more packages? /ak-browse
-2️⃣ View update history? /ak-history
-3️⃣ Contribute package? /ak-contribute
 ```

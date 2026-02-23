@@ -255,9 +255,6 @@ cp -r antikit/library/workflows/debug/translations/vi.md ~/.gemini/antigravity/g
 ```
 ⚠️ BƯỚC TIẾP THEO:
 
-1️⃣ Duyệt thêm packages? /ak-browse
-2️⃣ Xem lịch sử update? /ak-history
-3️⃣ Đóng góp package? /ak-contribute
 4️⃣ Test workflow mới? /recap
 ```
 
@@ -268,4 +265,3 @@ cp -r antikit/library/workflows/debug/translations/vi.md ~/.gemini/antigravity/g
 - Packages được auto-translate sang ngôn ngữ của bạn
 - Core framework update sẽ overwrite global files
 - Lịch sử update được lưu để rollback nếu cần
-- Chạy `/ak-history` để xem chi tiết
