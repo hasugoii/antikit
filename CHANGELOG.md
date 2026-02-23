@@ -4,6 +4,47 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.11.0] - 2026-02-23
+
+### 🚀 Deep Research Edition — Launch & Grow System v2
+
+Major upgrade based on deep research: indie hacker playbooks, Product Hunt strategies, SaaS growth frameworks, viral loop design, and landing page conversion optimization.
+
+### Upgraded
+- **`growth-marketing` skill v2.0** (~500 lines):
+  - Pre-sell validation (5 payments in 7 days rule)
+  - "Build in Public" content framework
+  - Product Hunt deep strategy (hunter, 12:01AM PT, Tue-Thu, asset specs)
+  - Hacker News "Show HN" protocol
+  - Content formulas: AIDA (revenue), Build-in-Public (community)
+  - Channel deep dives: per-country, per-platform timing, format, frequency
+  - Landing page: proven 8-section conversion structure
+  - Viral loop design: double-sided rewards, gamification, tiers
+  - Sean Ellis PMF test (40% "very disappointed" = PMF)
+  - Retention benchmarks (NRR, churn, D1/D7/D30)
+  - TTFV optimization (Time to First Value < 2 min)
+  - Success milestones (🌱→💎 growth stages)
+
+### Added
+- **`/grow` workflow** (7 phases, 6 power flags):
+  - Phase 1: Health Check + PMF Score
+  - Phase 2: Feedback → Roadmap pipeline
+  - Phase 3: Improve → Ship (connects to /debug, /enhance, /code)
+  - Phase 4: Promote Update (copy-paste content templates)
+  - Phase 5: Viral Loop (referral, social sharing, embedded brand)
+  - Phase 6: Retention (onboarding audit, re-engagement emails)
+  - Phase 7: Track & Celebrate (milestones, monthly recap)
+  - **Product Flywheel:** /grow → /brainstorm → /plan → /code → /deploy → /grow
+
+### New Pipeline (Complete)
+```
+🆕 New product:  /brainstorm → /plan → /code → /deploy → /launch
+🔄 Improve:      /grow → /enhance → /deploy → /grow --update
+🌟 New feature:  /grow --feedback → /brainstorm → /plan → /code → /deploy
+```
+
+---
+
 ## [1.10.0] - 2026-02-23
 
 ### 🚀 Launch System — Go-to-Market for Coders

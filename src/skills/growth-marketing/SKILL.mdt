@@ -1,14 +1,14 @@
 ---
 name: growth-marketing
-description: Go-to-market strategy, content creation, payment setup, and growth optimization. Localized per country/culture. Creates copy-paste ready content for all channels. Use when launching products, creating marketing content, or setting up monetization.
+description: Go-to-market strategy, content creation, payment setup, and growth optimization. Localized per country/culture. Creates copy-paste ready content for all channels. Deep expertise from indie hacker to SaaS scale.
 allowed-tools: all
-version: "1.0.0"
+version: "2.0.0"
 priority: P1
 ---
 
 # Growth Marketing
 
-> **Philosophy:** Coder builds it, AI sells it. Every output is COPY-PASTE READY. User is NOT a marketer — AI does the heavy lifting.
+> **Philosophy:** Coder builds it, AI sells it. Every output is COPY-PASTE READY. User is NOT a marketer — AI does the heavy lifting. Based on proven strategies from Product Hunt, indie hackers, and SaaS growth playbooks.
 
 ---
 
@@ -16,231 +16,522 @@ priority: P1
 
 Before ANY marketing work, determine the launch goal:
 
-| Goal | Strategy | KPI |
-|------|----------|-----|
-| 💰 **Revenue** | Sales-focused, CTA mạnh, pricing | MRR, conversion rate |
-| 🆓 **Free + Indirect** | Download-focused, viral | DAU, retention, ad revenue |
-| 👥 **Community/Fan** | Open source, tutorials | Stars, followers, contributors |
-| 🏆 **Reputation** | Portfolio, case study | Views, shares, job offers |
-| 🎯 **Hybrid** | Mix strategies | Custom metrics |
+| Goal | Strategy | KPI | Monetization |
+|------|----------|-----|-------------|
+| 💰 **Revenue** | Sales-focused, CTA mạnh | MRR, conversion, LTV/CAC | Subscription, one-time, pay-per-use |
+| 🆓 **Free + Indirect** | Download-focused, viral | DAU/MAU, retention D1/D7/D30 | Ads, affiliate, data |
+| 👥 **Community** | Open source, tutorials | Stars, contributors, PRs | Sponsorship, donate, consulting |
+| 🏆 **Reputation** | Portfolio, case study | Views, shares, inbound leads | Job offers, freelance |
+| 🎯 **Hybrid** | Mix strategies | Custom metrics | Freemium, tiered |
 
-### Prompt
+### Monetization Matrix — AI gợi ý model phù hợp
+
+| Model | Khi nào | Examples | Revenue Potential |
+|-------|---------|---------|-------------------|
+| **Freemium** | Nhiều user, features nâng cao | Notion, Canva, Spotify | ⭐⭐⭐⭐ |
+| **Subscription** | Value liên tục | Netflix, SaaS tools | ⭐⭐⭐⭐⭐ |
+| **One-time** | Tool đơn giản, template | Icon packs, themes | ⭐⭐ |
+| **Pay-per-use** | API, credits | OpenAI, AWS | ⭐⭐⭐⭐ |
+| **Ads + Free** | Volume > quality | Games, news apps | ⭐⭐ |
+| **Affiliate** | Content platform | Blogs, review sites | ⭐⭐⭐ |
+| **Sponsorship** | Có audience | Newsletter, OSS | ⭐⭐⭐ |
+| **Consulting** | Expertise | SaaS + premium support | ⭐⭐⭐⭐ |
+
+---
+
+## 2. Pre-Launch Validation (CRITICAL — Most skip this)
+
+### Pre-sell Before Building
+> "Don't build it and hope — validate demand first."
+> Rule: Aim for 5 payments in 7 days. If not → reconsider.
+
 ```
-"🚀 Launch app này để đạt mục tiêu gì?
-  1️⃣ 💰 Kiếm tiền (bán/subscription)
-  2️⃣ 🆓 Miễn phí + kiếm gián tiếp (ads, affiliate)
-  3️⃣ 👥 Thu fan/community (open source, portfolio)
-  4️⃣ 🏆 Xây danh tiếng (CV, personal brand)
-  5️⃣ 🎯 Kết hợp nhiều mục tiêu"
+AI creates:
+- Landing page with pricing + Stripe/SePay checkout
+- "Founding member" discount (30-50% off)
+- Email to collect early interest
+
+"Sếp có muốn validate trước khi build full không?
+  1️⃣ Pre-sell (tạo landing + collect payments)
+  2️⃣ Waitlist (thu email trước)
+  3️⃣ Skip — đã validate rồi"
+```
+
+### Build in Public Strategy
+Share journey on social → attract supporters → launch to warm audience.
+```
+Content framework (AI viết sẵn):
+- Week 1: "Tôi đang build [X] vì [problem]..."
+- Week 2: "Day 7 progress: [screenshot]..."
+- Week 3: "Struggles I faced: [authenticity]..."
+- Week 4: "Launching next week! [teaser]..."
 ```
 
 ---
 
-## 2. Competitor Intelligence
+## 3. Competitor Intelligence (Deep)
 
-Research before launch — find gaps and positioning.
+### Research Framework
+1. **Direct competitors** — same problem, same audience
+2. **Indirect competitors** — same problem, different audience
+3. **Alternative solutions** — different approach to same problem
 
-### What to research
-- Competitor pricing (charge bao nhiêu?)
-- Competitor channels (marketing ở đâu?)
-- Competitor reviews (1-star = opportunity!)
-- Market gap (thiếu gì?)
+### Analysis Output
+```markdown
+## Competitive Analysis
 
-### Output: USP Statement
-```
-"App [tên] khác biệt vì [X] — trong khi đối thủ [Y]."
+### [Competitor 1]
+- Price: [X]/month
+- Rating: [X]⭐ ([N] reviews)
+- Strengths: [list]
+- Weaknesses: [from 1-star reviews]
+- Channels: [where they market]
+
+### Market Gap
+[What competitors miss]
+
+### Positioning Statement
+"For [target audience] who [need],
+[Product] is the [category] that [key benefit].
+Unlike [competitors], we [differentiator]."
 ```
 
 ---
 
-## 3. Content Creation (COPY-PASTE READY)
+## 4. Content Creation (COPY-PASTE READY, Deep)
 
-All content MUST be ready to paste. User should NOT need to edit.
+All content MUST be ready to paste. User does NOT edit.
 
 ### Content per Goal
 
-#### 💰 Revenue Content
+#### 💰 Revenue Content Formula
 ```
-Pain point → Solution → Price justification → CTA
+AIDA Framework:
+A - Attention: Hook with pain point stat
+I - Interest: "Imagine if..." scenario
+D - Desire: Show benefits + social proof
+A - Action: Clear CTA with urgency
 
-"Bạn đang mất [X] vì [problem].
-[App] giúp bạn [benefit] ngay từ [timeframe].
-Chỉ [price] — rẻ hơn [comparison]."
-```
-
-#### 👥 Community Content
-```
-Story → Tech stack → Call for contribution
-
-"Mình vừa open source [app].
-Built with [tech stack].
-Star nếu thấy hữu ích! ⭐ PR welcome!"
+Example:
+"🔥 [Stat about problem]
+Imagine if [benefit scenario].
+[Product] helps you [specific outcome].
+[Social proof: "500+ users in first week"]
+👉 [CTA with urgency: "50% off this week only"]"
 ```
 
-#### 🏆 Reputation Content
+#### 👥 Community Content Formula
 ```
-Challenge → Process → Learnings → Results
+BUILD-IN-PUBLIC Framework:
+B - Background: Why you're building this
+U - Update: What you shipped this week
+I - Insight: What you learned
+L - Link: Try it / contribute
+D - Discussion: Ask for feedback
 
-"How I built [app] in [time] with AI
-Tech: [stack]. Lessons learned: [insights]..."
+Example:
+"🛠️ Week [N] of building [Product] in public
+This week: [feature shipped]
+Learned: [insight]
+Try it: [link]
+What feature would YOU want next?"
 ```
 
-### Content per Channel (Localized)
+### Channel-Specific Content (Localized)
 
-#### 🇻🇳 Vietnam Channels
-| Channel | Format | Best Time | Content Style |
-|---------|--------|-----------|---------------|
-| Facebook | Post + image/video | 11h-13h, 19h-21h | Storytelling, emotional |
-| TikTok | Video 15-60s | 18h-22h | Hook 3s, giải pháp nhanh |
-| Zalo OA | Article | 8h-10h | Professional, hữu ích |
-| Reddit VN/forums | Long post | Anytime | Technical, chi tiết |
+#### 🇻🇳 Vietnam — Channels Deep Dive
 
-#### 🇯🇵 Japan Channels
-| Channel | Format | Best Time | Content Style |
-|---------|--------|-----------|---------------|
-| Twitter/X | Thread | 12h, 18h-22h | Concise, hashtags |
-| note.com | Article | Weekend | Detailed, polished |
-| Qiita | Technical | Anytime | Code-heavy, tutorial |
-| LINE | Message | 12h, 20h | Personal, friendly |
+**Facebook (phổ biến nhất — 70M+ users VN)**
+```
+Post format:
+- Hook: 1-2 câu kích thích (câu hỏi hoặc stat gây sốc)
+- Story: 3-5 câu storytelling personal
+- Value: 3 bullet points lợi ích
+- CTA: Link + urgency
+- Hashtags: 5-7 relevant
+Best time: 11h-13h (lunch), 19h-21h (tối)
+Tần suất: 3-5 posts/tuần
+```
 
-#### 🇨🇳 China Channels  
-| Channel | Format | Best Time | Content Style |
-|---------|--------|-----------|---------------|
-| WeChat公众号 | Article | 20h-22h | Long-form, authoritative |
-| Douyin | Video | 19h-23h | Quick demo, trending |
-| 小红书 | Image+text | 12h, 20h | Aesthetic, lifestyle |
-| 知乎 | Q&A/Article | Anytime | Expert, in-depth |
+**TikTok (GenZ + 25-35 — 50M+ users VN)**
+```
+Video Script Template (15-60s):
+[0-3s] HOOK: "Bạn có biết..." / "Tháng nào cũng..."
+[3-8s] PROBLEM: Amplify pain point
+[8-20s] SOLUTION: Demo app (screen record)
+[20-25s] PROOF: "500 người đã dùng"
+[25-30s] CTA: "Link ở bio — miễn phí!"
+Trending sounds: Dùng nhạc trending VN
+Hashtags: #fyp #xuhuong #app #congnghe
+Best time: 18h-22h
+Tần suất: 1 video/ngày (tuần launch)
+```
 
-#### 🇺🇸 Global/English Channels
-| Channel | Format | Best Time | Content Style |
-|---------|--------|-----------|---------------|
-| Product Hunt | Launch post | Tue-Thu 00:01 PST | Feature-focused |
-| Hacker News | Show HN | Tue-Thu morning | Technical, humble |
-| Reddit | Post | Varies by sub | Community-first |
-| Twitter/X | Thread | 9h-12h EST | Concise, visual |
-| Dev.to | Article | Tue-Thu | Tutorial style |
+**Zalo OA (professional — 75M+ users VN)**
+```
+Dùng cho: B2B, professional tools
+Format: Article dài, hữu ích
+Tần suất: 1-2 bài/tuần
+Best for: Nurture existing users
+```
+
+#### 🇯🇵 Japan — Channels Deep Dive
+
+**Twitter/X (tech community — 60M+ users JP)**
+```
+Thread format (5-7 tweets):
+Tweet 1: [Hook + emoji] "〇〇で困っていませんか？"
+Tweet 2-5: Solution details (1 point per tweet)
+Tweet 6: Demo screenshot/video
+Tweet 7: CTA + link
+Hashtags: #開発 #プログラミング #個人開発
+Best time: 12h, 18h-22h JST
+```
+
+**note.com (long-form — JP Medium alternative)**
+```
+Article format: Detailed, polished, story-driven
+Tone: 丁寧語 (polite), personal story
+Length: 2000-4000 characters
+Best for: Building authority, SEO
+```
+
+**Qiita (developer community — JP Stack Overflow)**
+```
+Technical tutorial format
+Must be: High quality, code examples, reproducible
+Best for: Developer tools, OSS projects
+```
+
+#### 🇨🇳 China — Channels Deep Dive
+
+**WeChat 公众号 (official account — 1.3B users)**
+```
+Article format: Long-form (2000+ chars)
+Tone: Authoritative, data-driven
+Visuals: Heavy use of images, infographics
+Best time: 20h-22h
+Promotion: Share to WeChat groups, moments
+```
+
+**小红书 Xiaohongshu (lifestyle — 300M+ users)**
+```
+Format: Image carousel (6-9 images) + short text
+Style: Aesthetic, lifestyle-focused
+Best for: Consumer apps, design-heavy products
+Hashtags: #科技 #好物推荐 #APP推荐
+```
+
+#### 🌍 Global — Channels Deep Dive
+
+**Product Hunt (CRITICAL for global launch)**
+```
+PREPARATION (2-4 weeks before):
+1. Research hunters — reach out to influential ones
+2. Build PH community presence (comment, upvote daily)
+3. Prepare assets:
+   - Tagline: max 60 chars, value-driven, no buzzwords
+   - Description: 3 paragraphs (problem, solution, differentiator)
+   - Images: 5 high-quality screenshots (1200x900px)
+   - Video: 45-90s demo (optional but recommended)
+   - Maker comment: Personal story + vision + "ask me anything"
+
+LAUNCH DAY:
+- Time: 12:01 AM Pacific Time
+- Day: Tuesday-Thursday (higher traffic)
+- First hour: Reach out to supporters (NOT "please upvote")
+  → "We just launched on PH, would love your feedback!"
+- All day: Respond to EVERY comment within 15 min
+- Share milestones: "Top 5!"  "200 upvotes!"
+
+POST-LAUNCH:
+- Thank everyone publicly
+- Badge on website: "Product of the Day"
+- Repurpose content for other channels
+```
+
+**Hacker News (Show HN)**
+```
+Title: "Show HN: [Product] – [what it does in plain terms]"
+Rules:
+- Be humble, ask for feedback
+- NO marketing speak
+- Technical details welcome
+- Respond to every comment
+- Post on weekday mornings EST
+```
+
+**Reddit**
+```
+Subreddit strategy:
+- r/sideproject (always OK)
+- r/[relevant niche] (check rules first)
+- r/webdev, r/startups, r/indiehackers (if relevant)
+Format: Genuine story, ask for feedback, NOT salesy
+Timing: weekday mornings, vary by subreddit
+```
+
+**Dev.to / Hashnode (developer blogs)**
+```
+Format: "How I built [X] — tech stack, lessons, results"
+Include: Code snippets, architecture decisions, metrics
+Cross-post: Same article on both platforms for reach
+```
 
 ---
 
-## 4. Landing Page Patterns
+## 5. Landing Page (Proven High-Converting Structure)
 
-AI creates landing page code directly.
+Based on 2025 conversion optimization research.
 
-### High-Conversion Structure
-1. **Hero** — Headline + subline + CTA + screenshot
-2. **Problem** — 3 pain points (user relates)
-3. **Solution** — 3 features (benefit-focused, not feature-focused)
-4. **Social Proof** — Testimonials/stats/logos
-5. **Pricing** — Clear tiers (if paid)
-6. **FAQ** — Top 5 objections answered
-7. **Final CTA** — Repeat main CTA
-8. **Footer** — Legal, social links
+### Structure (MUST FOLLOW)
+```
+1. HERO (above the fold)
+   ├── Headline: 1 clear benefit (not feature)
+   ├── Subheadline: How it works in 1 sentence
+   ├── CTA button: Action verb + benefit ("Save 2 hours/day")
+   ├── Hero image/video: Product in action
+   └── Trust signal: "500+ users" or partner logos
 
-### CTA per Goal
-| Goal | CTA |
-|------|-----|
-| 💰 Revenue | "Bắt đầu dùng thử miễn phí" |
-| 🆓 Free | "Tải miễn phí ngay" |
-| 👥 Community | "⭐ Star on GitHub" |
-| 🏆 Reputation | "Xem demo" |
+2. PROBLEM SECTION
+   ├── 3 pain points (user relates emotionally)
+   └── "Sound familiar?" transition
+
+3. SOLUTION SECTION (3 features max)
+   ├── Feature 1: [Benefit, not feature name]
+   ├── Feature 2: [Benefit, not feature name]
+   └── Feature 3: [Benefit, not feature name]
+
+4. SOCIAL PROOF
+   ├── 3 testimonials (photo + name + role)
+   ├── Metrics: "X users", "Y% improvement"
+   └── Trust badges / media mentions
+
+5. PRICING (if paid)
+   ├── 2-3 tiers max
+   ├── Highlight recommended tier
+   ├── Annual discount visible
+   └── "Free trial" or "Money-back guarantee"
+
+6. FAQ (top 5 objections)
+   └── Address: price, security, migration, support, cancellation
+
+7. FINAL CTA (repeat hero CTA)
+   └── Urgency element if appropriate
+
+8. FOOTER
+   └── Legal, privacy, social links
+```
+
+### Critical Rules
+- Load time < 3 seconds
+- Mobile-first responsive
+- Single CTA (no competing links)
+- No navigation menu (landing page ≠ website)
+- Social proof above the fold if possible
 
 ---
 
-## 5. Payment Setup (Localized, Updated 2026)
+## 6. Payment Setup (Localized, Updated 2026)
 
-### 🇻🇳 Vietnam
+### Strategy by Goal
+```
+💰 Revenue + VN indie → SePay (free, auto-verify)
+💰 Revenue + VN consumer → MoMo (phổ biến nhất)
+💰 Revenue + Global SaaS → Stripe (best API)
+💰 Revenue + Global indie → LemonSqueezy (handles tax)
+🆓 Free → Donate: Buy Me A Coffee, Ko-fi
+👥 Community → GitHub Sponsors, Open Collective
+🎯 Hybrid → Freemium: Free tier + paid upgrade
+```
+
+### 🇻🇳 Vietnam Payment (Updated 2026)
+| Provider | Type | Fee | Integration | Best For |
+|----------|------|-----|-------------|----------|
+| **SePay** | Bank transfer auto | Free | REST API, webhook | Indie dev, startup. Auto-verify bank transfers |
+| **MoMo** | E-wallet | 1-2% | SDK, QR | Consumer app, wide reach |
+| **VNPay** | Gateway | 1.5-2% | SDK | Enterprise, multi-bank |
+| **ZaloPay** | E-wallet | 1-2% | API | Zalo ecosystem users |
+| **Stripe VN** | Card | 2.9% | Best API | SaaS, international cards |
+
+### 🇯🇵 Japan Payment
 | Provider | Type | Fee | Best For |
 |----------|------|-----|----------|
-| **SePay** | Bank transfer auto | Free | Indie dev, startup |
-| **MoMo** | E-wallet | 1-2% | Consumer app |
-| **VNPay** | Gateway | 1.5-2% | Enterprise |
-| **ZaloPay** | E-wallet | 1-2% | Zalo ecosystem |
-| **Stripe VN** | Card gateway | 2.9% | SaaS global |
-
-### 🇯🇵 Japan
-| Provider | Type | Fee | Best For |
-|----------|------|-----|----------|
-| **PayPay** | QR | 1.6-1.98% | Consumer |
-| **Stripe JP** | Card | 3.6% | SaaS |
-| **Konbini** | Cash | ¥130-300/tx | Users who prefer cash |
+| **PayPay** | QR | 1.6-1.98% | Most popular, 60M+ users |
+| **Stripe JP** | Card | 3.6% | SaaS, recurring |
+| **Konbini** | Cash at store | ¥130-300/tx | Users preferring cash |
 | **LINE Pay** | E-wallet | 2.45% | LINE ecosystem |
+| **Paidy** | BNPL | % | Young users |
 
-### 🇨🇳 China
+### 🇨🇳 China Payment
 | Provider | Type | Fee | Best For |
 |----------|------|-----|----------|
-| **WeChat Pay** | Super app | 0.6% | In-app |
-| **Alipay** | E-wallet | 0.6% | Cross-border |
+| **WeChat Pay** | Super app | 0.6% | #1 in-app payment |
+| **Alipay** | E-wallet | 0.6% | Cross-border, B2B |
+| **UnionPay** | Card | varies | Enterprise |
 
-### 🌍 Global
+### 🌍 Global Payment
 | Provider | Type | Fee | Best For |
 |----------|------|-----|----------|
-| **Stripe** | Card gateway | 2.9%+30¢ | #1 for devs |
-| **Paddle** | MoR | 5%+50¢ | Auto tax handling |
-| **LemonSqueezy** | MoR | 5%+50¢ | Indie SaaS |
-| **PayPal** | E-wallet | 2.9%+30¢ | US/EU users |
-
-### Smart Default Rule
-```
-If target == "VN" && goal == "indie" → recommend SePay
-If target == "VN" && goal == "consumer" → recommend MoMo
-If target == "global" && goal == "SaaS" → recommend Stripe
-If target == "global" && goal == "indie" → recommend LemonSqueezy
-```
+| **Stripe** | Gateway | 2.9%+30¢ | #1 for devs, best API |
+| **Paddle** | MoR | 5%+50¢ | Auto tax for 200+ countries |
+| **LemonSqueezy** | MoR | 5%+50¢ | Indie SaaS, simple |
+| **Gumroad** | Marketplace | 10% | Digital products, creators |
+| **PayPal** | E-wallet | 2.9%+30¢ | US/EU consumers |
 
 ---
 
-## 6. Launch Calendar (30-Day Template)
+## 7. Launch Calendar (30-Day, Detailed)
 
-### Pre-Launch (Day -7 to -1)
-- Day -7: Teaser post on main channel
-- Day -5: Behind-the-scenes (build story)
-- Day -3: Sneak peek (screenshot/video)
-- Day -1: "Launching tomorrow!" hype post
+### Pre-Launch Sprint (Day -14 to -1)
+```
+Day -14: Start "build in public" posts
+Day -10: Set up analytics (Plausible/GA)
+Day -7:  Teaser post — "Something big coming..."
+Day -5:  Behind-the-scenes — "Here's what I'm building..."
+Day -3:  Sneak peek — screenshot/video demo
+Day -2:  Final testing + prepare all content
+Day -1:  "Launching TOMORROW!" — build hype
+         → Schedule all posts for D-day
+         → Email waitlist "Get ready!"
+```
 
 ### Launch Week (Day 1-7)
-- Day 1: LAUNCH — post all channels simultaneously
-- Day 2: Share metrics ("100 users in 24h!")
-- Day 3: Thank you post
-- Day 5: First user testimonial
-- Day 7: Week 1 recap
+```
+Day 1 (LAUNCH DAY):
+  00:01 — Submit Product Hunt (if global)
+  08:00 — Post all channels simultaneously
+  08:00-23:00 — Respond to EVERY comment
+  12:00 — Share milestone "100 users!"
+  20:00 — Thank you post
 
-### Growth Phase (Day 8-30)
-- Day 10: Feature update post
-- Day 14: Tutorial/how-to content
-- Day 21: Community highlight
-- Day 30: Month 1 milestone celebration
+Day 2: Share first metrics + user reactions
+Day 3: Repost best user feedback
+Day 4: "Tips & tricks" content
+Day 5: First testimonial spotlight
+Day 7: Week 1 recap + metrics
+```
 
----
-
-## 7. Post-Launch Retention
-
-### Onboarding
-- AI creates first-time user flow
-- Welcome email template
-- Quick-start guide
-
-### Re-engagement
-- Day 3: "How's it going?" email
-- Day 7: "Feature you missed" notification
-- Day 14: "We improved X based on feedback"
-
-### Feedback Collection
-- In-app feedback form template
-- NPS survey template
-- User interview questions
+### Growth Sprint (Day 8-30)
+```
+Day 8:  Feature request collection
+Day 10: First feature update (ship fast!)
+Day 14: Tutorial / how-to content
+Day 17: User spotlight / case study
+Day 21: Community event (AMA, live demo)
+Day 25: Second feature update
+Day 28: "Month 1" retrospective
+Day 30: Celebrate milestone + plan Month 2
+```
 
 ---
 
-## 8. Growth Metrics Dashboard
+## 8. Viral Loop Design
 
-### What to Track per Goal
-| Goal | Primary Metric | Secondary |
-|------|---------------|-----------|
-| 💰 Revenue | MRR, ARR | Churn, LTV, CAC |
-| 🆓 Free | DAU, MAU | Retention D1/D7/D30 |
-| 👥 Community | Stars, contributors | PRs, issues, forks |
-| 🏆 Reputation | Page views, shares | Inbound leads |
+### Framework
+```
+User gets value → Shares naturally → Friend sees → Friend signs up → LOOP
 
-### Analytics Setup
-- Recommend: Plausible (privacy-friendly) or Google Analytics
-- AI creates tracking code + dashboard template
+Types:
+1. INHERENT: Product requires sharing (Zoom, WhatsApp)
+2. INCENTIVIZED: Rewards for sharing (Dropbox, Uber)
+3. SOCIAL: User showcases results (Spotify Wrapped)
+4. EMBEDDED: "Powered by [Product]" (Typeform, Calendly)
+```
+
+### Double-Sided Rewards (Proven)
+```
+Both referrer AND friend get something:
+- Dropbox: 500MB free storage → 3900% growth in 15 months
+- Uber: Free ride for both → global expansion
+- PayPal: $10 cash for both → viral early growth
+
+Template for AI:
+"Mời bạn bè → Bạn được [X], bạn bè được [Y]"
+```
+
+### Gamification
+```
+Tiers:
+🥉 3 referrals → Badge "Early Supporter"
+🥈 10 referrals → 1 month Premium free
+🥇 25 referrals → Lifetime free + "Ambassador" title
+
+Leaderboard: Top referrers visible (monthly reset)
+```
+
+---
+
+## 9. Post-Launch Growth (RETENTION FIRST)
+
+### Product-Market Fit Score
+```
+Sean Ellis Test: Survey users
+"How would you feel if you could no longer use [Product]?"
+  A) Very disappointed → TARGET: 40%+
+  B) Somewhat disappointed
+  C) Not disappointed
+
+Score:
+> 40% "very disappointed" = PMF achieved ✅
+  20-40% = Getting there, iterate
+  < 20% = Pivot or major changes needed ❌
+```
+
+### Key Metrics per Stage
+
+| Stage | Primary Metric | Target | Action if Below |
+|-------|---------------|--------|-----------------|
+| 🌱 0-100 users | Retention D7 | >25% | Fix onboarding |
+| 🌿 100-1K users | NPS | >30 | Interview users |
+| 🌳 1K-10K users | MRR growth | >10%/mo | Optimize funnel |
+| 🔥 10K+ users | NRR | >100% | Upsell/expand |
+
+### Retention Benchmarks (SaaS 2025)
+| Metric | Good | Great | Elite |
+|--------|------|-------|-------|
+| Monthly churn | <5% | <3% | <1% |
+| NRR | >100% | >110% | >120% |
+| D1 retention | >40% | >60% | >80% |
+| D7 retention | >20% | >35% | >50% |
+| D30 retention | >10% | >20% | >30% |
+
+### Onboarding (TTFV — Time to First Value)
+```
+Goal: User experiences core value within FIRST SESSION
+- Reduce steps to "aha moment"
+- Target: < 2 minutes to value
+- Remove all friction (no credit card, no long signup)
+
+Checklist:
+☐ Welcome screen (1 sentence: what to do first)
+☐ Guided first action (interactive, not text)
+☐ First win celebration (confetti, message)
+☐ Second action suggestion
+```
+
+---
+
+## 10. Success Milestones (AI celebrates + guides)
+
+```
+🌱 0-10 users:
+   "Tập trung làm 10 user THẬT SỰ yêu product"
+   Action: Interview mỗi user, fix mọi feedback
+
+🌿 10-100 users:
+   "Tìm 1 kênh hiệu quả nhất, double down"
+   Action: Test 3 channels, pick winner
+
+🌳 100-1K users:
+   "Tối ưu onboarding, giảm churn"
+   Action: A/B test, optimize TTFV
+
+🔥 1K-10K users:
+   "Scale kênh marketing + thêm revenue stream"
+   Action: Hire/automate, add pricing tiers
+
+💎 10K+ users:
+   "Bạn có BUSINESS thật sự. Tối ưu unit economics"
+   Action: Focus LTV/CAC ratio > 3:1
+```
