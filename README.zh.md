@@ -75,20 +75,12 @@ AI每隔几轮自我检查：*"我还在解决原来的请求吗？"*
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-# 中文
 iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex -Language zh
-
-# 英语（默认）
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
 ```
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-# 中文
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang zh
-
-# 英语（默认）
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
 ```
 
 > **💡 提示：** 随时用 `/config language [en|vi|ja|zh]` 更改语言

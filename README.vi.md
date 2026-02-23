@@ -75,20 +75,12 @@ Không cần biết code cao siêu. Mở terminal lên và paste câu **Thần C
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-# Tiếng Việt
 iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex -Language vi
-
-# Tiếng Anh (mặc định)
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
 ```
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-# Tiếng Việt
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang vi
-
-# Tiếng Anh (mặc định)
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
 ```
 
 > **💡 Mẹo:** Đổi ngôn ngữ bất cứ lúc nào với `/config language [en|vi|ja|zh]`

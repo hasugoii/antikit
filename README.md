@@ -75,20 +75,12 @@ You don't need to be a tech wizard. Just open your terminal and paste this **Mag
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-# English (default)
 iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
-
-# Other languages
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex -Language vi
 ```
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-# English (default)
 curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
-
-# Vietnamese / Japanese / Chinese
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang vi
 ```
 
 > **💡 Tip:** Change language anytime with `/config language [en|vi|ja|zh]`
