@@ -4,6 +4,23 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.9.4] - 2026-02-23
+
+### 📝 README Overhaul — 6 Pillars, Multi-Agent Showcase
+
+Complete rewrite of all 4 READMEs (en, vi, ja, zh) to showcase v1.9.x features and make users want to install immediately.
+
+### Changed
+- **Version badge:** 1.6.0 → 1.9.4
+- **4 Pillars → 6 Pillars:** Added Multi-Agent Collaboration, Evidence Discipline, Context Integrity
+- **Skills count:** 44 → 45
+- **Identity format:** Updated from `🆔 Agent` to `🤖 PRIMARY + SUPPORT`
+- **Pro section:** Added Multi-Agent Protocol, Evidence Gates
+- **What's Inside:** Added Multi-Agent Protocol and Evidence Discipline lines
+- **ARCHITECTURE.md:** Synced skill count, agent skills, added `evidence-discipline` entry
+
+---
+
 ## [1.9.3] - 2026-02-23
 
 ### 🎯 Multi-Agent Format Clarification — Flexible SUPPORT Count
