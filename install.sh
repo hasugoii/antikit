@@ -64,7 +64,7 @@ SKILLS=(
 
 # Scripts (7 total)
 SCRIPTS=(
-    "auto_preview.py" "checklist.py" "generate-index.sh"
+    "auto_preview.py" "checklist.py"
     "session_manager.py" "verify_all.py"
 )
 
@@ -325,12 +325,42 @@ for agent_file in "$AGENTS_DIR"/*.md; do
 done
 echo -e "${GREEN}✅ Agent Index generated${NC}"
 
-# 8.6 MULTI-AGENT PROTOCOL (language-agnostic, appended to all languages)
+# 8.6 Generate SKILL INDEX from downloaded skills
+echo -e "${CYAN}⏳ Generating Skill Index...${NC}"
+SKILL_INDEX="| Skill | Description |
+|-------|-------------|"
+
+for skill_dir in "$SKILLS_DIR"/*/; do
+    skill_file="$skill_dir/SKILL.md"
+    [ -f "$skill_file" ] || continue
+    s_name="" s_desc=""
+    in_fm=0
+    while IFS= read -r line; do
+        case "$line" in
+            "---") [ $in_fm -eq 0 ] && in_fm=1 || break ;;
+            *) if [ $in_fm -eq 1 ]; then
+                key="${line%%:*}"; val="${line#*: }"
+                case "$key" in name) s_name="$val";; description) s_desc="$val";; esac
+            fi ;;
+        esac
+    done < "$skill_file"
+    # Truncate long descriptions
+    [ ${#s_desc} -gt 100 ] && s_desc="${s_desc:0:100}..."
+    [ -n "$s_name" ] && SKILL_INDEX="$SKILL_INDEX
+| $s_name | $s_desc |"
+done
+echo -e "${GREEN}✅ Skill Index generated${NC}"
+
+# 8.7 MULTI-AGENT PROTOCOL (language-agnostic, appended to all languages)
 MULTI_AGENT_PROTOCOL='
 
 ## AGENT INDEX (Auto-Generated)
 
 '"$AGENT_INDEX"'
+
+## SKILL INDEX (Auto-Generated)
+
+'"$SKILL_INDEX"'
 
 ## MULTI-AGENT TASK PROTOCOL
 

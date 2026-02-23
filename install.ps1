@@ -66,7 +66,7 @@ $Skills = @(
 
 # Scripts (7 total)
 $Scripts = @(
-    "auto_preview.py", "checklist.py", "generate-index.sh",
+    "auto_preview.py", "checklist.py",
     "session_manager.py", "verify_all.py"
 )
 
@@ -340,12 +340,44 @@ foreach ($agentFile in Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyCont
 $AgentIndex = $AgentIndexRows -join "`n"
 Write-Host "[OK] Agent Index generated" -ForegroundColor Green
 
-# 8.6 MULTI-AGENT PROTOCOL (language-agnostic)
+# 8.6 Generate SKILL INDEX from downloaded skills
+Write-Host "[...] Generating Skill Index..." -ForegroundColor Cyan
+$SkillIndexRows = @()
+$SkillIndexRows += "| Skill | Description |"
+$SkillIndexRows += "|-------|-------------|"
+
+foreach ($skill in $Skills) {
+    $skillFile = "$SkillsDir\$skill\SKILL.md"
+    if (-not (Test-Path $skillFile)) { continue }
+    $sName = ""; $sDesc = ""
+    $inFm = $false
+    foreach ($line in (Get-Content $skillFile)) {
+        if ($line -eq "---") {
+            if (-not $inFm) { $inFm = $true; continue } else { break }
+        }
+        if ($inFm -and $line -match '^(\w+):\s*(.+)$') {
+            switch ($Matches[1]) {
+                'name' { $sName = $Matches[2] }
+                'description' { $sDesc = $Matches[2] }
+            }
+        }
+    }
+    if ($sDesc.Length -gt 100) { $sDesc = $sDesc.Substring(0, 100) + "..." }
+    if ($sName) { $SkillIndexRows += "| $sName | $sDesc |" }
+}
+$SkillIndex = $SkillIndexRows -join "`n"
+Write-Host "[OK] Skill Index generated" -ForegroundColor Green
+
+# 8.7 MULTI-AGENT PROTOCOL (language-agnostic)
 $MultiAgentProtocol = @"
 
 ## AGENT INDEX (Auto-Generated)
 
 $AgentIndex
+
+## SKILL INDEX (Auto-Generated)
+
+$SkillIndex
 
 ## MULTI-AGENT TASK PROTOCOL
 
