@@ -52,12 +52,12 @@ AI:  → Chiến lược giữ chân khách
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang vi
 ```
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language vi
 ```
 
 > 💡 **Ngôn ngữ?** Đổi bất cứ lúc nào: `/config language vi`
@@ -243,7 +243,7 @@ Community skills từ [coreyhaines31/marketingskills](https://github.com/coreyha
 **Đừng code mù. Hãy build business.** 🚀
 
 ```
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang vi
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)

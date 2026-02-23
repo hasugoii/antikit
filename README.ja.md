@@ -52,12 +52,12 @@ AI:    → 解約防止戦略
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang ja
 ```
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language ja
 ```
 
 > 💡 **言語変更:** いつでも `/config language ja`
@@ -219,7 +219,7 @@ AntiKit:
 **盲目にコードを書くのをやめる。ビジネスを構築しよう。** 🚀
 
 ```
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang ja
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)

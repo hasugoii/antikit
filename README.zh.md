@@ -52,12 +52,12 @@ AI: → 用户留存策略
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang zh
 ```
 
 ### 🪟 Windows (PowerShell)
 ```powershell
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language zh
 ```
 
 > 💡 **切换语言：** 随时 `/config language zh`
@@ -219,7 +219,7 @@ AntiKit:
 **别盲目写代码。开始构建商业。** 🚀
 
 ```
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang zh
 ```
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
