@@ -1,63 +1,63 @@
 ---
-description: Add or update features in existing application. Used for iterative development.
+description: 既存アプリケーションに機能を追加・更新。反復開発に使用。
 ---
 
-# /enhance - Update Application
+# /enhance - アプリケーション更新
 
 $ARGUMENTS
 
 ---
 
-## Task
+## タスク
 
-This command adds features or makes updates to existing application.
+このコマンドは既存アプリケーションに機能を追加または更新します。
 
-### Steps:
+### ステップ:
 
-1. **Understand Current State**
-   - Load project state with `python .agent/scripts/session_manager.py info`
-   - Understand existing features, tech stack
+1. **現状把握**
+   - `python .agent/scripts/session_manager.py info` でプロジェクト状態を読み込む
+   - 既存機能、技術スタックを理解する
 
-2. **Plan Changes**
-   - Determine what will be added/changed
-   - Detect affected files
-   - Check dependencies
+2. **変更計画**
+   - 何を追加/変更するか決定
+   - 影響を受けるファイルを検出
+   - 依存関係を確認
 
-3. **Present Plan to User** (for major changes)
+3. **ユーザーに計画を提示**（大きな変更の場合）
    ```
-   "To add admin panel:
-   - I'll create 15 new files
-   - Update 8 files
-   - Takes ~10 minutes
-   
-   Should I start?"
+   「管理パネルを追加するには:
+   - 15個の新規ファイルを作成
+   - 8個のファイルを更新
+   - 約10分かかります
+
+   始めてよろしいですか？」
    ```
 
-4. **Apply**
-   - Call relevant agents
-   - Make changes
-   - Test
+4. **適用**
+   - 関連エージェントを呼び出す
+   - 変更を実施
+   - テスト
 
-5. **Update Preview**
-   - Hot reload or restart
+5. **プレビュー更新**
+   - ホットリロードまたは再起動
 
 ---
 
-## Usage Examples
+## 使用例
 
 ```
-/enhance add dark mode
-/enhance build admin panel
-/enhance integrate payment system
-/enhance add search feature
-/enhance edit profile page
-/enhance make responsive
+/enhance ダークモードを追加
+/enhance 管理パネルを構築
+/enhance 決済システムを統合
+/enhance 検索機能を追加
+/enhance プロフィールページを編集
+/enhance レスポンシブ対応
 ```
 
 ---
 
-## Caution
+## 注意事項
 
-- Get approval for major changes
-- Warn on conflicting requests (e.g., "use Firebase" when project uses PostgreSQL)
-- Commit each change with git
+- 大きな変更には承認を得る
+- 競合するリクエストは警告する（例: PostgreSQL使用中に「Firebaseを使って」）
+- 各変更をgitでコミット

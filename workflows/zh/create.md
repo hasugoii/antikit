@@ -1,59 +1,59 @@
 ---
-description: Create new application command. Triggers App Builder skill and starts interactive dialogue with user.
+description: 创建新应用程序。触发App Builder技能并与用户开始交互对话。
 ---
 
-# /create - Create Application
+# /create - 创建应用
 
 $ARGUMENTS
 
 ---
 
-## Task
+## 任务
 
-This command starts a new application creation process.
+此命令启动新的应用程序创建流程。
 
-### Steps:
+### 步骤:
 
-1. **Request Analysis**
-   - Understand what the user wants
-   - If information is missing, use `conversation-manager` skill to ask
+1. **需求分析**
+   - 理解用户需求
+   - 如信息不足，提问补充
 
-2. **Project Planning**
-   - Use `project-planner` agent for task breakdown
-   - Determine tech stack
-   - Plan file structure
-   - Create plan file and proceed to building
+2. **项目规划**
+   - 使用 `project-planner` 代理进行任务分解
+   - 确定技术栈
+   - 规划文件结构
+   - 创建计划文件并开始构建
 
-3. **Application Building (After Approval)**
-   - Orchestrate with `app-builder` skill
-   - Coordinate expert agents:
-     - `database-architect` → Schema
+3. **应用构建（批准后）**
+   - 使用 `app-builder` 技能进行编排
+   - 协调专家代理:
+     - `database-architect` → 数据库设计
      - `backend-specialist` → API
      - `frontend-specialist` → UI
 
-4. **Preview**
-   - Start with `auto_preview.py` when complete
-   - Present URL to user
+4. **预览**
+   - 完成后使用 `auto_preview.py` 启动
+   - 向用户展示URL
 
 ---
 
-## Usage Examples
+## 使用示例
 
 ```
-/create blog site
-/create e-commerce app with product listing and cart
-/create todo app
-/create Instagram clone
-/create crm system with customer management
+/create 博客网站
+/create 带商品列表和购物车的电商应用
+/create TODO应用
+/create Instagram克隆
+/create 客户管理CRM系统
 ```
 
 ---
 
-## Before Starting
+## 开始前
 
-If request is unclear, ask these questions:
-- What type of application?
-- What are the basic features?
-- Who will use it?
+如果请求不明确，询问以下问题:
+- 什么类型的应用？
+- 基本功能是什么？
+- 谁会使用？
 
-Use defaults, add details later.
+使用默认值，后续添加细节。

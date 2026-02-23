@@ -1,86 +1,86 @@
 ---
-description: Display agent and project status. Progress tracking and status board.
+description: エージェントとプロジェクトの状態を表示。進捗追跡とステータスボード。
 ---
 
-# /status - Show Status
+# /status - ステータス表示
 
 $ARGUMENTS
 
 ---
 
-## Task
+## タスク
 
-Show current project and agent status.
+現在のプロジェクトとエージェントの状態を表示。
 
-### What It Shows
+### 表示内容
 
-1. **Project Info**
-   - Project name and path
-   - Tech stack
-   - Current features
+1. **プロジェクト情報**
+   - プロジェクト名とパス
+   - 技術スタック
+   - 現在の機能
 
-2. **Agent Status Board**
-   - Which agents are running
-   - Which tasks are completed
-   - Pending work
+2. **エージェントステータスボード**
+   - 実行中のエージェント
+   - 完了したタスク
+   - 保留中の作業
 
-3. **File Statistics**
-   - Files created count
-   - Files modified count
+3. **ファイル統計**
+   - 作成されたファイル数
+   - 変更されたファイル数
 
-4. **Preview Status**
-   - Is server running
+4. **プレビュー状態**
+   - サーバーが稼働中か
    - URL
-   - Health check
+   - ヘルスチェック
 
 ---
 
-## Example Output
+## 出力例
 
 ```
-=== Project Status ===
+=== プロジェクトステータス ===
 
-📁 Project: my-ecommerce
-📂 Path: C:/projects/my-ecommerce
-🏷️ Type: nextjs-ecommerce
-📊 Status: active
+📁 プロジェクト: my-ecommerce
+📂 パス: /projects/my-ecommerce
+🏷️ タイプ: nextjs-ecommerce
+📊 ステータス: アクティブ
 
-🔧 Tech Stack:
-   Framework: next.js
-   Database: postgresql
-   Auth: clerk
-   Payment: stripe
+🔧 技術スタック:
+   フレームワーク: next.js
+   データベース: postgresql
+   認証: clerk
+   決済: stripe
 
-✅ Features (5):
+✅ 機能 (5):
    • product-listing
    • cart
    • checkout
    • user-auth
    • order-history
 
-⏳ Pending (2):
+⏳ 保留中 (2):
    • admin-panel
    • email-notifications
 
-📄 Files: 73 created, 12 modified
+📄 ファイル: 73 作成, 12 変更
 
-=== Agent Status ===
+=== エージェントステータス ===
 
-✅ database-architect → Completed
-✅ backend-specialist → Completed
-🔄 frontend-specialist → Dashboard components (60%)
-⏳ test-engineer → Waiting
+✅ database-architect → 完了
+✅ backend-specialist → 完了
+🔄 frontend-specialist → ダッシュボードコンポーネント (60%)
+⏳ test-engineer → 待機中
 
-=== Preview ===
+=== プレビュー ===
 
 🌐 URL: http://localhost:3000
-💚 Health: OK
+💚 ヘルス: OK
 ```
 
 ---
 
-## Technical
+## 技術情報
 
-Status uses these scripts:
+ステータスは以下のスクリプトを使用:
 - `python .agent/scripts/session_manager.py status`
 - `python .agent/scripts/auto_preview.py status`

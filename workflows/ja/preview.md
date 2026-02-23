@@ -1,81 +1,80 @@
 ---
-description: Preview server start, stop, and status check. Local development server management.
+description: プレビューサーバーの起動、停止、状態確認。ローカル開発サーバー管理。
 ---
 
-# /preview - Preview Management
+# /preview - プレビュー管理
 
 $ARGUMENTS
 
 ---
 
-## Task
+## タスク
 
-Manage preview server: start, stop, status check.
+プレビューサーバーの管理: 起動、停止、状態確認。
 
-### Commands
+### コマンド
 
 ```
-/preview           - Show current status
-/preview start     - Start server
-/preview stop      - Stop server
-/preview restart   - Restart
-/preview check     - Health check
+/preview           - 現在の状態を表示
+/preview start     - サーバー起動
+/preview stop      - サーバー停止
+/preview restart   - 再起動
+/preview check     - ヘルスチェック
 ```
 
 ---
 
-## Usage Examples
+## 使用例
 
-### Start Server
+### サーバー起動
 ```
 /preview start
 
-Response:
-🚀 Starting preview...
-   Port: 3000
-   Type: Next.js
+応答:
+🚀 プレビューを起動中...
+   ポート: 3000
+   タイプ: Next.js
 
-✅ Preview ready!
+✅ プレビュー準備完了!
    URL: http://localhost:3000
 ```
 
-### Status Check
+### 状態確認
 ```
 /preview
 
-Response:
-=== Preview Status ===
+応答:
+=== プレビュー状態 ===
 
 🌐 URL: http://localhost:3000
-📁 Project: C:/projects/my-app
-🏷️ Type: nextjs
-💚 Health: OK
+📁 プロジェクト: /projects/my-app
+🏷️ タイプ: nextjs
+💚 ヘルス: OK
 ```
 
-### Port Conflict
+### ポート競合
 ```
 /preview start
 
-Response:
-⚠️ Port 3000 is in use.
+応答:
+⚠️ ポート3000は使用中です。
 
-Options:
-1. Start on port 3001
-2. Close app on 3000
-3. Specify different port
+オプション:
+1. ポート3001で起動
+2. ポート3000のアプリを閉じる
+3. 別のポートを指定
 
-Which one? (default: 1)
+どれにしますか？ (デフォルト: 1)
 ```
 
 ---
 
-## Technical
+## 技術情報
 
-Auto preview uses `auto_preview.py` script:
+自動プレビューは `auto_preview.py` スクリプトを使用:
 
 ```bash
 python .agent/scripts/auto_preview.py start [port]
 python .agent/scripts/auto_preview.py stop
 python .agent/scripts/auto_preview.py status
 ```
-

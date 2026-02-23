@@ -1,81 +1,80 @@
 ---
-description: Preview server start, stop, and status check. Local development server management.
+description: 预览服务器启动、停止和状态检查。本地开发服务器管理。
 ---
 
-# /preview - Preview Management
+# /preview - 预览管理
 
 $ARGUMENTS
 
 ---
 
-## Task
+## 任务
 
-Manage preview server: start, stop, status check.
+管理预览服务器: 启动、停止、状态检查。
 
-### Commands
+### 命令
 
 ```
-/preview           - Show current status
-/preview start     - Start server
-/preview stop      - Stop server
-/preview restart   - Restart
-/preview check     - Health check
+/preview           - 显示当前状态
+/preview start     - 启动服务器
+/preview stop      - 停止服务器
+/preview restart   - 重启
+/preview check     - 健康检查
 ```
 
 ---
 
-## Usage Examples
+## 使用示例
 
-### Start Server
+### 启动服务器
 ```
 /preview start
 
-Response:
-🚀 Starting preview...
-   Port: 3000
-   Type: Next.js
+响应:
+🚀 正在启动预览...
+   端口: 3000
+   类型: Next.js
 
-✅ Preview ready!
+✅ 预览已就绪!
    URL: http://localhost:3000
 ```
 
-### Status Check
+### 状态检查
 ```
 /preview
 
-Response:
-=== Preview Status ===
+响应:
+=== 预览状态 ===
 
 🌐 URL: http://localhost:3000
-📁 Project: C:/projects/my-app
-🏷️ Type: nextjs
-💚 Health: OK
+📁 项目: /projects/my-app
+🏷️ 类型: nextjs
+💚 健康: OK
 ```
 
-### Port Conflict
+### 端口冲突
 ```
 /preview start
 
-Response:
-⚠️ Port 3000 is in use.
+响应:
+⚠️ 端口3000已被占用。
 
-Options:
-1. Start on port 3001
-2. Close app on 3000
-3. Specify different port
+选项:
+1. 在端口3001上启动
+2. 关闭占用3000端口的应用
+3. 指定其他端口
 
-Which one? (default: 1)
+选择哪个？ (默认: 1)
 ```
 
 ---
 
-## Technical
+## 技术信息
 
-Auto preview uses `auto_preview.py` script:
+自动预览使用 `auto_preview.py` 脚本:
 
 ```bash
 python .agent/scripts/auto_preview.py start [port]
 python .agent/scripts/auto_preview.py stop
 python .agent/scripts/auto_preview.py status
 ```
-

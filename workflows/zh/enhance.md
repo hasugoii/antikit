@@ -1,63 +1,63 @@
 ---
-description: Add or update features in existing application. Used for iterative development.
+description: 为现有应用添加或更新功能。用于迭代开发。
 ---
 
-# /enhance - Update Application
+# /enhance - 更新应用
 
 $ARGUMENTS
 
 ---
 
-## Task
+## 任务
 
-This command adds features or makes updates to existing application.
+此命令为现有应用添加功能或进行更新。
 
-### Steps:
+### 步骤:
 
-1. **Understand Current State**
-   - Load project state with `python .agent/scripts/session_manager.py info`
-   - Understand existing features, tech stack
+1. **了解当前状态**
+   - 使用 `python .agent/scripts/session_manager.py info` 加载项目状态
+   - 了解现有功能和技术栈
 
-2. **Plan Changes**
-   - Determine what will be added/changed
-   - Detect affected files
-   - Check dependencies
+2. **规划变更**
+   - 确定要添加/更改的内容
+   - 检测受影响的文件
+   - 检查依赖关系
 
-3. **Present Plan to User** (for major changes)
+3. **向用户展示计划**（重大变更时）
    ```
-   "To add admin panel:
-   - I'll create 15 new files
-   - Update 8 files
-   - Takes ~10 minutes
-   
-   Should I start?"
+   "要添加管理面板:
+   - 将创建15个新文件
+   - 更新8个文件
+   - 大约需要10分钟
+
+   可以开始吗？"
    ```
 
-4. **Apply**
-   - Call relevant agents
-   - Make changes
-   - Test
+4. **执行**
+   - 调用相关代理
+   - 实施变更
+   - 测试
 
-5. **Update Preview**
-   - Hot reload or restart
+5. **更新预览**
+   - 热重载或重启
 
 ---
 
-## Usage Examples
+## 使用示例
 
 ```
-/enhance add dark mode
-/enhance build admin panel
-/enhance integrate payment system
-/enhance add search feature
-/enhance edit profile page
-/enhance make responsive
+/enhance 添加暗色模式
+/enhance 构建管理面板
+/enhance 集成支付系统
+/enhance 添加搜索功能
+/enhance 编辑个人资料页面
+/enhance 做响应式适配
 ```
 
 ---
 
-## Caution
+## 注意事项
 
-- Get approval for major changes
-- Warn on conflicting requests (e.g., "use Firebase" when project uses PostgreSQL)
-- Commit each change with git
+- 重大变更需获得批准
+- 对冲突请求发出警告（如：项目使用PostgreSQL时要求"使用Firebase"）
+- 每次变更用git提交

@@ -1,86 +1,86 @@
 ---
-description: Display agent and project status. Progress tracking and status board.
+description: 显示代理和项目状态。进度跟踪和状态面板。
 ---
 
-# /status - Show Status
+# /status - 显示状态
 
 $ARGUMENTS
 
 ---
 
-## Task
+## 任务
 
-Show current project and agent status.
+显示当前项目和代理状态。
 
-### What It Shows
+### 显示内容
 
-1. **Project Info**
-   - Project name and path
-   - Tech stack
-   - Current features
+1. **项目信息**
+   - 项目名称和路径
+   - 技术栈
+   - 当前功能
 
-2. **Agent Status Board**
-   - Which agents are running
-   - Which tasks are completed
-   - Pending work
+2. **代理状态面板**
+   - 哪些代理正在运行
+   - 哪些任务已完成
+   - 待处理工作
 
-3. **File Statistics**
-   - Files created count
-   - Files modified count
+3. **文件统计**
+   - 已创建文件数
+   - 已修改文件数
 
-4. **Preview Status**
-   - Is server running
+4. **预览状态**
+   - 服务器是否运行
    - URL
-   - Health check
+   - 健康检查
 
 ---
 
-## Example Output
+## 输出示例
 
 ```
-=== Project Status ===
+=== 项目状态 ===
 
-📁 Project: my-ecommerce
-📂 Path: C:/projects/my-ecommerce
-🏷️ Type: nextjs-ecommerce
-📊 Status: active
+📁 项目: my-ecommerce
+📂 路径: /projects/my-ecommerce
+🏷️ 类型: nextjs-ecommerce
+📊 状态: 活跃
 
-🔧 Tech Stack:
-   Framework: next.js
-   Database: postgresql
-   Auth: clerk
-   Payment: stripe
+🔧 技术栈:
+   框架: next.js
+   数据库: postgresql
+   认证: clerk
+   支付: stripe
 
-✅ Features (5):
+✅ 功能 (5):
    • product-listing
    • cart
    • checkout
    • user-auth
    • order-history
 
-⏳ Pending (2):
+⏳ 待处理 (2):
    • admin-panel
    • email-notifications
 
-📄 Files: 73 created, 12 modified
+📄 文件: 73 已创建, 12 已修改
 
-=== Agent Status ===
+=== 代理状态 ===
 
-✅ database-architect → Completed
-✅ backend-specialist → Completed
-🔄 frontend-specialist → Dashboard components (60%)
-⏳ test-engineer → Waiting
+✅ database-architect → 已完成
+✅ backend-specialist → 已完成
+🔄 frontend-specialist → 仪表盘组件 (60%)
+⏳ test-engineer → 等待中
 
-=== Preview ===
+=== 预览 ===
 
 🌐 URL: http://localhost:3000
-💚 Health: OK
+💚 健康: OK
 ```
 
 ---
 
-## Technical
+## 技术信息
 
-Status uses these scripts:
+状态使用以下脚本:
 - `python .agent/scripts/session_manager.py status`
 - `python .agent/scripts/auto_preview.py status`

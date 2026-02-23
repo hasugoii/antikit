@@ -1,59 +1,59 @@
 ---
-description: Create new application command. Triggers App Builder skill and starts interactive dialogue with user.
+description: 新しいアプリケーションを作成。App Builderスキルを起動し、ユーザーとの対話を開始します。
 ---
 
-# /create - Create Application
+# /create - アプリケーション作成
 
 $ARGUMENTS
 
 ---
 
-## Task
+## タスク
 
-This command starts a new application creation process.
+このコマンドは新しいアプリケーション作成プロセスを開始します。
 
-### Steps:
+### ステップ:
 
-1. **Request Analysis**
-   - Understand what the user wants
-   - If information is missing, use `conversation-manager` skill to ask
+1. **リクエスト分析**
+   - ユーザーが何を求めているか理解する
+   - 情報が不足している場合、質問する
 
-2. **Project Planning**
-   - Use `project-planner` agent for task breakdown
-   - Determine tech stack
-   - Plan file structure
-   - Create plan file and proceed to building
+2. **プロジェクト計画**
+   - `project-planner` エージェントでタスク分解
+   - 技術スタックを決定
+   - ファイル構造を計画
+   - 計画ファイルを作成し、構築に進む
 
-3. **Application Building (After Approval)**
-   - Orchestrate with `app-builder` skill
-   - Coordinate expert agents:
-     - `database-architect` → Schema
+3. **アプリケーション構築（承認後）**
+   - `app-builder` スキルでオーケストレーション
+   - 専門エージェントの調整:
+     - `database-architect` → スキーマ
      - `backend-specialist` → API
      - `frontend-specialist` → UI
 
-4. **Preview**
-   - Start with `auto_preview.py` when complete
-   - Present URL to user
+4. **プレビュー**
+   - 完了時に `auto_preview.py` で起動
+   - ユーザーにURLを提示
 
 ---
 
-## Usage Examples
+## 使用例
 
 ```
-/create blog site
-/create e-commerce app with product listing and cart
-/create todo app
-/create Instagram clone
-/create crm system with customer management
+/create ブログサイト
+/create 商品一覧とカート付きECアプリ
+/create TODOアプリ
+/create Instagramクローン
+/create 顧客管理CRMシステム
 ```
 
 ---
 
-## Before Starting
+## 開始前に
 
-If request is unclear, ask these questions:
-- What type of application?
-- What are the basic features?
-- Who will use it?
+リクエストが不明確な場合、以下を確認:
+- どのタイプのアプリケーション？
+- 基本機能は何？
+- 誰が使う？
 
-Use defaults, add details later.
+デフォルトを使用し、詳細は後で追加。
