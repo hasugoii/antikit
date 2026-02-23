@@ -288,17 +288,6 @@ Scan files/folders:
 
 ---
 
-## Phase 3: Create Preferences File
-...
-```json
-{
-  "mode": "lightweight | balanced | powerful | custom",
-  ...
-}
-```
-
-
----
 
 ## Phase 3: Create Preferences File
 

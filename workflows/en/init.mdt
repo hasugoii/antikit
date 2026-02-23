@@ -210,11 +210,38 @@ AI AUTOMATICALLY sets up important things that users often forget:
 
 ---
 
+## Phase 9: 🚀 Optional Build App (From Scaffold → Complete App)
+
+### 9.1. Ask User
+```
+"Project scaffold is done! Would you like to:
+
+1️⃣ **Stop here** - I'll code manually later (/plan)
+2️⃣ **Build now** - I'll create a complete app from your idea
+3️⃣ **Design UI first** - /visualize"
+```
+
+### 9.2. If Build Now (Option 2)
+Use `app-builder` skill to orchestrate agents:
+- `database-architect` → Create Schema
+- `backend-specialist` → Create API
+- `frontend-specialist` → Create UI
+
+### 9.3. Auto Preview
+When build completes, automatically start preview:
+```bash
+python .agent/scripts/auto_preview.py start
+```
+→ Show URL to User: `http://localhost:3000`
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Start first feature? /plan
 2️⃣ Design UI first? /visualize
 3️⃣ Run the app? /run
+4️⃣ See preview? /preview
 ```
 
 ---

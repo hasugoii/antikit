@@ -285,3 +285,69 @@ Many Vibe Coders don't think about these. AI must ask proactively:
 2️⃣ Need to edit UI? Continue in /visualize
 3️⃣ Display errors? /debug
 ```
+
+---
+
+## 🤖 Phase 8: Auto Design System (From ui-ux-pro-max)
+
+### 8.1. Generate Design System via Script
+Using data from `.shared/ui-ux-pro-max/` (50+ styles, 97 palettes, 57 fonts):
+
+```bash
+# Generate full design system (RECOMMENDED)
+python3 .agent/.shared/ui-ux-pro-max/scripts/search.py "<product_type> <industry> <keywords>" --design-system -p "Project Name"
+
+# Save design system to project
+python3 .agent/.shared/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "Project Name"
+```
+
+### 8.2. Search by Domain
+```bash
+python3 .agent/.shared/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain>
+```
+
+| Domain | Use when | Example |
+|--------|----------|---------|
+| `style` | Finding UI style | `--domain style "glassmorphism dark"` |
+| `chart` | Finding chart type | `--domain chart "real-time dashboard"` |
+| `ux` | Best practices | `--domain ux "animation accessibility"` |
+| `typography` | Finding fonts | `--domain typography "elegant luxury"` |
+| `landing` | Landing structure | `--domain landing "hero social-proof"` |
+
+### 8.3. Stack Guidelines
+```bash
+python3 .agent/.shared/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
+```
+Stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`, `react-native`, `flutter`, `shadcn`
+
+---
+
+## 📋 Phase 9: Professional UI Checklist
+
+### Icons & Visual
+- [ ] Don't use emoji as UI icons (use SVG: Heroicons, Lucide)
+- [ ] Icons consistent in size (w-6 h-6)
+- [ ] Brand logos accurate (from Simple Icons)
+
+### Interaction
+- [ ] All clickable elements have `cursor-pointer`
+- [ ] Hover states have visual feedback
+- [ ] Smooth transitions (150-300ms)
+- [ ] Focus states for keyboard navigation
+
+### Light/Dark Mode
+- [ ] Light mode text contrast sufficient (4.5:1 minimum)
+- [ ] Glass/transparent elements visible in light mode
+- [ ] Borders visible in both modes
+
+### Layout
+- [ ] Floating navbar has spacing from edges
+- [ ] No content hidden behind fixed navbar
+- [ ] Responsive: 375px, 768px, 1024px, 1440px
+- [ ] No horizontal scroll on mobile
+
+### Accessibility
+- [ ] Images have alt text
+- [ ] Form inputs have labels
+- [ ] `prefers-reduced-motion` respected
+

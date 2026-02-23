@@ -181,6 +181,37 @@ AI automatically detects potential blockers from:
 
 ---
 
+## Phase 5: 📊 Quick Dashboard (Agent + Files + Preview)
+
+### 5.1. Agent Status Board
+Display status of agents that have been/are/waiting to work:
+
+```
+=== Agent Status ===
+
+✅ database-architect → Complete
+✅ backend-specialist → Complete
+🔄 frontend-specialist → Dashboard components (60%)
+⏳ test-engineer → Waiting
+```
+
+### 5.2. File Statistics
+```
+📄 Files: [X] created, [Y] modified
+```
+*   Get from: `python .agent/scripts/session_manager.py status`
+
+### 5.3. Preview Health Check
+```
+=== Preview ===
+🌐 URL: http://localhost:3000
+💚 Health: OK
+```
+*   Get from: `python .agent/scripts/auto_preview.py status`
+*   If server not running → Suggest `/preview start`
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Continue unfinished work? /code or /debug
