@@ -43,7 +43,7 @@ $Skills = @(
     "api-patterns", "app-builder", "architecture", "bash-linux", "behavioral-modes",
     "brainstorming", "clean-code", "code-review-checklist", "database-design",
     "deployment-procedures", "docker-expert", "documentation-templates", "evidence-discipline", "frontend-design",
-    "game-development", "geo-fundamentals", "i18n-localization", "lint-and-validate",
+    "game-development", "geo-fundamentals", "growth-marketing", "i18n-localization", "lint-and-validate",
     "mcp-builder", "mobile-design", "nestjs-expert", "nextjs-expert", "nodejs-best-practices",
     "parallel-agents", "performance-profiling", "plan-writing", "powershell-windows", "proactive-intelligence",
     "prisma-expert", "python-patterns", "react-patterns", "red-team-tactics",

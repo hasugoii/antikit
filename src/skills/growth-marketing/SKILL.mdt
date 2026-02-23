@@ -1,0 +1,246 @@
+---
+name: growth-marketing
+description: Go-to-market strategy, content creation, payment setup, and growth optimization. Localized per country/culture. Creates copy-paste ready content for all channels. Use when launching products, creating marketing content, or setting up monetization.
+allowed-tools: all
+version: "1.0.0"
+priority: P1
+---
+
+# Growth Marketing
+
+> **Philosophy:** Coder builds it, AI sells it. Every output is COPY-PASTE READY. User is NOT a marketer — AI does the heavy lifting.
+
+---
+
+## 1. Goal Discovery (MUST ASK FIRST)
+
+Before ANY marketing work, determine the launch goal:
+
+| Goal | Strategy | KPI |
+|------|----------|-----|
+| 💰 **Revenue** | Sales-focused, CTA mạnh, pricing | MRR, conversion rate |
+| 🆓 **Free + Indirect** | Download-focused, viral | DAU, retention, ad revenue |
+| 👥 **Community/Fan** | Open source, tutorials | Stars, followers, contributors |
+| 🏆 **Reputation** | Portfolio, case study | Views, shares, job offers |
+| 🎯 **Hybrid** | Mix strategies | Custom metrics |
+
+### Prompt
+```
+"🚀 Launch app này để đạt mục tiêu gì?
+  1️⃣ 💰 Kiếm tiền (bán/subscription)
+  2️⃣ 🆓 Miễn phí + kiếm gián tiếp (ads, affiliate)
+  3️⃣ 👥 Thu fan/community (open source, portfolio)
+  4️⃣ 🏆 Xây danh tiếng (CV, personal brand)
+  5️⃣ 🎯 Kết hợp nhiều mục tiêu"
+```
+
+---
+
+## 2. Competitor Intelligence
+
+Research before launch — find gaps and positioning.
+
+### What to research
+- Competitor pricing (charge bao nhiêu?)
+- Competitor channels (marketing ở đâu?)
+- Competitor reviews (1-star = opportunity!)
+- Market gap (thiếu gì?)
+
+### Output: USP Statement
+```
+"App [tên] khác biệt vì [X] — trong khi đối thủ [Y]."
+```
+
+---
+
+## 3. Content Creation (COPY-PASTE READY)
+
+All content MUST be ready to paste. User should NOT need to edit.
+
+### Content per Goal
+
+#### 💰 Revenue Content
+```
+Pain point → Solution → Price justification → CTA
+
+"Bạn đang mất [X] vì [problem].
+[App] giúp bạn [benefit] ngay từ [timeframe].
+Chỉ [price] — rẻ hơn [comparison]."
+```
+
+#### 👥 Community Content
+```
+Story → Tech stack → Call for contribution
+
+"Mình vừa open source [app].
+Built with [tech stack].
+Star nếu thấy hữu ích! ⭐ PR welcome!"
+```
+
+#### 🏆 Reputation Content
+```
+Challenge → Process → Learnings → Results
+
+"How I built [app] in [time] with AI
+Tech: [stack]. Lessons learned: [insights]..."
+```
+
+### Content per Channel (Localized)
+
+#### 🇻🇳 Vietnam Channels
+| Channel | Format | Best Time | Content Style |
+|---------|--------|-----------|---------------|
+| Facebook | Post + image/video | 11h-13h, 19h-21h | Storytelling, emotional |
+| TikTok | Video 15-60s | 18h-22h | Hook 3s, giải pháp nhanh |
+| Zalo OA | Article | 8h-10h | Professional, hữu ích |
+| Reddit VN/forums | Long post | Anytime | Technical, chi tiết |
+
+#### 🇯🇵 Japan Channels
+| Channel | Format | Best Time | Content Style |
+|---------|--------|-----------|---------------|
+| Twitter/X | Thread | 12h, 18h-22h | Concise, hashtags |
+| note.com | Article | Weekend | Detailed, polished |
+| Qiita | Technical | Anytime | Code-heavy, tutorial |
+| LINE | Message | 12h, 20h | Personal, friendly |
+
+#### 🇨🇳 China Channels  
+| Channel | Format | Best Time | Content Style |
+|---------|--------|-----------|---------------|
+| WeChat公众号 | Article | 20h-22h | Long-form, authoritative |
+| Douyin | Video | 19h-23h | Quick demo, trending |
+| 小红书 | Image+text | 12h, 20h | Aesthetic, lifestyle |
+| 知乎 | Q&A/Article | Anytime | Expert, in-depth |
+
+#### 🇺🇸 Global/English Channels
+| Channel | Format | Best Time | Content Style |
+|---------|--------|-----------|---------------|
+| Product Hunt | Launch post | Tue-Thu 00:01 PST | Feature-focused |
+| Hacker News | Show HN | Tue-Thu morning | Technical, humble |
+| Reddit | Post | Varies by sub | Community-first |
+| Twitter/X | Thread | 9h-12h EST | Concise, visual |
+| Dev.to | Article | Tue-Thu | Tutorial style |
+
+---
+
+## 4. Landing Page Patterns
+
+AI creates landing page code directly.
+
+### High-Conversion Structure
+1. **Hero** — Headline + subline + CTA + screenshot
+2. **Problem** — 3 pain points (user relates)
+3. **Solution** — 3 features (benefit-focused, not feature-focused)
+4. **Social Proof** — Testimonials/stats/logos
+5. **Pricing** — Clear tiers (if paid)
+6. **FAQ** — Top 5 objections answered
+7. **Final CTA** — Repeat main CTA
+8. **Footer** — Legal, social links
+
+### CTA per Goal
+| Goal | CTA |
+|------|-----|
+| 💰 Revenue | "Bắt đầu dùng thử miễn phí" |
+| 🆓 Free | "Tải miễn phí ngay" |
+| 👥 Community | "⭐ Star on GitHub" |
+| 🏆 Reputation | "Xem demo" |
+
+---
+
+## 5. Payment Setup (Localized, Updated 2026)
+
+### 🇻🇳 Vietnam
+| Provider | Type | Fee | Best For |
+|----------|------|-----|----------|
+| **SePay** | Bank transfer auto | Free | Indie dev, startup |
+| **MoMo** | E-wallet | 1-2% | Consumer app |
+| **VNPay** | Gateway | 1.5-2% | Enterprise |
+| **ZaloPay** | E-wallet | 1-2% | Zalo ecosystem |
+| **Stripe VN** | Card gateway | 2.9% | SaaS global |
+
+### 🇯🇵 Japan
+| Provider | Type | Fee | Best For |
+|----------|------|-----|----------|
+| **PayPay** | QR | 1.6-1.98% | Consumer |
+| **Stripe JP** | Card | 3.6% | SaaS |
+| **Konbini** | Cash | ¥130-300/tx | Users who prefer cash |
+| **LINE Pay** | E-wallet | 2.45% | LINE ecosystem |
+
+### 🇨🇳 China
+| Provider | Type | Fee | Best For |
+|----------|------|-----|----------|
+| **WeChat Pay** | Super app | 0.6% | In-app |
+| **Alipay** | E-wallet | 0.6% | Cross-border |
+
+### 🌍 Global
+| Provider | Type | Fee | Best For |
+|----------|------|-----|----------|
+| **Stripe** | Card gateway | 2.9%+30¢ | #1 for devs |
+| **Paddle** | MoR | 5%+50¢ | Auto tax handling |
+| **LemonSqueezy** | MoR | 5%+50¢ | Indie SaaS |
+| **PayPal** | E-wallet | 2.9%+30¢ | US/EU users |
+
+### Smart Default Rule
+```
+If target == "VN" && goal == "indie" → recommend SePay
+If target == "VN" && goal == "consumer" → recommend MoMo
+If target == "global" && goal == "SaaS" → recommend Stripe
+If target == "global" && goal == "indie" → recommend LemonSqueezy
+```
+
+---
+
+## 6. Launch Calendar (30-Day Template)
+
+### Pre-Launch (Day -7 to -1)
+- Day -7: Teaser post on main channel
+- Day -5: Behind-the-scenes (build story)
+- Day -3: Sneak peek (screenshot/video)
+- Day -1: "Launching tomorrow!" hype post
+
+### Launch Week (Day 1-7)
+- Day 1: LAUNCH — post all channels simultaneously
+- Day 2: Share metrics ("100 users in 24h!")
+- Day 3: Thank you post
+- Day 5: First user testimonial
+- Day 7: Week 1 recap
+
+### Growth Phase (Day 8-30)
+- Day 10: Feature update post
+- Day 14: Tutorial/how-to content
+- Day 21: Community highlight
+- Day 30: Month 1 milestone celebration
+
+---
+
+## 7. Post-Launch Retention
+
+### Onboarding
+- AI creates first-time user flow
+- Welcome email template
+- Quick-start guide
+
+### Re-engagement
+- Day 3: "How's it going?" email
+- Day 7: "Feature you missed" notification
+- Day 14: "We improved X based on feedback"
+
+### Feedback Collection
+- In-app feedback form template
+- NPS survey template
+- User interview questions
+
+---
+
+## 8. Growth Metrics Dashboard
+
+### What to Track per Goal
+| Goal | Primary Metric | Secondary |
+|------|---------------|-----------|
+| 💰 Revenue | MRR, ARR | Churn, LTV, CAC |
+| 🆓 Free | DAU, MAU | Retention D1/D7/D30 |
+| 👥 Community | Stars, contributors | PRs, issues, forks |
+| 🏆 Reputation | Page views, shares | Inbound leads |
+
+### Analytics Setup
+- Recommend: Plausible (privacy-friendly) or Google Analytics
+- AI creates tracking code + dashboard template

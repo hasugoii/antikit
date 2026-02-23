@@ -4,6 +4,46 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.10.0] - 2026-02-23
+
+### 🚀 Launch System — Go-to-Market for Coders
+
+Complete go-to-market system that takes products from "just deployed" to "users love it". AI writes copy-paste ready content, creates landing pages, sets up payments, and plans 30-day marketing calendars — all localized per country.
+
+### Added
+
+#### New Workflow: `/launch`
+- **8-phase go-to-market:** Goal discovery → Competitor intel → Marketing plan → Content creation → Landing page → Payment → Distribution → Post-launch
+- **Power mode flags:** `--landing`, `--content`, `--pricing`, `--ads`
+- **Goal-first:** 💰 Revenue / 🆓 Free / 👥 Community / 🏆 Reputation / 🎯 Hybrid
+- Content is **COPY-PASTE READY** — user just pastes into Facebook/TikTok/Product Hunt
+
+#### New Agent: `growth-hacker`
+- Marketing expert that speaks coder language
+- Translates marketing jargon for freshers
+- Localized per country/culture
+
+#### New Skill: `growth-marketing`
+- **Goal Discovery** — determines strategy from launch objective
+- **Competitor Intelligence** — research + USP positioning
+- **Content Creation** — channel-specific, copy-paste ready (FB, TikTok, PH, X, etc.)
+- **Landing Page Patterns** — high-conversion structure
+- **Payment Setup (2026)** — SePay, MoMo, VNPay, PayPay, Stripe, Paddle, etc.
+- **30-Day Calendar** — pre-launch → launch → growth phases
+- **Post-Launch Retention** — onboarding, re-engagement, feedback
+- **Growth Metrics** — KPIs per goal type
+
+### Changed
+- **`install.sh`** — Added `growth-marketing` to SKILLS array (now 47 skills)
+- **`install.ps1`** — Added `growth-marketing` to $Skills array
+
+### New Pipeline
+```
+/brainstorm → /plan → /code → /deploy → /launch (NEW!)
+```
+
+---
+
 ## [1.9.8] - 2026-02-23
 
 ### 🗣️ Dialect & Regional Language Detection
