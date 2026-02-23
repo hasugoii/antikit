@@ -4,6 +4,30 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.13.3] - 2026-02-24
+
+### 🔄 Merge /sync-schema + Website Redesign
+
+### Changed
+- **`/sync-schema` merged into `/save-brain`** — schema sync now runs inline, no standalone command needed
+- Deleted `sync-schema.mdt` (4 languages)
+- Removed from `install.sh` + `install.ps1` download lists
+- Updated `save_brain.mdt` (4 langs): inline sync instead of calling `/sync-schema`
+- Workflow count: 20 → **19**
+
+### Added — Website Redesign (`antikit-web`)
+- **Homepage** (13 sections): Hero, Animated Stats, Story, Live Terminal Demo, Solution Grid, Comparison Table, Pipeline, Agent Showcase, Safety 7-Layer, Memory, Daily Workflow, Social Proof, CTA
+- **Docs** (4 pages): Overview, Workflows (search+filter), Agents (search+expand), Skills (search+category)
+- **Data files**: `agents.ts`, `workflows.ts`, `skills.ts` — all data-driven
+- **Sidebar navigation** for docs
+- Color scheme: cyan/emerald
+
+### Updated
+- READMEs (4 langs): 20 → 19 workflows
+- Website locales (4 langs): stats, pipeline, descriptions
+
+---
+
 ## [1.13.2] - 2026-02-24
 
 ### 🛡️ GEMINI.md Protection & Installer Fixes
