@@ -65,7 +65,7 @@ SKILLS=(
 # Scripts (7 total)
 SCRIPTS=(
     "auto_preview.py" "checklist.py" "generate-index.sh"
-    "security-scan.ps1" "security-scan.sh" "session_manager.py" "verify_all.py"
+    "session_manager.py" "verify_all.py"
 )
 
 # Paths
