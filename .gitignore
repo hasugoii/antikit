@@ -33,3 +33,7 @@ node_modules/
 .idea/
 .vscode/
 *.sublime-*
+
+# Private directories (never push to public repo)
+docs/
+plans/
