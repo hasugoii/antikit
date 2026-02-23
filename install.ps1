@@ -19,9 +19,13 @@ $WorkflowsEn = @(
 
 # Agents
 $Agents = @(
-    "architect.md", "backend.md", "database.md", "debugger.md", "devops.md",
-    "doc-writer.md", "explorer.md", "frontend.md", "game.md", "mobile.md",
-    "orchestrator.md", "pentester.md", "performance.md", "security.md", "seo.md", "tester.md"
+    "backend-specialist.md", "code-archaeologist.md", "database-architect.md",
+    "debugger.md", "devops-engineer.md", "documentation-writer.md",
+    "explorer-agent.md", "frontend-specialist.md", "game-developer.md",
+    "mobile-developer.md", "orchestrator.md", "penetration-tester.md",
+    "performance-optimizer.md", "product-manager.md", "product-owner.md",
+    "project-planner.md", "qa-automation-engineer.md", "security-auditor.md",
+    "seo-specialist.md", "test-engineer.md"
 )
 
 # Schemas
