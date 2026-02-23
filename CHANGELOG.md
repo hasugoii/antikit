@@ -4,6 +4,54 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.13.0] - 2026-02-23
+
+### 🌐 Full 4-Language Workflow Parity — 72 Files Synchronized
+
+Complete audit and sync of all 18 workflows across EN, VI, JA, ZH. Previously JA/ZH were 30-60% rut gọn (missing phases, logic gaps). Now all 4 languages have identical structure and logic.
+
+### Added — New Workflows
+- **`/launch` translations** (4 languages): Go-to-market workflow with 8 phases, localized channels per country
+- **`/grow` translations** (4 languages): Product Flywheel with 7 phases, retention + viral loop design
+
+### Fixed — Content Gaps (JA/ZH)
+| Workflow | Gap Fixed |
+|----------|-----------|
+| `/brainstorm` JA/ZH | +Product Type chooser, Active Listening, Feature Grouping, Technical Reality Check, BRIEF.md template, Important Rules (was 32-38% → 98-100%) |
+| `/next` JA/ZH | +Session.json integration, Plan progress bars, Resilience patterns (was 46% → 84-100%) |
+| `/visualize` JA/ZH | +Phase 8 (Auto Design System), Phase 9 (Professional UI Checklist) (was 37-48% → 100%) |
+| `/deploy` JA/ZH | Full 11-phase deploy flow (was 43-64% → 100%) |
+| `/plan` JA/ZH | Full 6-phase planning with dependencies, time estimation, risks (was 46-57% → 100%) |
+| `/code` JA/ZH | Full pre-commit checklist, breaking change detection (was 50-59% → 100%) |
+| All P2/P3 workflows | Synced to EN baseline (audit, debug, recap, init, config, test, refactor, ak-update) |
+
+### Fixed — Content Gaps (VI ↔ EN)
+| File | Direction | What was added |
+|------|-----------|---------------|
+| `brainstorm.mdt` | EN→VI | Full rewrite VI from EN (147→404 lines) |
+| `visualize.mdt` | VI→EN | +Phase 8 (Auto Design System) + Phase 9 (UI Checklist) |
+| `recap.mdt` | VI→EN | +Phase 5 (Quick Dashboard: Agent Status, Files, Preview) |
+| `init.mdt` | VI→EN | +Phase 9 (Build App from Scaffold) |
+| `config.mdt` | Fix EN | Removed duplicate Phase 3 stub |
+
+### Fixed — Logic Gaps (launch/grow JA/ZH)
+- `grow.mdt` JA: +Phase 7 (Track & Celebrate + Monthly Recap)
+- `grow.mdt` ZH: +Phase 7 (Track & Celebrate + Monthly Recap)
+- `launch.mdt` JA: +Section 7.3 (Re-engagement) + Phase 8 (Confirm & Handoff)
+- `launch.mdt` ZH: +Section 7.3 (Re-engagement) + Phase 8 (Confirm & Handoff)
+
+### Changed — Installer
+- `install.sh`: Added `launch.mdt` + `grow.mdt` to WORKFLOWS array
+- `install.ps1`: Added `launch.mdt` + `grow.mdt` to $WorkflowsEn array
+
+### Stats
+- **72 workflow files** across 4 languages, all synced
+- **+6,500 lines** added/changed
+- **16/18 workflows** at 90-100% line parity between EN and all languages
+- **18 workflows × 4 languages × identical power flags** ✅
+
+---
+
 ## [1.12.0] - 2026-02-23
 
 ### 🌐 Community Skills Import — 36 Skills from 3 Repos
