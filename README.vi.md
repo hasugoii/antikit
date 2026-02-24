@@ -2,8 +2,8 @@
 
 # AntiKit 🚀
 
-### Biến Antigravity thành **cỗ máy in tiền.**
-*Từ "anh có ý tưởng" → code xong, marketing xong, và kiếm tiền — trong một bộ công cụ.*
+### **21 chuyên gia AI. 1 khung chat. Từ ý tưởng đến doanh thu.**
+*Ngừng vibe coding mù quáng. Bắt đầu vibe coding thông minh.*
 
 [![Version](https://img.shields.io/badge/v1.14.0-91_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
@@ -17,31 +17,42 @@
 
 ---
 
-## 🤯 Nếu AI không chỉ code, mà còn bán hàng giùm bạn thì sao?
+## 🤯 Nếu AI của bạn có cả đội ngũ phía sau thì sao?
 
-Phần lớn AI coding tool dừng ở việc viết code. **AntiKit thì không.**
+Phần lớn AI coding tool cho bạn **1 bộ não**. AntiKit cho bạn **21 chuyên gia** — engineering, marketing, bảo mật, growth — cùng cộng tác trong một khung chat.
 
 ```
-Bạn: /brainstorm app quản lý chi tiêu
-AI:  → Nghiên cứu thị trường + phân tích đối thủ
-     → Chọn tính năng MVP + tech stack
-     → Vẽ kiến trúc hệ thống
+👤 Bạn: /brainstorm app quản lý chi tiêu
 
-Bạn: /code
-AI:  → Full-stack code có test
-     → 21 agent chuyên gia cùng làm
+🤖 PRIMARY: @project-planner
+🤖 SUPPORT: @frontend-specialist
+   → Nghiên cứu thị trường + phân tích đối thủ
+   → Chọn tính năng MVP + tech stack
+   → Vẽ kiến trúc hệ thống
 
-Bạn: /launch
-AI:  → Landing page (code xong + deploy luôn)
-     → Bài đăng Facebook/TikTok/Zalo (copy-paste xài liền)
-     → Thiết lập thanh toán (SePay, MoMo, VNPay)
-     → Lịch marketing 30 ngày
+👤 Bạn: /code
 
-Bạn: /grow
-AI:  → Chiến lược giữ chân khách
-     → Thiết kế chương trình giới thiệu
-     → Tối ưu giá (phương pháp Van Westendorp)
-     → Email sequences (copy-paste xài liền)
+🤖 PRIMARY: @frontend-specialist + @backend-specialist
+🤖 SUPPORT: @test-engineer + @security-auditor
+   → Full-stack code có test
+   → 4 agent cùng làm real-time
+
+👤 Bạn: /launch
+
+🤖 PRIMARY: @growth-hacker
+   → Landing page (code xong + deploy luôn)
+   → Bài đăng Facebook/TikTok/Zalo (copy-paste xài liền)
+   → Thiết lập thanh toán (SePay, MoMo, VNPay)
+   → Lịch marketing 30 ngày
+
+👤 Bạn: /grow
+
+🤖 PRIMARY: @growth-hacker
+🤖 SUPPORT: @seo-specialist
+   → Chiến lược giữ chân khách
+   → Thiết kế chương trình giới thiệu
+   → Tối ưu giá (Van Westendorp)
+   → Email sequences (copy-paste xài liền)
 ```
 
 **Kết quả:** Từ ý tưởng đến doanh thu trong vài ngày, không phải vài tháng.
@@ -302,7 +313,7 @@ Community skills từ [coreyhaines31/marketingskills](https://github.com/coreyha
 
 <div align="center">
 
-**Đừng code mù. Hãy build business.** 🚀
+**Ngừng vibe coding mù quáng. Bắt đầu vibe coding thông minh.** 🚀
 
 **macOS / Linux:**
 ```bash
@@ -316,6 +327,6 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
 
-**Được tạo bằng ❤️ cho dân build muốn ship VÀ bán.**
+**21 chuyên gia AI. 1 chat. Từ ý tưởng đến doanh thu. ❤️**
 
 </div>

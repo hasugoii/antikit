@@ -2,8 +2,8 @@
 
 # AntiKit 🚀
 
-### 把Antigravity变成**赚钱机器。**
-*从"我有个想法" → 开发完成、营销完成、开始赚钱 — 一套工具搞定。*
+### **21位AI专家。1个聊天。从创意到收入。**
+*告别盲目Vibe Coding。开始智能Vibe Coding。*
 
 [![Version](https://img.shields.io/badge/v1.14.0-91_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
@@ -278,7 +278,7 @@ AntiKit:
 
 <div align="center">
 
-**别盲目写代码。开始构建商业。** 🚀
+**告别盲目Vibe Coding。开始智能Vibe Coding。** 🚀
 
 **macOS / Linux:**
 ```bash
@@ -292,6 +292,6 @@ curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | 
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
 
-**用 ❤️ 为想要发布并销售的构建者而制作。**
+**21位AI专家。1个聊天。从创意到收入。 ❤️**
 
 </div>

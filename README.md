@@ -2,8 +2,8 @@
 
 # AntiKit 🚀
 
-### Turn Antigravity into a **money-printing machine.**
-*From "I have an idea" → deployed, marketed, and making money — in one toolkit.*
+### **21 AI experts. 1 chat. From idea to income.**
+*Stop vibe coding blind. Start vibe coding smart.*
 
 [![Version](https://img.shields.io/badge/v1.14.0-91_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
@@ -17,31 +17,42 @@
 
 ---
 
-## 🤯 What if AI could build AND sell your product?
+## 🤯 What if your AI had a whole team behind it?
 
-Most AI coding tools stop at writing code. **AntiKit doesn't.**
+Most AI coding tools give you **1 brain**. AntiKit gives you **21 specialists** — engineering, marketing, security, growth — all collaborating in one chat.
 
 ```
-You: /brainstorm expense tracker app
-AI:  → Market research + competitor analysis
-     → Feature prioritization + tech stack
-     → Architecture diagram
+👤 You: /brainstorm expense tracker app
 
-You: /code
-AI:  → Full-stack code with tests
-     → 21 specialist agents collaborating
+🤖 PRIMARY: @project-planner
+🤖 SUPPORT: @frontend-specialist
+   → Market research + competitor analysis
+   → Feature prioritization + tech stack
+   → Architecture diagram
 
-You: /launch
-AI:  → Landing page (coded + deployed)
-     → Facebook/TikTok/ProductHunt copy (ready to paste)
-     → Payment setup (SePay, Stripe, MoMo)
-     → 30-day marketing calendar
+👤 You: /code
 
-You: /grow
-AI:  → Churn prevention strategy
-     → Referral program design
-     → Pricing optimization (Van Westendorp method)
-     → Email sequences (copy-paste ready)
+🤖 PRIMARY: @frontend-specialist + @backend-specialist
+🤖 SUPPORT: @test-engineer + @security-auditor
+   → Full-stack code with tests
+   → 4 agents collaborating in real-time
+
+👤 You: /launch
+
+🤖 PRIMARY: @growth-hacker
+   → Landing page (coded + deployed)
+   → Social media posts (copy-paste ready)
+   → Payment setup (SePay, Stripe, MoMo)
+   → 30-day marketing calendar
+
+👤 You: /grow
+
+🤖 PRIMARY: @growth-hacker
+🤖 SUPPORT: @seo-specialist
+   → Churn prevention strategy
+   → Referral program design
+   → Pricing optimization (Van Westendorp)
+   → Email sequences (copy-paste ready)
 ```
 
 **Result:** From idea to revenue in days, not months.
@@ -160,12 +171,12 @@ Type a command. Get an expert. It's that simple.
 Every task gets **2+ agents** working together. Not one AI — a **team**.
 
 ```
-You: "Build a login page"
+👤 You: "Build a login page"
 
-AntiKit:
-🤖 PRIMARY: @frontend-specialist (React, CSS, accessibility)
-🤖 SUPPORT: @security-auditor (XSS, CSRF, JWT)
-🤖 SUPPORT: @test-engineer (E2E tests)
+AntiKit routes to:
+🤖 PRIMARY:  @frontend-specialist (React, CSS, accessibility)
+🤖 SUPPORT:  @security-auditor (XSS, CSRF, JWT)
+🤖 SUPPORT:  @test-engineer (E2E tests)
 
 → Result: Beautiful, secure, tested login page
 ```
@@ -331,7 +342,7 @@ Community skills from [coreyhaines31/marketingskills](https://github.com/coreyha
 
 <div align="center">
 
-**Stop coding blindly. Start building businesses.** 🚀
+**Stop vibe coding blind. Start vibe coding smart.** 🚀
 
 **macOS / Linux:**
 ```bash
@@ -345,6 +356,6 @@ iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | 
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hasugoii/antikit&type=Date)](https://star-history.com/#hasugoii/antikit&Date)
 
-**Built with ❤️ for builders who want to ship AND sell.**
+**21 AI experts. 1 chat. From idea to income. ❤️**
 
 </div>
