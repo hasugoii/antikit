@@ -78,8 +78,10 @@ $AgentsDir = "$AntigravityDir\agents"
 $SchemasDir = "$AntigravityDir\schemas"
 $TemplatesDir = "$AntigravityDir\templates"
 $SkillsDir = "$AntigravityDir\skills"
+$ScriptsDir = "$AntigravityDir\scripts"
 $GeminiMd = "$env:USERPROFILE\.gemini\GEMINI.md"
 $VersionFile = "$env:USERPROFILE\.gemini\antikit_version"
+$CustomFile = "$env:USERPROFILE\.gemini\antikit_custom.json"
 
 # Get version from repo
 try {
@@ -143,7 +145,7 @@ $success = 0
 $failed = 0
 
 # 1. Create directories
-$dirs = @($AntigravityDir, $GlobalWorkflows, $AgentsDir, $SchemasDir, $TemplatesDir, $SkillsDir)
+$dirs = @($AntigravityDir, $GlobalWorkflows, $AgentsDir, $SchemasDir, $TemplatesDir, $SkillsDir, $ScriptsDir)
 foreach ($dir in $dirs) {
     if (-not (Test-Path $dir)) {
         New-Item -ItemType Directory -Force -Path $dir | Out-Null
@@ -151,20 +153,24 @@ foreach ($dir in $dirs) {
 }
 Write-Host "[DIR] Directories ready: $AntigravityDir" -ForegroundColor Green
 
-# 1.5. Clean old files (remove renamed/obsolete agents)
-$OldAgents = @("architect.md", "backend.md", "database.md", "devops.md", "doc-writer.md",
-    "explorer.md", "frontend.md", "game.md", "mobile.md", "pentester.md",
-    "performance.md", "security.md", "seo.md", "tester.md")
-$cleaned = 0
-foreach ($old in $OldAgents) {
-    $oldPath = "$AgentsDir\$old"
-    if (Test-Path $oldPath) {
-        Remove-Item $oldPath -Force
-        $cleaned++
-    }
-}
-if ($cleaned -gt 0) {
-    Write-Host "[CLEAN] Cleaned $cleaned old agent files" -ForegroundColor Yellow
+# 1.5. Fetch manifest
+Write-Host ""
+Write-Host "[...] Fetching manifest..." -ForegroundColor Cyan
+$ManifestData = $null
+try {
+    $ManifestRaw = (Invoke-WebRequest -Uri "$RepoBase/manifest.json" -UseBasicParsing -ErrorAction Stop).Content
+    $ManifestData = $ManifestRaw | ConvertFrom-Json
+    Write-Host "[OK] Manifest fetched (v$($ManifestData.version))" -ForegroundColor Green
+
+    # Override arrays from manifest
+    $WorkflowsEn = $ManifestData.workflows
+    $Agents = $ManifestData.agents
+    $Skills = $ManifestData.skills
+    $Scripts = $ManifestData.scripts
+    $Schemas = $ManifestData.schemas
+    $Templates = $ManifestData.templates
+} catch {
+    Write-Host "[WARN] Manifest not available. Using fallback lists." -ForegroundColor Yellow
 }
 
 # 2. Download Workflows
@@ -273,13 +279,75 @@ foreach ($script in $Scripts) {
     }
 }
 
-# 7. Save version and language
+# 7. Orphan cleanup
+Write-Host ""
+Write-Host "[...] Scanning for orphan files..." -ForegroundColor Cyan
+$orphanCount = 0
+
+# Load custom files
+$customWorkflows = @()
+$customAgents = @()
+$customSkills = @()
+if (Test-Path $CustomFile) {
+    try {
+        $customData = Get-Content $CustomFile -Raw | ConvertFrom-Json
+        if ($customData.custom_workflows) { $customWorkflows = $customData.custom_workflows }
+        if ($customData.custom_agents) { $customAgents = $customData.custom_agents }
+        if ($customData.custom_skills) { $customSkills = $customData.custom_skills }
+    } catch {}
+}
+
+# Scan workflows
+foreach ($file in Get-ChildItem "$GlobalWorkflows\*.md" -ErrorAction SilentlyContinue) {
+    $name = $file.BaseName
+    if ($WorkflowsEn -notcontains $name -and $customWorkflows -notcontains $name) {
+        Write-Host "   [DEL] Removing orphan workflow: $($file.Name)" -ForegroundColor Yellow
+        Remove-Item $file.FullName -Force
+        $orphanCount++
+    }
+}
+
+# Scan agents
+foreach ($file in Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyContinue) {
+    $name = $file.BaseName
+    if ($Agents -notcontains $name -and $customAgents -notcontains $name) {
+        Write-Host "   [DEL] Removing orphan agent: $($file.Name)" -ForegroundColor Yellow
+        Remove-Item $file.FullName -Force
+        $orphanCount++
+    }
+}
+
+# Scan skills
+foreach ($dir in Get-ChildItem "$SkillsDir" -Directory -ErrorAction SilentlyContinue) {
+    $name = $dir.Name
+    if ($Skills -notcontains $name -and $customSkills -notcontains $name) {
+        Write-Host "   [DEL] Removing orphan skill: $name/" -ForegroundColor Yellow
+        Remove-Item $dir.FullName -Recurse -Force
+        $orphanCount++
+    }
+}
+
+if ($orphanCount -eq 0) {
+    Write-Host "   [OK] No orphan files found" -ForegroundColor Green
+} else {
+    Write-Host "   [OK] Cleaned $orphanCount orphan file(s)" -ForegroundColor Green
+}
+
+# 7.5. Save version and language
 if (-not (Test-Path "$env:USERPROFILE\.gemini")) {
     New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.gemini" | Out-Null
 }
 [System.IO.File]::WriteAllText($VersionFile, $CurrentVersion, [System.Text.Encoding]::UTF8)
-$LangFile = "$env:USERPROFILE\.gemini\antikit_language"
-[System.IO.File]::WriteAllText($LangFile, $lang, [System.Text.Encoding]::UTF8)
+# Write to BOTH files for backward compat
+$LangFileNew = "$env:USERPROFILE\.gemini\antikit_language"
+$LangFileOld = "$env:USERPROFILE\.gemini\antikit_lang"
+[System.IO.File]::WriteAllText($LangFileNew, $lang, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText($LangFileOld, $lang, [System.Text.Encoding]::UTF8)
+
+# Save manifest locally
+if ($ManifestData) {
+    $ManifestRaw | Out-File "$AntigravityDir\manifest.json" -Encoding UTF8
+}
 Write-Host ""
 Write-Host "[OK] Version saved: $CurrentVersion" -ForegroundColor Green
 Write-Host "[OK] Language saved: $lang" -ForegroundColor Green
@@ -292,10 +360,10 @@ if (-not (Test-Path $RulesDir)) { New-Item -ItemType Directory -Force -Path $Rul
 
 # Download language-specific instructions + core GEMINI.md
 try {
-    Invoke-WebRequest -Uri "$RepoBase/rules/instructions_$Language.md" -OutFile "$RulesDir\instructions.md" -UseBasicParsing -ErrorAction Stop
-    Write-Host "   [OK] instructions_$Language.md" -ForegroundColor Green
+    Invoke-WebRequest -Uri "$RepoBase/rules/instructions_$lang.md" -OutFile "$RulesDir\instructions.md" -UseBasicParsing -ErrorAction Stop
+    Write-Host "   [OK] instructions_$lang.md" -ForegroundColor Green
 } catch {
-    Write-Host "   [X] instructions_$Language.md" -ForegroundColor Red
+    Write-Host "   [X] instructions_$lang.md" -ForegroundColor Red
 }
 
 try {

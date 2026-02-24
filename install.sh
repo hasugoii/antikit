@@ -1,73 +1,9 @@
 #!/bin/bash
 # AntiKit Installer for macOS/Linux
-# Direct download approach - inspired by AWF
+# Manifest-based approach — single source of truth
 # https://github.com/hasugoii/antikit
 
 REPO_BASE="https://raw.githubusercontent.com/hasugoii/antikit/main"
-
-# Workflows (will use selected language)
-WORKFLOWS=(
-    "ak-update.mdt" "audit.mdt" "brainstorm.mdt" "code.mdt" "config.mdt"
-    "debug.mdt" "deploy.mdt" "grow.mdt" "init.mdt" "launch.mdt" "next.mdt"
-    "plan.mdt" "recap.mdt" "refactor.mdt" "run.mdt" "save_brain.mdt" "test.mdt"
-    "uninstall.mdt" "visualize.mdt"
-)
-
-# Agents (21 total)
-AGENTS=(
-    "backend-specialist.mdt" "code-archaeologist.mdt" "database-architect.mdt"
-    "debugger.mdt" "devops-engineer.mdt" "documentation-writer.mdt"
-    "explorer-agent.mdt" "frontend-specialist.mdt" "game-developer.mdt"
-    "growth-hacker.mdt" "mobile-developer.mdt" "orchestrator.mdt"
-    "penetration-tester.mdt" "performance-optimizer.mdt" "product-manager.mdt"
-    "product-owner.mdt" "project-planner.mdt" "qa-automation-engineer.mdt"
-    "security-auditor.mdt" "seo-specialist.mdt" "test-engineer.mdt"
-)
-
-# Schemas
-SCHEMAS=(
-    "brain.schema.json" "preferences.schema.json" "session.schema.json"
-)
-
-# Templates
-TEMPLATES=(
-    "brain.example.json" "preferences.example.json" "session.example.json"
-    "lessons.example.md"
-)
-
-# Skills (83 total — directories with SKILL.mdt inside)
-SKILLS=(
-    "ab-test-setup" "ad-creative" "ai-seo" "analytics-tracking"
-    "api-patterns" "app-builder" "app-store-optimization" "architecture"
-    "bash-linux" "behavioral-modes" "brainstorming"
-    "churn-prevention" "clean-code" "code-review-checklist" "cold-email"
-    "competitor-alternatives" "content-hash-cache-pattern" "content-strategy"
-    "continuous-learning-v2" "copy-editing" "copywriting" "cost-aware-llm-pipeline"
-    "database-design" "deployment-procedures" "docker-expert" "docker-patterns"
-    "documentation-templates" "e2e-testing" "email-sequence" "evidence-discipline"
-    "form-cro" "free-tool-strategy" "frontend-design"
-    "game-development" "geo-fundamentals" "growth-marketing"
-    "i18n-localization" "intelligent-routing"
-    "launch-strategy" "lint-and-validate"
-    "marketing-ideas" "marketing-psychology" "mcp-builder" "mobile-design"
-    "nestjs-expert" "nextjs-expert" "nextjs-react-expert" "nodejs-best-practices"
-    "onboarding-cro"
-    "page-cro" "paid-ads" "parallel-agents" "paywall-upgrade-cro"
-    "performance-profiling" "plan-writing" "popup-cro" "powershell-windows"
-    "pricing-strategy" "prisma-expert" "proactive-intelligence"
-    "product-marketing-context" "programmatic-seo" "python-patterns"
-    "react-patterns" "red-team-tactics" "referral-program" "rust-pro"
-    "schema-markup" "seo-audit" "seo-fundamentals" "server-management"
-    "signup-flow-cro" "social-content" "strategic-compact" "systematic-debugging"
-    "tailwind-patterns" "tdd-workflow" "testing-patterns" "typescript-expert"
-    "ui-ux-pro-max" "vulnerability-scanner" "web-design-guidelines" "webapp-testing"
-)
-
-# Scripts (7 total)
-SCRIPTS=(
-    "auto_preview.py" "checklist.py"
-    "session_manager.py" "verify_all.py"
-)
 
 # Paths
 ANTIGRAVITY_DIR="$HOME/.gemini/antigravity"
@@ -76,8 +12,10 @@ AGENTS_DIR="$ANTIGRAVITY_DIR/agents"
 SCHEMAS_DIR="$ANTIGRAVITY_DIR/schemas"
 TEMPLATES_DIR="$ANTIGRAVITY_DIR/templates"
 SKILLS_DIR="$ANTIGRAVITY_DIR/skills"
+SCRIPTS_DIR="$ANTIGRAVITY_DIR/scripts"
 GEMINI_MD="$HOME/.gemini/GEMINI.md"
 VERSION_FILE="$HOME/.gemini/antikit_version"
+CUSTOM_FILE="$HOME/.gemini/antikit_custom.json"
 
 # Colors
 RED='\033[0;31m'
@@ -105,12 +43,13 @@ if [ -f "$VERSION_FILE" ]; then
     echo ""
 fi
 
-# Language selection
-LANG_FILE="$HOME/.gemini/antikit_language"
+# ── LANGUAGE SELECTION ──────────────────────────────────────
+LANG_FILE_NEW="$HOME/.gemini/antikit_language"
+LANG_FILE_OLD="$HOME/.gemini/antikit_lang"
 LANG="en" # Default
 CLI_LANG=""
 
-# 0. Parse CLI arguments (e.g., --lang vi)
+# Parse CLI arguments
 while [ $# -gt 0 ]; do
     case "$1" in
         --lang)
@@ -127,16 +66,17 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-# 1. CLI argument has highest priority
+# Priority: CLI > antikit_language > antikit_lang > prompt > en
 if [ -n "$CLI_LANG" ]; then
     LANG="$CLI_LANG"
     echo -e "${GREEN}✅ Using language from --lang: $LANG${NC}"
-# 2. Try to load from config if exists
-elif [ -f "$LANG_FILE" ]; then
-    LANG=$(cat "$LANG_FILE")
+elif [ -f "$LANG_FILE_NEW" ]; then
+    LANG=$(cat "$LANG_FILE_NEW")
+    echo -e "${GREEN}✅ Auto-detected language: $LANG${NC}"
+elif [ -f "$LANG_FILE_OLD" ]; then
+    LANG=$(cat "$LANG_FILE_OLD")
     echo -e "${GREEN}✅ Auto-detected language: $LANG${NC}"
 else
-    # 3. Prompt user (only works in interactive terminal, not piped)
     if [ -t 0 ]; then
         echo -e "${CYAN}🌐 Select language for workflows:${NC}"
         echo "   1. English (en)"
@@ -145,7 +85,6 @@ else
         echo "   4. Chinese (zh)"
         echo ""
         read -p "Enter choice (1-4, default: 1): " lang_choice
-
         case $lang_choice in
             2) LANG="ja" ;;
             3) LANG="vi" ;;
@@ -161,57 +100,120 @@ else
 fi
 echo ""
 
+# ── FETCH MANIFEST ──────────────────────────────────────────
+echo -e "${CYAN}⏳ Fetching manifest...${NC}"
+MANIFEST_TMP="/tmp/antikit_manifest.json"
+if curl -f -s -o "$MANIFEST_TMP" "$REPO_BASE/manifest.json"; then
+    echo -e "${GREEN}✅ Manifest fetched (v$(python3 -c "import json;print(json.load(open('$MANIFEST_TMP'))['version'])" 2>/dev/null || echo '?'))${NC}"
+else
+    echo -e "${YELLOW}⚠️  Manifest not available. Using fallback hardcoded lists.${NC}"
+    MANIFEST_TMP=""
+fi
+
+# ── PARSE MANIFEST ──────────────────────────────────────────
+# Helper: parse JSON array to bash array (works without jq)
+parse_json_array() {
+    python3 -c "
+import json, sys
+data = json.load(open('$MANIFEST_TMP'))
+items = data.get('$1', [])
+for item in items:
+    print(item)
+" 2>/dev/null
+}
+
+if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
+    # Read arrays from manifest
+    mapfile -t WORKFLOWS < <(parse_json_array "workflows")
+    mapfile -t AGENTS < <(parse_json_array "agents")
+    mapfile -t SKILLS < <(parse_json_array "skills")
+    mapfile -t SCRIPTS < <(parse_json_array "scripts")
+    mapfile -t SCHEMAS < <(parse_json_array "schemas")
+    mapfile -t TEMPLATES < <(parse_json_array "templates")
+else
+    # Fallback: hardcoded (keep for backward compat)
+    WORKFLOWS=(
+        "ak-update" "audit" "brainstorm" "code" "config"
+        "debug" "deploy" "grow" "init" "launch" "next"
+        "plan" "recap" "refactor" "run" "save_brain" "test"
+        "uninstall" "visualize"
+    )
+    AGENTS=(
+        "backend-specialist" "code-archaeologist" "database-architect"
+        "debugger" "devops-engineer" "documentation-writer"
+        "explorer-agent" "frontend-specialist" "game-developer"
+        "growth-hacker" "mobile-developer" "orchestrator"
+        "penetration-tester" "performance-optimizer" "product-manager"
+        "product-owner" "project-planner" "qa-automation-engineer"
+        "security-auditor" "seo-specialist" "test-engineer"
+    )
+    SKILLS=(
+        "ab-test-setup" "ad-creative" "ai-seo" "analytics-tracking"
+        "api-patterns" "app-builder" "app-store-optimization" "architecture"
+        "bash-linux" "behavioral-modes" "brainstorming"
+        "churn-prevention" "clean-code" "code-review-checklist" "cold-email"
+        "competitor-alternatives" "content-hash-cache-pattern" "content-strategy"
+        "continuous-learning-v2" "copy-editing" "copywriting" "cost-aware-llm-pipeline"
+        "database-design" "deployment-procedures" "docker-expert" "docker-patterns"
+        "documentation-templates" "e2e-testing" "email-sequence" "evidence-discipline"
+        "form-cro" "free-tool-strategy" "frontend-design"
+        "game-development" "geo-fundamentals" "growth-marketing"
+        "i18n-localization" "intelligent-routing"
+        "launch-strategy" "lint-and-validate"
+        "marketing-ideas" "marketing-psychology" "mcp-builder" "mobile-design"
+        "nestjs-expert" "nextjs-expert" "nextjs-react-expert" "nodejs-best-practices"
+        "onboarding-cro"
+        "page-cro" "paid-ads" "parallel-agents" "paywall-upgrade-cro"
+        "performance-profiling" "plan-writing" "popup-cro" "powershell-windows"
+        "pricing-strategy" "prisma-expert" "proactive-intelligence"
+        "product-marketing-context" "programmatic-seo" "python-patterns"
+        "react-patterns" "red-team-tactics" "referral-program" "rust-pro"
+        "schema-markup" "seo-audit" "seo-fundamentals" "server-management"
+        "signup-flow-cro" "social-content" "strategic-compact" "systematic-debugging"
+        "tailwind-patterns" "tdd-workflow" "testing-patterns" "typescript-expert"
+        "ui-ux-pro-max" "vulnerability-scanner" "web-design-guidelines" "webapp-testing"
+    )
+    SCRIPTS=("auto_preview.py" "checklist.py" "session_manager.py" "verify_all.py")
+    SCHEMAS=("brain.schema.json" "preferences.schema.json" "session.schema.json")
+    TEMPLATES=("brain.example.json" "preferences.example.json" "session.example.json" "lessons.example.md")
+fi
+
 success=0
 failed=0
 
-# 1. Create directories
-mkdir -p "$ANTIGRAVITY_DIR" "$GLOBAL_WORKFLOWS" "$AGENTS_DIR" "$SCHEMAS_DIR" "$TEMPLATES_DIR" "$SKILLS_DIR"
+# ── CREATE DIRECTORIES ──────────────────────────────────────
+mkdir -p "$ANTIGRAVITY_DIR" "$GLOBAL_WORKFLOWS" "$AGENTS_DIR" "$SCHEMAS_DIR" "$TEMPLATES_DIR" "$SKILLS_DIR" "$SCRIPTS_DIR"
 echo -e "${GREEN}📂 Directories ready: $ANTIGRAVITY_DIR${NC}"
 
-# 1.5. Clean old files (remove renamed/obsolete agents)
-OLD_AGENTS=("architect.md" "backend.md" "database.md" "devops.md" "doc-writer.md"
-    "explorer.md" "frontend.md" "game.md" "mobile.md" "pentester.md"
-    "performance.md" "security.md" "seo.md" "tester.md")
-cleaned=0
-for old in "${OLD_AGENTS[@]}"; do
-    if [ -f "$AGENTS_DIR/$old" ]; then
-        rm -f "$AGENTS_DIR/$old"
-        ((cleaned++))
-    fi
-done
-if [ $cleaned -gt 0 ]; then
-    echo -e "${YELLOW}🧹 Cleaned $cleaned old agent files${NC}"
-fi
+# ── DOWNLOAD FILES ──────────────────────────────────────────
 
-# 2. Download Workflows
+# Workflows
 echo ""
 echo -e "${CYAN}⏳ Downloading workflows ($LANG)...${NC}"
 for wf in "${WORKFLOWS[@]}"; do
-    out_name="${wf%.mdt}.md"
-    if curl -f -s -o "$GLOBAL_WORKFLOWS/$out_name" "$REPO_BASE/workflows/$LANG/$wf"; then
-        echo -e "   ${GREEN}✅ $out_name${NC}"
+    if curl -f -s -o "$GLOBAL_WORKFLOWS/${wf}.md" "$REPO_BASE/workflows/$LANG/${wf}.mdt"; then
+        echo -e "   ${GREEN}✅ ${wf}.md${NC}"
         ((success++))
     else
-        echo -e "   ${RED}❌ $out_name${NC}"
+        echo -e "   ${RED}❌ ${wf}.md${NC}"
         ((failed++))
     fi
 done
 
-# 3. Download Agents
+# Agents
 echo ""
 echo -e "${CYAN}⏳ Downloading agents...${NC}"
 for agent in "${AGENTS[@]}"; do
-    out_name="${agent%.mdt}.md"
-    if curl -f -s -o "$AGENTS_DIR/$out_name" "$REPO_BASE/src/agents/$agent"; then
-        echo -e "   ${GREEN}✅ $out_name${NC}"
+    if curl -f -s -o "$AGENTS_DIR/${agent}.md" "$REPO_BASE/src/agents/${agent}.mdt"; then
+        echo -e "   ${GREEN}✅ ${agent}.md${NC}"
         ((success++))
     else
-        echo -e "   ${RED}❌ $out_name${NC}"
+        echo -e "   ${RED}❌ ${agent}.md${NC}"
         ((failed++))
     fi
 done
 
-# 4. Download Schemas
+# Schemas
 echo ""
 echo -e "${CYAN}⏳ Downloading schemas...${NC}"
 for schema in "${SCHEMAS[@]}"; do
@@ -224,7 +226,7 @@ for schema in "${SCHEMAS[@]}"; do
     fi
 done
 
-# 5. Download Templates
+# Templates
 echo ""
 echo -e "${CYAN}⏳ Downloading templates...${NC}"
 for template in "${TEMPLATES[@]}"; do
@@ -237,7 +239,7 @@ for template in "${TEMPLATES[@]}"; do
     fi
 done
 
-# 6. Download Skills
+# Skills
 echo ""
 echo -e "${CYAN}⏳ Downloading skills...${NC}"
 for skill in "${SKILLS[@]}"; do
@@ -251,9 +253,7 @@ for skill in "${SKILLS[@]}"; do
     fi
 done
 
-# 6.5 Download Scripts
-SCRIPTS_DIR="$ANTIGRAVITY_DIR/scripts"
-mkdir -p "$SCRIPTS_DIR"
+# Scripts
 echo ""
 echo -e "${CYAN}⏳ Downloading scripts...${NC}"
 for script in "${SCRIPTS[@]}"; do
@@ -267,22 +267,103 @@ for script in "${SCRIPTS[@]}"; do
     fi
 done
 
-# 7. Save version and language
+# ── ORPHAN CLEANUP ──────────────────────────────────────────
+echo ""
+echo -e "${CYAN}🧹 Scanning for orphan files...${NC}"
+orphan_count=0
+
+# Load custom files list (user-created workflows/agents/skills)
+custom_workflows=()
+custom_agents=()
+custom_skills=()
+if [ -f "$CUSTOM_FILE" ]; then
+    while IFS= read -r line; do custom_workflows+=("$line"); done < <(python3 -c "
+import json
+data = json.load(open('$CUSTOM_FILE'))
+for w in data.get('custom_workflows', []): print(w)
+" 2>/dev/null)
+    while IFS= read -r line; do custom_agents+=("$line"); done < <(python3 -c "
+import json
+data = json.load(open('$CUSTOM_FILE'))
+for a in data.get('custom_agents', []): print(a)
+" 2>/dev/null)
+    while IFS= read -r line; do custom_skills+=("$line"); done < <(python3 -c "
+import json
+data = json.load(open('$CUSTOM_FILE'))
+for s in data.get('custom_skills', []): print(s)
+" 2>/dev/null)
+fi
+
+# Helper: check if value is in array
+in_array() {
+    local needle="$1"; shift
+    for item in "$@"; do
+        [ "$item" = "$needle" ] && return 0
+    done
+    return 1
+}
+
+# Scan workflows for orphans
+for file in "$GLOBAL_WORKFLOWS"/*.md; do
+    [ -f "$file" ] || continue
+    name=$(basename "$file" .md)
+    if ! in_array "$name" "${WORKFLOWS[@]}" && ! in_array "$name" "${custom_workflows[@]}"; then
+        echo -e "   ${YELLOW}🗑️  Removing orphan workflow: ${name}.md${NC}"
+        rm -f "$file"
+        ((orphan_count++))
+    fi
+done
+
+# Scan agents for orphans
+for file in "$AGENTS_DIR"/*.md; do
+    [ -f "$file" ] || continue
+    name=$(basename "$file" .md)
+    if ! in_array "$name" "${AGENTS[@]}" && ! in_array "$name" "${custom_agents[@]}"; then
+        echo -e "   ${YELLOW}🗑️  Removing orphan agent: ${name}.md${NC}"
+        rm -f "$file"
+        ((orphan_count++))
+    fi
+done
+
+# Scan skills for orphans
+for dir in "$SKILLS_DIR"/*/; do
+    [ -d "$dir" ] || continue
+    name=$(basename "$dir")
+    if ! in_array "$name" "${SKILLS[@]}" && ! in_array "$name" "${custom_skills[@]}"; then
+        echo -e "   ${YELLOW}🗑️  Removing orphan skill: $name/${NC}"
+        rm -rf "$dir"
+        ((orphan_count++))
+    fi
+done
+
+if [ $orphan_count -eq 0 ]; then
+    echo -e "   ${GREEN}✅ No orphan files found${NC}"
+else
+    echo -e "   ${GREEN}✅ Cleaned $orphan_count orphan file(s)${NC}"
+fi
+
+# ── SAVE VERSION + LANGUAGE ─────────────────────────────────
 mkdir -p "$HOME/.gemini"
 echo "$CURRENT_VERSION" > "$VERSION_FILE"
-LANG_FILE="$HOME/.gemini/antikit_language"
-echo "$LANG" > "$LANG_FILE"
+# Write to BOTH files for backward compat
+echo "$LANG" > "$LANG_FILE_NEW"
+echo "$LANG" > "$LANG_FILE_OLD"
 echo ""
 echo -e "${GREEN}✅ Version saved: $CURRENT_VERSION${NC}"
 echo -e "${GREEN}✅ Language saved: $LANG${NC}"
 
-# 8. Download GEMINI.md source files from rules/
+# ── SAVE MANIFEST LOCALLY ──────────────────────────────────
+if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
+    cp "$MANIFEST_TMP" "$ANTIGRAVITY_DIR/manifest.json"
+    rm -f "$MANIFEST_TMP"
+fi
+
+# ── DOWNLOAD GEMINI RULES ──────────────────────────────────
 echo ""
 echo -e "${CYAN}⏳ Downloading GEMINI rules...${NC}"
 RULES_DIR="$ANTIGRAVITY_DIR/rules"
 mkdir -p "$RULES_DIR"
 
-# Download language-specific instructions + core GEMINI.md
 curl -f -s -o "$RULES_DIR/instructions.md" "$REPO_BASE/rules/instructions_${LANG}.md" && \
     echo -e "   ${GREEN}✅ instructions_${LANG}.md${NC}" || \
     echo -e "   ${RED}❌ instructions_${LANG}.md${NC}"
@@ -302,7 +383,7 @@ if [ -f "$RULES_DIR/GEMINI.md" ]; then
 $(cat "$RULES_DIR/GEMINI.md")"
 fi
 
-# 8.5 Generate AGENT INDEX from downloaded agents
+# ── GENERATE AGENT INDEX ────────────────────────────────────
 echo ""
 echo -e "${CYAN}⏳ Generating Agent Index...${NC}"
 AGENT_INDEX="| Agent | Tags | Skills |
@@ -326,7 +407,7 @@ for agent_file in "$AGENTS_DIR"/*.md; do
 done
 echo -e "${GREEN}✅ Agent Index generated${NC}"
 
-# 8.6 Generate SKILL INDEX from downloaded skills
+# ── GENERATE SKILL INDEX ────────────────────────────────────
 echo -e "${CYAN}⏳ Generating Skill Index...${NC}"
 SKILL_INDEX="| Skill | Description |
 |-------|-------------|"
@@ -337,7 +418,6 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     s_name="" s_desc=""
     in_fm=0
     has_fm=0
-    # Try YAML frontmatter first
     while IFS= read -r line; do
         case "$line" in
             "---") [ $in_fm -eq 0 ] && { in_fm=1; has_fm=1; } || break ;;
@@ -347,19 +427,17 @@ for skill_dir in "$SKILLS_DIR"/*/; do
             fi ;;
         esac
     done < "$skill_file"
-    # Fallback: no frontmatter → use directory name + first description line
     if [ -z "$s_name" ]; then
         s_name=$(basename "$skill_dir")
         s_desc=$(grep -m1 '^>' "$skill_file" 2>/dev/null | sed 's/^> *//' || echo "")
     fi
-    # Truncate long descriptions
     [ ${#s_desc} -gt 100 ] && s_desc="${s_desc:0:100}..."
     [ -n "$s_name" ] && SKILL_INDEX="$SKILL_INDEX
 | $s_name | $s_desc |"
 done
 echo -e "${GREEN}✅ Skill Index generated${NC}"
 
-# 8.7 MULTI-AGENT PROTOCOL (language-agnostic, appended to all languages)
+# ── MULTI-AGENT PROTOCOL ───────────────────────────────────
 MULTI_AGENT_PROTOCOL='
 
 ## AGENT INDEX (Auto-Generated)
@@ -425,14 +503,14 @@ Cross-review format:
 ANTIKIT_INSTRUCTIONS="$ANTIKIT_INSTRUCTIONS
 $MULTI_AGENT_PROTOCOL"
 
-# Write instructions to a temp file (avoids awk multiline variable issues)
+# ── UPDATE GEMINI.MD ────────────────────────────────────────
 INSTR_TMP="${GEMINI_MD}.instr.tmp"
 printf '%s\n' "$ANTIKIT_INSTRUCTIONS" > "$INSTR_TMP"
 
 START_MARKER="<!-- ANTIKIT_START -->"
 END_MARKER="<!-- ANTIKIT_END -->"
 
-# ── AUTO-BACKUP ──────────────────────────────────────────────
+# Auto-backup
 BACKUP_CREATED=""
 if [ -f "$GEMINI_MD" ]; then
     BACKUP_FILE="${GEMINI_MD}.backup.$(date +%Y%m%d_%H%M%S)"
@@ -440,13 +518,12 @@ if [ -f "$GEMINI_MD" ]; then
     BACKUP_CREATED="$BACKUP_FILE"
     echo -e "${GREEN}💾 Backup: $(basename "$BACKUP_FILE")${NC}"
 
-    # Keep only 3 most recent backups, remove older ones
+    # Keep only 3 most recent backups
     ls -t "${GEMINI_MD}.backup."* 2>/dev/null | tail -n +4 | while read -r old_backup; do
         rm -f "$old_backup"
     done
 fi
 
-# ── UPDATE GEMINI.MD ─────────────────────────────────────────
 if [ ! -f "$GEMINI_MD" ]; then
     echo "$START_MARKER" > "$GEMINI_MD"
     cat "$INSTR_TMP" >> "$GEMINI_MD"
@@ -454,8 +531,6 @@ if [ ! -f "$GEMINI_MD" ]; then
     echo -e "${GREEN}✅ Created Global Rules (GEMINI.md)${NC}"
 else
     if grep -q "$START_MARKER" "$GEMINI_MD" && grep -q "$END_MARKER" "$GEMINI_MD"; then
-        # Scenario A: Markers exist - Block Replace
-        # Extract content before start marker and after end marker, sandwich new content
         TMP_FILE="${GEMINI_MD}.tmp"
         {
             sed -n "1,/^${START_MARKER}/{ /^${START_MARKER}/!p; }" "$GEMINI_MD"
@@ -464,12 +539,9 @@ else
             echo "$END_MARKER"
             sed -n "/^${END_MARKER}/,\${ /^${END_MARKER}/!p; }" "$GEMINI_MD"
         } > "$TMP_FILE"
-        
         mv "$TMP_FILE" "$GEMINI_MD"
         echo -e "${GREEN}✅ Updated Global Rules (GEMINI.md) - Block Replaced${NC}"
-        
     else
-        # Scenario B: Legacy Header or Fresh Install
         if grep -q "AntiKit - Enhancement Kit for Antigravity" "$GEMINI_MD" 2>/dev/null; then
             sed -i.bak '/# AntiKit - Enhancement Kit for Antigravity/,$d' "$GEMINI_MD"
             rm -f "$GEMINI_MD.bak"
@@ -477,8 +549,6 @@ else
             sed -i.bak '/# AWF - Antigravity Workflow Framework/,$d' "$GEMINI_MD"
             rm -f "$GEMINI_MD.bak"
         fi
-        
-        # Append new content with markers
         echo "" >> "$GEMINI_MD"
         echo "$START_MARKER" >> "$GEMINI_MD"
         cat "$INSTR_TMP" >> "$GEMINI_MD"
@@ -487,17 +557,14 @@ else
     fi
 fi
 
-# ── DETECT CUSTOM CONTENT ───────────────────────────────────
+# ── DETECT CUSTOM CONTENT ──────────────────────────────────
 CUSTOM_BEFORE=0
 CUSTOM_AFTER=0
 ANTIKIT_LINES=0
 
 if [ -f "$GEMINI_MD" ] && grep -q "$START_MARKER" "$GEMINI_MD" && grep -q "$END_MARKER" "$GEMINI_MD"; then
-    # Count lines before start marker (user's custom rules)
     CUSTOM_BEFORE=$(sed -n "1,/^${START_MARKER}/{ /^${START_MARKER}/d; /^$/d; p; }" "$GEMINI_MD" | wc -l | tr -d ' ')
-    # Count lines after end marker (user's custom rules)
     CUSTOM_AFTER=$(sed -n "/^${END_MARKER}/,\${ /^${END_MARKER}/d; /^$/d; p; }" "$GEMINI_MD" | wc -l | tr -d ' ')
-    # Count AntiKit managed lines
     ANTIKIT_LINES=$(sed -n "/^${START_MARKER}/,/^${END_MARKER}/p" "$GEMINI_MD" | wc -l | tr -d ' ')
 fi
 
@@ -521,10 +588,13 @@ fi
 # Clean up temp file
 rm -f "$INSTR_TMP"
 
-# Summary
+# ── SUMMARY ─────────────────────────────────────────────────
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e "${YELLOW}🎉 COMPLETE! Installed $success files ($failed failed)${NC}"
+if [ $orphan_count -gt 0 ]; then
+    echo -e "${YELLOW}🧹 Cleaned $orphan_count orphan file(s)${NC}"
+fi
 echo -e "${CYAN}📦 Version: $CURRENT_VERSION${NC}"
 echo ""
 echo "📂 Workflows:  $GLOBAL_WORKFLOWS"
@@ -545,8 +615,5 @@ echo -e "   To change language: ${MAGENTA}/config language [en|vi|ja|zh]${NC}"
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-if [ ! -f "$LANG_FILE" ]; then
-    read -p "Press Enter to exit..."
-fi
 
 exit 0
