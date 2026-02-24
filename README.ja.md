@@ -2,6 +2,8 @@
 
 # AntiKit 🚀
 
+#### Google Antigravity IDE向け #1 Vibe Codingフレームワーク
+
 ### **21人のAI専門家。1つのチャット。アイデアから収益へ。**
 *闇雲なVibe Codingはもう終わり。スマートなVibe Codingを始めよう。*
 

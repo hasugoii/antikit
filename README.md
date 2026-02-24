@@ -2,6 +2,8 @@
 
 # AntiKit 🚀
 
+#### The #1 Vibe Coding Framework for Google Antigravity IDE
+
 ### **21 AI experts. 1 chat. From idea to income.**
 *Stop vibe coding blind. Start vibe coding smart.*
 
@@ -280,10 +282,10 @@ Sound familiar? **AntiKit solves this.**
 
 | Problem | AntiKit Solution |
 |:--------|:----------------|
-| 🤦 AI forgets everything next session | `/save-brain` saves project knowledge to `.brain/brain.json` — **permanent** |
-| 🤷 AI hallucinates code that doesn't exist | `/recap` scans your actual codebase, not memory |
-| 😤 Re-explaining the same thing every day | `.brain/session.json` tracks what you're working on |
-| 🔄 Context lost after long conversations | Structured knowledge survives across sessions |
+| 🔋 Token runs out mid-conversation | `/save-brain` preserves context — **never lose progress again** |
+| 🤷 AI hallucinates: invents APIs, fabricates libraries | `/recap` scans your actual codebase, not memory |
+| 😤 Explained architecture yesterday — forgot today | `.brain/brain.json` stores permanent knowledge |
+| 🔄 Fix 1 bug, 3 new ones appear — no impact awareness | Change Impact Awareness prevents cascade failures |
 
 ```
 End of day:  /save-brain  → saves architecture, APIs, DB schema, decisions

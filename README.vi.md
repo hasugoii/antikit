@@ -2,6 +2,8 @@
 
 # AntiKit 🚀
 
+#### Framework Vibe Coding #1 cho Google Antigravity IDE
+
 ### **21 chuyên gia AI. 1 khung chat. Từ ý tưởng đến doanh thu.**
 *Ngừng vibe coding mù quáng. Bắt đầu vibe coding thông minh.*
 

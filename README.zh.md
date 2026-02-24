@@ -2,6 +2,8 @@
 
 # AntiKit 🚀
 
+#### Google Antigravity IDE的 #1 Vibe Coding框架
+
 ### **21位AI专家。1个聊天。从创意到收入。**
 *告别盲目Vibe Coding。开始智能Vibe Coding。*
 
