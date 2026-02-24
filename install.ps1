@@ -33,7 +33,8 @@ $Schemas = @(
 
 # Templates
 $Templates = @(
-    "brain.example.json", "preferences.example.json", "session.example.json"
+    "brain.example.json", "preferences.example.json", "session.example.json",
+    "lessons.example.md"
 )
 
 # Skills (83 total — directories with SKILL.mdt inside)
