@@ -107,20 +107,59 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 
 ## Phase 6: 更新実行
 
-選択したパッケージをダウンロードし、ローカルにコピー、antikit_installed.jsonを更新。
+> 🔴 **AIはこれらのコマンドを直接実行しなければなりません。表示するだけではいけません。**
+
+### 6.1. コアバージョン更新
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION" -o "$HOME/.gemini/antikit_version"
+```
+
+### 6.2. 選択したワークフローをダウンロード
+選択された各ワークフローに対して、AIは必ず実行:
+```bash
+# ユーザー言語を検出
+LANG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+
+# ワークフローをダウンロード（{name}を実際の名前に置換）
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/workflows/$LANG/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/global_workflows/{name}.md"
+```
+
+### 6.3. 選択したスキルをダウンロード
+選択された各スキルに対して、AIは必ず実行:
+```bash
+mkdir -p "$HOME/.gemini/antigravity/skills/{name}"
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/skills/{name}/SKILL.mdt" \
+  -o "$HOME/.gemini/antigravity/skills/{name}/SKILL.md"
+```
+
+### 6.4. 選択したエージェントをダウンロード
+選択された各エージェントに対して、AIは必ず実行:
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/agents/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/agents/{name}.md"
+```
+
+### 6.5. ダウンロード確認
+すべてのダウンロード後、各ファイルの存在と非空を確認:
+```bash
+[ -s "$FILE_PATH" ] && echo "✅ {name}" || echo "❌ {name} 失敗"
+```
 
 ---
 
 ## Phase 7: 確認
 
+結果をユーザーに報告:
 ```
 ✅ アップデート完了！
 
 📦 更新済み:
-├── workflow/debug 1.0.0 → 1.2.0
-├── skill/react-patterns (新規)
+├── workflow/{name} ✅
+├── skill/{name} ✅
+└── バージョン: {version}
 
-👉 IDEを再起動して変更を適用してください。
+⏳ GEMINI.mdルールを更新中...
 ```
 
 ---
@@ -128,7 +167,7 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 ## Phase 8: 次のステップ
 
 ```
-1️⃣ 新機能を試す
+1️⃣ IDEを再起動して変更を適用
 2️⃣ /recap で変更内容を確認
 3️⃣ 問題があれば /debug
 ```
@@ -137,27 +176,34 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 
 ## Phase 9: GEMINI.mdルールの更新
 
-**重要:** ワークフロー/スキル/エージェントの更新後、インストーラーを再実行してGEMINI.mdを最新のルール、AGENT INDEX、SKILL INDEXで更新してください。
+> 🔴 **必須: AIはPhase 6の後、自動的にこれを実行しなければなりません。スキップ不可。コマンドを表示するだけではいけません。**
 
-**自動言語検出**: `~/.gemini/antikit_lang`から言語を読み取り、正しいフラグを使用：
-
+### 9.1. 言語検出
 ```bash
-# macOS/Linux — 言語を自動検出
-LANG_FLAG=$(cat ~/.gemini/antikit_lang 2>/dev/null)
-[ -n "$LANG_FLAG" ] && [ "$LANG_FLAG" != "en" ] && curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG" || curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+LANG_FLAG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+echo "検出された言語: $LANG_FLAG"
 ```
 
-```powershell
-# Windows — 言語を自動検出
-$lang = Get-Content "$env:USERPROFILE\.gemini\antikit_lang" -ErrorAction SilentlyContinue
-if ($lang -and $lang -ne "en") { & ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language $lang } else { iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex }
+### 9.2. インストーラーを再実行
+AIは直接インストーラーを実行:
+```bash
+if [ "$LANG_FLAG" != "en" ]; then
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG"
+else
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+fi
+```
+
+### 9.3. GEMINI.md更新確認
+```bash
+grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.mdマーカーOK" || echo "❌ GEMINI.md未更新"
 ```
 
 確認事項:
 - ✅ コアルールが更新される（rules/GEMINI.md）
-- ✅ AGENT INDEXが再生成される（新しいエージェントを含む）
-- ✅ SKILL INDEXが再生成される（新しいスキルを含む）
-- ✅ ユーザーのカスタムルールは保持される（マーカー外）
+- ✅ AGENT INDEXが再生成される（新エージェントを含む）
+- ✅ SKILL INDEXが再生成される（新スキルを含む）
+- ✅ ユーザーカスタムルールは保持される（マーカー外）
 - ✅ 更新前に自動バックアップが作成される
 
-> **注意:** インストーラーは既存のインストールを検出し、インプレースで更新します。`<!-- ANTIKIT_START -->`マーカー外のカスタムルールは常に保持されます。
+> **注意:** インストーラーは既存インストールを検出し、インプレースで更新します。`<!-- ANTIKIT_START -->`マーカー外のカスタムルールは常に保持されます。

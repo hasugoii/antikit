@@ -107,20 +107,59 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 
 ## Phase 6: 执行更新
 
-下载选定的包，复制到本地，更新antikit_installed.json。
+> 🔴 **AI必须直接执行这些命令。不能只是显示它们。**
+
+### 6.1. 更新核心版本
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION" -o "$HOME/.gemini/antikit_version"
+```
+
+### 6.2. 下载选定的工作流
+对于每个选定的工作流，AI必须执行:
+```bash
+# 检测用户语言
+LANG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+
+# 下载工作流（将{name}替换为实际名称）
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/workflows/$LANG/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/global_workflows/{name}.md"
+```
+
+### 6.3. 下载选定的技能
+对于每个选定的技能，AI必须执行:
+```bash
+mkdir -p "$HOME/.gemini/antigravity/skills/{name}"
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/skills/{name}/SKILL.mdt" \
+  -o "$HOME/.gemini/antigravity/skills/{name}/SKILL.md"
+```
+
+### 6.4. 下载选定的代理
+对于每个选定的代理，AI必须执行:
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/agents/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/agents/{name}.md"
+```
+
+### 6.5. 验证下载
+所有下载完成后，确认每个文件存在且非空:
+```bash
+[ -s "$FILE_PATH" ] && echo "✅ {name}" || echo "❌ {name} 失败"
+```
 
 ---
 
 ## Phase 7: 确认
 
+向用户报告结果:
 ```
 ✅ 更新完成！
 
 📦 已更新:
-├── workflow/debug 1.0.0 → 1.2.0
-├── skill/react-patterns (新增)
+├── workflow/{name} ✅
+├── skill/{name} ✅
+└── 版本: {version}
 
-👉 请重启IDE以应用更改。
+⏳ 正在刷新GEMINI.md规则...
 ```
 
 ---
@@ -128,7 +167,7 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 ## Phase 8: 下一步
 
 ```
-1️⃣ 试用新功能
+1️⃣ 重启IDE以应用更改
 2️⃣ /recap 查看变更内容
 3️⃣ 有问题请 /debug
 ```
@@ -137,20 +176,27 @@ curl -s https://raw.githubusercontent.com/hasugoii/antikit/main/registry/index.j
 
 ## Phase 9: 刷新GEMINI.md规则
 
-**重要:** 更新工作流/技能/代理后，重新运行安装程序以使用最新的规则、AGENT INDEX和SKILL INDEX刷新GEMINI.md。
+> 🔴 **必须: AI必须在Phase 6之后自动执行此步骤。不可跳过。不可只显示命令。**
 
-**自动检测语言**: 从`~/.gemini/antikit_lang`读取语言并使用正确的标志：
-
+### 9.1. 检测语言
 ```bash
-# macOS/Linux — 自动检测语言
-LANG_FLAG=$(cat ~/.gemini/antikit_lang 2>/dev/null)
-[ -n "$LANG_FLAG" ] && [ "$LANG_FLAG" != "en" ] && curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG" || curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+LANG_FLAG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+echo "检测到的语言: $LANG_FLAG"
 ```
 
-```powershell
-# Windows — 自动检测语言
-$lang = Get-Content "$env:USERPROFILE\.gemini\antikit_lang" -ErrorAction SilentlyContinue
-if ($lang -and $lang -ne "en") { & ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language $lang } else { iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex }
+### 9.2. 重新运行安装程序
+AI必须直接执行安装程序:
+```bash
+if [ "$LANG_FLAG" != "en" ]; then
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG"
+else
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+fi
+```
+
+### 9.3. 验证GEMINI.md已更新
+```bash
+grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.md标记OK" || echo "❌ GEMINI.md未更新"
 ```
 
 确保:

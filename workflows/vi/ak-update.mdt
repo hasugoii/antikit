@@ -183,111 +183,105 @@ Ví dụ: 1,2,4,5 hoặc all
 
 ---
 
-## Giai đoạn 6: Thực Hiện Update
+## Phase 6: Thực Thi Cập Nhật
 
-### 6.1. Download Selected
+> 🔴 **AI PHẢI TỰ CHẠY các lệnh này. KHÔNG CHỈ hiển thị.**
 
-```
-⬇️ ĐANG TẢI...
-
-├── /debug (vi)... ✓
-├── /code (vi)... ✓
-├── react-patterns... ✓
-└── nextjs-expert... ✓
-
-Đã tải: 4 packages
-```
-
-### 6.2. Update Local Files
-
+### 6.1. Cập Nhật Phiên Bản
 ```bash
-# Copy từ git repo sang local
-cp -r antikit/library/workflows/debug/translations/vi.md ~/.gemini/antigravity/global_workflows/debug.md
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION" -o "$HOME/.gemini/antikit_version"
 ```
 
-### 6.3. Update antikit_installed.json
+### 6.2. Tải Workflows Đã Chọn
+Với mỗi workflow được chọn, AI PHẢI chạy:
+```bash
+# Phát hiện ngôn ngữ user
+LANG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
 
-```json
-{
-  "installed": {
-    "workflows": {
-      "debug": { "version": "1.2.0", "installed": "2026-02-01" }
-    }
-  },
-  "history": [
-    {
-      "date": "2026-02-01T16:00:00Z",
-      "action": "update",
-      "packages": ["workflow/debug", "workflow/code", "skill/react-patterns"]
-    }
-  ]
-}
+# Tải workflow (thay {name} bằng tên thật)
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/workflows/$LANG/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/global_workflows/{name}.md"
+```
+
+### 6.3. Tải Skills Đã Chọn
+Với mỗi skill được chọn, AI PHẢI chạy:
+```bash
+mkdir -p "$HOME/.gemini/antigravity/skills/{name}"
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/skills/{name}/SKILL.mdt" \
+  -o "$HOME/.gemini/antigravity/skills/{name}/SKILL.md"
+```
+
+### 6.4. Tải Agents Đã Chọn
+Với mỗi agent được chọn, AI PHẢI chạy:
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/agents/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/agents/{name}.md"
+```
+
+### 6.5. Xác Nhận Tải Về
+Sau khi tải xong, kiểm tra từng file tồn tại và không rỗng:
+```bash
+[ -s "$FILE_PATH" ] && echo "✅ {name}" || echo "❌ {name} THẤT BẠI"
 ```
 
 ---
 
-## Giai đoạn 7: Xác Nhận
+## Phase 7: Xác Nhận
 
+Báo cáo kết quả cho user:
 ```
 ✅ CẬP NHẬT HOÀN TẤT!
 
 📦 Đã cập nhật:
-├── workflow/debug 1.0.0 → 1.2.0
-├── workflow/code 1.1.0 → 1.2.1
-├── skill/react-patterns (new)
-└── skill/nextjs-expert (new)
+├── workflow/{name} ✅
+├── skill/{name} ✅
+└── Phiên bản: {version}
 
-📊 Thống kê:
-├── Workflows: 21 installed
-├── Skills: 42 installed
-├── Agents: 16 installed
-└── Total packages: 79
-
-📝 Lịch sử được lưu tại: ~/.gemini/antikit_installed.json
-
-👉 Khởi động lại IDE để áp dụng thay đổi.
+⏳ Đang làm mới GEMINI.md rules...
 ```
 
 ---
 
-## Giai đoạn 7: Next Steps
+## Phase 8: Bước Tiếp Theo
 
 ```
-⚠️ BƯỚC TIẾP THEO:
-
-4️⃣ Test workflow mới? /recap
+1️⃣ Khởi động lại IDE để áp dụng
+2️⃣ /recap để xem thay đổi
+3️⃣ Có vấn đề? /debug
 ```
 
 ---
 
-## ⚠️ Lưu Ý
+## Phase 9: Làm Mới GEMINI.md Rules
 
-- Packages được auto-translate sang ngôn ngữ của bạn
-- Core framework update sẽ overwrite global files
-- Lịch sử update được lưu để rollback nếu cần
+> 🔴 **BẮT BUỘC: AI PHẢI tự chạy sau Phase 6. KHÔNG ĐƯỢC bỏ qua. KHÔNG CHỈ hiển thị lệnh.**
 
-
----
-
-## Phase 9: Cập Nhật GEMINI.md Rules
-
-**QUAN TRỌNG:** Sau khi update workflows/skills/agents, chạy lại installer để cập nhật GEMINI.md với rules, AGENT INDEX, SKILL INDEX mới nhất.
-
+### 9.1. Phát Hiện Ngôn Ngữ
 ```bash
-# macOS/Linux
-curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+LANG_FLAG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+echo "Ngôn ngữ: $LANG_FLAG"
 ```
 
-```powershell
-# Windows
-iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex
+### 9.2. Chạy Lại Installer
+AI PHẢI chạy installer trực tiếp:
+```bash
+if [ "$LANG_FLAG" != "en" ]; then
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG"
+else
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+fi
+```
+
+### 9.3. Xác Nhận GEMINI.md Đã Cập Nhật
+```bash
+grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.md markers OK" || echo "❌ GEMINI.md chưa cập nhật"
 ```
 
 Đảm bảo:
-- ✅ Core rules được cập nhật
+- ✅ Core rules cập nhật (rules/GEMINI.md)
 - ✅ AGENT INDEX tạo lại (bao gồm agents mới)
 - ✅ SKILL INDEX tạo lại (bao gồm skills mới)
-- ✅ Custom rules của user được giữ nguyên
+- ✅ Custom rules của user giữ nguyên
 - ✅ Auto-backup trước khi update
 
 > **Lưu ý:** Installer tự detect đã cài đặt → chỉ update. Custom rules ngoài markers luôn được bảo toàn.

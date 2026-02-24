@@ -107,20 +107,59 @@ Example: 1,2,4,5 or all
 
 ## Phase 6: Execute Update
 
-Download selected packages, copy to local, update antikit_installed.json.
+> 🔴 **AI MUST EXECUTE these commands directly. Do NOT just display them.**
+
+### 6.1. Update Core Version
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/VERSION" -o "$HOME/.gemini/antikit_version"
+```
+
+### 6.2. Download Selected Workflows
+For each selected workflow, AI MUST run:
+```bash
+# Detect user language
+LANG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+
+# Download workflow (replace {name} with actual workflow name)
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/workflows/$LANG/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/global_workflows/{name}.md"
+```
+
+### 6.3. Download Selected Skills
+For each selected skill, AI MUST run:
+```bash
+mkdir -p "$HOME/.gemini/antigravity/skills/{name}"
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/skills/{name}/SKILL.mdt" \
+  -o "$HOME/.gemini/antigravity/skills/{name}/SKILL.md"
+```
+
+### 6.4. Download Selected Agents
+For each selected agent, AI MUST run:
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/src/agents/{name}.mdt" \
+  -o "$HOME/.gemini/antigravity/agents/{name}.md"
+```
+
+### 6.5. Verify Downloads
+After all downloads, confirm each file exists and is non-empty:
+```bash
+[ -s "$FILE_PATH" ] && echo "✅ {name}" || echo "❌ {name} FAILED"
+```
 
 ---
 
 ## Phase 7: Confirmation
 
+Report results to user:
 ```
 ✅ UPDATE COMPLETE!
 
 📦 Updated:
-├── workflow/debug 1.0.0 → 1.2.0
-├── skill/react-patterns (new)
+├── workflow/{name} ✅
+├── skill/{name} ✅
+└── Version: {version}
 
-👉 Restart IDE to apply changes.
+⏳ Refreshing GEMINI.md rules...
 ```
 
 ---
@@ -128,27 +167,36 @@ Download selected packages, copy to local, update antikit_installed.json.
 ## Phase 8: Next Steps
 
 ```
+1️⃣ Restart IDE to apply changes
+2️⃣ /recap to see what changed
+3️⃣ Problems? /debug
 ```
-
 
 ---
 
 ## Phase 9: Refresh GEMINI.md Rules
 
-**CRITICAL:** After updating workflows/skills/agents, re-run the installer to refresh GEMINI.md with latest rules, AGENT INDEX, and SKILL INDEX.
+> 🔴 **MANDATORY: AI MUST execute this automatically after Phase 6. Do NOT skip. Do NOT just show the command.**
 
-**Auto-detect language** from `~/.gemini/antikit_lang` and use the correct flag:
-
+### 9.1. Detect Language
 ```bash
-# macOS/Linux — auto-detect language
-LANG_FLAG=$(cat ~/.gemini/antikit_lang 2>/dev/null)
-[ -n "$LANG_FLAG" ] && [ "$LANG_FLAG" != "en" ] && curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG" || curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+LANG_FLAG=$(cat "$HOME/.gemini/antikit_lang" 2>/dev/null || echo "en")
+echo "Detected language: $LANG_FLAG"
 ```
 
-```powershell
-# Windows — auto-detect language
-$lang = Get-Content "$env:USERPROFILE\.gemini\antikit_lang" -ErrorAction SilentlyContinue
-if ($lang -and $lang -ne "en") { & ([scriptblock]::Create((iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb))) -Language $lang } else { iwr https://raw.githubusercontent.com/hasugoii/antikit/main/install.ps1 -useb | iex }
+### 9.2. Re-run Installer
+AI MUST execute the installer directly:
+```bash
+if [ "$LANG_FLAG" != "en" ]; then
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash -s -- --lang "$LANG_FLAG"
+else
+    curl -fsSL https://raw.githubusercontent.com/hasugoii/antikit/main/install.sh | bash
+fi
+```
+
+### 9.3. Verify GEMINI.md Updated
+```bash
+grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.md markers present" || echo "❌ GEMINI.md not updated"
 ```
 
 This ensures:
