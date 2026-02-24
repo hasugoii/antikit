@@ -123,19 +123,16 @@ for item in items:
 }
 
 if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
-    # Read arrays from manifest (POSIX-compatible, no mapfile)
-    WORKFLOWS=()
-    while IFS= read -r line; do WORKFLOWS+=("$line"); done < <(parse_json_array "workflows")
-    AGENTS=()
-    while IFS= read -r line; do AGENTS+=("$line"); done < <(parse_json_array "agents")
-    SKILLS=()
-    while IFS= read -r line; do SKILLS+=("$line"); done < <(parse_json_array "skills")
-    SCRIPTS=()
-    while IFS= read -r line; do SCRIPTS+=("$line"); done < <(parse_json_array "scripts")
-    SCHEMAS=()
-    while IFS= read -r line; do SCHEMAS+=("$line"); done < <(parse_json_array "schemas")
-    TEMPLATES=()
-    while IFS= read -r line; do TEMPLATES+=("$line"); done < <(parse_json_array "templates")
+    # Read arrays from manifest using python3 (fully POSIX-compatible, no mapfile/process substitution)
+    eval "$(python3 -c "
+import json
+data = json.load(open('$MANIFEST_TMP'))
+for key in ['workflows','agents','skills','scripts','schemas','templates']:
+    items = data.get(key, [])
+    bash_key = key.upper()
+    quoted = ' '.join(['\"' + i + '\"' for i in items])
+    print(f'{bash_key}=({quoted})')
+" 2>/dev/null)"
 
     # Verify manifest parsed correctly (safety check)
     if [ ${#WORKFLOWS[@]} -eq 0 ] || [ ${#AGENTS[@]} -eq 0 ]; then
