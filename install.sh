@@ -123,13 +123,25 @@ for item in items:
 }
 
 if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
-    # Read arrays from manifest
-    mapfile -t WORKFLOWS < <(parse_json_array "workflows")
-    mapfile -t AGENTS < <(parse_json_array "agents")
-    mapfile -t SKILLS < <(parse_json_array "skills")
-    mapfile -t SCRIPTS < <(parse_json_array "scripts")
-    mapfile -t SCHEMAS < <(parse_json_array "schemas")
-    mapfile -t TEMPLATES < <(parse_json_array "templates")
+    # Read arrays from manifest (POSIX-compatible, no mapfile)
+    WORKFLOWS=()
+    while IFS= read -r line; do WORKFLOWS+=("$line"); done < <(parse_json_array "workflows")
+    AGENTS=()
+    while IFS= read -r line; do AGENTS+=("$line"); done < <(parse_json_array "agents")
+    SKILLS=()
+    while IFS= read -r line; do SKILLS+=("$line"); done < <(parse_json_array "skills")
+    SCRIPTS=()
+    while IFS= read -r line; do SCRIPTS+=("$line"); done < <(parse_json_array "scripts")
+    SCHEMAS=()
+    while IFS= read -r line; do SCHEMAS+=("$line"); done < <(parse_json_array "schemas")
+    TEMPLATES=()
+    while IFS= read -r line; do TEMPLATES+=("$line"); done < <(parse_json_array "templates")
+
+    # Verify manifest parsed correctly (safety check)
+    if [ ${#WORKFLOWS[@]} -eq 0 ] || [ ${#AGENTS[@]} -eq 0 ]; then
+        echo -e "${YELLOW}⚠️  Manifest parse failed. Using fallback lists.${NC}"
+        MANIFEST_TMP=""
+    fi
 else
     # Fallback: hardcoded (keep for backward compat)
     WORKFLOWS=(
