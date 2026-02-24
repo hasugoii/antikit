@@ -312,6 +312,21 @@ Besides phases, **ALSO SAVE** full spec to `docs/specs/[feature]_spec.md`:
 
 ---
 
+## 📝 学びの自動保存
+
+計画後、見積もりが間違っていたり依存関係を見逃した場合：
+1. `.brain/lessons.md` の存在確認（なければ → テンプレートから作成）
+2. 「## Recent」セクションに記入：
+   ```
+   ### [日付] - /plan - [コンテキスト]
+   - ❌ 誤り: [見逃した依存関係や間違った見積もり]
+   - ✅ ルール: [覚えるべき計画の洞察]
+   - 📁 ファイル: [計画ファイル]
+   ```
+3. 学びがuniversalなら → 「## Rules (Permanent)」への記入を提案
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Start coding Phase 1? `/code phase-01`

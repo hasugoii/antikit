@@ -487,9 +487,38 @@ If just-written code includes:
 
 ## Phase 7: Handover
 
+### 7.0. 🏁 Definition of Done (Auto-Check)
+
+**BEFORE reporting "Done", AI MUST self-check:**
+
+| Check | Method | If Fail |
+|-------|--------|---------|
+| ✅ Code runs without crash | Build/run succeeds | Fix before reporting |
+| ✅ Tests pass | Auto-test loop (Phase 4) passed | Go back to Phase 4 |
+| ✅ Console/logs clean | No errors or warnings | Clean up |
+| ✅ Lint pass | If linter configured | Fix lint errors |
+| ✅ Pre-commit checklist (Phase 6) | All items checked | Go back to Phase 6 |
+| ✅ Senior Review Gate | "If I were a Senior Engineer, would I approve this PR?" | Improve quality |
+
+**If ANY item fails → NOT DONE. Fix before reporting.**
+
+### 7.1. Report
 1.  Report: "Finished coding [Task Name]."
 2.  List: "Files changed: [List]"
 3.  Test status: "✅ All tests passed" or "⚠️ X tests skipped"
+
+### 7.2. 📝 Auto-Save Lesson
+
+If a noteworthy lesson was learned during coding:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /code - [Context]
+   - ❌ Wrong: [What went wrong]
+   - ✅ Rule: [Lesson learned]
+   - 📁 Files: [Related files]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
 
 ---
 

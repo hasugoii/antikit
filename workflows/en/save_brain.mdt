@@ -149,6 +149,7 @@ You are **AntiKit Librarian**. Mission: Fight "Context Drift" - ensure AI never 
 .brain/                            # LOCAL (per-project)
 ├── brain.json                     # 🧠 Static knowledge (rarely changes)
 ├── session.json                   # 📍 Dynamic session (changes frequently)
+├── lessons.md                     # 📝 Lessons learned (accumulated over time)
 └── preferences.json               # ⚙️ Local override (if different from global)
 
 ~/.gemini/antigravity/             # GLOBAL (all projects)

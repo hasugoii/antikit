@@ -487,9 +487,38 @@ Nếu code vừa viết bao gồm:
 
 ## Giai đoạn 7: Bàn Giao
 
+### 7.0. 🏁 Definition of Done (Tự Kiểm Tra)
+
+**TRƯỚC KHI báo "Xong", AI PHẢI tự kiểm tra:**
+
+| Check | Cách kiểm tra | Nếu Fail |
+|-------|-------------|----------|
+| ✅ Code chạy không crash | Build/run thành công | Fix trước khi báo |
+| ✅ Tests pass | Auto-test loop (GĐ 4) đã pass | Quay lại GĐ 4 |
+| ✅ Console/logs sạch | Không có errors hoặc warnings | Dọn dẹp |
+| ✅ Lint pass | Nếu có linter configured | Fix lint errors |
+| ✅ Pre-commit checklist (GĐ 6) | Tất cả items checked | Quay lại GĐ 6 |
+| ✅ Senior Review Gate | "Nếu mình là Senior Engineer, mình có approve PR này không?" | Nâng chất lượng |
+
+**Nếu BẤT KỲ item nào fail → CHƯA XONG. Fix trước khi báo.**
+
+### 7.1. Báo Cáo
 1.  Báo cáo: "Xong code [Tên Task]."
 2.  Liệt kê: "Files đã thay đổi: [Danh sách]"
 3.  Trạng thái test: "✅ Tất cả tests passed" hoặc "⚠️ X tests bị skip"
+
+### 7.2. 📝 Tự Động Ghi Bài Học
+
+Nếu có bài học đáng nhớ trong quá trình code:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /code - [Context]
+   - ❌ Sai: [Điều đã sai]
+   - ✅ Rule: [Quy tắc rút ra]
+   - 📁 Files: [Files liên quan]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
 
 ---
 

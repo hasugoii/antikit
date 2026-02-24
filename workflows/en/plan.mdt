@@ -312,6 +312,21 @@ Besides phases, **ALSO SAVE** full spec to `docs/specs/[feature]_spec.md`:
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After planning, if estimates were wrong or dependencies were missed, save the lesson:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /plan - [Context]
+   - ❌ Wrong: [Missed dependency or wrong estimate]
+   - ✅ Rule: [Planning insight to remember]
+   - 📁 Files: [Plan files]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Start coding Phase 1? `/code phase-01`

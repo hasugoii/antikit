@@ -162,6 +162,21 @@ describe('[Feature Name]', () => {
 
 ---
 
+## 📝 学びの自動保存
+
+テストで予期しない失敗やエッジケースが見つかった場合：
+1. `.brain/lessons.md` の存在確認（なければ → テンプレートから作成）
+2. 「## Recent」セクションに記入：
+   ```
+   ### [日付] - /test - [コンテキスト]
+   - ❌ 誤り: [予期しないテスト失敗やエッジケース]
+   - ✅ ルール: [覚えるべきテストパターン]
+   - 📁 ファイル: [影響テストファイル]
+   ```
+3. 学びがuniversalなら → 「## Rules (Permanent)」への記入を提案
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Tests pass? /deploy to push to production

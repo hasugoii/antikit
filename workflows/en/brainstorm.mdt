@@ -346,6 +346,21 @@ I'll read the Brief and continue from there!"
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After brainstorming, if market insights or research findings are worth remembering:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /brainstorm - [Context]
+   - ❌ Wrong: [Assumption that was invalidated]
+   - ✅ Rule: [Market insight or research finding]
+   - 📁 Files: [BRIEF.md or related files]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## 🔗 CONNECTION WITH OTHER WORKFLOWS
 
 ```

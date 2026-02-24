@@ -285,3 +285,28 @@ grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.md markers
 - ✅ Auto-backup trước khi update
 
 > **Lưu ý:** Installer tự detect đã cài đặt → chỉ update. Custom rules ngoài markers luôn được bảo toàn.
+
+### 9.4. Kiểm Tra Sau Update
+
+Sau khi installer hoàn thành, kiểm tra các thành phần:
+```bash
+# Verify AGENT INDEX
+grep -c "AGENT INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ AGENT INDEX" || echo "❌ AGENT INDEX thiếu"
+
+# Verify SKILL INDEX
+grep -c "SKILL INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ SKILL INDEX" || echo "❌ SKILL INDEX thiếu"
+
+# Verify lessons template
+[ -f "$HOME/.gemini/antigravity/templates/lessons.example.md" ] && echo "✅ Lessons template" || echo "⚠️ Lessons template không tìm thấy"
+```
+
+Báo cáo:
+```
+📋 KIỂM TRA SAU UPDATE:
+├── GEMINI.md markers ✅
+├── AGENT INDEX ✅
+├── SKILL INDEX ✅
+└── Lessons template ✅
+
+🎉 Update xong! Restart IDE để áp dụng.
+```

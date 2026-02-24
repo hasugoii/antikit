@@ -162,6 +162,21 @@ describe('[Feature Name]', () => {
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After testing reveals unexpected failures or edge cases, save the lesson:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /test - [Context]
+   - ❌ Wrong: [Unexpected test failure or edge case]
+   - ✅ Rule: [Testing pattern to remember]
+   - 📁 Files: [Test files affected]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Tests pass? /deploy to push to production

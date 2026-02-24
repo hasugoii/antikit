@@ -168,6 +168,23 @@ Modular knowledge domains that agents can load on-demand. based on task context.
 | `performance-profiling`   | Web Vitals, optimization  |
 | `systematic-debugging`    | Troubleshooting           |
 
+### Skill Tiers & Connection Map
+
+Skills are organized into 4 tiers forming a **mesh network** — each skill declares its `connections` in YAML frontmatter.
+
+| Tier | Role | Skills |
+|------|------|--------|
+| **T1 Orchestrators** | Coordinate multiple skills | `app-builder`, `parallel-agents`, `intelligent-routing` |
+| **T2 Hubs** | Cross-domain coordination | `brainstorming`, `plan-writing`, `evidence-discipline`, `frontend-design`, `mobile-design`, `growth-marketing` |
+| **T3 Utilities** | Domain-specific tools | `api-patterns`, `database-design`, `testing-patterns`, `clean-code`, `react-best-practices`, `nodejs-best-practices`, `tailwind-patterns`, `seo-fundamentals`, `vulnerability-scanner`, `deployment-procedures`, `performance-profiling` |
+| **T4 Standalone** | Independent skills | All other skills (game-development, rust-pro, docker-patterns, etc.) |
+
+**Connection flow:**
+```
+T1 Orchestrators → call → T2 Hubs → call → T3 Utilities
+                                    ↕ cross-call ↕
+```
+
 ---
 
 ## 🔄 Workflows (29)

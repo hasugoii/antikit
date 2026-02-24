@@ -236,6 +236,21 @@ Proceed with safe fixes?"
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After discovering security or quality issues, save the lesson:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /audit - [Context]
+   - ❌ Wrong: [Vulnerability or issue found]
+   - ✅ Rule: [Pattern to prevent this]
+   - 📁 Files: [Affected files]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to check after fixes

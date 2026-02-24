@@ -195,6 +195,21 @@ Nếu CÒN reference → KHÔNG PHẢI dead code. KHÔNG XÓA.
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi refactor, ghi lại patterns phát hiện:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /refactor - [Context]
+   - ❌ Sai: [Anti-pattern phát hiện]
+   - ✅ Rule: [Pattern tốt hơn]
+   - 📁 Files: [Files đã refactor]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Chạy /test để verify logic không bị ảnh hưởng

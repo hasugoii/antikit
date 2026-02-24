@@ -149,6 +149,7 @@ description: 💾 保存项目知识
 .brain/                            # LOCAL（每个项目）
 ├── brain.json                     # 🧠 静态知识（很少变化）
 ├── session.json                   # 📍 动态会话（经常变化）
+├── lessons.md                     # 📝 经验教训（随时间积累）
 └── preferences.json               # ⚙️ 本地覆盖
 
 ~/.gemini/antigravity/             # GLOBAL（所有项目）

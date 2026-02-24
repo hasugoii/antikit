@@ -207,3 +207,28 @@ This ensures:
 - ✅ Auto-backup created before update
 
 > **Note:** The installer detects existing installation and updates in-place. User custom rules outside `<!-- ANTIKIT_START -->` markers are always preserved.
+
+### 9.4. Post-Update Verification
+
+After installer completes, verify key components:
+```bash
+# Verify AGENT INDEX exists
+grep -c "AGENT INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ AGENT INDEX" || echo "❌ AGENT INDEX missing"
+
+# Verify SKILL INDEX exists
+grep -c "SKILL INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ SKILL INDEX" || echo "❌ SKILL INDEX missing"
+
+# Verify lessons template available
+[ -f "$HOME/.gemini/antigravity/templates/lessons.example.md" ] && echo "✅ Lessons template" || echo "⚠️ Lessons template not found"
+```
+
+Report summary:
+```
+📋 POST-UPDATE VERIFICATION:
+├── GEMINI.md markers ✅
+├── AGENT INDEX ✅
+├── SKILL INDEX ✅
+└── Lessons template ✅
+
+🎉 Update complete! Restart IDE to apply.
+```

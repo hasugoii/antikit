@@ -2,6 +2,9 @@
 name: seo-fundamentals
 description: SEO fundamentals, E-E-A-T, Core Web Vitals, and Google algorithm principles.
 allowed-tools: Read, Glob, Grep
+connections:
+  uses: [performance-profiling]
+  used_by: [frontend-design, growth-marketing]
 ---
 
 # SEO Fundamentals

@@ -4,6 +4,22 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.14.0] - 2026-02-25
+
+### 🕸️ Skill Mesh Network + Learning System
+
+### Added
+- **Skill Connections** — 20 core skills (T1-T3) now declare `connections` in YAML frontmatter (`uses` / `used_by`), forming a mesh network instead of isolated "oases"
+- **Skill Tiers** — Skills classified into T1 Orchestrators, T2 Hubs, T3 Utilities, T4 Standalone in `ARCHITECTURE.md`
+- **Lessons System** — `.brain/lessons.md` file for project-specific learning. AI writes lessons after bug fixes, audits, refactors, planning mistakes, market research, etc.
+- **Lessons template** — `templates/lessons.example.md` with Rules (Permanent) + Recent (Last 30 days) sections
+- **Auto-Save Lesson** — Added to 8 workflows × 4 languages (32 edits): `/debug`, `/code`, `/audit`, `/refactor`, `/plan`, `/brainstorm`, `/test`, `/deploy`
+- **Lessons Read** — `/recap` now loads `.brain/lessons.md` at session start (Step 4 in load order)
+- **Lessons Include** — `/save_brain` includes `lessons.md` in `.brain/` directory structure
+- **Definition of Done** — `/code` Phase 7 now has DoD gate: 6-point checklist (build, tests, lint, console, pre-commit, senior review) before reporting "done"
+
+---
+
 ## [1.13.6] - 2026-02-24
 
 ### 🌐 /ak-update Full JA/ZH Translation

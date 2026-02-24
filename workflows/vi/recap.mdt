@@ -32,7 +32,11 @@ Bước 2: Load Kiến Thức Dự Án
 Bước 3: Load Trạng Thái Session
 └── .brain/session.json                 # Session động
 
-Bước 4: Tạo Tóm Tắt
+Bước 4: Load Bài Học (nếu có)
+└── .brain/lessons.md                   # Lỗi cũ & patterns đã học
+    → Xem lại rules gần đây trước khi bắt đầu
+
+Bước 5: Tạo Tóm Tắt
 ```
 
 ### 1.2. Kiểm tra files

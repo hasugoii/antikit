@@ -207,3 +207,28 @@ grep -c "ANTIKIT_START" "$HOME/.gemini/GEMINI.md" && echo "✅ GEMINI.md标记OK
 - ✅ 更新前自动备份
 
 > **注意:** 安装程序检测到现有安装后会就地更新。`<!-- ANTIKIT_START -->`标记外的自定义规则始终被保留。
+
+### 9.4. 更新后验证
+
+安装程序完成后，验证关键组件：
+```bash
+# 验证 AGENT INDEX
+grep -c "AGENT INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ AGENT INDEX" || echo "❌ AGENT INDEX缺失"
+
+# 验证 SKILL INDEX
+grep -c "SKILL INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ SKILL INDEX" || echo "❌ SKILL INDEX缺失"
+
+# 验证 Lessons模板
+[ -f "$HOME/.gemini/antigravity/templates/lessons.example.md" ] && echo "✅ Lessons模板" || echo "⚠️ Lessons模板未找到"
+```
+
+报告：
+```
+📋 更新后验证：
+├── GEMINI.md标记 ✅
+├── AGENT INDEX ✅
+├── SKILL INDEX ✅
+└── Lessons模板 ✅
+
+🎉 更新完成！重启IDE以应用。
+```

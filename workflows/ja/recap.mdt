@@ -32,7 +32,11 @@ Step 2: Load Project Knowledge
 Step 3: Load Session State
 └── .brain/session.json                 # Dynamic session
 
-Step 4: Generate Summary
+Step 4: Load Lessons (if exists)
+└── .brain/lessons.md                   # Past mistakes & patterns learned
+    → Review recent rules before starting work
+
+Step 5: Generate Summary
 ```
 
 ### 1.2. Check files

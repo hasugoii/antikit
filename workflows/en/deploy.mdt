@@ -299,6 +299,21 @@ When production deploy fails:
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After deployment, if production issues or gotchas were discovered, save the lesson:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /deploy - [Context]
+   - ❌ Wrong: [Production issue or deploy gotcha]
+   - ✅ Rule: [Deploy pattern to remember]
+   - 📁 Files: [Config/deploy files affected]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Deploy OK? /save-brain to save config

@@ -4,6 +4,9 @@ description: Evidence-based development discipline + context integrity. Prevents
 allowed-tools: Read, Glob, Grep
 version: 1.0
 priority: HIGH
+connections:
+  uses: [testing-patterns, clean-code]
+  used_by: [intelligent-routing, parallel-agents, plan-writing]
 ---
 
 # Evidence Discipline + Context Integrity

@@ -246,6 +246,21 @@ Bug types worth suggesting for global:
 
 ---
 
+## 📝 学びの自動保存
+
+バグ修正後、学びを自動保存：
+1. `.brain/lessons.md` の存在確認（なければ → テンプレートから作成）
+2. 「## Recent」セクションに記入：
+   ```
+   ### [日付] - /debug - [コンテキスト]
+   - ❌ 誤り: [バグの根本原因]
+   - ✅ ルール: [このバグを防ぐパターン]
+   - 📁 ファイル: [修正したファイル]
+   ```
+3. 学びがuniversalなら → 「## Rules (Permanent)」への記入を提案
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to test thoroughly

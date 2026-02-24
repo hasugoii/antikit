@@ -2,6 +2,9 @@
 name: intelligent-routing
 description: Dynamic multi-agent selection and task routing. Automatically selects PRIMARY + SUPPORT agents using AGENT INDEX tags, loads relevant skills, and performs cross-review.
 version: 2.0.0
+connections:
+  uses: [brainstorming, evidence-discipline]
+  used_by: [parallel-agents, app-builder]
 ---
 
 # Intelligent Agent Routing v2 — Multi-Agent Selection

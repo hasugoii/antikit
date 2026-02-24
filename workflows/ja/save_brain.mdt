@@ -149,6 +149,7 @@ description: 💾 プロジェクト知識を保存
 .brain/                            # LOCAL（プロジェクトごと）
 ├── brain.json                     # 🧠 静的知識（ほとんど変わらない）
 ├── session.json                   # 📍 動的セッション（頻繁に変わる）
+├── lessons.md                     # 📝 学んだ教訓（時間とともに蓄積）
 └── preferences.json               # ⚙️ ローカルオーバーライド
 
 ~/.gemini/antigravity/             # GLOBAL（全プロジェクト）

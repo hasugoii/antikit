@@ -246,6 +246,21 @@ Bug types worth suggesting for global:
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After fixing a bug, automatically save the lesson:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /debug - [Context]
+   - ❌ Wrong: [Root cause of the bug]
+   - ✅ Rule: [Pattern to prevent this bug]
+   - 📁 Files: [Files that were fixed]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to test thoroughly

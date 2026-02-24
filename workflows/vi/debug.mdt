@@ -246,6 +246,21 @@ Các loại bug nên đề xuất lưu global:
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi fix bug, tự động ghi bài học:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /debug - [Context]
+   - ❌ Sai: [Nguyên nhân gốc của bug]
+   - ✅ Rule: [Pattern để tránh bug này]
+   - 📁 Files: [Files đã fix]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Chạy /test để test kỹ

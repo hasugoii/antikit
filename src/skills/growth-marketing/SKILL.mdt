@@ -4,6 +4,9 @@ description: Go-to-market strategy, content creation, payment setup, and growth 
 allowed-tools: all
 version: "2.0.0"
 priority: P1
+connections:
+  uses: [seo-fundamentals, frontend-design]
+  used_by: [app-builder]
 ---
 
 # Growth Marketing

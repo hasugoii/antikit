@@ -246,6 +246,21 @@ Bug types worth suggesting for global:
 
 ---
 
+## 📝 自动保存经验教训
+
+修复bug后，自动保存经验教训：
+1. 检查 `.brain/lessons.md` 是否存在（如不存在 → 从模板创建）
+2. 写入 "## Recent" 部分：
+   ```
+   ### [日期] - /debug - [上下文]
+   - ❌ 错误: [bug的根本原因]
+   - ✅ 规则: [防止此bug的模式]
+   - 📁 文件: [修复的文件]
+   ```
+3. 如果经验教训是通用的 → 建议写入 "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to test thoroughly

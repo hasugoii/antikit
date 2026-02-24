@@ -162,6 +162,21 @@ describe('[Feature Name]', () => {
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi test phát hiện lỗi bất ngờ hoặc edge case mới:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /test - [Context]
+   - ❌ Sai: [Test fail bất ngờ hoặc edge case]
+   - ✅ Rule: [Pattern testing cần nhớ]
+   - 📁 Files: [Test files ảnh hưởng]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Tests pass? /deploy để đẩy lên production

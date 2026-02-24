@@ -236,6 +236,21 @@ Tiếp tục với các fix an toàn?"
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi phát hiện vấn đề bảo mật hoặc chất lượng, ghi bài học:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /audit - [Context]
+   - ❌ Sai: [Lỗ hổng hoặc vấn đề phát hiện]
+   - ✅ Rule: [Pattern để tránh]
+   - 📁 Files: [Files ảnh hưởng]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Chạy /test để kiểm tra sau khi fix

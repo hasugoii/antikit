@@ -195,6 +195,21 @@ If ANY reference found → NOT dead code. Do NOT delete.
 
 ---
 
+## 📝 Auto-Save Lesson
+
+After refactoring, save patterns discovered:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /refactor - [Context]
+   - ❌ Wrong: [Anti-pattern found]
+   - ✅ Rule: [Better pattern to use]
+   - 📁 Files: [Files refactored]
+   ```
+3. If lesson is universal → suggest writing to "## Rules (Permanent)"
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to verify logic wasn't affected

@@ -2,6 +2,9 @@
 name: performance-profiling
 description: Performance profiling principles. Measurement, analysis, and optimization techniques.
 allowed-tools: Read, Glob, Grep, Bash
+connections:
+  uses: []
+  used_by: [frontend-design, mobile-design, seo-fundamentals, database-design, deployment-procedures, react-best-practices]
 ---
 
 # Performance Profiling

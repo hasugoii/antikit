@@ -195,6 +195,21 @@ If ANY reference found → NOT dead code. Do NOT delete.
 
 ---
 
+## 📝 学びの自動保存
+
+リファクタリング後、発見したパターンを保存：
+1. `.brain/lessons.md` の存在確認（なければ → テンプレートから作成）
+2. 「## Recent」セクションに記入：
+   ```
+   ### [日付] - /refactor - [コンテキスト]
+   - ❌ 誤り: [発見したアンチパターン]
+   - ✅ ルール: [より良いパターン]
+   - 📁 ファイル: [リファクタリングしたファイル]
+   ```
+3. 学びがuniversalなら → 「## Rules (Permanent)」への記入を提案
+
+---
+
 ## ⚠️ NEXT STEPS:
 ```
 1️⃣ Run /test to verify logic wasn't affected

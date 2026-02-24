@@ -487,9 +487,38 @@ If just-written code includes:
 
 ## Phase 7: Handover
 
-1.  Report: "Finished coding [Task Name]."
-2.  List: "Files changed: [List]"
-3.  Test status: "✅ All tests passed" or "⚠️ X tests skipped"
+### 7.0. 🏁 Definition of Done (自动检查)
+
+**报告"完成"之前，AI必须自检：**
+
+| 检查项 | 方法 | 失败时 |
+|-------|------|--------|
+| ✅ 代码运行不崩溃 | 构建/运行成功 | 报告前修复 |
+| ✅ 测试通过 | Auto-test loop (Phase 4) 已通过 | 返回Phase 4 |
+| ✅ 控制台/日志干净 | 无错误或警告 | 清理 |
+| ✅ Lint通过 | 如已配置linter | 修复lint错误 |
+| ✅ Pre-commit检查清单 (Phase 6) | 所有项目已检查 | 返回Phase 6 |
+| ✅ 高级工程师审查关卡 | "如果我是高级工程师，我会批准这个PR吗？" | 提高质量 |
+
+**任何一项失败 → 未完成。报告前修复。**
+
+### 7.1. 报告
+1.  报告："[任务名称]编码完成。"
+2.  列表："变更文件：[列表]"
+3.  测试状态："✅ 所有测试通过" 或 "⚠️ X个测试跳过"
+
+### 7.2. 📝 自动保存经验教训
+
+如果在编码过程中有值得记录的经验教训：
+1. 检查 `.brain/lessons.md` 是否存在（如不存在 → 从模板创建）
+2. 写入 "## Recent" 部分：
+   ```
+   ### [日期] - /code - [上下文]
+   - ❌ 错误: [什么出了问题]
+   - ✅ 规则: [学到的经验]
+   - 📁 文件: [相关文件]
+   ```
+3. 如果经验教训是通用的 → 建议写入 "## Rules (Permanent)"
 
 ---
 

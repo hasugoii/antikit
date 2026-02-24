@@ -391,6 +391,21 @@ Khi brainstorm giải pháp kỹ thuật, sử dụng format so sánh:
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi brainstorm, nếu có market insight hoặc kết quả research đáng nhớ:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /brainstorm - [Context]
+   - ❌ Sai: [Giả thuyết bị bác bỏ]
+   - ✅ Rule: [Market insight hoặc research finding]
+   - 📁 Files: [BRIEF.md hoặc files liên quan]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## 🔗 Kết Nối Workflows
 
 ```

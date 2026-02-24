@@ -299,6 +299,21 @@ Khi deploy production fail:
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi deploy, nếu gặp issue production hoặc gotcha:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /deploy - [Context]
+   - ❌ Sai: [Issue production hoặc deploy gotcha]
+   - ✅ Rule: [Deploy pattern cần nhớ]
+   - 📁 Files: [Config/deploy files ảnh hưởng]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Deploy OK? /save-brain để lưu config

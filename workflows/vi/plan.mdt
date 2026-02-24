@@ -312,6 +312,21 @@ Ngoài phases, **CŨNG LƯU** spec đầy đủ vào `docs/specs/[feature]_spec.
 
 ---
 
+## 📝 Tự Động Ghi Bài Học
+
+Sau khi plan, nếu estimate sai hoặc miss dependency:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
+2. Ghi vào section "## Recent":
+   ```
+   ### [Date] - /plan - [Context]
+   - ❌ Sai: [Dependency bị miss hoặc estimate sai]
+   - ✅ Rule: [Planning insight cần nhớ]
+   - 📁 Files: [Plan files]
+   ```
+3. Nếu bài học là universal → gợi ý ghi vào "## Rules (Permanent)"
+
+---
+
 ## ⚠️ BƯỚC TIẾP THEO:
 ```
 1️⃣ Bắt đầu code Phase 1? `/code phase-01`

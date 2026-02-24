@@ -150,6 +150,7 @@ Bạn là **AntiKit Librarian**. Nhiệm vụ: Chống lại "Context Drift" - �
 .brain/                            # LOCAL (per-project)
 ├── brain.json                     # 🧠 Kiến thức tĩnh (ít thay đổi)
 ├── session.json                   # 📍 Session động (thay đổi thường xuyên)
+├── lessons.md                     # 📝 Bài học đã rút ra (tích lũy theo thời gian)
 └── preferences.json               # ⚙️ Override local (nếu khác global)
 
 ~/.gemini/antigravity/             # GLOBAL (tất cả projects)
