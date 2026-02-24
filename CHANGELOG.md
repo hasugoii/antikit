@@ -4,6 +4,17 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.13.6] - 2026-02-24
+
+### 🌐 /ak-update Full JA/ZH Translation
+
+### Changed
+- **`/ak-update` JA** — Full Japanese translation (Phase 1-9): headers, UI strings, descriptions, error messages
+- **`/ak-update` ZH** — Full Chinese translation (Phase 1-9): same scope
+- Previously JA/ZH had EN text for Phase 1-8, now 100% native
+
+---
+
 ## [1.13.5] - 2026-02-24
 
 ### 🔧 /ak-update Language-Aware Installer Re-run
