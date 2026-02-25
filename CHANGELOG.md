@@ -4,6 +4,20 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.15.2] - 2026-02-25
+
+### 🐛 Fix: PowerShell Installer 40 Failed Downloads
+
+### Fixed
+- **`install.ps1` URL construction** — Manifest provides names without `.mdt` extension (e.g., `ak-update`), but PowerShell wasn't appending `.mdt` to download URLs → 404 for all 19 workflows + 21 agents = 40 failed
+- **`install.ps1` fallback arrays** — Hardcoded fallback arrays still had `.mdt` suffix (e.g., `ak-update.mdt`) while manifest uses clean names → orphan cleanup would delete ALL files if manifest fetch failed
+- **`install.ps1` output filenames** — Replaced regex `.mdt → .md` strip with direct `${name}.md` construction (consistent with `install.sh` approach)
+
+### Root Cause
+`install.sh` (bash) appends `.mdt` in the URL template: `${wf}.mdt`. But `install.ps1` used `$wf` directly after manifest override changed values from `"ak-update.mdt"` to `"ak-update"`.
+
+---
+
 ## [1.15.0] - 2026-02-25
 
 ### 📦 Manifest-Based Installer — Single Source of Truth

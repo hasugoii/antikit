@@ -9,21 +9,21 @@ $RepoBase = "https://raw.githubusercontent.com/hasugoii/antikit/main"
 
 # Workflows - organized by language
 $WorkflowsEn = @(
-    "ak-update.mdt", "audit.mdt", "brainstorm.mdt", "code.mdt", "config.mdt",
-    "debug.mdt", "deploy.mdt", "grow.mdt", "init.mdt", "launch.mdt", "next.mdt",
-    "plan.mdt", "recap.mdt", "refactor.mdt", "run.mdt", "save_brain.mdt", "test.mdt",
-    "uninstall.mdt", "visualize.mdt"
+    "ak-update", "audit", "brainstorm", "code", "config",
+    "debug", "deploy", "grow", "init", "launch", "next",
+    "plan", "recap", "refactor", "run", "save_brain", "test",
+    "uninstall", "visualize"
 )
 
 # Agents (21 total)
 $Agents = @(
-    "backend-specialist.mdt", "code-archaeologist.mdt", "database-architect.mdt",
-    "debugger.mdt", "devops-engineer.mdt", "documentation-writer.mdt",
-    "explorer-agent.mdt", "frontend-specialist.mdt", "game-developer.mdt",
-    "growth-hacker.mdt", "mobile-developer.mdt", "orchestrator.mdt",
-    "penetration-tester.mdt", "performance-optimizer.mdt", "product-manager.mdt",
-    "product-owner.mdt", "project-planner.mdt", "qa-automation-engineer.mdt",
-    "security-auditor.mdt", "seo-specialist.mdt", "test-engineer.mdt"
+    "backend-specialist", "code-archaeologist", "database-architect",
+    "debugger", "devops-engineer", "documentation-writer",
+    "explorer-agent", "frontend-specialist", "game-developer",
+    "growth-hacker", "mobile-developer", "orchestrator",
+    "penetration-tester", "performance-optimizer", "product-manager",
+    "product-owner", "project-planner", "qa-automation-engineer",
+    "security-auditor", "seo-specialist", "test-engineer"
 )
 
 # Schemas
@@ -178,14 +178,14 @@ Write-Host ""
 Write-Host "[...] Downloading workflows ($lang)..." -ForegroundColor Cyan
 foreach ($wf in $WorkflowsEn) {
     try {
-        $outName = $wf -replace '\.mdt$', '.md'
-        $url = "$RepoBase/workflows/$lang/$wf"
+        $outName = "${wf}.md"
+        $url = "$RepoBase/workflows/$lang/${wf}.mdt"
         Invoke-WebRequest -Uri $url -OutFile "$GlobalWorkflows\$outName" -UseBasicParsing -ErrorAction Stop
         Write-Host "   [OK] $outName" -ForegroundColor Green
         $success++
     }
     catch {
-        $outName = $wf -replace '\.mdt$', '.md'
+        $outName = "${wf}.md"
         Write-Host "   [X] $outName" -ForegroundColor Red
         $failed++
     }
@@ -196,14 +196,14 @@ Write-Host ""
 Write-Host "[...] Downloading agents..." -ForegroundColor Cyan
 foreach ($agent in $Agents) {
     try {
-        $outName = $agent -replace '\.mdt$', '.md'
-        $url = "$RepoBase/src/agents/$agent"
+        $outName = "${agent}.md"
+        $url = "$RepoBase/src/agents/${agent}.mdt"
         Invoke-WebRequest -Uri $url -OutFile "$AgentsDir\$outName" -UseBasicParsing -ErrorAction Stop
         Write-Host "   [OK] $outName" -ForegroundColor Green
         $success++
     }
     catch {
-        $outName = $agent -replace '\.mdt$', '.md'
+        $outName = "${agent}.md"
         Write-Host "   [X] $outName" -ForegroundColor Red
         $failed++
     }
