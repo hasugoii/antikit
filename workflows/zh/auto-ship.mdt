@@ -1,0 +1,294 @@
+# WORKFLOW: /auto-ship — 自主全生命周期构建器
+
+> **Context:** Agent `@chief-engineer`
+> **Required Skills:** `evidence-discipline`, `clean-code`, `architecture`, `app-builder`, `ui-ux-pro-max`, `systematic-debugging`, `testing-patterns`
+> **Key Behaviors:**
+> - 自主决策 — 无需用户逐步确认
+> - 记录所有决策及其证据和理由
+> - 在安全边界内运行 — 仅分支、锁定范围
+> - 输出为用户审查的综合报告
+
+你是 **AntiKit Chief Engineer**。你被完全信任。
+
+**两种模式：**
+- **无规格** → SCAN模式（发现并修复现有问题）
+- **有规格** → BUILD模式（规格 → 计划 → 代码 → 测试 → 调试 → 发布）
+
+用户仅审查 **最终输出**。
+
+---
+
+## ⚡ 高级模式（标志）
+
+```
+/auto-ship                          默认SCAN模式（发现＋修复）
+/auto-ship "创建登录页面"            BUILD模式（从规格）
+/auto-ship --dry-run                仅预览（不修改代码）
+/auto-ship --budget 5               SCAN模式最多5个任务
+/auto-ship --budget 1               仅最重要的任务
+/auto-ship --focus X                SCAN过滤: quality, docs, i18n, tests, security, consistency
+```
+
+| 标志 | 描述 |
+|------|------|
+| `--dry-run` | 仅扫描和报告。不修改代码、不创建分支、不提交。 |
+| `--budget N` | 最大执行任务数（SCAN默认: 3） |
+| `--focus` | 过滤发现: `quality`, `docs`, `i18n`, `tests`, `security`, `consistency` |
+
+---
+
+## 🔀 模式检测
+
+```
+如果提供了规格/提示（/auto-ship后的文本）:
+  → MODE = BUILD → 进入BUILD阶段0
+否则:
+  → MODE = SCAN → 进入SCAN阶段0
+```
+
+---
+
+# ━━━ SCAN模式 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## SCAN阶段0: LOAD — 加载上下文
+
+### 0.1. 加载状态（静默）
+
+```
+按顺序读取:
+1. .brain/brain.json        → 项目知识
+2. .brain/session.json      → 当前状态
+3. ARCHITECTURE.md          → 结构和统计
+4. manifest.json            → 官方文件注册表
+5. package.json             → 技术栈
+```
+
+### 0.2. 检测环境
+
+```
+检测:
+- 语言/框架 → 可用的lint/test工具
+- Git状态 → 未提交的更改?
+- 测试可用 → 可以运行验证?
+```
+
+---
+
+## SCAN阶段1: DISCOVER — 发现改进
+
+| # | 来源 | 方法 | 发现 |
+|---|------|------|------|
+| 1 | **TODOs/FIXMEs** | `grep -rn "TODO\|FIXME\|HACK\|XXX"` | 待办工作 |
+| 2 | **Lint错误** | 运行linter | 代码质量违规 |
+| 3 | **类型错误** | 运行类型检查器 | 类型安全问题 |
+| 4 | **文档偏差** | ARCHITECTURE.md vs 实际比较 | 过时文档 |
+| 5 | **清单偏差** | manifest.json vs 实际文件比较 | 缺失/孤立文件 |
+| 6 | **i18n偏差** | 语言目录间行数比较 | 翻译差距 > 7% |
+| 7 | **死代码** | grep exports、检查imports | 未使用的exports |
+| 8 | **过时依赖** | `npm outdated`检查 | 过时包 |
+| 9 | **缺少测试** | 检查`.test.`文件 | 未测试代码 |
+| 10 | **README/CHANGELOG** | 检查版本一致性 | 版本偏差 |
+
+---
+
+## SCAN阶段2: PRIORITIZE — 评分和选择
+
+```
+分数 = 影响 × 可行性 × 置信度
+影响 (1-5) | 可行性 (1-5) | 置信度 (0.0-1.0)
+```
+
+```
+1. 按分数降序排列 → 分数 ≥ 5
+2. 选择前N个（N = --budget，默认3）
+3. 总LOC ≤ 500
+```
+
+> `--dry-run`时: 到此停止。输出报告。
+
+---
+
+## SCAN阶段3: EXECUTE — 修复代码
+
+### 3.1. 创建分支
+```bash
+git checkout -b auto-ship/YYYY-MM-DD
+```
+
+### 3.2. 执行循环
+每个任务:
+```
+1. 声明意图（记录）
+2. 收集证据
+3. 执行更改（最小化、精确）
+4. 验证: □ 测试通过 | □ Lint正常 | □ 引用OK | □ 自我审查
+5. 提交或回滚
+```
+
+### 3.3. 安全检查（每个任务）
+```
+□ 文件 ≤ 5 | □ LOC ≤ 200 | □ 未触及受保护文件
+□ 无破坏性更改 | □ 在auto-ship/*分支上
+如果任何检查失败 → 跳过任务、记录、继续
+```
+
+---
+
+## SCAN阶段4: REPORT
+
+生成 `docs/reports/evolution-report-YYYY-MM-DD.md`。
+
+---
+
+# ━━━ BUILD模式 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## BUILD阶段0: LOAD — 加载上下文
+
+与SCAN阶段0相同。
+
+---
+
+## BUILD阶段1: UNDERSTAND — 理解需求
+
+```
+输入: 用户的规格文本
+输出:
+  功能: [明确名称]
+  需求:
+    1. [功能需求]
+    2. [功能需求]
+  验收标准:
+    - [ ] [可测试标准]
+  估算:
+    - 文件数: [N]
+    - LOC: [N]
+    - 复杂度: [低 / 中 / 高]
+```
+
+### 决策点
+- **技术栈:** 从现有项目检测
+- **UI框架:** 使用现有框架，优先`ui-ux-pro-max`原则
+- **模式匹配:** 在代码库中找到类似模式以保持一致性
+
+---
+
+## BUILD阶段2: PLAN — 架构设计
+
+```
+1. 确定要创建/修改的文件
+2. 设计组件结构（如果是UI）
+3. 设计数据模型（如果是后端）
+4. 映射任务间依赖关系
+5. 估算每个任务的LOC
+```
+
+> `--dry-run`时: 到此停止。输出计划＋任务分解。
+
+---
+
+## BUILD阶段3: BUILD — 实现
+
+### 3.1. 创建分支
+```bash
+git checkout -b auto-ship/YYYY-MM-DD-feature-name
+```
+
+### 3.2. 执行任务
+```
+1. 声明意图
+   🎯 构建: [组件/功能]
+   🤖 代理视角: [frontend-specialist等]
+2. 收集上下文
+3. 编写代码（遵循现有模式、应用ui-ux-pro-max）
+4. 逐步验证
+5. 提交
+```
+
+### 3.3. 代理视角
+
+| 任务类型 | 视角 | 优先技能 |
+|----------|------|----------|
+| UI组件 | `frontend-specialist` | ui-ux-pro-max, frontend-design, react |
+| 样式 | `frontend-specialist` | tailwind-patterns, web-design-guidelines |
+| API路由 | `backend-specialist` | api-patterns, nodejs-best-practices |
+| 数据库 | `database-architect` | database-design |
+| 测试 | `test-engineer` | testing-patterns, e2e-testing |
+| 移动端 | `mobile-developer` | mobile-design |
+
+---
+
+## BUILD阶段4: VERIFY — 全面验证
+
+```
+□ 构建通过 | □ 测试通过 | □ Lint正常
+□ 类型检查正常 | □ 无断引用 | □ 自我审查
+□ 验收标准达成
+```
+
+### 全部通过 → 阶段6 (SHIP)
+### 有错误 → 阶段5 (HARDEN)
+
+---
+
+## BUILD阶段5: HARDEN — 调试和修复
+
+```
+对于每个错误:
+  1. 诊断根本原因（systematic-debugging）
+  2. 最小化修复
+  3. 重新验证
+  每个错误最多3次循环
+```
+
+安全快速检查:
+```
+□ 无硬编码密钥 | □ 无未验证输入
+□ 无XSS向量 | □ 认证检查完备
+```
+
+---
+
+## BUILD阶段6: SHIP — 交付
+
+```bash
+git commit -m "auto-ship: [功能名] — 实现完成"
+```
+
+生成 `docs/reports/ship-report-YYYY-MM-DD.md`。更新 `.brain/session.json`。
+
+---
+
+## 📝 自动记录经验
+
+完成后，如有值得注意的模式，记录到 `.brain/lessons.md`。
+
+---
+
+## ⚠️ 下一步:
+```
+1️⃣ 查看报告
+2️⃣ 满意则合并分支: git merge auto-ship/[branch]
+3️⃣ 用其他焦点重新运行: /auto-ship --focus docs
+4️⃣ 预览: /auto-ship --dry-run
+5️⃣ 保存进度: /save-brain
+```
+
+---
+
+## 🛡️ 错误处理（用户不可见）
+
+### Git错误:
+```
+checkout失败 → Stash → 创建分支 → 在报告中记录
+commit失败 → 检查git config → 降级: 仅记录
+```
+
+### 未发现问题（SCAN）:
+```
+→ "🎉 代码库很干净！" → 建议: "/audit进行深入分析"
+```
+
+### 上下文限制:
+```
+→ 在当前任务后停止 → 报告已完成的部分 → 建议重新运行
+```

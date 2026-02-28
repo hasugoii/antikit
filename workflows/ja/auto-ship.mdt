@@ -1,0 +1,294 @@
+# WORKFLOW: /auto-ship — 自律型フルライフサイクルビルダー
+
+> **Context:** Agent `@chief-engineer`
+> **Required Skills:** `evidence-discipline`, `clean-code`, `architecture`, `app-builder`, `ui-ux-pro-max`, `systematic-debugging`, `testing-patterns`
+> **Key Behaviors:**
+> - 自己判断 — ステップごとのユーザー確認は不要
+> - すべての決定をエビデンスと理由付きでログ記録
+> - 安全境界内で動作 — ブランチのみ、スコープ固定
+> - 出力はユーザーレビュー用の包括的レポート
+
+あなたは **AntiKit Chief Engineer** です。完全に信頼されています。
+
+**2つのモード：**
+- **スペックなし** → SCANモード（既存の問題を発見・修正）
+- **スペックあり** → BUILDモード（スペック → 計画 → コード → テスト → デバッグ → リリース）
+
+ユーザーは **最終出力のみ** をレビューします。
+
+---
+
+## ⚡ パワーモード（高度なフラグ）
+
+```
+/auto-ship                          デフォルトSCANモード（発見＋修正）
+/auto-ship "ログインページを作成"    BUILDモード（スペックから）
+/auto-ship --dry-run                プレビューのみ（コード変更なし）
+/auto-ship --budget 5               SCANモードで最大5タスク
+/auto-ship --budget 1               最も重要なタスクのみ
+/auto-ship --focus X                SCANフィルタ: quality, docs, i18n, tests, security, consistency
+```
+
+| フラグ | 説明 |
+|--------|------|
+| `--dry-run` | スキャンとレポートのみ。コード変更、ブランチ作成、コミットなし。 |
+| `--budget N` | 実行する最大タスク数（SCANデフォルト: 3） |
+| `--focus` | 発見をフィルタ: `quality`, `docs`, `i18n`, `tests`, `security`, `consistency` |
+
+---
+
+## 🔀 モード検出
+
+```
+スペック/プロンプトが提供された場合（/auto-shipの後のテキスト）:
+  → MODE = BUILD → BUILD PHASE 0へ
+それ以外:
+  → MODE = SCAN → SCAN PHASE 0へ
+```
+
+---
+
+# ━━━ SCANモード ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## SCANフェーズ0: LOAD — コンテキスト読込
+
+### 0.1. 状態読込（サイレント）
+
+```
+読込順序:
+1. .brain/brain.json        → プロジェクト知識
+2. .brain/session.json      → 現在の状態
+3. ARCHITECTURE.md          → 構造と統計
+4. manifest.json            → 公式ファイルレジストリ
+5. package.json             → テクスタック
+```
+
+### 0.2. 環境検出
+
+```
+検出:
+- 言語/フレームワーク → 利用可能なlint/testツール
+- Gitステータス → 未コミットの変更?
+- テスト利用可能 → 検証実行可能?
+```
+
+---
+
+## SCANフェーズ1: DISCOVER — 改善発見
+
+| # | ソース | 方法 | 発見内容 |
+|---|--------|------|----------|
+| 1 | **TODOs/FIXMEs** | `grep -rn "TODO\|FIXME\|HACK\|XXX"` | 未処理の作業 |
+| 2 | **Lintエラー** | リンター実行 | コード品質違反 |
+| 3 | **型エラー** | 型チェッカー実行 | 型安全性の問題 |
+| 4 | **ドキュメント差異** | ARCHITECTURE.md vs 実態比較 | 古いドキュメント |
+| 5 | **マニフェスト差異** | manifest.json vs 実ファイル比較 | 欠落/孤立ファイル |
+| 6 | **i18n差異** | 言語間の行数比較 | 翻訳ギャップ > 7% |
+| 7 | **デッドコード** | exports検索、import確認 | 未使用のexports |
+| 8 | **古い依存** | `npm outdated`確認 | 古いパッケージ |
+| 9 | **テスト不足** | `.test.`ファイル確認 | 未テストコード |
+| 10 | **README/CHANGELOG** | バージョン一貫性確認 | バッジ/バージョン差異 |
+
+---
+
+## SCANフェーズ2: PRIORITIZE — スコアリングと選択
+
+```
+スコア = 影響度 × 実現性 × 確信度
+影響度 (1-5) | 実現性 (1-5) | 確信度 (0.0-1.0)
+```
+
+```
+1. スコア降順でソート → スコア ≥ 5のみ
+2. 上位N件選択（N = --budget、デフォルト3）
+3. 合計LOC ≤ 500
+```
+
+> `--dry-run`の場合: ここで停止。レポート出力。
+
+---
+
+## SCANフェーズ3: EXECUTE — コード修正
+
+### 3.1. ブランチ作成
+```bash
+git checkout -b auto-ship/YYYY-MM-DD
+```
+
+### 3.2. 実行ループ
+各タスク:
+```
+1. 意図宣言（ログ）
+2. エビデンス収集
+3. 変更実行（最小限、正確）
+4. 検証: □ テスト合格 | □ Lint正常 | □ 参照OK | □ セルフレビュー
+5. コミットまたはロールバック
+```
+
+### 3.3. 安全チェック（各タスク）
+```
+□ ファイル ≤ 5 | □ LOC ≤ 200 | □ 保護ファイル未変更
+□ 破壊的変更なし | □ auto-ship/*ブランチ上
+いずれかFAIL → タスクスキップ、ログ記録、次へ
+```
+
+---
+
+## SCANフェーズ4: REPORT
+
+`docs/reports/evolution-report-YYYY-MM-DD.md`を生成。
+
+---
+
+# ━━━ BUILDモード ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## BUILDフェーズ0: LOAD — コンテキスト読込
+
+SCANフェーズ0と同じ。
+
+---
+
+## BUILDフェーズ1: UNDERSTAND — 要件理解
+
+```
+入力: ユーザーのスペックテキスト
+出力:
+  機能: [明確な名前]
+  要件:
+    1. [機能要件]
+    2. [機能要件]
+  受入基準:
+    - [ ] [テスト可能な基準]
+  見積:
+    - ファイル数: [N]
+    - LOC: [N]
+    - 複雑度: [低 / 中 / 高]
+```
+
+### 判断ポイント
+- **テクスタック:** 既存プロジェクトから検出
+- **UIフレームワーク:** 既存使用、`ui-ux-pro-max`原則優先
+- **パターンマッチ:** コードベースの既存パターンと一貫性維持
+
+---
+
+## BUILDフェーズ2: PLAN — アーキテクチャ設計
+
+```
+1. 作成/修正するファイル特定
+2. コンポーネント構造設計（UIの場合）
+3. データモデル設計（バックエンドの場合）
+4. タスク間の依存関係マップ
+5. タスクごとのLOC見積
+```
+
+> `--dry-run`の場合: ここで停止。計画＋タスク分解を出力。
+
+---
+
+## BUILDフェーズ3: BUILD — 実装
+
+### 3.1. ブランチ作成
+```bash
+git checkout -b auto-ship/YYYY-MM-DD-feature-name
+```
+
+### 3.2. タスク実行
+```
+1. 意図宣言
+   🎯 構築: [コンポーネント/機能]
+   🤖 エージェント視点: [frontend-specialist等]
+2. コンテキスト収集
+3. コード作成（既存パターン準拠、ui-ux-pro-max適用）
+4. 段階的検証
+5. コミット
+```
+
+### 3.3. エージェント視点
+
+| タスク種別 | 視点 | 優先スキル |
+|------------|------|------------|
+| UIコンポーネント | `frontend-specialist` | ui-ux-pro-max, frontend-design, react |
+| スタイリング | `frontend-specialist` | tailwind-patterns, web-design-guidelines |
+| APIルート | `backend-specialist` | api-patterns, nodejs-best-practices |
+| データベース | `database-architect` | database-design |
+| テスト | `test-engineer` | testing-patterns, e2e-testing |
+| モバイル | `mobile-developer` | mobile-design |
+
+---
+
+## BUILDフェーズ4: VERIFY — 全面検証
+
+```
+□ ビルド合格 | □ テスト合格 | □ Lint正常
+□ 型チェック正常 | □ 参照切れなし | □ セルフレビュー
+□ 受入基準達成
+```
+
+### 全て合格 → フェーズ6 (SHIP)
+### エラーあり → フェーズ5 (HARDEN)
+
+---
+
+## BUILDフェーズ5: HARDEN — デバッグ＆修正
+
+```
+各エラーに対して:
+  1. 根本原因診断（systematic-debugging）
+  2. 最小限の修正
+  3. 再検証
+  最大3ループ/エラー
+```
+
+セキュリティクイックチェック:
+```
+□ シークレットハードコードなし | □ 未検証入力なし
+□ XSSベクターなし | □ 認証チェック完備
+```
+
+---
+
+## BUILDフェーズ6: SHIP — デリバリー
+
+```bash
+git commit -m "auto-ship: [機能名] — 実装完了"
+```
+
+`docs/reports/ship-report-YYYY-MM-DD.md`を生成。`.brain/session.json`を更新。
+
+---
+
+## 📝 自動レッスン記録
+
+完了後、注目すべきパターンがあれば`.brain/lessons.md`に記録。
+
+---
+
+## ⚠️ 次のステップ:
+```
+1️⃣ レポートを確認
+2️⃣ ブランチをマージ: git merge auto-ship/[branch]
+3️⃣ 別のフォーカスで再実行: /auto-ship --focus docs
+4️⃣ プレビュー: /auto-ship --dry-run
+5️⃣ 進捗保存: /save-brain
+```
+
+---
+
+## 🛡️ エラー処理（ユーザーに非表示）
+
+### Gitエラー:
+```
+checkout失敗 → Stash → ブランチ作成 → レポートに記載
+commit失敗 → git config確認 → フォールバック: ログのみ
+```
+
+### 発見なし（SCAN）:
+```
+→ "🎉 コードベースはクリーン！" → "/auditで詳細分析を推奨"
+```
+
+### コンテキスト制限:
+```
+→ 現タスク後に停止 → 完了分をレポート → 再実行を推奨
+```

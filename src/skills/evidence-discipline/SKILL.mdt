@@ -115,4 +115,4 @@ This skill is **read-once, apply-always**:
 | `/refactor` | Measure before/after, no blind restructuring |
 | `/deploy` | All gates must pass before deploy |
 | `/audit` | Evidence-based security findings |
-| `/auto-evolve` | Quality gates replace human approval for autonomous tasks |
+| `/auto-ship` | Quality gates for autonomous scan and build tasks |

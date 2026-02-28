@@ -4,6 +4,34 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.17.0] - 2026-03-01
+
+### 🚀 Auto-Ship — Autonomous Full-Lifecycle Builder
+
+**Replaces `/auto-evolve` with `/auto-ship`** — unified SCAN + BUILD mode.
+
+**New:**
+- `/auto-ship "spec"` — BUILD mode: spec → plan → code → test → debug → ship (100% autonomous)
+- `/auto-ship` (no spec) — SCAN mode: discover + fix codebase issues (formerly auto-evolve)
+- Chief Engineer v2 — upgraded from 8 to 27 skills, agent delegation, UI/UX priority
+- Agent orchestration — delegates to frontend-specialist, backend-specialist, test-engineer, etc.
+
+**Changed:**
+- `chief-engineer.mdt` — v2 rewrite: dual-mode, BUILD protocol, 27 skills
+- `manifest.json` — `auto-evolve` → `auto-ship`
+- `ARCHITECTURE.md` — updated agent table + workflow table
+- `rules/instructions_{en,vi,ja,zh}.md` — Command Mapping updated (×4)
+- `evidence-discipline SKILL` — integration points updated
+
+**Removed:**
+- `workflows/{en,vi,ja,zh}/auto-evolve.mdt` (×4) — replaced by auto-ship
+
+**Stats:**
+- EN auto-ship: 464 lines | VI: 380 | JA: 294 | ZH: 294
+- Chief Engineer skills: 8 → 27
+
+---
+
 ## [1.16.0] - 2026-03-01
 
 ### 🧬 Auto-Evolve — Autonomous Self-Development

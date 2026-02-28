@@ -31,7 +31,7 @@ When user types commands starting with `/`, read the corresponding workflow file
 ## Command Mapping:
 | Command | Workflow File | Description |
 |---------|--------------|-------------|
-| `/auto-evolve` | ~/.gemini/antigravity/global_workflows/auto-evolve.md | 🧬 Autonomous self-development |
+| `/auto-ship` | ~/.gemini/antigravity/global_workflows/auto-ship.md | 🚀 Autonomous full-lifecycle builder |
 | `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 Brainstorm ideas, market research |
 | `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | Design features |
 | `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | Create UI/UX |

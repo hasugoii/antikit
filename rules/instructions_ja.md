@@ -31,7 +31,7 @@
 ## Command Mapping:
 | コマンド | ワークフローファイル | 説明 |
 |----------|---------------------|------|
-| `/auto-evolve` | ~/.gemini/antigravity/global_workflows/auto-evolve.md | 🧬 自律的自己開発 |
+| `/auto-ship` | ~/.gemini/antigravity/global_workflows/auto-ship.md | 🚀 自律型フルライフサイクルビルダー |
 | `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 アイデア出し、市場調査 |
 | `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | 機能設計 |
 | `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | UI/UX作成 |

@@ -35,7 +35,7 @@ Specialist AI personas for different domains.
 
 | Agent                    | Focus                      | Skills Used                                              |
 | ------------------------ | -------------------------- | -------------------------------------------------------- |
-| `chief-engineer`         | Autonomous self-development| evidence-discipline, clean-code, architecture            |
+| `chief-engineer`         | Full-lifecycle builder      | evidence-discipline, app-builder, ui-ux-pro-max + 24 more |
 | `orchestrator`           | Multi-agent coordination   | parallel-agents, behavioral-modes                        |
 | `project-planner`        | Discovery, task planning   | brainstorming, plan-writing, architecture                |
 | `frontend-specialist`    | Web UI/UX                  | frontend-design, react-best-practices, tailwind-patterns |
@@ -201,7 +201,7 @@ Slash command procedures. Invoke with `/command`. All available in 4 languages (
 | `/code` | Write code from spec | `--mobile` `--api` `--nestjs` `--nextjs` `--db` `--rust` `--python` `--ts` |
 | `/plan` | Task breakdown | - |
 | `/visualize` | UI/UX design | `--mobile` `--game` `--audit` |
-| `/auto-evolve` | Autonomous self-development | `--dry-run` `--budget N` `--focus X` |
+| `/auto-ship` | Full-lifecycle builder | `"spec"` `--dry-run` `--budget N` `--focus X` |
 | `/brainstorm` | Socratic discovery | - |
 
 ### Quality & Testing

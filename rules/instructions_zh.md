@@ -31,7 +31,7 @@
 ## Command Mapping:
 | 命令 | 工作流文件 | 描述 |
 |------|-----------|------|
-| `/auto-evolve` | ~/.gemini/antigravity/global_workflows/auto-evolve.md | 🧬 自主持续开发 |
+| `/auto-ship` | ~/.gemini/antigravity/global_workflows/auto-ship.md | 🚀 自主全生命周期构建器 |
 | `/brainstorm` | ~/.gemini/antigravity/global_workflows/brainstorm.md | 💡 头脑风暴、市场研究 |
 | `/plan` | ~/.gemini/antigravity/global_workflows/plan.md | 功能设计 |
 | `/visualize` | ~/.gemini/antigravity/global_workflows/visualize.md | 创建UI/UX |
