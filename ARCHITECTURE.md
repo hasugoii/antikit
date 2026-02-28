@@ -8,9 +8,9 @@
 
 Antigravity Kit is a modular system consisting of:
 
-- **21 Specialist Agents** - Role-based AI personas
+- **22 Specialist Agents** - Role-based AI personas
 - **83 Skills** - Domain-specific knowledge modules
-- **19 Workflows** - Slash command procedures (×4 languages)
+- **20 Workflows** - Slash command procedures (×4 languages)
 
 ---
 
@@ -20,21 +20,22 @@ Antigravity Kit is a modular system consisting of:
 .agent/
 ├── ARCHITECTURE.md          # This file
 ├── src/
-│   ├── agents/              # 21 Specialist Agents
+│   ├── agents/              # 22 Specialist Agents
 │   └── skills/              # 83 Skills
-├── workflows/               # 19 Slash Commands (×4 languages)
+├── workflows/               # 20 Slash Commands (×4 languages)
 ├── rules/                   # Global Rules
 └── scripts/                 # Master Validation Scripts
 ```
 
 ---
 
-## 🤖 Agents (21)
+## 🤖 Agents (22)
 
 Specialist AI personas for different domains.
 
 | Agent                    | Focus                      | Skills Used                                              |
 | ------------------------ | -------------------------- | -------------------------------------------------------- |
+| `chief-engineer`         | Autonomous self-development| evidence-discipline, clean-code, architecture            |
 | `orchestrator`           | Multi-agent coordination   | parallel-agents, behavioral-modes                        |
 | `project-planner`        | Discovery, task planning   | brainstorming, plan-writing, architecture                |
 | `frontend-specialist`    | Web UI/UX                  | frontend-design, react-best-practices, tailwind-patterns |
@@ -188,7 +189,7 @@ T1 Orchestrators → call → T2 Hubs → call → T3 Utilities
 
 ---
 
-## 🔄 Workflows (19)
+## 🔄 Workflows (20)
 
 Slash command procedures. Invoke with `/command`. All available in 4 languages (EN, VI, JA, ZH).
 
@@ -200,6 +201,7 @@ Slash command procedures. Invoke with `/command`. All available in 4 languages (
 | `/code` | Write code from spec | `--mobile` `--api` `--nestjs` `--nextjs` `--db` `--rust` `--python` `--ts` |
 | `/plan` | Task breakdown | - |
 | `/visualize` | UI/UX design | `--mobile` `--game` `--audit` |
+| `/auto-evolve` | Autonomous self-development | `--dry-run` `--budget N` `--focus X` |
 | `/brainstorm` | Socratic discovery | - |
 
 ### Quality & Testing
@@ -323,13 +325,13 @@ For details, see [scripts/README.md](scripts/README.md)
 
 | Metric              | Value                           |
 | ------------------- | ------------------------------- |
-| **Total Agents**    | 21                              |
+| **Total Agents**    | 22                              |
 | **Total Skills**    | 83                              |
-| **Total Workflows** | 19 (×4 languages = 76 files)    |
+| **Total Workflows** | 20 (×4 languages = 80 files)    |
 | **Total Scripts**   | 4 (master)                      |
 | **Schemas**         | 3                               |
 | **Templates**       | 4                               |
-| **Power Mode Flags**| 25+ across 7 workflows          |
+| **Power Mode Flags**| 28+ across 8 workflows          |
 | **Coverage**        | ~95% web/mobile development     |
 
 ---

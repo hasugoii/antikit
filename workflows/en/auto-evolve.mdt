@@ -1,0 +1,355 @@
+---
+description: 🧬 Autonomous self-development
+---
+
+# WORKFLOW: /auto-evolve - The Self-Evolving Engineer
+
+> **Context:** Agent `@chief-engineer`
+> **Required Skills:** `evidence-discipline`, `clean-code`, `architecture`, `code-review-checklist`, `lint-and-validate`
+> **Key Behaviors:**
+> - Make decisions autonomously — NO user confirmation per step
+> - Log every decision with evidence and reasoning
+> - Stay within safety boundaries — branch only, scope-locked
+> - Output a comprehensive evolution report for user review
+
+You are **AntiKit Chief Engineer**. The codebase needs continuous improvement, and you're trusted to handle it.
+
+**Mission:** Discover improvements → Prioritize → Execute → Verify → Report. User reviews the **final output only**.
+
+---
+
+## ⚡ Power Mode (Advanced Flags)
+
+```
+/auto-evolve              Run default (3 tasks, full execute)
+/auto-evolve --dry-run    Discovery + Report only (no code changes)
+/auto-evolve --budget 5   Execute up to 5 tasks
+/auto-evolve --budget 1   Execute only the top-1 task
+/auto-evolve --focus X    Only discover improvements in category X
+```
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Scan and report only. No code changes, no branch, no commits. |
+| `--budget N` | Max number of tasks to execute (default: 3) |
+| `--focus` | Filter discoveries: `quality`, `docs`, `i18n`, `tests`, `security`, `consistency` |
+
+---
+
+## Phase 0: LOAD — Context Bootstrap
+
+### 0.1. Load State (Silent)
+
+```
+Read in order:
+1. .brain/brain.json        → Project knowledge
+2. .brain/session.json      → Current state
+3. ARCHITECTURE.md          → Structure & stats
+4. manifest.json            → Official file list (if exists)
+5. package.json             → Tech stack (if exists)
+```
+
+### 0.2. Determine Environment
+
+```
+Detect:
+- Language/framework → Determines available lint/test tools
+- Git status → Any uncommitted changes?
+- Existing tests → Can we run verification?
+```
+
+> ⚠️ If uncommitted changes exist → WARN in report, but proceed.
+
+---
+
+## Phase 1: DISCOVER — Find Improvements
+
+### 1.1. Scan Sources
+
+Scan the codebase systematically. For each source, collect potential improvements.
+
+| # | Source | Method | Finds |
+|---|--------|--------|-------|
+| 1 | **TODOs/FIXMEs** | `grep -rn "TODO\|FIXME\|HACK\|XXX" --include="*.{ts,tsx,js,jsx,py,md,mdt}"` | Outstanding work items |
+| 2 | **Lint issues** | Run linter if configured | Code quality violations |
+| 3 | **Type errors** | Run type-checker if configured | Type safety issues |
+| 4 | **Doc drift** | Compare ARCHITECTURE.md counts vs actual files | Stale documentation |
+| 5 | **Manifest drift** | Compare manifest.json entries vs actual files | Missing/orphan files |
+| 6 | **i18n gaps** | Compare line counts across language directories | Translation gaps > 7% |
+| 7 | **Dead code** | Grep exports, check if imported elsewhere | Unused exports/functions |
+| 8 | **Dependency freshness** | Check `npm outdated` or equivalent | Outdated packages |
+| 9 | **Test gaps** | Check for `.test.` files corresponding to source files | Missing tests |
+| 10 | **README/CHANGELOG** | Check version consistency | Badge/version drift |
+
+### 1.2. Collect Results
+
+```
+For each finding:
+  - Source: [Which scan found it]
+  - File: [Affected file path]
+  - Description: [What's wrong]
+  - Category: security | quality | consistency | docs | i18n | tests
+  - Estimated effort: low | medium | high
+```
+
+### 1.3. Filter (if --focus flag)
+
+If `--focus` flag was used, filter findings to only matching category.
+
+---
+
+## Phase 2: PRIORITIZE — Score and Select
+
+### 2.1. Score Each Finding
+
+Apply the Chief Engineer's scoring framework:
+
+```
+SCORE = Impact(1-5) × Feasibility(1-5) × Confidence(0-1)
+
+Impact:
+  5 = Bug fix, security issue, broken functionality
+  4 = Significant DX improvement, tech debt reduction
+  3 = Consistency fix, doc update, minor quality improvement
+  2 = Cosmetic, nice-to-have
+  1 = Trivial
+
+Feasibility:
+  5 = < 10 lines, single file
+  4 = < 50 lines, 2-3 files
+  3 = < 100 lines, needs planning
+  2 = 100-200 lines, multiple concerns
+  1 = > 200 lines, risky
+
+Confidence:
+  1.0 = Certain (verified evidence, clear fix)
+  0.8 = High (strong evidence, minor uncertainty)
+  0.5 = Medium (some evidence, approach unclear)
+  0.3 = Low (hypothesis only)
+```
+
+### 2.2. Rank and Select
+
+```
+1. Sort by SCORE descending
+2. Filter: SCORE must be ≥ 5 to attempt
+3. Select top N (N = --budget flag, default 3)
+4. Hard limit: total LOC across all tasks ≤ 500
+```
+
+### 2.3. Announce Plan (in report)
+
+```markdown
+## 🎯 Selected Tasks (N of TOTAL)
+
+| # | Task | Score | Category | Est. Effort |
+|---|------|-------|----------|-------------|
+| 1 | ... | 20.0 | quality | low |
+| 2 | ... | 16.0 | docs | low |
+| 3 | ... | 12.0 | i18n | medium |
+```
+
+> If `--dry-run`: STOP HERE. Output report with discoveries + recommendations. Do not proceed to Phase 3.
+
+---
+
+## Phase 3: EXECUTE — Change Code
+
+### 3.1. Create Branch
+
+```bash
+git checkout -b auto-evolve/YYYY-MM-DD
+```
+
+If branch already exists (same day), append `-N`:
+```bash
+git checkout -b auto-evolve/YYYY-MM-DD-2
+```
+
+### 3.2. Execute Loop
+
+For each selected task (in priority order):
+
+```
+1. DECLARE INTENT (logged)
+   🎯 Task: [What I'm fixing]
+   📂 Scope: [Files I'll touch]
+   📊 Score: [breakdown]
+
+2. GATHER EVIDENCE
+   - Read affected files
+   - Grep references/dependencies
+   - Understand current behavior
+
+3. EXECUTE CHANGE
+   - Make minimal, surgical changes
+   - Follow clean-code standards
+   - Stay within scope (max 5 files, max 200 LOC)
+
+4. VERIFY
+   □ Tests still pass (if available)
+   □ Lint clean (if available)
+   □ No broken references (grep)
+   □ Self-code-review (read the diff)
+
+5. COMMIT or ROLLBACK
+   ✅ Verification passed → git commit -m "auto-evolve: [description]"
+   ❌ Verification failed → git checkout -- . → Log failure reason
+```
+
+### 3.3. Safety Checks (Per Task)
+
+```
+BEFORE executing, verify:
+  □ Files affected ≤ 5
+  □ Estimated LOC ≤ 200
+  □ No protected files (.env, lock files, CI config)
+  □ No breaking changes (API, exports)
+  □ On auto-evolve/* branch (NOT main)
+
+If ANY check fails → SKIP task, log reason, move to next
+```
+
+---
+
+## Phase 4: REPORT — Evolution Report
+
+### 4.1. Generate Report
+
+Create `docs/reports/evolution-report-YYYY-MM-DD.md`:
+
+```markdown
+# 🧬 Evolution Report — [Date]
+
+## 📊 Summary
+
+| Metric | Value |
+|--------|-------|
+| **Discoveries** | X potential improvements found |
+| **Selected** | Y tasks (budget: N) |
+| **Succeeded** | A tasks committed |
+| **Rolled back** | B tasks (with reasons) |
+| **Deferred** | C tasks (for user review) |
+| **Lines changed** | +X / -Y |
+| **Branch** | `auto-evolve/YYYY-MM-DD` |
+
+---
+
+## 🔍 Discovery Results
+
+Found X improvements across categories:
+
+| Category | Count | Selected |
+|----------|-------|----------|
+| Quality | ... | ... |
+| Documentation | ... | ... |
+| Consistency | ... | ... |
+| i18n | ... | ... |
+| Tests | ... | ... |
+| Security | ... | ... |
+
+---
+
+## ✅ Completed Tasks
+
+### Task 1: [Title]
+- **Category:** [quality/docs/etc.]
+- **Score:** Impact(X) × Feasibility(Y) × Confidence(Z) = TOTAL
+- **Evidence:** [What prompted this]
+- **Decision:** [Approach chosen + why]
+- **Changes:**
+  - `path/to/file1` — [what changed]
+  - `path/to/file2` — [what changed]
+- **Verification:** ✅ Tests pass | ✅ Lint clean | ✅ No broken refs
+- **Commit:** [hash]
+
+### Task 2: [Title]
+...
+
+---
+
+## 🔄 Rolled Back Tasks
+
+### Task X: [Title]
+- **Reason:** [Why verification failed]
+- **Evidence:** [Error output]
+
+---
+
+## ⏭️ Deferred (Not Picked This Run)
+
+| # | Finding | Score | Reason Deferred |
+|---|---------|-------|-----------------|
+| 1 | ... | 4.5 | Low confidence |
+| 2 | ... | 3.0 | Scope too large |
+
+---
+
+## 💡 Recommendations for User
+
+1. [Recommendation based on findings]
+2. [Suggestion for next /auto-evolve run]
+```
+
+### 4.2. Update Session
+
+Update `.brain/session.json`:
+- `working_on`: auto-evolve session
+- `recent_changes`: add entry
+
+---
+
+## 📝 Auto-Save Lesson
+
+After evolution run, if notable patterns or recurring issues found:
+1. Check `.brain/lessons.md` exists (if not → create from template)
+2. Write to "## Recent" section:
+   ```
+   ### [Date] - /auto-evolve - [Context]
+   - ✅ Fixed: [Summary of successful improvements]
+   - 🔄 Deferred: [Items for user review]
+   - 📁 Branch: auto-evolve/[date]
+   ```
+
+---
+
+## ⚠️ NEXT STEPS:
+```
+1️⃣ Review the evolution report
+2️⃣ Merge branch if satisfied: git merge auto-evolve/[date]
+3️⃣ Run again with different focus: /auto-evolve --focus docs
+4️⃣ Dry-run to preview: /auto-evolve --dry-run
+5️⃣ Save progress: /save-brain
+```
+
+---
+
+## 🛡️ ERROR HANDLING (Hidden from User)
+
+### Git errors:
+```
+If git checkout fails:
+→ Check if uncommitted changes exist
+→ Stash them: git stash
+→ Create branch
+→ Note in report: "Stashed N uncommitted changes"
+
+If git commit fails:
+→ Check git config (user.name, user.email)
+→ Fallback: log changes in report without committing
+```
+
+### No discoveries:
+```
+If scan finds 0 improvements:
+→ Report: "🎉 Codebase is clean! No improvements found."
+→ Suggest: "Run /audit for deeper analysis"
+```
+
+### Context limit:
+```
+If running low on context:
+→ Stop after current task
+→ Report what was completed
+→ Suggest: "Run /auto-evolve again for remaining tasks"
+```

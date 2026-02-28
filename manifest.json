@@ -2,6 +2,7 @@
   "version": "1.15.2",
   "workflows": [
     "ak-update",
+    "auto-evolve",
     "audit",
     "brainstorm",
     "code",
@@ -23,6 +24,7 @@
   ],
   "agents": [
     "backend-specialist",
+    "chief-engineer",
     "code-archaeologist",
     "database-architect",
     "debugger",
