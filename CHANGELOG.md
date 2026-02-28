@@ -4,6 +4,41 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.16.0] - 2026-03-01
+
+### 🧬 Auto-Evolve — Autonomous Self-Development
+
+New workflow + agent for autonomous codebase improvement. AI discovers issues, prioritizes by Impact×Feasibility×Confidence scoring, executes fixes, verifies results, and outputs a comprehensive evolution report — all without per-step user confirmation.
+
+### Added
+
+#### New Agent: `chief-engineer`
+- **Decision Framework** — Impact(1-5) × Feasibility(1-5) × Confidence(0-1) scoring
+- **Safety Boundaries** — Max 5 files/task, 200 LOC, branch-only commits, zero breaking changes
+- **Self-Review Protocol** — 5-point checklist before completing each task
+- **Discovery Sources** — TODOs, lint, types, dead code, doc drift, manifest drift, i18n gaps, test gaps
+- Skills: `evidence-discipline`, `clean-code`, `architecture`, `plan-writing`, `code-review-checklist`, `testing-patterns`, `lint-and-validate`, `bash-linux`
+
+#### New Workflow: `/auto-evolve` (4 languages)
+- **5 phases:** LOAD → DISCOVER → PRIORITIZE → EXECUTE → REPORT
+- **Power mode flags:** `--dry-run`, `--budget N`, `--focus X`
+- **Structured report:** `docs/reports/evolution-report-YYYY-MM-DD.md`
+- **Auto-save lessons** to `.brain/lessons.md`
+- Available in EN, VI, JA, ZH (full parity, ~320 lines each)
+
+### Changed
+- **`manifest.json`** — Added `auto-evolve` workflow + `chief-engineer` agent
+- **`ARCHITECTURE.md`** — 21→22 agents, 19→20 workflows, 76→80 total workflow files
+- **`rules/instructions_{en,vi,ja,zh}.md`** — Command Mapping +`/auto-evolve` (×4 languages)
+- **`evidence-discipline` SKILL** — Integration Points +`/auto-evolve`
+
+### Stats
+- **5 new files** (1 agent + 4 workflow translations)
+- **8 files modified** (manifest, architecture, 4 instructions, skill, brain)
+- **~1,575 lines** added
+
+---
+
 ## [1.15.2] - 2026-02-25
 
 ### 🐛 Fix: PowerShell Installer 40 Failed Downloads

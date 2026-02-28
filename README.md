@@ -7,7 +7,7 @@
 ### **21 AI experts. 1 chat. From idea to income.**
 *Stop vibe coding blind. Start vibe coding smart.*
 
-[![Version](https://img.shields.io/badge/v1.15.2-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/v1.16.0-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![Docs](https://img.shields.io/badge/Docs-antikit.pages.dev-FF6D00?style=for-the-badge)](https://antikit.pages.dev/docs)
