@@ -4,6 +4,26 @@ All notable changes to AntiKit will be documented in this file.
 
 ---
 
+## [1.17.1] - 2026-03-01
+
+### 🛡️ Installer Hardening + i18n Parity
+
+**Fixed (Critical):**
+- `install.sh` orphan cleanup now skips when downloads fail (was deleting valid files on network failure)
+- `install.sh` fallback lists now include `auto-ship` workflow + `chief-engineer` agent
+- `install.sh` script retry failures now counted in `$failed`
+
+**Fixed (Warnings):**
+- Atomic downloads: all loops use `.tmp` → `mv` pattern to prevent file corruption (both sh + ps1)
+- `install.sh` manifest `eval` sanitizes metacharacters + validates output format
+- `install.ps1` reads `antikit_lang` (old format) as fallback for upgrades
+- `install.ps1` removed duplicate `$ScriptsDir` declaration
+
+**Improved:**
+- i18n: JA/ZH auto-ship 295→459 lines (98%), VI 380→460 lines (99%)
+
+---
+
 ## [1.17.0] - 2026-03-01
 
 ### 🚀 Auto-Ship — Autonomous Full-Lifecycle Builder
