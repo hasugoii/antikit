@@ -9,7 +9,7 @@ $RepoBase = "https://raw.githubusercontent.com/hasugoii/antikit/main"
 
 # Workflows - organized by language
 $WorkflowsEn = @(
-    "ak-update", "audit", "brainstorm", "code", "config",
+    "ak-update", "auto-ship", "audit", "brainstorm", "code", "config",
     "debug", "deploy", "grow", "init", "launch", "next",
     "plan", "recap", "refactor", "run", "save_brain", "test",
     "uninstall", "visualize"
@@ -17,7 +17,7 @@ $WorkflowsEn = @(
 
 # Agents (21 total)
 $Agents = @(
-    "backend-specialist", "code-archaeologist", "database-architect",
+    "backend-specialist", "chief-engineer", "code-archaeologist", "database-architect",
     "debugger", "devops-engineer", "documentation-writer",
     "explorer-agent", "frontend-specialist", "game-developer",
     "growth-hacker", "mobile-developer", "orchestrator",
@@ -169,7 +169,8 @@ try {
     $Scripts = $ManifestData.scripts
     $Schemas = $ManifestData.schemas
     $Templates = $ManifestData.templates
-} catch {
+}
+catch {
     Write-Host "[WARN] Manifest not available. Using fallback lists." -ForegroundColor Yellow
 }
 
@@ -290,59 +291,67 @@ foreach ($script in $Scripts) {
     }
 }
 
-# 7. Orphan cleanup
-Write-Host ""
-Write-Host "[...] Scanning for orphan files..." -ForegroundColor Cyan
-$orphanCount = 0
-
-# Load custom files
-$customWorkflows = @()
-$customAgents = @()
-$customSkills = @()
-if (Test-Path $CustomFile) {
-    try {
-        $customData = Get-Content $CustomFile -Raw | ConvertFrom-Json
-        if ($customData.custom_workflows) { $customWorkflows = $customData.custom_workflows }
-        if ($customData.custom_agents) { $customAgents = $customData.custom_agents }
-        if ($customData.custom_skills) { $customSkills = $customData.custom_skills }
-    } catch {}
+# 7. Orphan cleanup (ONLY if all downloads succeeded — prevents deleting valid files on network failure)
+if ($failed -gt 0) {
+    Write-Host ""
+    Write-Host "[SKIP] Skipping orphan cleanup ($failed download(s) failed — files may be valid)" -ForegroundColor Yellow
 }
+else {
+    Write-Host ""
+    Write-Host "[...] Scanning for orphan files..." -ForegroundColor Cyan
+    $orphanCount = 0
 
-# Scan workflows
-foreach ($file in Get-ChildItem "$GlobalWorkflows\*.md" -ErrorAction SilentlyContinue) {
-    $name = $file.BaseName
-    if ($WorkflowsEn -notcontains $name -and $customWorkflows -notcontains $name) {
-        Write-Host "   [DEL] Removing orphan workflow: $($file.Name)" -ForegroundColor Yellow
-        Remove-Item $file.FullName -Force
-        $orphanCount++
+    # Load custom files
+    $customWorkflows = @()
+    $customAgents = @()
+    $customSkills = @()
+    if (Test-Path $CustomFile) {
+        try {
+            $customData = Get-Content $CustomFile -Raw | ConvertFrom-Json
+            if ($customData.custom_workflows) { $customWorkflows = $customData.custom_workflows }
+            if ($customData.custom_agents) { $customAgents = $customData.custom_agents }
+            if ($customData.custom_skills) { $customSkills = $customData.custom_skills }
+        }
+        catch {}
     }
-}
 
-# Scan agents
-foreach ($file in Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyContinue) {
-    $name = $file.BaseName
-    if ($Agents -notcontains $name -and $customAgents -notcontains $name) {
-        Write-Host "   [DEL] Removing orphan agent: $($file.Name)" -ForegroundColor Yellow
-        Remove-Item $file.FullName -Force
-        $orphanCount++
+    # Scan workflows
+    foreach ($file in Get-ChildItem "$GlobalWorkflows\*.md" -ErrorAction SilentlyContinue) {
+        $name = $file.BaseName
+        if ($WorkflowsEn -notcontains $name -and $customWorkflows -notcontains $name) {
+            Write-Host "   [DEL] Removing orphan workflow: $($file.Name)" -ForegroundColor Yellow
+            Remove-Item $file.FullName -Force
+            $orphanCount++
+        }
     }
-}
 
-# Scan skills
-foreach ($dir in Get-ChildItem "$SkillsDir" -Directory -ErrorAction SilentlyContinue) {
-    $name = $dir.Name
-    if ($Skills -notcontains $name -and $customSkills -notcontains $name) {
-        Write-Host "   [DEL] Removing orphan skill: $name/" -ForegroundColor Yellow
-        Remove-Item $dir.FullName -Recurse -Force
-        $orphanCount++
+    # Scan agents
+    foreach ($file in Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyContinue) {
+        $name = $file.BaseName
+        if ($Agents -notcontains $name -and $customAgents -notcontains $name) {
+            Write-Host "   [DEL] Removing orphan agent: $($file.Name)" -ForegroundColor Yellow
+            Remove-Item $file.FullName -Force
+            $orphanCount++
+        }
     }
-}
 
-if ($orphanCount -eq 0) {
-    Write-Host "   [OK] No orphan files found" -ForegroundColor Green
-} else {
-    Write-Host "   [OK] Cleaned $orphanCount orphan file(s)" -ForegroundColor Green
-}
+    # Scan skills
+    foreach ($dir in Get-ChildItem "$SkillsDir" -Directory -ErrorAction SilentlyContinue) {
+        $name = $dir.Name
+        if ($Skills -notcontains $name -and $customSkills -notcontains $name) {
+            Write-Host "   [DEL] Removing orphan skill: $name/" -ForegroundColor Yellow
+            Remove-Item $dir.FullName -Recurse -Force
+            $orphanCount++
+        }
+    }
+
+    if ($orphanCount -eq 0) {
+        Write-Host "   [OK] No orphan files found" -ForegroundColor Green
+    }
+    else {
+        Write-Host "   [OK] Cleaned $orphanCount orphan file(s)" -ForegroundColor Green
+    }
+} # end if ($failed -gt 0) guard
 
 # 7.5. Save version and language
 if (-not (Test-Path "$env:USERPROFILE\.gemini")) {
@@ -373,14 +382,16 @@ if (-not (Test-Path $RulesDir)) { New-Item -ItemType Directory -Force -Path $Rul
 try {
     Invoke-WebRequest -Uri "$RepoBase/rules/instructions_$lang.md" -OutFile "$RulesDir\instructions.md" -UseBasicParsing -ErrorAction Stop
     Write-Host "   [OK] instructions_$lang.md" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   [X] instructions_$lang.md" -ForegroundColor Red
 }
 
 try {
     Invoke-WebRequest -Uri "$RepoBase/rules/GEMINI.md" -OutFile "$RulesDir\GEMINI.md" -UseBasicParsing -ErrorAction Stop
     Write-Host "   [OK] GEMINI.md (core rules)" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   [X] GEMINI.md (core rules)" -ForegroundColor Red
 }
 
@@ -393,7 +404,7 @@ function Strip-Frontmatter($filePath) {
             if ($lines[$i] -eq "---") { $endIdx = $i; break }
         }
         if ($endIdx -ge 0) {
-            return ($lines[($endIdx+1)..($lines.Count-1)] | Where-Object { $_ -ne $null }) -join "`n"
+            return ($lines[($endIdx + 1)..($lines.Count - 1)] | Where-Object { $_ -ne $null }) -join "`n"
         }
     }
     return Get-Content $filePath -Raw
