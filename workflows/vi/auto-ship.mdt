@@ -107,10 +107,31 @@ Chỉ giữ phát hiện thuộc danh mục tương ứng.
 
 ### Chấm Điểm
 
+Áp dụng framework chấm điểm Chief Engineer:
+
 ```
 ĐIỂM = Tác Động × Khả Thi × Độ Tin Cậy
 
-Tác Động (1-5) | Khả Thi (1-5) | Độ Tin Cậy (0.0-1.0)
+Tác Động (1-5):
+  5 = Sửa bug, lỗi bảo mật, chức năng hỏng
+  4 = Cải thiện DX, giảm tech debt đáng kể
+  3 = Sửa nhất quán, cập nhật docs, cải thiện chất lượng nhỏ
+  2 = Cosmetic, nice-to-have
+  1 = Không đáng kể
+
+Khả Thi (1-5):
+  5 = <10 dòng, 1 file, fix rõ ràng
+  4 = <50 dòng, 2-3 files, straightforward
+  3 = <100 dòng, cần lên kế hoạch cẩn thận
+  2 = 100-200 dòng, nhiều vấn đề
+  1 = >200 dòng, rủi ro cao, cấp kiến trúc
+
+Độ Tin Cậy (0.0-1.0):
+  1.0 = Chắc chắn (evidence đã xác minh, fix rõ ràng)
+  0.8 = Cao (evidence mạnh, chút không chắc)
+  0.5 = Trung bình (có evidence, approach chưa rõ)
+  0.3 = Thấp (giả thuyết, cần nghiên cứu thêm)
+  0.0 = Không có evidence (KHÔNG ĐƯỢC thực hiện)
 ```
 
 ### Xếp Hạng và Chọn
@@ -162,7 +183,12 @@ Nếu FAIL → BỎ QUA task, ghi log, chuyển tiếp
 
 ## SCAN Giai Đoạn 4: REPORT
 
-Tạo `docs/reports/evolution-report-YYYY-MM-DD.md` với tóm tắt, tasks hoàn thành, items hoãn lại.
+Tạo `docs/reports/evolution-report-YYYY-MM-DD.md` với:
+
+- Bảng tóm tắt (số phát hiện / đã chọn / thành công / rollback / hoãn lại)
+- Tasks hoàn thành kèm evidence, quyết định, thay đổi, kết quả kiểm tra
+- Items hoãn lại và lý do
+- Thông tin cập nhật session
 
 ---
 
@@ -328,22 +354,64 @@ git commit -m "auto-ship: [tên feature] — hoàn thành implementation"
 
 ### 6.2. Tạo Báo Cáo
 
-Tạo `docs/reports/ship-report-YYYY-MM-DD.md` với tóm tắt, acceptance criteria, files thay đổi, kết quả kiểm tra.
+Tạo `docs/reports/ship-report-YYYY-MM-DD.md`:
+
+```markdown
+# 🚀 Ship Report — [Tên Feature]
+
+## 📊 Tóm Tắt
+
+| Chỉ số | Giá trị |
+|--------|--------|
+| **Spec** | [Text spec gốc] |
+| **Tasks hoàn thành** | N tasks |
+| **Files tạo mới** | N files |
+| **Files sửa** | N files |
+| **Dòng thêm** | +N |
+| **Tests** | N pass |
+| **Branch** | `auto-ship/YYYY-MM-DD-feature-name` |
+
+## ✅ Tiêu Chí Chấp Nhận
+
+- [x] Tiêu chí 1
+- [x] Tiêu chí 2
+- [ ] Tiêu chí 3 (một phần — xem notes)
+
+## 📁 Files Thay Đổi
+
+| File | Action | Mô tả |
+|------|--------|--------|
+| `src/components/X.tsx` | NEW | [Chức năng] |
+| `src/pages/Y.tsx` | MODIFIED | [Thay đổi] |
+
+## 🧪 Kiểm Tra
+
+- Build: ✅
+- Tests: ✅ (N pass)
+- Lint: ✅
+- Types: ✅
+
+## 📝 Notes
+
+[Quyết định, trade-offs, limitations đã biết]
+```
 
 ### 6.3. Cập Nhật Session
 
-Cập nhật `.brain/session.json` với trạng thái mới.
+Cập nhật `.brain/session.json`:
+- `working_on`: thông tin auto-ship session
+- `recent_changes`: thêm entry mới
 
 ---
 
 ## 📝 Tự Động Ghi Bài Học
 
-Sau khi hoàn thành (cả 2 mode), nếu có patterns đáng chú ý:
-1. Kiểm tra `.brain/lessons.md` tồn tại
+Sau khi hoàn thành (cả 2 mode), nếu có patterns đáng chú ý hoặc vấn đề lặp lại:
+1. Kiểm tra `.brain/lessons.md` tồn tại (nếu chưa → tạo từ template)
 2. Ghi vào "## Recent":
    ```
    ### [Ngày] - /auto-ship - [Context]
-   - ✅ Đã làm: [Tóm tắt]
+   - ✅ Đã làm: [Tóm tắt cải thiện/feature]
    - 🔄 Hoãn lại: [Items cần user review]
    - 📁 Branch: auto-ship/[ngày]
    ```
@@ -365,16 +433,28 @@ Sau khi hoàn thành (cả 2 mode), nếu có patterns đáng chú ý:
 
 ### Lỗi Git:
 ```
-Nếu git checkout fail → Stash → Tạo branch → Ghi trong báo cáo
-Nếu git commit fail → Kiểm tra git config → Fallback: ghi log
+Nếu git checkout fail:
+→ Kiểm tra thay đổi chưa commit
+→ Stash: git stash
+→ Tạo branch
+→ Ghi trong báo cáo: "Đã stash N thay đổi chưa commit"
+
+Nếu git commit fail:
+→ Kiểm tra git config (user.name, user.email)
+→ Fallback: không commit, ghi log thay đổi trong báo cáo
 ```
 
 ### Không tìm thấy gì (SCAN):
 ```
-→ "🎉 Codebase sạch sẽ!" → Gợi ý: "/audit để phân tích sâu hơn"
+Nếu scan tìm được 0 cải thiện:
+→ Báo cáo: "🎉 Codebase sạch sẽ! Không tìm thấy cải thiện."
+→ Gợi ý: "Chạy /audit để phân tích sâu hơn"
 ```
 
 ### Hết context:
 ```
-→ Dừng sau task hiện tại → Báo cáo → Gợi ý chạy lại
+Nếu context sắp hết:
+→ Dừng sau task hiện tại
+→ Báo cáo những gì đã hoàn thành
+→ Gợi ý: "Chạy lại /auto-ship cho các tasks còn lại"
 ```

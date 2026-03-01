@@ -76,67 +76,122 @@
 
 ## SCAN阶段1: DISCOVER — 发现改进
 
+系统地扫描代码库。从各个来源收集潜在改进点。
+
 | # | 来源 | 方法 | 发现 |
 |---|------|------|------|
-| 1 | **TODOs/FIXMEs** | `grep -rn "TODO\|FIXME\|HACK\|XXX"` | 待办工作 |
-| 2 | **Lint错误** | 运行linter | 代码质量违规 |
-| 3 | **类型错误** | 运行类型检查器 | 类型安全问题 |
-| 4 | **文档偏差** | ARCHITECTURE.md vs 实际比较 | 过时文档 |
-| 5 | **清单偏差** | manifest.json vs 实际文件比较 | 缺失/孤立文件 |
+| 1 | **TODOs/FIXMEs** | `grep -rn "TODO\|FIXME\|HACK\|XXX" --include="*.{ts,tsx,js,jsx,py,md,mdt}"` | 待办工作 |
+| 2 | **Lint错误** | 运行linter（已配置的情况下） | 代码质量违规 |
+| 3 | **类型错误** | 运行类型检查器（已配置的情况下） | 类型安全问题 |
+| 4 | **文档偏差** | ARCHITECTURE.md统计 vs 实际比较 | 过时文档 |
+| 5 | **清单偏差** | manifest.json条目 vs 实际文件比较 | 缺失/孤立文件 |
 | 6 | **i18n偏差** | 语言目录间行数比较 | 翻译差距 > 7% |
-| 7 | **死代码** | grep exports、检查imports | 未使用的exports |
-| 8 | **过时依赖** | `npm outdated`检查 | 过时包 |
-| 9 | **缺少测试** | 检查`.test.`文件 | 未测试代码 |
+| 7 | **死代码** | 搜索exports、检查imports引用 | 未使用的exports/函数 |
+| 8 | **过时依赖** | `npm outdated`或等效命令检查 | 过时包 |
+| 9 | **缺少测试** | 检查`.test.`文件与源文件的对应 | 未测试代码 |
 | 10 | **README/CHANGELOG** | 检查版本一致性 | 版本偏差 |
+
+### 过滤（`--focus`标志使用时）
+
+只保留与指定类别匹配的发现。
 
 ---
 
 ## SCAN阶段2: PRIORITIZE — 评分和选择
 
+### 对每个发现进行评分
+
+应用Chief Engineer评分框架：
+
 ```
 分数 = 影响 × 可行性 × 置信度
-影响 (1-5) | 可行性 (1-5) | 置信度 (0.0-1.0)
+
+影响 (1-5):
+  5 = 修复缺陷、安全问题、功能故障
+  4 = 改善DX、显著减少技术债务
+  3 = 一致性修复、文档更新、轻微质量改善
+  2 = 外观、锦上添花
+  1 = 细微
+
+可行性 (1-5):
+  5 = <10行、单个文件、明显的修复
+  4 = <50行、2-3个文件、直接
+  3 = <100行、需要谨慎规划
+  2 = 100-200行、多个关注点
+  1 = >200行、有风险、架构级别
+
+置信度 (0.0-1.0):
+  1.0 = 确定（已验证的证据、明确的修复方法）
+  0.8 = 高（强证据、轻微不确定性）
+  0.5 = 中等（部分证据、方法不明确）
+  0.3 = 低（假设、需要更多研究）
+  0.0 = 无证据（禁止执行）
 ```
 
+### 排名和选择
+
 ```
-1. 按分数降序排列 → 分数 ≥ 5
-2. 选择前N个（N = --budget，默认3）
-3. 总LOC ≤ 500
+1. 按分数降序排列
+2. 过滤: 分数 ≥ 5的项目
+3. 选择前N个（N = --budget值，默认3）
+4. 硬性限制: 所有任务总LOC ≤ 500
 ```
 
-> `--dry-run`时: 到此停止。输出报告。
+> `--dry-run`时: 到此停止。输出发现和建议的报告。
 
 ---
 
 ## SCAN阶段3: EXECUTE — 修复代码
 
 ### 3.1. 创建分支
+
 ```bash
 git checkout -b auto-ship/YYYY-MM-DD
 ```
 
 ### 3.2. 执行循环
-每个任务:
+
+按优先级顺序执行每个已选任务：
+
 ```
 1. 声明意图（记录）
+   🎯 任务: [修复内容]
+   📂 范围: [目标文件]
+   📊 分数: [详细]
+
 2. 收集证据
 3. 执行更改（最小化、精确）
-4. 验证: □ 测试通过 | □ Lint正常 | □ 引用OK | □ 自我审查
+4. 验证
+   □ 测试通过 | □ Lint正常 | □ 无断引用 | □ 自我审查
+
 5. 提交或回滚
+   ✅ 验证通过 → git commit -m "auto-ship: [描述]"
+   ❌ 验证失败 → git checkout -- . → 记录失败原因
 ```
 
 ### 3.3. 安全检查（每个任务）
+
 ```
-□ 文件 ≤ 5 | □ LOC ≤ 200 | □ 未触及受保护文件
-□ 无破坏性更改 | □ 在auto-ship/*分支上
-如果任何检查失败 → 跳过任务、记录、继续
+执行前确认:
+  □ 目标文件 ≤ 5
+  □ 预估LOC ≤ 200
+  □ 未触及受保护文件（.env、lock文件、CI配置）
+  □ 无破坏性更改（API、exports）
+  □ 在auto-ship/*分支上（不是main）
+
+任何检查失败 → 跳过任务、记录原因、进入下一个任务
 ```
 
 ---
 
-## SCAN阶段4: REPORT
+## SCAN阶段4: REPORT — 生成报告
 
-生成 `docs/reports/evolution-report-YYYY-MM-DD.md`。
+生成 `docs/reports/evolution-report-YYYY-MM-DD.md`，包含：
+
+- 摘要表格（发现数 / 选择数 / 成功数 / 回滚数 / 暂缓数）
+- 已完成任务的证据、决策、更改内容、验证结果
+- 暂缓项目及其原因
+- 会话更新信息
 
 ---
 
@@ -174,6 +229,8 @@ git checkout -b auto-ship/YYYY-MM-DD
 
 ## BUILD阶段2: PLAN — 架构设计
 
+### 2.1. 设计
+
 ```
 1. 确定要创建/修改的文件
 2. 设计组件结构（如果是UI）
@@ -182,37 +239,74 @@ git checkout -b auto-ship/YYYY-MM-DD
 5. 估算每个任务的LOC
 ```
 
-> `--dry-run`时: 到此停止。输出计划＋任务分解。
+### 2.2. 任务分解
+
+创建有序任务列表：
+
+```markdown
+| # | 任务 | 文件 | LOC | 依赖 |
+|---|------|------|-----|------|
+| 1 | 创建组件 | src/components/X.tsx | ~50 | - |
+| 2 | 添加样式 | src/styles/X.css | ~30 | 任务1 |
+| 3 | 连接父组件 | src/pages/Y.tsx | ~20 | 任务1 |
+| 4 | 添加测试 | src/__tests__/X.test.tsx | ~40 | 任务1 |
+```
+
+### 2.3. Dry-Run门控
+
+> `--dry-run`时: 到此停止。输出架构＋任务分解。
 
 ---
 
 ## BUILD阶段3: BUILD — 实现
 
 ### 3.1. 创建分支
+
 ```bash
 git checkout -b auto-ship/YYYY-MM-DD-feature-name
 ```
 
 ### 3.2. 执行任务
+
+按依赖顺序执行每个任务：
+
 ```
 1. 声明意图
    🎯 构建: [组件/功能]
-   🤖 代理视角: [frontend-specialist等]
+   📂 文件: [列表]
+   🤖 代理视角: [frontend-specialist / backend-specialist等]
+
 2. 收集上下文
-3. 编写代码（遵循现有模式、应用ui-ux-pro-max）
+   - 读取代码库中的现有模式
+   - 检查设计系统/组件库
+   - 理解路由/状态管理模式
+
+3. 编写代码
+   - 遵循现有模式
+   - UI应用ui-ux-pro-max原则
+   - 应用clean-code标准
+   - 使用领域特定技能（react-best-practices、api-patterns等）
+
 4. 逐步验证
+   - 每个文件后进Lint检查
+   - TypeScript时进行类型检查
+   - 快速自我审查
+
 5. 提交
+   - git commit -m "auto-ship: [任务描述]"
 ```
 
 ### 3.3. 代理视角
 
+根据任务类型应用适当的专家视角：
+
 | 任务类型 | 视角 | 优先技能 |
 |----------|------|----------|
-| UI组件 | `frontend-specialist` | ui-ux-pro-max, frontend-design, react |
+| UI组件 | `frontend-specialist` | ui-ux-pro-max, frontend-design, react-best-practices |
 | 样式 | `frontend-specialist` | tailwind-patterns, web-design-guidelines |
 | API路由 | `backend-specialist` | api-patterns, nodejs-best-practices |
 | 数据库 | `database-architect` | database-design |
-| 测试 | `test-engineer` | testing-patterns, e2e-testing |
+| 测试 | `test-engineer` | testing-patterns, e2e-testing, webapp-testing |
 | 移动端 | `mobile-developer` | mobile-design |
 
 ---
@@ -250,17 +344,76 @@ git checkout -b auto-ship/YYYY-MM-DD-feature-name
 
 ## BUILD阶段6: SHIP — 交付
 
+### 6.1. 最终提交
+
 ```bash
+git add .
 git commit -m "auto-ship: [功能名] — 实现完成"
 ```
 
-生成 `docs/reports/ship-report-YYYY-MM-DD.md`。更新 `.brain/session.json`。
+### 6.2. 生成报告
+
+创建 `docs/reports/ship-report-YYYY-MM-DD.md`：
+
+```markdown
+# 🚀 Ship Report — [功能名]
+
+## 📊 摘要
+
+| 指标 | 值 |
+|------|----|
+| **规格** | [原始规格文本] |
+| **完成任务** | N个任务 |
+| **创建文件** | N个文件 |
+| **修改文件** | N个文件 |
+| **新增行数** | +N |
+| **测试** | N个通过 |
+| **分支** | `auto-ship/YYYY-MM-DD-feature-name` |
+
+## ✅ 验收标准
+
+- [x] 标准1
+- [x] 标准2
+- [ ] 标准3（部分完成 — 见备注）
+
+## 📁 变更文件
+
+| 文件 | 操作 | 描述 |
+|------|------|------|
+| `src/components/X.tsx` | NEW | [功能说明] |
+| `src/pages/Y.tsx` | MODIFIED | [变更内容] |
+
+## 🧪 验证
+
+- 构建: ✅
+- 测试: ✅ (N个通过)
+- Lint: ✅
+- 类型检查: ✅
+
+## 📝 备注
+
+[决策、权衡、已知限制]
+```
+
+### 6.3. 更新会话
+
+更新 `.brain/session.json`：
+- `working_on`: auto-ship会话信息
+- `recent_changes`: 添加条目
 
 ---
 
 ## 📝 自动记录经验
 
-完成后，如有值得注意的模式，记录到 `.brain/lessons.md`。
+完成后（两种模式均适用），如有值得注意的模式或反复出现的问题：
+1. 检查 `.brain/lessons.md` 是否存在（不存在则从模板创建）
+2. 写入 "## Recent" 部分：
+   ```
+   ### [日期] - /auto-ship - [上下文]
+   - ✅ 完成: [改进/功能摘要]
+   - 🔄 暂缓: [需要用户审查的项目]
+   - 📁 分支: auto-ship/[日期]
+   ```
 
 ---
 
@@ -279,16 +432,28 @@ git commit -m "auto-ship: [功能名] — 实现完成"
 
 ### Git错误:
 ```
-checkout失败 → Stash → 创建分支 → 在报告中记录
-commit失败 → 检查git config → 降级: 仅记录
+checkout失败的情况:
+→ 检查未提交更改
+→ Stash: git stash
+→ 创建分支
+→ 在报告中记录: "已Stash未提交更改N个"
+
+commit失败的情况:
+→ 检查git config（user.name、user.email）
+→ 回退: 不提交，在报告中记录变更内容
 ```
 
-### 未发现问题（SCAN）:
+### 未发现问题（SCAN模式）:
 ```
-→ "🎉 代码库很干净！" → 建议: "/audit进行深入分析"
+扫描发现0个改进的情况:
+→ 报告: "🎉 代码库很干净！未发现改进点。"
+→ 建议: "使用/audit进行深入分析"
 ```
 
 ### 上下文限制:
 ```
-→ 在当前任务后停止 → 报告已完成的部分 → 建议重新运行
+上下文不足的情况:
+→ 在当前任务后停止
+→ 报告已完成的部分
+→ 建议: "为剩余任务重新运行/auto-ship"
 ```
