@@ -7,7 +7,7 @@
 ### **21位AI专家。1个聊天。从创意到收入。**
 *告别盲目Vibe Coding。开始智能Vibe Coding。*
 
-[![Version](https://img.shields.io/badge/v1.17.0-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
+[![Version](https://img.shields.io/badge/v1.17.1-83_Skills-00C853?style=for-the-badge)](https://github.com/hasugoii/antikit/releases)
 [![Stars](https://img.shields.io/github/stars/hasugoii/antikit?style=for-the-badge&color=FFD700)](https://github.com/hasugoii/antikit)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 [![Docs](https://img.shields.io/badge/文档-antikit.pages.dev-FF6D00?style=for-the-badge)](https://antikit.pages.dev/docs)
