@@ -441,6 +441,128 @@ else
     echo -e "   ${YELLOW}⚠️  Global Lessons (optional — will retry next update)${NC}"
 fi
 
+# ── RUN VERSION MIGRATIONS ─────────────────────────────────
+echo ""
+echo -e "${CYAN}🔄 Checking version migrations...${NC}"
+MIGRATIONS_TMP="/tmp/antikit_migrations.json"
+MIGRATIONS_APPLIED=0
+
+if curl -f -s -o "$MIGRATIONS_TMP" "$REPO_BASE/migrations.json"; then
+    # Get user's installed version
+    INSTALLED_VERSION="0.0.0"
+    if [ -f "$VERSION_FILE" ]; then
+        INSTALLED_VERSION=$(cat "$VERSION_FILE" 2>/dev/null || echo "0.0.0")
+    fi
+
+    # Use python3 for JSON parsing + semver comparison + action execution
+    MIGRATION_OUTPUT=$(python3 -c "
+import json, os, shutil
+
+installed = '$INSTALLED_VERSION'
+antigravity = '$ANTIGRAVITY_DIR'
+agents_dir = '$AGENTS_DIR'
+skills_dir = '$SKILLS_DIR'
+workflows_dir = '$GLOBAL_WORKFLOWS'
+
+def ver_tuple(v):
+    return tuple(int(x) for x in v.split('.'))
+
+data = json.load(open('$MIGRATIONS_TMP'))
+pending = [m for m in data['migrations'] if ver_tuple(m['version']) > ver_tuple(installed)]
+pending.sort(key=lambda m: ver_tuple(m['version']))
+
+if not pending:
+    print('NO_PENDING')
+else:
+    print(f'PENDING:{len(pending)}:{installed}')
+    applied = 0
+    for m in pending:
+        print(f'VERSION:{m[\"version\"]}:{m[\"description\"]}')
+        for action in m.get('actions', []):
+            t = action['type']
+            if t == 'remove_agent':
+                p = os.path.join(agents_dir, action['name'] + '.md')
+                if os.path.exists(p):
+                    os.remove(p)
+                    print(f'DEL:Agent:{action[\"name\"]}.md')
+                    applied += 1
+            elif t == 'remove_skill':
+                p = os.path.join(skills_dir, action['name'])
+                if os.path.isdir(p):
+                    shutil.rmtree(p)
+                    print(f'DEL:Skill:{action[\"name\"]}/')
+                    applied += 1
+            elif t == 'remove_workflow':
+                p = os.path.join(workflows_dir, action['name'] + '.md')
+                if os.path.exists(p):
+                    os.remove(p)
+                    print(f'DEL:Workflow:{action[\"name\"]}.md')
+                    applied += 1
+            elif t == 'rename_agent':
+                p = os.path.join(agents_dir, action['from'] + '.md')
+                if os.path.exists(p):
+                    os.remove(p)
+                    print(f'REN:Agent:{action[\"from\"]} -> {action[\"to\"]}')
+                    applied += 1
+            elif t == 'rename_skill':
+                p = os.path.join(skills_dir, action['from'])
+                if os.path.isdir(p):
+                    shutil.rmtree(p)
+                    print(f'REN:Skill:{action[\"from\"]} -> {action[\"to\"]}')
+                    applied += 1
+            elif t == 'remove_file':
+                p = os.path.join(antigravity, action['path'])
+                if os.path.exists(p):
+                    os.remove(p)
+                    print(f'DEL:File:{action[\"path\"]}')
+                    applied += 1
+    print(f'APPLIED:{applied}')
+" 2>/dev/null)
+
+    if [ -n "$MIGRATION_OUTPUT" ]; then
+        while IFS= read -r line; do
+            case "$line" in
+                NO_PENDING)
+                    echo -e "   ${GREEN}✅ No pending migrations${NC}"
+                    ;;
+                PENDING:*)
+                    count=$(echo "$line" | cut -d: -f2)
+                    from_ver=$(echo "$line" | cut -d: -f3)
+                    echo -e "   ${YELLOW}📋 Found $count migration(s) to apply ($from_ver -> $CURRENT_VERSION)${NC}"
+                    ;;
+                VERSION:*)
+                    ver=$(echo "$line" | cut -d: -f2)
+                    desc=$(echo "$line" | cut -d: -f3-)
+                    echo -e "   ${CYAN}[v$ver] $desc${NC}"
+                    ;;
+                DEL:*)
+                    type=$(echo "$line" | cut -d: -f2)
+                    name=$(echo "$line" | cut -d: -f3)
+                    echo -e "      ${YELLOW}🗑️  $type: $name${NC}"
+                    ((MIGRATIONS_APPLIED++))
+                    ;;
+                REN:*)
+                    type=$(echo "$line" | cut -d: -f2)
+                    name=$(echo "$line" | cut -d: -f3-)
+                    echo -e "      ${YELLOW}🔄 $type: $name${NC}"
+                    ((MIGRATIONS_APPLIED++))
+                    ;;
+                APPLIED:*)
+                    count=$(echo "$line" | cut -d: -f2)
+                    if [ "$count" -gt 0 ] 2>/dev/null; then
+                        echo -e "   ${GREEN}✅ Applied $count migration action(s)${NC}"
+                    else
+                        echo -e "   ${GREEN}✅ All migrations already applied${NC}"
+                    fi
+                    ;;
+            esac
+        done <<< "$MIGRATION_OUTPUT"
+    fi
+    rm -f "$MIGRATIONS_TMP"
+else
+    echo -e "   ${YELLOW}⚠️  Migrations check skipped (network error)${NC}"
+fi
+
 # ── SAVE MANIFEST LOCALLY ──────────────────────────────────
 if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
     cp "$MANIFEST_TMP" "$ANTIGRAVITY_DIR/manifest.json"

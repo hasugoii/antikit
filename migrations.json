@@ -1,0 +1,46 @@
+{
+  "_comment": "AntiKit Version Migrations — like DB migrations for file system. Each version lists cleanup/rename actions needed when updating FROM an older version.",
+  "migrations": [
+    {
+      "version": "1.13.3",
+      "description": "Merged /sync-schema into /save-brain",
+      "actions": [
+        {"type": "remove_workflow", "name": "sync-schema"}
+      ]
+    },
+    {
+      "version": "1.14.0",
+      "description": "Added Security Shield, selective install, orphan cleanup",
+      "actions": []
+    },
+    {
+      "version": "1.15.0",
+      "description": "Manifest-based installer, schema sync automation",
+      "actions": []
+    },
+    {
+      "version": "1.16.0",
+      "description": "Added chief-engineer, consolidated skills",
+      "actions": [
+        {"type": "remove_agent", "name": "full-stack-developer"},
+        {"type": "remove_skill", "name": "nextjs-patterns"},
+        {"type": "remove_skill", "name": "react-fundamentals"}
+      ]
+    },
+    {
+      "version": "1.17.0",
+      "description": "Added /terminal-rules, /auto-ship, UI/UX skills",
+      "actions": [
+        {"type": "remove_workflow", "name": "auto-evolve"},
+        {"type": "remove_skill", "name": "docker-basics"}
+      ]
+    },
+    {
+      "version": "1.18.0",
+      "description": "Continuous Learning Layer — Auto-Learn Protocol + Privacy Guard",
+      "actions": [
+        {"type": "add_file", "target": "global_lessons.md", "source": "global_lessons.md"}
+      ]
+    }
+  ]
+}

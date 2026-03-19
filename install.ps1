@@ -436,6 +436,117 @@ catch {
     Write-Host "   [!!] Global Lessons (optional - will retry next update)" -ForegroundColor Yellow
 }
 
+# 7.7. Run Version Migrations (like DB migrations for file system)
+Write-Host ""
+Write-Host "[...] Checking version migrations..." -ForegroundColor Cyan
+$MigrationsTmp = "$env:TEMP\antikit_migrations.json"
+$MigrationsApplied = 0
+try {
+    Invoke-WebRequest -Uri "$RepoBase/migrations.json" -OutFile $MigrationsTmp -UseBasicParsing -ErrorAction Stop
+    $migrations = (Get-Content $MigrationsTmp -Raw | ConvertFrom-Json).migrations
+
+    # Get user's current installed version (before this update)
+    $InstalledVersion = "0.0.0"
+    if (Test-Path $VersionFile) {
+        $InstalledVersion = Get-Content $VersionFile -ErrorAction SilentlyContinue
+        if ([string]::IsNullOrWhiteSpace($InstalledVersion)) { $InstalledVersion = "0.0.0" }
+    }
+
+    # Version compare helper
+    function Compare-SemVer($a, $b) {
+        $aParts = $a -split '\.' | ForEach-Object { [int]$_ }
+        $bParts = $b -split '\.' | ForEach-Object { [int]$_ }
+        for ($i = 0; $i -lt 3; $i++) {
+            $av = if ($i -lt $aParts.Count) { $aParts[$i] } else { 0 }
+            $bv = if ($i -lt $bParts.Count) { $bParts[$i] } else { 0 }
+            if ($av -lt $bv) { return -1 }
+            if ($av -gt $bv) { return 1 }
+        }
+        return 0
+    }
+
+    # Filter migrations: version > installedVersion, sort ascending
+    $pendingMigrations = $migrations | Where-Object {
+        (Compare-SemVer $_.version $InstalledVersion) -gt 0
+    } | Sort-Object { $v = $_.version -split '\.'; [int]$v[0] * 10000 + [int]$v[1] * 100 + [int]$v[2] }
+
+    if ($pendingMigrations.Count -eq 0) {
+        Write-Host "   [OK] No pending migrations" -ForegroundColor Green
+    }
+    else {
+        Write-Host "   [INFO] Found $($pendingMigrations.Count) migration(s) to apply ($InstalledVersion -> $CurrentVersion)" -ForegroundColor Yellow
+        foreach ($migration in $pendingMigrations) {
+            Write-Host "   [v$($migration.version)] $($migration.description)" -ForegroundColor Cyan
+            foreach ($action in $migration.actions) {
+                switch ($action.type) {
+                    "remove_agent" {
+                        $target = "$AgentsDir\$($action.name).md"
+                        if (Test-Path $target) {
+                            Remove-Item $target -Force
+                            Write-Host "      [DEL] Agent: $($action.name).md" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    "remove_skill" {
+                        $target = "$SkillsDir\$($action.name)"
+                        if (Test-Path $target) {
+                            Remove-Item $target -Recurse -Force
+                            Write-Host "      [DEL] Skill: $($action.name)/" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    "remove_workflow" {
+                        $target = "$GlobalWorkflows\$($action.name).md"
+                        if (Test-Path $target) {
+                            Remove-Item $target -Force
+                            Write-Host "      [DEL] Workflow: $($action.name).md" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    "rename_agent" {
+                        $old = "$AgentsDir\$($action.from).md"
+                        if (Test-Path $old) {
+                            Remove-Item $old -Force
+                            Write-Host "      [REN] Agent: $($action.from) -> $($action.to)" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    "rename_skill" {
+                        $old = "$SkillsDir\$($action.from)"
+                        if (Test-Path $old) {
+                            Remove-Item $old -Recurse -Force
+                            Write-Host "      [REN] Skill: $($action.from) -> $($action.to)" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    "remove_file" {
+                        $target = "$AntigravityDir\$($action.path)"
+                        if (Test-Path $target) {
+                            Remove-Item $target -Force
+                            Write-Host "      [DEL] File: $($action.path)" -ForegroundColor Yellow
+                            $MigrationsApplied++
+                        }
+                    }
+                    default {
+                        # add_file, run_cleanup — handled by other install steps
+                    }
+                }
+            }
+        }
+        if ($MigrationsApplied -gt 0) {
+            Write-Host "   [OK] Applied $MigrationsApplied migration action(s)" -ForegroundColor Green
+        } else {
+            Write-Host "   [OK] All migrations already applied" -ForegroundColor Green
+        }
+    }
+}
+catch {
+    Write-Host "   [!!] Migrations check skipped (network error)" -ForegroundColor Yellow
+}
+finally {
+    Remove-Item $MigrationsTmp -Force -ErrorAction SilentlyContinue
+}
+
 # 8. Download GEMINI.md source files from rules/
 Write-Host ""
 Write-Host "[...] Downloading GEMINI rules..." -ForegroundColor Cyan
