@@ -16,6 +16,7 @@ SCRIPTS_DIR="$ANTIGRAVITY_DIR/scripts"
 GEMINI_MD="$HOME/.gemini/GEMINI.md"
 VERSION_FILE="$HOME/.gemini/antikit_version"
 CUSTOM_FILE="$HOME/.gemini/antikit_custom.json"
+REGISTRY_FILE="$ANTIGRAVITY_DIR/antikit_installed.json"
 
 # Colors
 RED='\033[0;31m'
@@ -203,6 +204,10 @@ fi
 success=0
 failed=0
 
+# Init registry tracking (temp file for this session)
+REGISTRY_TMP="/tmp/antikit_reg_entries.txt"
+> "$REGISTRY_TMP"
+
 # ── CREATE DIRECTORIES ──────────────────────────────────────
 mkdir -p "$ANTIGRAVITY_DIR" "$GLOBAL_WORKFLOWS" "$AGENTS_DIR" "$SCHEMAS_DIR" "$TEMPLATES_DIR" "$SKILLS_DIR" "$SCRIPTS_DIR"
 echo -e "${GREEN}📂 Directories ready: $ANTIGRAVITY_DIR${NC}"
@@ -216,6 +221,7 @@ for wf in "${WORKFLOWS[@]}"; do
     if curl -f -s -o "$GLOBAL_WORKFLOWS/${wf}.md.tmp" "$REPO_BASE/workflows/$LANG/${wf}.mdt"; then
         mv -f "$GLOBAL_WORKFLOWS/${wf}.md.tmp" "$GLOBAL_WORKFLOWS/${wf}.md"
         echo -e "   ${GREEN}✅ ${wf}.md${NC}"
+        echo "global_workflows/${wf}.md" >> "$REGISTRY_TMP"
         ((success++))
     else
         rm -f "$GLOBAL_WORKFLOWS/${wf}.md.tmp"
@@ -231,6 +237,7 @@ for agent in "${AGENTS[@]}"; do
     if curl -f -s -o "$AGENTS_DIR/${agent}.md.tmp" "$REPO_BASE/src/agents/${agent}.mdt"; then
         mv -f "$AGENTS_DIR/${agent}.md.tmp" "$AGENTS_DIR/${agent}.md"
         echo -e "   ${GREEN}✅ ${agent}.md${NC}"
+        echo "agents/${agent}.md" >> "$REGISTRY_TMP"
         ((success++))
     else
         rm -f "$AGENTS_DIR/${agent}.md.tmp"
@@ -246,6 +253,7 @@ for schema in "${SCHEMAS[@]}"; do
     if curl -f -s -o "$SCHEMAS_DIR/$schema.tmp" "$REPO_BASE/schemas/$schema"; then
         mv -f "$SCHEMAS_DIR/$schema.tmp" "$SCHEMAS_DIR/$schema"
         echo -e "   ${GREEN}✅ $schema${NC}"
+        echo "schemas/$schema" >> "$REGISTRY_TMP"
         ((success++))
     else
         rm -f "$SCHEMAS_DIR/$schema.tmp"
@@ -261,6 +269,7 @@ for template in "${TEMPLATES[@]}"; do
     if curl -f -s -o "$TEMPLATES_DIR/$template.tmp" "$REPO_BASE/templates/$template"; then
         mv -f "$TEMPLATES_DIR/$template.tmp" "$TEMPLATES_DIR/$template"
         echo -e "   ${GREEN}✅ $template${NC}"
+        echo "templates/$template" >> "$REGISTRY_TMP"
         ((success++))
     else
         rm -f "$TEMPLATES_DIR/$template.tmp"
@@ -277,6 +286,7 @@ for skill in "${SKILLS[@]}"; do
     if curl -f -s -o "$SKILLS_DIR/$skill/SKILL.md.tmp" "$REPO_BASE/src/skills/$skill/SKILL.mdt"; then
         mv -f "$SKILLS_DIR/$skill/SKILL.md.tmp" "$SKILLS_DIR/$skill/SKILL.md"
         echo -e "   ${GREEN}✅ $skill${NC}"
+        echo "skills/$skill/SKILL.md" >> "$REGISTRY_TMP"
         ((success++))
     else
         rm -f "$SKILLS_DIR/$skill/SKILL.md.tmp"
@@ -293,6 +303,7 @@ for script in "${SCRIPTS[@]}"; do
         mv -f "$SCRIPTS_DIR/$script.tmp" "$SCRIPTS_DIR/$script"
         chmod +x "$SCRIPTS_DIR/$script"
         echo -e "   ${GREEN}✅ $script${NC}"
+        echo "scripts/$script" >> "$REGISTRY_TMP"
         ((success++))
     else
         # Retry once after 2s (CDN cache may cause transient 404)
@@ -301,6 +312,7 @@ for script in "${SCRIPTS[@]}"; do
             mv -f "$SCRIPTS_DIR/$script.tmp" "$SCRIPTS_DIR/$script"
             chmod +x "$SCRIPTS_DIR/$script"
             echo -e "   ${GREEN}✅ $script (retry)${NC}"
+            echo "scripts/$script" >> "$REGISTRY_TMP"
             ((success++))
         else
             rm -f "$SCRIPTS_DIR/$script.tmp"
@@ -310,85 +322,78 @@ for script in "${SCRIPTS[@]}"; do
     fi
 done
 
-# ── ORPHAN CLEANUP (ONLY if all downloads succeeded) ───────
-if [ $failed -gt 0 ]; then
-    echo ""
-    echo -e "${YELLOW}⚠️  Skipping orphan cleanup ($failed download(s) failed — files may be valid)${NC}"
-else
-    echo ""
-    echo -e "${CYAN}🧹 Scanning for orphan files...${NC}"
-    orphan_count=0
+# ── REGISTRY-BASED ORPHAN CLEANUP ──────────────────────────
+echo ""
+echo -e "${CYAN}🧹 Registry-based orphan cleanup...${NC}"
+python3 << 'REGISTRY_SCRIPT'
+import json, os, shutil, datetime
 
-    # Load custom files list (user-created workflows/agents/skills)
-    custom_workflows=()
-    custom_agents=()
-    custom_skills=()
-    if [ -f "$CUSTOM_FILE" ]; then
-        while IFS= read -r line; do custom_workflows+=("$line"); done < <(python3 -c "
-import json
-data = json.load(open('$CUSTOM_FILE'))
-for w in data.get('custom_workflows', []): print(w)
-" 2>/dev/null)
-        while IFS= read -r line; do custom_agents+=("$line"); done < <(python3 -c "
-import json
-data = json.load(open('$CUSTOM_FILE'))
-for a in data.get('custom_agents', []): print(a)
-" 2>/dev/null)
-        while IFS= read -r line; do custom_skills+=("$line"); done < <(python3 -c "
-import json
-data = json.load(open('$CUSTOM_FILE'))
-for s in data.get('custom_skills', []): print(s)
-" 2>/dev/null)
-    fi
+antigravity = os.path.expanduser("~/.gemini/antigravity")
+registry_file = os.path.join(antigravity, "antikit_installed.json")
+new_entries_file = "/tmp/antikit_reg_entries.txt"
+version = open("/tmp/antikit_current_version.txt").read().strip() if os.path.exists("/tmp/antikit_current_version.txt") else "0.0.0"
 
-    # Helper: check if value is in array
-    in_array() {
-        local needle="$1"; shift
-        for item in "$@"; do
-            [ "$item" = "$needle" ] && return 0
-        done
-        return 1
-    }
+# Read version from VERSION_FILE
+version_file = os.path.expanduser("~/.gemini/antikit_version")
+if os.path.exists(version_file):
+    version = open(version_file).read().strip()
 
-    # Scan workflows for orphans
-    for file in "$GLOBAL_WORKFLOWS"/*.md; do
-        [ -f "$file" ] || continue
-        name=$(basename "$file" .md)
-        if ! in_array "$name" "${WORKFLOWS[@]}" && ! in_array "$name" "${custom_workflows[@]}"; then
-            echo -e "   ${YELLOW}🗑️  Removing orphan workflow: ${name}.md${NC}"
-            rm -f "$file"
-            ((orphan_count++))
-        fi
-    done
+# Load old registry
+old_files = {}
+if os.path.exists(registry_file):
+    try:
+        old_files = json.load(open(registry_file)).get("files", {})
+    except:
+        pass
 
-    # Scan agents for orphans
-    for file in "$AGENTS_DIR"/*.md; do
-        [ -f "$file" ] || continue
-        name=$(basename "$file" .md)
-        if ! in_array "$name" "${AGENTS[@]}" && ! in_array "$name" "${custom_agents[@]}"; then
-            echo -e "   ${YELLOW}🗑️  Removing orphan agent: ${name}.md${NC}"
-            rm -f "$file"
-            ((orphan_count++))
-        fi
-    done
+# Load new downloads from this session
+new_files = {}
+if os.path.exists(new_entries_file):
+    for line in open(new_entries_file):
+        key = line.strip()
+        if key:
+            new_files[key] = version
 
-    # Scan skills for orphans
-    for dir in "$SKILLS_DIR"/*/; do
-        [ -d "$dir" ] || continue
-        name=$(basename "$dir")
-        if ! in_array "$name" "${SKILLS[@]}" && ! in_array "$name" "${custom_skills[@]}"; then
-            echo -e "   ${YELLOW}🗑️  Removing orphan skill: $name/${NC}"
-            rm -rf "$dir"
-            ((orphan_count++))
-        fi
-    done
+# Merge: new overrides old
+merged = {**old_files, **new_files}
 
-    if [ $orphan_count -eq 0 ]; then
-        echo -e "   ${GREEN}✅ No orphan files found${NC}"
-    else
-        echo -e "   ${GREEN}✅ Cleaned $orphan_count orphan file(s)${NC}"
-    fi
-fi
+# Find orphans: in registry but not in new downloads (current manifest)
+orphan_count = 0
+for key in list(merged.keys()):
+    if key not in new_files:
+        full_path = os.path.join(antigravity, key)
+        if os.path.exists(full_path):
+            if os.path.isdir(full_path):
+                shutil.rmtree(full_path)
+            else:
+                os.remove(full_path)
+            # Clean empty parent
+            parent = os.path.dirname(full_path)
+            if os.path.isdir(parent) and not os.listdir(parent):
+                os.rmdir(parent)
+            print(f"DEL:{key}")
+            orphan_count += 1
+        del merged[key]
+
+if orphan_count > 0:
+    print(f"CLEANED:{orphan_count}")
+else:
+    print("CLEAN:0")
+
+# Save registry
+reg = {
+    "version": version,
+    "updated_at": datetime.datetime.now().isoformat() + "Z",
+    "files": merged
+}
+json.dump(reg, open(registry_file, "w"), indent=2)
+print(f"SAVED:{len(merged)}")
+REGISTRY_SCRIPT
+
+# Parse python output for display
+# (python3 already prints directly, just colorize)
+rm -f "$REGISTRY_TMP"
+echo -e "   ${GREEN}✅ Registry cleanup complete${NC}"
 
 # ── SAVE VERSION + LANGUAGE ─────────────────────────────────
 mkdir -p "$HOME/.gemini"

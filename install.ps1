@@ -82,6 +82,7 @@ $ScriptsDir = "$AntigravityDir\scripts"
 $GeminiMd = "$env:USERPROFILE\.gemini\GEMINI.md"
 $VersionFile = "$env:USERPROFILE\.gemini\antikit_version"
 $CustomFile = "$env:USERPROFILE\.gemini\antikit_custom.json"
+$RegistryFile = "$AntigravityDir\antikit_installed.json"
 
 # Get version from repo
 try {
@@ -149,6 +150,17 @@ Write-Host ""
 $success = 0
 $failed = 0
 
+# Init file ownership registry
+$Registry = @{}
+if (Test-Path $RegistryFile) {
+    try {
+        $oldReg = Get-Content $RegistryFile -Raw | ConvertFrom-Json
+        if ($oldReg.files) {
+            $oldReg.files.PSObject.Properties | ForEach-Object { $Registry[$_.Name] = $_.Value }
+        }
+    } catch {}
+}
+
 # 1. Create directories
 $dirs = @($AntigravityDir, $GlobalWorkflows, $AgentsDir, $SchemasDir, $TemplatesDir, $SkillsDir, $ScriptsDir)
 foreach ($dir in $dirs) {
@@ -190,6 +202,7 @@ foreach ($wf in $WorkflowsEn) {
         Invoke-WebRequest -Uri $url -OutFile "$GlobalWorkflows\$tmpName" -UseBasicParsing -ErrorAction Stop
         Move-Item -Path "$GlobalWorkflows\$tmpName" -Destination "$GlobalWorkflows\$outName" -Force
         Write-Host "   [OK] $outName" -ForegroundColor Green
+        $Registry["global_workflows/$outName"] = $CurrentVersion
         $success++
     }
     catch {
@@ -211,6 +224,7 @@ foreach ($agent in $Agents) {
         Invoke-WebRequest -Uri $url -OutFile "$AgentsDir\$tmpName" -UseBasicParsing -ErrorAction Stop
         Move-Item -Path "$AgentsDir\$tmpName" -Destination "$AgentsDir\$outName" -Force
         Write-Host "   [OK] $outName" -ForegroundColor Green
+        $Registry["agents/$outName"] = $CurrentVersion
         $success++
     }
     catch {
@@ -226,10 +240,13 @@ Write-Host ""
 Write-Host "[...] Downloading schemas..." -ForegroundColor Cyan
 foreach ($schema in $Schemas) {
     try {
+        $outName = $schema
+        $tmpName = "${schema}.tmp"
         $url = "$RepoBase/schemas/$schema"
-        Invoke-WebRequest -Uri $url -OutFile "$SchemasDir\$schema.tmp" -UseBasicParsing -ErrorAction Stop
-        Move-Item -Path "$SchemasDir\$schema.tmp" -Destination "$SchemasDir\$schema" -Force
-        Write-Host "   [OK] $schema" -ForegroundColor Green
+        Invoke-WebRequest -Uri $url -OutFile "$SchemasDir\$tmpName" -UseBasicParsing -ErrorAction Stop
+        Move-Item -Path "$SchemasDir\$tmpName" -Destination "$SchemasDir\$outName" -Force
+        Write-Host "   [OK] $outName" -ForegroundColor Green
+        $Registry["schemas/$outName"] = $CurrentVersion
         $success++
     }
     catch {
@@ -244,10 +261,13 @@ Write-Host ""
 Write-Host "[...] Downloading templates..." -ForegroundColor Cyan
 foreach ($template in $Templates) {
     try {
+        $outName = $template
+        $tmpName = "${template}.tmp"
         $url = "$RepoBase/templates/$template"
-        Invoke-WebRequest -Uri $url -OutFile "$TemplatesDir\$template.tmp" -UseBasicParsing -ErrorAction Stop
-        Move-Item -Path "$TemplatesDir\$template.tmp" -Destination "$TemplatesDir\$template" -Force
-        Write-Host "   [OK] $template" -ForegroundColor Green
+        Invoke-WebRequest -Uri $url -OutFile "$TemplatesDir\$tmpName" -UseBasicParsing -ErrorAction Stop
+        Move-Item -Path "$TemplatesDir\$tmpName" -Destination "$TemplatesDir\$outName" -Force
+        Write-Host "   [OK] $outName" -ForegroundColor Green
+        $Registry["templates/$outName"] = $CurrentVersion
         $success++
     }
     catch {
@@ -270,6 +290,7 @@ foreach ($skill in $Skills) {
         Invoke-WebRequest -Uri $url -OutFile "$skillDir\SKILL.md.tmp" -UseBasicParsing -ErrorAction Stop
         Move-Item -Path "$skillDir\SKILL.md.tmp" -Destination "$skillDir\SKILL.md" -Force
         Write-Host "   [OK] $skill" -ForegroundColor Green
+        $Registry["skills/$skill/SKILL.md"] = $CurrentVersion
         $success++
     }
     catch {
@@ -290,6 +311,7 @@ foreach ($script in $Scripts) {
         Invoke-WebRequest -Uri $url -OutFile "$ScriptsDir\$script.tmp" -UseBasicParsing -ErrorAction Stop
         Move-Item -Path "$ScriptsDir\$script.tmp" -Destination "$ScriptsDir\$script" -Force
         Write-Host "   [OK] $script" -ForegroundColor Green
+        $Registry["scripts/$script"] = $CurrentVersion
         $success++
         $downloaded = $true
     }
@@ -300,6 +322,7 @@ foreach ($script in $Scripts) {
             Invoke-WebRequest -Uri $url -OutFile "$ScriptsDir\$script.tmp" -UseBasicParsing -ErrorAction Stop
             Move-Item -Path "$ScriptsDir\$script.tmp" -Destination "$ScriptsDir\$script" -Force
             Write-Host "   [OK] $script (retry)" -ForegroundColor Green
+            $Registry["scripts/$script"] = $CurrentVersion
             $success++
             $downloaded = $true
         }
@@ -310,67 +333,61 @@ foreach ($script in $Scripts) {
     }
 }
 
-# 7. Orphan cleanup (ONLY if all downloads succeeded — prevents deleting valid files on network failure)
-if ($failed -gt 0) {
-    Write-Host ""
-    Write-Host "[SKIP] Skipping orphan cleanup ($failed download(s) failed — files may be valid)" -ForegroundColor Yellow
+# 7. Registry-based orphan cleanup (safe for user files)
+Write-Host ""
+Write-Host "[...] Scanning for orphan files (registry-based)..." -ForegroundColor Cyan
+$orphanCount = 0
+
+# Build set of current valid files from manifest
+$validFiles = @{}
+foreach ($wf in $WorkflowsEn) { $validFiles["global_workflows/${wf}.md"] = $true }
+foreach ($ag in $Agents) { $validFiles["agents/${ag}.md"] = $true }
+foreach ($sk in $Skills) { $validFiles["skills/$sk/SKILL.md"] = $true }
+foreach ($sc in $Scripts) { $validFiles["scripts/$sc"] = $true }
+foreach ($sch in $Schemas) { $validFiles["schemas/$sch"] = $true }
+foreach ($tpl in $Templates) { $validFiles["templates/$tpl"] = $true }
+
+# Only delete files that are IN registry (AntiKit installed) but NOT in current manifest
+$keysToRemove = @()
+foreach ($regKey in $Registry.Keys) {
+    if (-not $validFiles.ContainsKey($regKey)) {
+        $filePath = "$AntigravityDir\$($regKey -replace '/', '\')" 
+        if (Test-Path $filePath) {
+            # Check if it's a directory (skill folder)
+            if ((Get-Item $filePath).PSIsContainer) {
+                Remove-Item $filePath -Recurse -Force
+            } else {
+                Remove-Item $filePath -Force
+            }
+            Write-Host "   [DEL] Orphan (registry): $regKey" -ForegroundColor Yellow
+            $orphanCount++
+        }
+        # Also clean empty parent dir for skills
+        $parentDir = Split-Path $filePath -Parent
+        if ((Test-Path $parentDir) -and (Get-ChildItem $parentDir -ErrorAction SilentlyContinue).Count -eq 0) {
+            Remove-Item $parentDir -Force -ErrorAction SilentlyContinue
+        }
+        $keysToRemove += $regKey
+    }
+}
+# Remove orphan keys from registry
+foreach ($key in $keysToRemove) { $Registry.Remove($key) }
+
+if ($orphanCount -eq 0) {
+    Write-Host "   [OK] No orphan files found" -ForegroundColor Green
 }
 else {
-    Write-Host ""
-    Write-Host "[...] Scanning for orphan files..." -ForegroundColor Cyan
-    $orphanCount = 0
+    Write-Host "   [OK] Cleaned $orphanCount orphan file(s)" -ForegroundColor Green
+}
 
-    # Load custom files
-    $customWorkflows = @()
-    $customAgents = @()
-    $customSkills = @()
-    if (Test-Path $CustomFile) {
-        try {
-            $customData = Get-Content $CustomFile -Raw | ConvertFrom-Json
-            if ($customData.custom_workflows) { $customWorkflows = $customData.custom_workflows }
-            if ($customData.custom_agents) { $customAgents = $customData.custom_agents }
-            if ($customData.custom_skills) { $customSkills = $customData.custom_skills }
-        }
-        catch {}
-    }
-
-    # Scan workflows
-    foreach ($file in Get-ChildItem "$GlobalWorkflows\*.md" -ErrorAction SilentlyContinue) {
-        $name = $file.BaseName
-        if ($WorkflowsEn -notcontains $name -and $customWorkflows -notcontains $name) {
-            Write-Host "   [DEL] Removing orphan workflow: $($file.Name)" -ForegroundColor Yellow
-            Remove-Item $file.FullName -Force
-            $orphanCount++
-        }
-    }
-
-    # Scan agents
-    foreach ($file in Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyContinue) {
-        $name = $file.BaseName
-        if ($Agents -notcontains $name -and $customAgents -notcontains $name) {
-            Write-Host "   [DEL] Removing orphan agent: $($file.Name)" -ForegroundColor Yellow
-            Remove-Item $file.FullName -Force
-            $orphanCount++
-        }
-    }
-
-    # Scan skills
-    foreach ($dir in Get-ChildItem "$SkillsDir" -Directory -ErrorAction SilentlyContinue) {
-        $name = $dir.Name
-        if ($Skills -notcontains $name -and $customSkills -notcontains $name) {
-            Write-Host "   [DEL] Removing orphan skill: $name/" -ForegroundColor Yellow
-            Remove-Item $dir.FullName -Recurse -Force
-            $orphanCount++
-        }
-    }
-
-    if ($orphanCount -eq 0) {
-        Write-Host "   [OK] No orphan files found" -ForegroundColor Green
-    }
-    else {
-        Write-Host "   [OK] Cleaned $orphanCount orphan file(s)" -ForegroundColor Green
-    }
-} # end if ($failed -gt 0) guard
+# Save registry
+$regOutput = @{
+    version = $CurrentVersion
+    updated_at = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
+    files = $Registry
+}
+$regOutput | ConvertTo-Json -Depth 3 | Set-Content -Path $RegistryFile -Encoding UTF8
+Write-Host "   [OK] Registry saved ($($Registry.Count) files tracked)" -ForegroundColor Green
 
 # 7.5. Save version and language
 if (-not (Test-Path "$env:USERPROFILE\.gemini")) {
