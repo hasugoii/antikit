@@ -224,6 +224,38 @@ Sau khi tải xong, kiểm tra từng file tồn tại và không rỗng:
 [ -s "$FILE_PATH" ] && echo "✅ {name}" || echo "❌ {name} THẤT BẠI"
 ```
 
+### 6.6. Sync Global Lessons (Kiến Thức Cộng Đồng)
+
+> 🧠 **Đây là "collective intelligence"** — mọi lessons đã học được tích lũy qua các version đều được chia sẻ cho user mới.
+
+**AI PHẢI thực hiện các bước sau:**
+
+1. **Download community lessons:**
+
+```bash
+curl -f -s "https://raw.githubusercontent.com/hasugoii/antikit/main/global_lessons.md" \
+  -o "$HOME/.gemini/antigravity/global_lessons_upstream.md"
+```
+
+2. **Smart Merge:**
+   - Nếu user **chưa có** `global_lessons.md` → Copy trực tiếp
+   - Nếu user **đã có** → AI đọc cả 2 file, merge thông minh:
+     - Sections `## 🔒 Meta-Rule` và `## 🧠 Auto-Learn Protocol` → **Thay thế** bằng upstream (luôn lấy mới nhất)
+     - Section `## Rules (Permanent)` → **Merge** (thêm rules mới, giữ rules user đã có)
+     - Section `## Recent` → **Giữ nguyên của user** (đây là lessons cá nhân)
+
+3. **Cleanup:**
+
+```bash
+rm -f "$HOME/.gemini/antigravity/global_lessons_upstream.md"
+```
+
+4. **Verify:**
+
+```bash
+grep -c "Auto-Learn Protocol" "$HOME/.gemini/antigravity/global_lessons.md" && echo "✅ Auto-Learn Protocol" || echo "❌ Auto-Learn Protocol thiếu"
+```
+
 ---
 
 ## Phase 7: Xác Nhận
@@ -298,6 +330,10 @@ grep -c "SKILL INDEX" "$HOME/.gemini/GEMINI.md" && echo "✅ SKILL INDEX" || ech
 
 # Verify lessons template
 [ -f "$HOME/.gemini/antigravity/templates/lessons.example.md" ] && echo "✅ Lessons template" || echo "⚠️ Lessons template không tìm thấy"
+
+# Verify Global Lessons + Auto-Learn Protocol
+grep -c "Auto-Learn Protocol" "$HOME/.gemini/antigravity/global_lessons.md" && echo "✅ Auto-Learn Protocol" || echo "❌ Auto-Learn Protocol thiếu"
+grep -c "Rules (Permanent)" "$HOME/.gemini/antigravity/global_lessons.md" && echo "✅ Permanent Rules" || echo "❌ Permanent Rules thiếu"
 ```
 
 Báo cáo:
@@ -306,7 +342,12 @@ Báo cáo:
 ├── GEMINI.md markers ✅
 ├── AGENT INDEX ✅
 ├── SKILL INDEX ✅
-└── Lessons template ✅
+├── Lessons template ✅
+├── Auto-Learn Protocol ✅
+└── Permanent Rules ✅
+
+🧠 Continuous Learning: ACTIVE
+   Agent sẽ tự động học từ mỗi session.
 
 🎉 Update xong! Restart IDE để áp dụng.
 ```
