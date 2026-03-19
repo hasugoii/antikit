@@ -400,6 +400,47 @@ echo ""
 echo -e "${GREEN}✅ Version saved: $CURRENT_VERSION${NC}"
 echo -e "${GREEN}✅ Language saved: $LANG${NC}"
 
+# ── SYNC GLOBAL LESSONS (Continuous Learning) ──────────────
+echo ""
+echo -e "${CYAN}🧠 Syncing Global Lessons (Auto-Learn Protocol)...${NC}"
+GLOBAL_LESSONS_FILE="$ANTIGRAVITY_DIR/global_lessons.md"
+GLOBAL_LESSONS_UPSTREAM="$ANTIGRAVITY_DIR/global_lessons_upstream.md"
+
+if curl -f -s -o "$GLOBAL_LESSONS_UPSTREAM" "$REPO_BASE/global_lessons.md"; then
+    if [ ! -f "$GLOBAL_LESSONS_FILE" ]; then
+        # New user: copy directly
+        mv -f "$GLOBAL_LESSONS_UPSTREAM" "$GLOBAL_LESSONS_FILE"
+        echo -e "   ${GREEN}✅ Global Lessons installed (new)${NC}"
+    else
+        # Existing user: smart merge — keep user's Recent, update everything else
+        if python3 -c "
+import sys
+upstream = open('$GLOBAL_LESSONS_UPSTREAM', 'r').read()
+local = open('$GLOBAL_LESSONS_FILE', 'r').read()
+marker = '## Recent'
+local_idx = local.find(marker)
+user_recent = local[local_idx:] if local_idx >= 0 else ''
+upstream_idx = upstream.find(marker)
+if upstream_idx >= 0 and user_recent:
+    merged = upstream[:upstream_idx] + user_recent
+else:
+    merged = upstream
+open('$GLOBAL_LESSONS_FILE', 'w').write(merged)
+" 2>/dev/null; then
+            rm -f "$GLOBAL_LESSONS_UPSTREAM"
+            echo -e "   ${GREEN}✅ Global Lessons merged (kept personal Recent)${NC}"
+        else
+            # Fallback: just copy upstream if python3 not available
+            mv -f "$GLOBAL_LESSONS_UPSTREAM" "$GLOBAL_LESSONS_FILE"
+            echo -e "   ${GREEN}✅ Global Lessons updated (fallback)${NC}"
+        fi
+    fi
+    ((success++))
+else
+    rm -f "$GLOBAL_LESSONS_UPSTREAM"
+    echo -e "   ${YELLOW}⚠️  Global Lessons (optional — will retry next update)${NC}"
+fi
+
 # ── SAVE MANIFEST LOCALLY ──────────────────────────────────
 if [ -n "$MANIFEST_TMP" ] && [ -f "$MANIFEST_TMP" ]; then
     cp "$MANIFEST_TMP" "$ANTIGRAVITY_DIR/manifest.json"

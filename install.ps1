@@ -1,4 +1,4 @@
-﻿# Tự động detect Antigravity và cài đặt Enhancement Kit
+# Tự động detect Antigravity và cài đặt Enhancement Kit
 
 param(
     [switch]$Unattended = $false,
@@ -390,6 +390,51 @@ if ($ManifestData) {
 Write-Host ""
 Write-Host "[OK] Version saved: $CurrentVersion" -ForegroundColor Green
 Write-Host "[OK] Language saved: $lang" -ForegroundColor Green
+
+# 7.6. Download Global Lessons (Continuous Learning)
+Write-Host ""
+Write-Host "[...] Syncing Global Lessons (Auto-Learn Protocol)..." -ForegroundColor Cyan
+$GlobalLessonsFile = "$AntigravityDir\global_lessons.md"
+$GlobalLessonsUpstream = "$AntigravityDir\global_lessons_upstream.md"
+try {
+    Invoke-WebRequest -Uri "$RepoBase/global_lessons.md" -OutFile $GlobalLessonsUpstream -UseBasicParsing -ErrorAction Stop
+    if (-not (Test-Path $GlobalLessonsFile)) {
+        # New user: copy directly
+        Move-Item -Path $GlobalLessonsUpstream -Destination $GlobalLessonsFile -Force
+        Write-Host "   [OK] Global Lessons installed (new)" -ForegroundColor Green
+    }
+    else {
+        # Existing user: smart merge - replace Meta-Rule + Auto-Learn, merge Permanent, keep Recent
+        $upstreamContent = Get-Content $GlobalLessonsUpstream -Raw
+        $localContent = Get-Content $GlobalLessonsFile -Raw
+
+        # Extract user's Recent section (personal lessons)
+        $recentMarker = "## Recent"
+        $localRecentIdx = $localContent.IndexOf($recentMarker)
+        $userRecent = ""
+        if ($localRecentIdx -ge 0) {
+            $userRecent = $localContent.Substring($localRecentIdx)
+        }
+
+        # Use upstream as base but keep user's Recent
+        $upstreamRecentIdx = $upstreamContent.IndexOf($recentMarker)
+        if ($upstreamRecentIdx -ge 0 -and $userRecent) {
+            $mergedContent = $upstreamContent.Substring(0, $upstreamRecentIdx) + $userRecent
+        }
+        else {
+            $mergedContent = $upstreamContent
+        }
+
+        [System.IO.File]::WriteAllText($GlobalLessonsFile, $mergedContent, [System.Text.Encoding]::UTF8)
+        Remove-Item -Path $GlobalLessonsUpstream -Force -ErrorAction SilentlyContinue
+        Write-Host "   [OK] Global Lessons merged (kept personal Recent)" -ForegroundColor Green
+    }
+    $success++
+}
+catch {
+    Remove-Item -Path $GlobalLessonsUpstream -Force -ErrorAction SilentlyContinue
+    Write-Host "   [!!] Global Lessons (optional - will retry next update)" -ForegroundColor Yellow
+}
 
 # 8. Download GEMINI.md source files from rules/
 Write-Host ""
